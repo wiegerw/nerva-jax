@@ -1,7 +1,5 @@
 # The nerva-jax library
 
-**_NOTE:_**  This page is a stub. The library has not yet been released!
-
 This repository contains an implementation of multilayer perceptrons in JAX.
 It is part of a group of five Python packages that can be installed via pip:
 
@@ -40,7 +38,7 @@ TODO
 
 ## Installation
 
-The code is available as the PyPI package [CONEstrip](https://pypi.org/project/CONEstrip/).
+The code is available as the PyPI package [nerva-jax](https://pypi.org/project/nerva-jax/).
 It can be installed using
 
 ```
@@ -149,7 +147,7 @@ Training of an MLP consists of three steps:
 These steps are performed for each input batch of a dataset, and this process is
 repeated `epoch` times.
 
-#### Command line script
+#### Command line scripts
 For convenience, a command line script `tools/mlp.py` is included that can be
 used to do a training experiment. An example invocation of this script is
 provided in `examples/cifar10.sh`:
@@ -199,10 +197,10 @@ Gradient checking of the softmax layer looks like this:
     DX = W.T * DZ
 
     # check gradients using symbolic differentiation
-    DW1 = diff(loss(Y), w)
-    Db1 = diff(loss(Y), b)
-    DX1 = diff(loss(Y), x)
-    DZ1 = diff(loss(Y), z)
+    DW1 = gradient(loss(Y), w)
+    Db1 = gradient(loss(Y), b)
+    DX1 = gradient(loss(Y), x)
+    DZ1 = gradient(loss(Y), z)
     self.assertTrue(equal_matrices(DW, DW1))
     self.assertTrue(equal_matrices(Db, Db1))
     self.assertTrue(equal_matrices(DX, DX1))

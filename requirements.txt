@@ -1,2 +1,4 @@
 numpy
 jax
+jaxlib
+scikit-learn
