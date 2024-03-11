@@ -32,10 +32,6 @@ backpropagation is provided in an accessible manner. Currently, the scope is
 limited to multilayer perceptrons. However, the approach can easily be
 generalized to more complex neural network architectures.
 
-## Documentation
-
-TODO
-
 ## Installation
 
 The code is available as the PyPI package [nerva-jax](https://pypi.org/project/nerva-jax/).
