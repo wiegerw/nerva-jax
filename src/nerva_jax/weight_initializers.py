@@ -14,7 +14,7 @@ def set_bias_to_zero(b: Matrix):
 
 def set_weights_xavier(W: Matrix):
     K, D = W.shape
-    xavier_stddev = np.sqrt(2 / (K + D))
+    xavier_stddev = np.sqrt(2.0 / (K + D))
     return jnp.array(np.random.randn(K, D) * xavier_stddev)
 
 
@@ -24,7 +24,7 @@ def set_bias_xavier(b: Matrix):
 
 def set_weights_xavier_normalized(W: Matrix):
     K, D = W.shape
-    xavier_stddev = np.sqrt(2 / (K + D))
+    xavier_stddev = np.sqrt(2.0 / (K + D))
     return jnp.array(np.random.randn(K, D) * xavier_stddev)
 
 
@@ -34,7 +34,7 @@ def set_bias_xavier_normalized(b: Matrix):
 
 def set_weights_he(W: Matrix):
     K, D = W.shape
-    he_stddev = np.sqrt(2 / D)
+    he_stddev = np.sqrt(2.0 / D)
     random_matrix = np.random.randn(K, D)
     return jnp.array(random_matrix * he_stddev)
 

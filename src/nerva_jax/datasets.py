@@ -10,9 +10,32 @@ import numpy as np
 
 
 def to_one_hot(x: jnp.ndarray, n_classes: int):
+    """
+    Converts a tensor of class indices to a one-hot encoded tensor.
+
+    Args:
+        x (torch.LongTensor): Tensor of class indices.
+        num_classes (int): Number of classes.
+
+    Returns:
+        torch.Tensor: One-hot encoded tensor of shape (len(x), num_classes).
+    """
     one_hot = np.zeros((len(x), n_classes), dtype=float)
     one_hot[np.arange(len(x)), x] = 1
     return jnp.array(one_hot)
+
+
+def from_one_hot(one_hot: jnp.ndarray) -> jnp.ndarray:
+    """
+    Converts a one-hot encoded tensor back to a tensor of class indices.
+
+    Args:
+        one_hot (jnp.ndarray): One-hot encoded tensor of shape (N, num_classes).
+
+    Returns:
+        jnp.ndarray: Tensor of class indices of shape (N,).
+    """
+    return jnp.argmax(one_hot, axis=1)
 
 
 class MemoryDataLoader(object):
