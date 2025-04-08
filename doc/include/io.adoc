@@ -1,0 +1,13 @@
+// tag::io[]
+[[io]]
+== I/O
+The {library} has support for reading and writing datasets and weights + biases of a model in NumPy NPZ format.
+This format is used for portability between C++ and Python implementations.
+There is no support yet for storing a complete model, including its architecture.
+
+=== NPZ format
+The default storage format used in the Nerva libraries is the NumPy NPZ format, see link:https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html[numpy.lib.format]. The reason for choosing this format is portability between C++ and Python implementations. A file in `.npz` format can be used to store a dictionary of arrays.
+
+=== Storing datasets and weights
+The `{mlptool}` tool has options `--load-weights` and `--save-weights` for loading and saving the weights and bias vectors of an MLP, and options `--load-data` and `--save-data` for loading and saving a dataset in NPZ format. The keys in the dictionary for the weight matrices and bias vectors of linear layers are `W1, W2, ...` and `b1, b2, ...`. The keys for the training data plus targets are `Xtrain` and `Ttrain`, while for the test data plus targets we use `Xtest` and `Ttest`.
+// end::io[]

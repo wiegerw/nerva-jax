@@ -1,0 +1,29 @@
+:root: ../../
+
+== Extending the library
+The {library} can be extended in several obvious ways, such as adding new layers, activation functions, loss functions, learning rate schedulers, and pruning or growing functions. However, the implementation of those extensions must be done in {cpp}, as documented in the section
+link:{root}/doc/nerva-cpp.adoc#extending[Extending the library] of the {cpp} manual.
+After adding these components to {cpp}, they can be integrated in the `nerva` Python module.
+
+=== Adding a loss function
+As an example, we will explain how the loss function `SoftmaxCrossEntropyLoss` is added to the `nerva` Python module.
+
+* The first step is to define a C++ class `softmax_cross_entropy_loss` in the header file
+`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/loss_functions.h[loss_functions.h]`.
+
+* The next step is to add the class `softmax_cross_entropy_loss` to the Python bindings in the file `link:https://github.com/wiegerw/nerva-rowwise/blob/main/src/python-bindings.cpp[python-bindings.cpp]`:
+[.small-code]
+[source,python]
+----
+include::{root}/src/python-bindings.cpp[tag=softmax_cross_entropy_loss]
+----
+
+* The third step is to define a Python class `SoftmaxCrossEntropyLoss` in the file `link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/loss-functions.py[loss-functions.py]`:
+[.small-code]
+[source,python]
+----
+include::{root}/python/nerva/loss_functions.py[tag=softmax_cross_entropy_loss]
+----
+Note that the Python class derives from the C++ class. In the same file, an entry to the function `parse_loss_function` should be added.
+
+* The last step is to reinstall the `nerva` Python module via `pip`, see <<pip-install>>.

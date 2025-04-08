@@ -1,0 +1,195 @@
+:root: ../../
+
+== Overview of the code
+This section gives an overview of the Python code in the
+{library}, and some explanations about the code.
+
+=== Number type
+The {library} uses 32-bit floats as its number type. The C++ library also supports 64-bit floats.
+
+=== Module contents
+The most important files in the `nerva` module are given in the table below.
+
+|===
+|File |Description
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/multilayer_perceptron.py[multilayer_perceptron.py]`
+|A multilayer perceptron class.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/layers.py[layers.py]`
+|Neural network layers.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/activation_functions.py[activation_functions.py]`
+|Activation functions.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/loss_functions.py[loss_functions.py]`
+|Loss functions.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/weights.py[weights.py]`
+|Weight initialization functions.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/optimizers.py[optimizers.py]`
+|Optimizer functions, for updating neural network parameters using their gradients.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/learning_rate_schedulers.py[learning_rate_schedulers.py]`
+|Learning rate schedulers, for updating the learning rate during training.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/training.py[training.py]`
+|A stochastic gradient descent algorithm.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/prune.py[prune.py]`
+|Algorithms for pruning sparse weight matrices. This is used for dynamic sparse training.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/nerva/grow.py[grow.py]`
+|Algorithms for (re-)growing sparse weights. This is used for dynamic sparse training.
+|===
+
+=== Classes
+
+==== Class MultilayerPerceptron
+A multilayer perceptron (MLP) is modeled using the class `MultilayerPerceptron`. It contains a list of layers, and has member functions `feedforward`, `backpropagate` and `optimize` that can be used for training the neural network. Constructing an MLP can be done as follows:
+[[construct_mlp1]]
+[.small-code]
+[source,cpp]
+----
+include::{root}/python/tests/multilayer_perceptron_test.py[tag=construct1]
+----
+This creates an MLP with three linear layers. The parameter `sizes` contains the input and output sizes of the three layers. The weights are initialized using Xavier.
+
+Another way to construct MLPs is provided by the function `make_layers`, that offers a string based interface. An example is given in the code below:
+[[construct_mlp2]]
+[.small-code]
+[source,cpp]
+----
+include::{root}/python/tests/multilayer_perceptron_test.py[tag=construct2]
+----
+Note that optimizers should be specified for linear layers, but also for batch normalization layers.
+
+NOTE: A `MultilayerPerceptron` needs to be compiled before it can be used. This is done by calling `M.compile(batch_size)`. As a result of this call, a C++ object is created that contains the actual model. A reference to this object is stored in the attribute `_model`.
+
+==== Class Layer
+The class `Layer` is the base class of all neural network layers. There are three different types of layers:
+
+|===
+|Layer |Description
+
+|`Dense`
+|A dense linear layer.
+
+|`Sparse`
+|A sparse linear layer.
+
+|`BatchNormalization`
+|A batch normalization layer.
+|===
+
+A `Dense` layer has a constructor with the following parameters:
+[.small-code]
+[source,python]
+----
+include::{root}/python/nerva/layers.py[tag=dense_constructor]
+----
+This only sets a number of attributes of the layer. Before using the layer the `compile` function must be called:
+[.small-code]
+[source,python]
+----
+include::{root}/python/nerva/layers.py[tag=dense_compile]
+----
+As a result of this call a C++ object is created that contains the actual layer. It is stored in the attribute `_layer`. The normal workflow is to call the `compile` method of the multilayer perceptron, which will also compile the layers, as illustrated in
+<<construct_mlp1>> and <<construct_mlp2>>.
+
+A `Sparse` layer has an additional parameter `density` in the interval stem:[$$[0,1]$$], that determines the fraction of weights that are in the support. Sparse layers do not support dropout.
+
+A `BatchNormalization` layer has the following constructor:
+[.small-code]
+[source,python]
+----
+include::{root}/python/nerva/layers.py[tag=batchnormalization_constructor]
+----
+The output size may be omitted, since by definition it is the same as the input size.
+
+==== Class LossFunction
+The class `LossFunction` is the base class of all loss functions. There are five loss functions available:
+
+* `SquaredErrorLoss`
+
+* `CrossEntropyLoss`
+
+* `LogisticCrossEntropyLoss`
+
+* `NegativeLogLikelihoodLoss`
+
+* `SoftmaxCrossEntropyLoss`
+
+See the https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf[Nerva library specifications] document for precise definitions of these loss functions.
+
+==== Activation functions
+The class `ActivationFunction` is the base class of all activation functions. The following activation functions are available:
+
+* `ReLU`
+* `Sigmoid`
+* `Softmax`
+* `LogSoftmax`
+* `TReLU`
+* `LeakyReLU`
+* `AllReLU`
+* `SReLU`
+* `HyperbolicTangent`
+
+See the https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf[Nerva library specifications] document for precise definitions of these activation functions.
+
+=== Accessing C++ data structures
+To a limited extent, the C++ data structures can be accessed in Python. In the file
+`link:https://github.com/wiegerw/nerva-rowwise/blob/main/python/tests/loss_test.py[loss_test.py]` it is demonstrated how to modify the weight matrices and bias vectors of dense layers via the `_layer` attribute:
+[.small-code]
+[source,python]
+----
+include::{root}/python/tests/multilayer_perceptron_test.py[tag=layer-access]
+----
+The weight matrices of sparse layers are not yet fully exposed to Python.
+
+=== Training a neural network
+The class `StochasticGradientDescentAlgorithm` can be used to train a neural network. It takes as input a multilayer perceptron, a dataset, a loss function, a learning rate scheduler, and a struct containing options like the number of epochs. The main loop looks like this:
+[.small-code]
+[source,python]
+----
+for epoch in range(self.options.epochs):
+    self.on_start_epoch(epoch)
+
+    for batch_index, (X, T) in enumerate(self.train_loader):
+        self.on_start_batch(batch_index)
+        T = to_one_hot(T, num_classes)
+        Y = M.feedforward(X)
+        DY = self.loss.gradient(Y, T) / options.batch_size
+        M.backpropagate(Y, DY)
+        M.optimize(learning_rate)
+        self.on_end_batch(k)
+
+    self.on_end_epoch(epoch)
+
+self.on_end_training()
+----
+
+NOTE: We follow the PyTorch convention that the targets used for classification are provided as a one dimensional vector of integers. Using a call to `to_one_hot` this vector is transformed in to a one hot encoded boolean matrix of the same dimensions as the output `Y`.
+
+In every epoch, the dataset is divided into a number of batches. This is handled by the `DataLoader`, that creates batches `X` of a given batch size, with corresponding targets `T` (i.e. the expected outputs). Each batch goes through the three steps of stochastic gradient descent:
+
+. *feedforward:* Given an input batch `X` and
+the neural network parameters `Θ`, compute the
+output `Y`.
+. *backpropagation:* Given output `Y` corresponding to input `X` and targets `T`, compute the gradient  `DY` of `Y` with respect to the loss function. Then from `Y` and `DY`, compute the gradient `DΘ` of the parameters `Θ`.
+. *optimization:* Given the gradient `DΘ`, update
+the parameters `Θ`.
+
+include::overview-of-the-code.adoc[tags=event-functions]
+
+[[on_start_epoch]]
+An example can be found in the tool `mlp`:
+[.small-code]
+[source,python]
+----
+include::{root}/python/tools/mlp.py[tag=event]
+----
+
+include::overview-of-the-code.adoc[tags=event-actions]
+

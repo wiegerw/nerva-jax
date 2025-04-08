@@ -1,0 +1,221 @@
+:root: ../../
+
+== Overview of the code
+This section gives an overview of the C++ code in the
+{library}, and some information that is needed for understanding the code.
+
+=== Number type
+The {library} uses a type called `scalar` as its number type. By default, it is defined as a 32-bit float. It is possible to change this by defining the symbol `NERVA_USE_DOUBLE`, in which case 64 bit doubles are used. The corresponding code is
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/settings.h[tag=doc]
+----
+A more generic approach would be to add a template argument for the number type to most classes and functions. This has been tried in the past, but since it had a negative impact on the readability of the code, it was later removed.
+
+=== Header files
+The most important header files in are given in the table below.
+
+|===
+|Header file |Description
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/multilayer_perceptron.h[multilayer_perceptron.h]`
+|A multilayer perceptron class.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/layers.h[layers.h]`
+|Neural network layers.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/activation_functions.h[activation_functions.h]`
+|Activation functions.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/loss_functions.h[loss_functions.h]`
+|Loss functions.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/weights.h[weights.h]`
+|Weight initialization functions.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/optimizers.h[optimizers.h]`
+|Optimizer functions, for updating neural network parameters using their gradients.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/learning_rate_schedulers.h[learning_rate_schedulers.h]`
+|Learning rate schedulers, for updating the learning rate during training.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/training.h[training.h]`
+|A stochastic gradient descent algorithm.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/prune.h[prune.h]`
+|Algorithms for pruning sparse weight matrices. This is used for dynamic sparse training.
+
+|`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/grow.h[grow.h]`
+|Algorithms for (re-)growing sparse weights. This is used for dynamic sparse training.
+|===
+
+=== Classes
+
+==== Class multilayer_perceptron
+A multilayer perceptron (MLP) is modeled using the class `multilayer_perceptron`. It contains a list of layers, and has member functions `feedforward`, `backpropagate` and `optimize` that can be used for training the neural network. Constructing an MLP can be done manually, as is illustrated in the tests:
+[.small-code]
+[source,cpp]
+----
+include::{root}/tests/multilayer_perceptron_test.cpp[tag=doc]
+----
+This will create an MLP with three linear layers that have weight matrices `W1, W2, W3` and bias vectors `b1, b2, b3`. The parameter `sizes` contains the input and output sizes of the three layers. Note that the layers and the optimizers are stored using smart pointers. This is done to facilitate the Nerva Python interface. Constructing an MLP like this is quite verbose. An easier way to construct MLPs is provided by the function `make_layers`, that offers a string based interface.
+
+[.small-code]
+[source,cpp]
+----
+include::{root}/tests/gradient_test.cpp[tag=construct_mlp]
+----
+Note that the random number generator argument is used for the generation of the weights. See
+<<mlp_tool, mlp command line options>> for an overview of the supported string arguments.
+
+==== Class neural_network_layer
+The class `neural_network_layer` is the base class of all neural network layers. It has attributes for the input matrix `X` and the corresponding gradient `DX`. Usually a layer has some additional parameters that can be learned by training the neural network. The most important member functions of `neural_network_layer` are given below.
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/layers.h[tag=layer]
+----
+
+==== Class loss_function
+The class `loss_function` is the base class of all loss functions. Although a loss function is similar to a layer, the interface is different:
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/loss_functions.h[tag=doc]
+----
+So instead of the names `feedforward` and `backpropagate`, we use `value` and `gradient`.
+
+There are five loss functions available:
+
+* `squared_error_loss`
+
+* `cross_entropy_loss`
+
+* `logistic_cross_entropy_loss`
+
+* `softmax_cross_entropy_loss`
+
+* `negative_log_likelihood_loss`
+
+==== Activation functions
+Currently, there is no common base class for activation functions. For example, the ReLU activation function is implemented like this:
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/activation_functions.h[tag=doc]
+----
+
+NOTE: Currently, there are some inconsistencies between the
+interfaces of layers, loss functions and activation functions. This may be changed in the future.
+
+=== Training a neural network
+The class `stochastic_gradient_descent_algorithm` can be used to train a neural network. It takes as input a multilayer perceptron, a dataset, a loss function, a learning rate scheduler, and a struct containing options like the number of epochs. The main loop looks like this:
+[.small-code]
+[source,cpp]
+----
+for (unsigned int epoch = 0; epoch < options.epochs; ++epoch)
+{
+  on_start_epoch(epoch);
+
+  eigen::matrix DY(L, options.batch_size);
+
+  for (long batch_index = 0; batch_index < K; batch_index++)
+  {
+    on_start_batch(batch_index);
+
+    eigen::eigen_slice batch(I.begin() + batch_index * options.batch_size, options.batch_size);
+    auto X = data.Xtrain(batch, Eigen::indexing::all);
+    auto T = data.Ttrain(batch, Eigen::indexing::all);
+
+    M.feedforward(X, Y);
+    DY = loss->gradient(Y, T) / options.batch_size;
+    M.backpropagate(Y, DY);
+    M.optimize(learning_rate);
+
+    on_end_batch(batch_index);
+  }
+  on_end_epoch(epoch);
+}
+----
+In every epoch, the dataset is divided into `K` batches. A batch `X` consists of `batch_size` examples, with corresponding targets `T` (i.e. the expected outputs). Each batch goes through the three steps of stochastic gradient descent:
+
+. *feedforward:* Given an input batch `X` and
+the neural network parameters `Θ`, compute the
+output `Y`.
+. *backpropagation:* Given output `Y` corresponding to input `X` and targets `T`, compute the gradient  `DY` of `Y` with respect to the loss function. Then from `Y` and `DY`, compute the gradient `DΘ` of the parameters `Θ`.
+. *optimization:* Given the gradient `DΘ`, update
+the parameters `Θ`.
+
+include::overview-of-the-code.adoc[tags=event-functions]
+
+[[on_start_epoch]]
+An example can be found in the tool `mlp`:
+[.small-code]
+[source,cpp]
+----
+include::{root}/tools/mlp.cpp[tag=event]
+----
+
+include::overview-of-the-code.adoc[tags=event-actions]
+
+=== Timers
+The {library} has two timer classes, defined in the header file `link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/utilities/timer.h[timer.h]`:
+
+|===
+|class |description
+
+|`map_timer`
+|A timer that can be used for timing different operations.
+Each operation is identified using a name, and for each name all timing results are stored.
+
+|`resumable_timer`
+|This is a `map_timer` that can be suspended.
+|===
+
+The {library} uses a predefined timer `nerva_timer` that is defined in the header file `link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/nerva_timer.h[nerva_timer.h]`.
+The `mlp` tool uses this timer to keep track of the time spent on feedforward, backpropagate and optimize calls during training, and optionally of other computations. Each computation is identified with a unique name. If the option `--timer=brief` is set, the accumulated times of all computations will be displayed:
+[listing]
+----
+--- timing results ---
+backpropagate        = 5.6162
+batchnorm1           = 0.0895
+batchnorm2           = 0.0418
+batchnorm3           = 0.1030
+batchnorm4           = 0.8833
+feedforward          = 1.4613
+optimize             = 0.1137
+total time           = 8.3089
+----
+
+For fine-grained measurements two macros `NERVA_TIMER_START` and `NERVA_TIMER_STOP` are defined for starting and stopping the timer. An example can be found in the backpropagate call of batch normalization layers:
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/batch_normalization_layers.h[tag=timer]
+----
+To avoid any overhead, these macros can be disabled by defining the symbol `NERVA_DISABLE_TIMER`. If the option `--timer=full` is set, all individual timings will be displayed:
+[.small-code]
+[listing]
+----
+    feedforward-1    0.001753s
+     batchnorm1-1    0.000096s
+     batchnorm2-1    0.000043s
+     batchnorm3-1    0.000099s
+     batchnorm4-1    0.001125s
+  backpropagate-1    0.006895s
+       optimize-1    0.000184s
+    feedforward-2    0.001773s
+     batchnorm1-2    0.000117s
+     batchnorm2-2    0.000051s
+     batchnorm3-2    0.000124s
+     batchnorm4-2    0.001280s
+  backpropagate-2    0.006300s
+       optimize-2    0.000115s
+    feedforward-3    0.001471s
+     batchnorm1-3    0.000071s
+     batchnorm2-3    0.000023s
+     batchnorm3-3    0.000088s
+     batchnorm4-3    0.000667s
+----
+The calls are numbered, to make it easy to compare different runs. Unsurprisingly, the timing output shows that the computation labeled `batchnorm4` takes the majority of time.

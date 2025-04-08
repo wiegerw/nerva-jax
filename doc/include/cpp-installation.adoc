@@ -1,0 +1,185 @@
+== Installation
+The following build systems are supported for building the {library}:
+
+- https://cmake.org/[CMake] 3.16 or newer
+- https://www.bfgroup.xyz/b2/[B2]
+
+=== Dependencies
+The {library} has the following dependencies:
+
+|===
+|Library |Description
+
+|https://github.com/onqtam/doctest[doctest]
+|Unit testing framework
+
+|https://github.com/fmtlib/fmt[FMT]
+|Formatting library
+
+|https://github.com/bfgroup/Lyra[Lyra]
+|Command line argument parser
+
+|https://eigen.tuxfamily.org/[Eigen]
+|Linear algebra library
+
+|https://github.com/pybind/pybind11[pybind11]
+|Python bindings
+
+|https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html[Intel MKL]
+|Math Kernel Library
+
+|https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html[Intel oneAPI] (*)
+|Intel oneAPI toolkit
+
+|===
+
+(*) The Intel `oneAPI` dependency is optional. This library is needed for the SYCL computation mode.
+Note that `oneAPI` includes the `icpx` compiler and the `MKL` library.
+
+=== Environment variables
+The following environment variables may have to be set:
+
+|===
+|Environment variable |Description
+
+|`ONEAPI_ROOT`
+|Path to the OneAPI installation directory.
+
+|`MKL_DIR`
+|Path to the MKL installation directory.
+
+|`MKL_NUM_THREADS`
+|Controls the number of threads used at runtime by the MKL library.
+
+|`OMP_NUM_THREADS`
+|Controls the number of threads used at runtime by the OMP library.
+
+|`NERVA_ENABLE_SYCL`
+|Enable the SYCL computation mode.
+
+|`NERVA_USE_DOUBLE`
+|Use double instead of single precision in the computations.
+|===
+
+Note that CMake seems to require setting the `MKL_DIR` variable, even if the `MKL`
+library is found in the `ONEAPI_ROOT` directory.
+
+See https://www.intel.com/content/www/us/en/docs/onemkl/developer-guide-linux/2024-2/techniques-to-set-the-number-of-threads.html[techniques-to-set-the-number-of-threads.html]
+for more information about setting the number of threads.
+
+TIP: You can skip setting the `ONEAPI_ROOT` variable by running the OneAPI `setvars.sh` script beforehand.
+This script does not set the `MKL_DIR` variable, so you may have to set it manually.
+
+=== Installation using CMake
+Using CMake, the {library} can be built in a standard way.
+Note that dependencies for `doctest`, `Eigen`, `FMT`, `Lyra`, and `pybind11` are automatically managed using the `FetchContent` commands in the build process.
+
+==== Linux CMake install
+On Linux, you can build and install the library with a command like this:
+
+[[cmake-build]]
+[source,bash]
+----
+mkdir build
+cd build
+cmake .. \
+    -DCMAKE_INSTALL_PREFIX=../install \
+    -DCMAKE_BUILD_TYPE=RELEASE \
+    -DMKL_DIR:PATH=$ONEAPI_ROOT/mkl/latest/lib/cmake/mkl
+make -j8
+make install
+----
+
+==== Windows CMake install
+On Windows, a Visual Studio command line build can be done like this:
+[source]
+----
+cmake .. ^
+    -G "NMake Makefiles" ^
+    -DCMAKE_INSTALL_PREFIX=..\install ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    -DMKL_DIR="%ONEAPI_ROOT%\latest\lib\cmake\mkl"
+nmake
+nmake install
+----
+
+==== SYCL matrix operations
+There is an experimental computation mode for SYCL matrix operations, that can be enabled in the `mlp` tool using the flag `--computation=sycl`. This is only supported on Linux in combination with the Intel `icpx` compiler. It can be enabled using the following build command:
+[source]
+----
+source $ONEAPI_ROOT/setvars.sh
+cmake .. \
+-DCMAKE_C_COMPILER=$ONEAPI_ROOT/compiler/latest/bin/icx \
+-DCMAKE_CXX_COMPILER=$ONEAPI_ROOT/compiler/latest/bin/icpx \
+-DCMAKE_INSTALL_PREFIX=../install \
+-DCMAKE_BUILD_TYPE=RELEASE \
+-DENABLE_SYCL=ON
+----
+
+NOTE: The initial tests with SYCL matrix operations on CPU have a rather disappointing performance.
+
+==== Unit tests
+The unit tests can be run using the command
+[source]
+----
+ctest -R nerva
+----
+
+==== icpx + clang compilers
+If you're using the Clang or ICX (Intel's `icpx`) compilers, be aware of a longstanding issue between MKL and Eigen. More information is available in the following discussions:
+
+- https://community.intel.com/t5/Intel-oneAPI-Math-Kernel-Library/Using-MKL-2023-0-0-20221201-with-Eigen/m-p/1456044[Intel Community Discussion (1456044)]
+- https://gitlab.com/libeigen/eigen/-/issues/2586[Eigen Issue Tracker (Issue 2586)].
+
+To work around this issue in Nerva, the symbol `EIGEN_COLPIVOTINGHOUSEHOLDERQR_LAPACKE_H` has been defined. This prevents the inclusion of the problematic header file and resolves the compatibility issue.
+
+=== Installation using B2
+The {library} can also be built using the B2 build system.
+
+The following environment variables must be set:
+
+|===
+|Environment variable |Description
+
+|`ONEAPI_ROOT`
+|Path to the OneAPI installation directory.
+
+|`DOCTEST_INCLUDE_DIR`
+|Path to the doctest include directory.
+
+|`EIGEN_INCLUDE_DIR`
+|Path to the Eigen include directory.
+
+|`FMT_INCLUDE_DIR`
+|Path to the FMT include directory.
+
+|`LYRA_INCLUDE_DIR`
+|Path to the Lyra include directory.
+
+|`PYBIND11_INCLUDE_DIR`
+|Path to the pybind11 include directory.
+
+|===
+
+NOTE: The Python include directory is currently hard coded to `/usr/include/python3.12`
+in the file
+`link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/Jamroot[Jamroot]`
+This may have to be changed to the correct location on your system.
+
+==== Building the tools
+The tools can be installed with a command like this, assuming that the `g++-14` compiler has been configured.
+[source]
+----
+cd tools
+b2 gcc-14 link=static release -j8
+----
+
+This will install the tools in the directory `install/bin`.
+
+==== Running the tests
+The unit tests can be run with a command like this:
+[source]
+----
+cd tests
+b2 gcc-14 link=static release -j8
+----

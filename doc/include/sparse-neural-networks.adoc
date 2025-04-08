@@ -1,0 +1,90 @@
+:root: ../../
+
+== Sparse neural networks
+Sparse neural network layers are often simulated using binary masks, see cite:[DBLP_journals_corr_abs-2102-01732]. This is caused by the lack of support for sparse tensors in popular neural network frameworks. Note that PyTorch is currently developing https://pytorch.org/docs/stable/sparse.html[sparse tensors]. The {library} supports truly sparse layers, meaning that the weight matrices of sparse layers are stored in a sparse matrix format. Another example of truly sparse layers is given by cite:[DBLP_conf_icml_NikdanPIKA23].
+
+=== Sparse matrices
+Since we are dealing with a programming context, we say that the _support_ of a sparse matrix refers to the set of positions (or indices) in the matrix that are explicitly stored. Elements inside the support can have a non-zero value. Elements outside the support have the value zero by definition.
+
+Sparse matrices in the {library} are stored in
+link:++https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)++[CSR] format.
+This matrix representation stores arrays of column and row indices to define the support, plus an array of the corresponding values. CSR matrices are _unstructured_ sparse matrices, meaning they have non-zero elements located at arbitrary positions. Alternatively, there are _structured_ sparse matrices, take for example butterfly matrices cite:[DBLP_journals_corr_abs-2405-15013].
+
+=== Sparse evolutionary training
+Sparse evolutionary training (SET) is a method for efficiently training sparse neural networks, see e.g. cite:[DBLP_journals_nca_LiuMMPP21]. The idea behind this method is to start the training with a random sparse topology, and to periodically prune and regrow some of the weights.
+
+=== Sparse initialization
+In SET, the sparsity is not divided evenly over the sparse layers. Instead, small layers are assigned a higher density than larger ones.
+In cite:[DBLP_journals_nca_LiuMMPP21] formula (3), https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model[Erdős–Rényi graph topology]
+is suggested to calculate the densities of the sparse layers given a desired overall density of the sparse layers combined.
+In the {library} this is implemented in the function `compute_sparse_layer_densities`, see `link:https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/layer_algorithms.h[layer_algorithms.h]`. The original Python implementation can be found
+https://github.com/VITA-Group/Random_Pruning/blob/871077f1d10f9bc44941b093fd5ccbc4ec3984fa/CIFAR/sparselearning/core.py#L155[here], along with several other sparse initialization strategies.
+In the tool `mlp` the option `--overall-density` is used for assigning Erdős–Rényi densities to the sparse layers. See <<mlp_output>> for an example of this. The overall density of `0.05` is converted into densities `[0.042382877, 0.06357384, 1.0]` for the individual layers.
+
+=== Pruning weights
+Pruning weights is about removing parameters from a neural network, see also https://en.wikipedia.org/wiki/Pruning_(artificial_neural_network)[Pruning (artificial_neural_network)]. In our context removing parameters is about removing elements from the support of a sparse weight matrix. The effect of this is that the values corresponding to these elements are zeroed.
+
+==== Threshold pruning
+In threshold pruning, all weights stem:[w_{ij}] with stem:[|w_{ij}| \leq t] for a given threshold stem:[t] are pruned from a weight matrix stem:[W].
+
+==== Magnitude based pruning
+Magnitude based pruning is special case of threshold pruning. In magnitude based pruning, the threshold stem:[t] is computed such that for a given fraction stem:[\zeta] of the weights we have stem:[|w_{ij}| \leq t]. To ensure that the desired fraction of weights is removed, our implementation takes into account that there can be multiple weights with
+stem:[|w_{ij}| = t].
+
+==== SET based pruning
+In SET based pruning, magnitude pruning is applied to positive weights and negative weights separately. So a fraction stem:[\zeta] of the positive weights and a fraction stem:[\zeta] of the negative weights are pruned.
+
+=== Growing weights
+Growing weights is about adding parameters to a neural network. In our context adding parameters is about adding elements to the support of a sparse weight matrix.
+
+==== Random growing
+In random growing, a given number of elements is chosen randomly from the positions outside the support of a weight matrix. These new elements are then added to the support. Since the new elements need to be initialized, a weight initializer needs to be chosen to generate values for them.
+
+A specific implementation `grow_random` for matrices in CSR format has been developed, that uses https://en.wikipedia.org/wiki/Reservoir_sampling[reservoir sampling] to determine the new elements that are added to the support.
+
+=== Classes for pruning and growing
+In the {library}, the classes `prune_function` and `grow_function` are used to represent generic pruning and growing strategies:
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/prune.h[tag=doc]
+----
+
+[.small-code]
+[source,cpp]
+----
+include::{root}/include/nerva/neural_networks/grow.h[tag=doc]
+----
+
+In the command line tool `mlp` the user can select specific implementations of these prune and grow functions. They are called at the start of each epoch of training via an attribute `regrow_function` that applies pruning and growing to the sparse layers of an MLP. See also the <<on_start_epoch>> event.
+
+=== Experiments with sparse training
+In cite:[wesselink2024nervatrulysparseimplementation] we report on some of our experiments with sparse neural networks.
+
+An example of a dynamic sparse training experiment is
+[.small-code]
+[source,bash]
+----
+include::{root}/examples/cifar10_pruning.sh[tag=doc]
+----
+At the start of every epoch 20% of the weights is pruned, and the same number of weights is added back at different locations.
+The output may look like this:
+[.small-code]
+[listing]
+----
+=== Nerva c++ model ===
+Sparse(input_size=3072, output_size=1024, density=0.042382877, optimizer=Nesterov(0.90000), activation=ReLU())
+Sparse(input_size=1024, output_size=1024, density=0.06357384, optimizer=Nesterov(0.90000), activation=ReLU())
+Dense(input_size=1024, output_size=10, optimizer=Nesterov(0.90000), activation=NoActivation())
+loss = SoftmaxCrossEntropyLoss()
+scheduler = ConstantScheduler(lr=0.01)
+layer densities: 133325/3145728 (4.238%), 66662/1048576 (6.357%), 10240/10240 (100%)
+
+epoch   0 lr: 0.01000000  loss: 2.30284437  train accuracy: 0.07904000  test accuracy: 0.08060000 time: 0.00000000s
+epoch   1 lr: 0.01000000  loss: 2.14723837  train accuracy: 0.21136000  test accuracy: 0.21320000 time: 5.48583113s
+pruning + growing 26665/133325 weights
+pruning + growing 13332/66662 weights
+epoch   2 lr: 0.01000000  loss: 1.91203228  train accuracy: 0.30918000  test accuracy: 0.30900000 time: 5.00460376s
+pruning + growing 26665/133325 weights
+pruning + growing 13332/66662 weights
+----

@@ -1,0 +1,49 @@
+:root: ../../
+
+== Command line tools
+The tool `mlp.py` can be used to do training experiments with multilayer perceptrons.
+
+=== The tool mlp.py
+An example invocation of the `mlp.py` tool is
+
+[source]
+----
+include::{root}/examples/cifar10_sparse_python.sh[tag=doc]
+----
+This will train a CIFAR-10 model using an MLP consisting of three layers with activation functions ReLU, ReLU and no activation. Note that it automatically downloads the CIFAR-10 dataset in the folder `../data` if it doesn't yet exist.
+
+The output may look like this:
+[.small-code]
+[source]
+----
+=== Nerva python model ===
+Sequential(
+  Sparse(output_size=1024, density=0.042382812500000006, activation=ReLU(), optimizer=Nesterov(0.9), weight_initializer=Xavier),
+  Sparse(output_size=1024, density=0.06357421875000001, activation=ReLU(), optimizer=Nesterov(0.9), weight_initializer=Xavier),
+  Dense(output_size=10, activation=NoActivation(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0)
+)
+loss = SoftmaxCrossEntropyLoss()
+scheduler = ConstantScheduler(lr=0.009999999776482582)
+layer densities: 133325/3145728 (4.238%), 66662/1048576 (6.357%), 10240/10240 (100%)
+
+
+=== Training Nerva model ===
+epoch   0  lr: 0.01000000  loss: 2.30246344  train accuracy: 0.10724000  test accuracy: 0.11390000  time: 0.00000000s
+epoch   1  lr: 0.01000000  loss: 1.89570341  train accuracy: 0.32142000  test accuracy: 0.32030000  time: 4.15395873s
+epoch   2  lr: 0.01000000  loss: 1.66956488  train accuracy: 0.40332000  test accuracy: 0.40220000  time: 3.60670412s
+epoch   3  lr: 0.01000000  loss: 1.53549386  train accuracy: 0.45616000  test accuracy: 0.44940000  time: 3.24853144s
+epoch   4  lr: 0.01000000  loss: 1.43913857  train accuracy: 0.49054000  test accuracy: 0.47920000  time: 3.29059404s
+epoch   5  lr: 0.01000000  loss: 1.36875251  train accuracy: 0.51380000  test accuracy: 0.49070000  time: 3.83244992s
+epoch   6  lr: 0.01000000  loss: 1.29761993  train accuracy: 0.54106000  test accuracy: 0.50710000  time: 3.59350869s
+epoch   7  lr: 0.01000000  loss: 1.23931273  train accuracy: 0.56170000  test accuracy: 0.51690000  time: 3.96624650s
+----
+
+include::command-line-tools.adoc[tags=mlptool-options]
+include::command-line-tools.adoc[tags=general-options]
+include::command-line-tools.adoc[tags=random-generator-options]
+include::command-line-tools.adoc[tags=layer-configuration-options]
+include::command-line-tools.adoc[tags=training-configuration-options]
+include::command-line-tools.adoc[tags=dataset-options]
+include::command-line-tools.adoc[tags=pruning-options]
+include::command-line-tools.adoc[tags=computation-options]
+include::command-line-tools.adoc[tags=miscellaneous-options]

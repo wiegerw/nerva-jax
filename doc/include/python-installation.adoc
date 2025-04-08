@@ -1,0 +1,27 @@
+:root: ../../
+
+== Installation
+The {library} Python bindings can be installed via `pip`. The installation is done via a https://github.com/wiegerw/nerva-rowwise/blob/main/python/setup.py[setup.py] script. The script has several dependencies, that need to be resolved using environment variables.
+
+=== Dependencies
+- Intel MKL library https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html[oneMKL]
+- FMT https://github.com/fmtlib/fmt
+- Eigen https://eigen.tuxfamily.org/
+- pybind11 https://github.com/pybind/pybind11
+
+The MKL dependency can be resolved by setting the `MKL_ROOT` environment variable, or by setting the `ONEAPI_ROOT` environment variable.
+
+To resolve the FMT, Eigen and pybind11 dependencies, the environment variables
+`EIGEN_INCLUDE_DIR`, `FMT_INCLUDE_DIR` and `PYBIND11_INCLUDE_DIR` can be set.
+
+An alternative solution is to use CMake to resolve these three dependencies, see also the
+link:{root}/{docfile}/nerva-cpp.adoc#cmake-build[CMake install] section in the C++ documentation. The `cmake` command causes the three libraries to be downloaded automatically in the `_deps` subdirectory of the CMake build directory. After that it is sufficient to set the environment variable `CMAKE_DEPS_DIR`.
+
+[[pip-install]]
+The `nerva` Python module can then be installed using
+[source]
+----
+cd python
+pip install .
+----
+
