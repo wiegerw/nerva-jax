@@ -33,8 +33,7 @@ The {library} has the following dependencies:
 
 |===
 
-(*) The Intel `oneAPI` dependency is optional. This library is needed for the SYCL computation mode.
-Note that `oneAPI` includes the `icpx` compiler and the `MKL` library.
+(*) The Intel `oneAPI` dependency is optional, but highly recommended. This library is needed for the SYCL computation mode. Note that `oneAPI` includes the `icpx` compiler and the `MKL` library. Please make sure to use the latest version of `oneAPI`.
 
 === Environment variables
 The following environment variables may have to be set:

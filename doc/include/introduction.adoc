@@ -15,6 +15,5 @@ This influence may still be evident in the naming of symbols.
 ifdef::nerva-python[]
 This library features a Python module named `nerva`, that is built using Python bindings to the
 https://wiegerw.github.io/nerva-rowwise/doc/nerva-cpp.html[Nerva-Rowwise C++ Library].
-Note that the matrix type used internally in the `nerva` module is `torch.Tensor`, to ensure
-an easy integration with PyTorch.
+Note that the matrix type used internally in the `nerva` module is `torch.Tensor`, to ensure an easy integration with PyTorch.
 endif::nerva-python[]

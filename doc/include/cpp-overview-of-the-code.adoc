@@ -1,5 +1,3 @@
-:root: ../../
-
 == Overview of the code
 This section gives an overview of the C++ code in the
 {library}, and some information that is needed for understanding the code.
@@ -9,7 +7,7 @@ The {library} uses a type called `scalar` as its number type. By default, it is 
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/settings.h[tag=doc]
+include::../../include/nerva/neural_networks/settings.h[tag=doc]
 ----
 A more generic approach would be to add a template argument for the number type to most classes and functions. This has been tried in the past, but since it had a negative impact on the readability of the code, it was later removed.
 
@@ -57,14 +55,14 @@ A multilayer perceptron (MLP) is modeled using the class `multilayer_perceptron`
 [.small-code]
 [source,cpp]
 ----
-include::{root}/tests/multilayer_perceptron_test.cpp[tag=doc]
+include::../../tests/multilayer_perceptron_test.cpp[tag=doc]
 ----
 This will create an MLP with three linear layers that have weight matrices `W1, W2, W3` and bias vectors `b1, b2, b3`. The parameter `sizes` contains the input and output sizes of the three layers. Note that the layers and the optimizers are stored using smart pointers. This is done to facilitate the Nerva Python interface. Constructing an MLP like this is quite verbose. An easier way to construct MLPs is provided by the function `make_layers`, that offers a string based interface.
 
 [.small-code]
 [source,cpp]
 ----
-include::{root}/tests/gradient_test.cpp[tag=construct_mlp]
+include::../../tests/gradient_test.cpp[tag=construct_mlp]
 ----
 Note that the random number generator argument is used for the generation of the weights. See
 <<mlp_tool, mlp command line options>> for an overview of the supported string arguments.
@@ -74,7 +72,7 @@ The class `neural_network_layer` is the base class of all neural network layers.
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/layers.h[tag=layer]
+include::../../include/nerva/neural_networks/layers.h[tag=layer]
 ----
 
 ==== Class loss_function
@@ -82,7 +80,7 @@ The class `loss_function` is the base class of all loss functions. Although a lo
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/loss_functions.h[tag=doc]
+include::../../include/nerva/neural_networks/loss_functions.h[tag=doc]
 ----
 So instead of the names `feedforward` and `backpropagate`, we use `value` and `gradient`.
 
@@ -103,7 +101,7 @@ Currently, there is no common base class for activation functions. For example, 
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/activation_functions.h[tag=doc]
+include::../../include/nerva/neural_networks/activation_functions.h[tag=doc]
 ----
 
 NOTE: Currently, there are some inconsistencies between the
@@ -154,7 +152,7 @@ An example can be found in the tool `mlp`:
 [.small-code]
 [source,cpp]
 ----
-include::{root}/tools/mlp.cpp[tag=event]
+include::../../tools/mlp.cpp[tag=event]
 ----
 
 include::overview-of-the-code.adoc[tags=event-actions]
@@ -192,7 +190,7 @@ For fine-grained measurements two macros `NERVA_TIMER_START` and `NERVA_TIMER_ST
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/batch_normalization_layers.h[tag=timer]
+include::../../include/nerva/neural_networks/batch_normalization_layers.h[tag=timer]
 ----
 To avoid any overhead, these macros can be disabled by defining the symbol `NERVA_DISABLE_TIMER`. If the option `--timer=full` is set, all individual timings will be displayed:
 [.small-code]

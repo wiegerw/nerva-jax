@@ -1,5 +1,3 @@
-:root: ../../
-
 == Performance
 This section discusses various aspects that play a role for the performance of a neural network library.
 
@@ -20,7 +18,7 @@ In general, the performance of Eigen is very good. But occasionally, the generat
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/layers.h[tag=nerva_computation]
+include::../../include/nerva/neural_networks/layers.h[tag=nerva_computation]
 ----
 In this case, the default version `computation::eigen` turned out to have very poor performance. A direct call to an MKL routine is used to solve this problem. The `NervaComputation` setting is also used to experiment with BLAS implementations and SYCL implementations. See the file https://github.com/wiegerw/nerva-rowwise/blob/main/include/nerva/neural_networks/optimizers.h[optimizers.h] for some examples of that.
 

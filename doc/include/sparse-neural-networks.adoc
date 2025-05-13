@@ -1,5 +1,3 @@
-:root: ../../
-
 == Sparse neural networks
 Sparse neural network layers are often simulated using binary masks, see cite:[DBLP_journals_corr_abs-2102-01732]. This is caused by the lack of support for sparse tensors in popular neural network frameworks. Note that PyTorch is currently developing https://pytorch.org/docs/stable/sparse.html[sparse tensors]. The {library} supports truly sparse layers, meaning that the weight matrices of sparse layers are stored in a sparse matrix format. Another example of truly sparse layers is given by cite:[DBLP_conf_icml_NikdanPIKA23].
 
@@ -47,13 +45,13 @@ In the {library}, the classes `prune_function` and `grow_function` are used to r
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/prune.h[tag=doc]
+include::../../include/nerva/neural_networks/prune.h[tag=doc]
 ----
 
 [.small-code]
 [source,cpp]
 ----
-include::{root}/include/nerva/neural_networks/grow.h[tag=doc]
+include::../../include/nerva/neural_networks/grow.h[tag=doc]
 ----
 
 In the command line tool `mlp` the user can select specific implementations of these prune and grow functions. They are called at the start of each epoch of training via an attribute `regrow_function` that applies pruning and growing to the sparse layers of an MLP. See also the <<on_start_epoch>> event.
@@ -65,7 +63,7 @@ An example of a dynamic sparse training experiment is
 [.small-code]
 [source,bash]
 ----
-include::{root}/examples/cifar10_pruning.sh[tag=doc]
+include::../../examples/cifar10_pruning.sh[tag=doc]
 ----
 At the start of every epoch 20% of the weights is pruned, and the same number of weights is added back at different locations.
 The output may look like this:

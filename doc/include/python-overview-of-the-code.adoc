@@ -1,5 +1,3 @@
-:root: ../../
-
 == Overview of the code
 This section gives an overview of the Python code in the
 {library}, and some explanations about the code.
@@ -52,7 +50,7 @@ A multilayer perceptron (MLP) is modeled using the class `MultilayerPerceptron`.
 [.small-code]
 [source,cpp]
 ----
-include::{root}/python/tests/multilayer_perceptron_test.py[tag=construct1]
+include::../../python/tests/multilayer_perceptron_test.py[tag=construct1]
 ----
 This creates an MLP with three linear layers. The parameter `sizes` contains the input and output sizes of the three layers. The weights are initialized using Xavier.
 
@@ -61,7 +59,7 @@ Another way to construct MLPs is provided by the function `make_layers`, that of
 [.small-code]
 [source,cpp]
 ----
-include::{root}/python/tests/multilayer_perceptron_test.py[tag=construct2]
+include::../../python/tests/multilayer_perceptron_test.py[tag=construct2]
 ----
 Note that optimizers should be specified for linear layers, but also for batch normalization layers.
 
@@ -87,13 +85,13 @@ A `Dense` layer has a constructor with the following parameters:
 [.small-code]
 [source,python]
 ----
-include::{root}/python/nerva/layers.py[tag=dense_constructor]
+include::../../python/nerva/layers.py[tag=dense_constructor]
 ----
 This only sets a number of attributes of the layer. Before using the layer the `compile` function must be called:
 [.small-code]
 [source,python]
 ----
-include::{root}/python/nerva/layers.py[tag=dense_compile]
+include::../../python/nerva/layers.py[tag=dense_compile]
 ----
 As a result of this call a C++ object is created that contains the actual layer. It is stored in the attribute `_layer`. The normal workflow is to call the `compile` method of the multilayer perceptron, which will also compile the layers, as illustrated in
 <<construct_mlp1>> and <<construct_mlp2>>.
@@ -104,7 +102,7 @@ A `BatchNormalization` layer has the following constructor:
 [.small-code]
 [source,python]
 ----
-include::{root}/python/nerva/layers.py[tag=batchnormalization_constructor]
+include::../../python/nerva/layers.py[tag=batchnormalization_constructor]
 ----
 The output size may be omitted, since by definition it is the same as the input size.
 
@@ -144,7 +142,7 @@ To a limited extent, the C++ data structures can be accessed in Python. In the f
 [.small-code]
 [source,python]
 ----
-include::{root}/python/tests/multilayer_perceptron_test.py[tag=layer-access]
+include::../../python/tests/multilayer_perceptron_test.py[tag=layer-access]
 ----
 The weight matrices of sparse layers are not yet fully exposed to Python.
 
@@ -188,7 +186,7 @@ An example can be found in the tool `mlp`:
 [.small-code]
 [source,python]
 ----
-include::{root}/python/tools/mlp.py[tag=event]
+include::../../python/tools/mlp.py[tag=event]
 ----
 
 include::overview-of-the-code.adoc[tags=event-actions]
