@@ -4,8 +4,7 @@
 
 import jax.numpy as jnp
 from nerva_jax.activation_functions import Sigmoid
-from nerva_jax.matrix_operations import column_repeat, dot, elements_sum, hadamard, log, log_sigmoid, reciprocal, \
-    rows_sum
+from nerva_jax.matrix_operations import column_repeat, dot, elements_sum, hadamard, log, log_sigmoid, reciprocal, rows_sum
 from nerva_jax.softmax_functions import log_softmax, softmax, stable_log_softmax, stable_softmax
 
 
@@ -28,26 +27,6 @@ def Squared_error_loss(Y, T):
 
 def Squared_error_loss_gradient(Y, T):
     return 2 * (Y - T)
-
-
-def mean_squared_error_loss(y, t):
-    N, K = y.shape
-    return squared_error_loss(y, t) / K
-
-
-def mean_squared_error_loss_gradient(y, t):
-    N, K = y.shape
-    return squared_error_loss_gradient(y, t) / K
-
-
-def Mean_squared_error_loss(Y, T):
-    N, K = Y.shape
-    return Squared_error_loss(Y, T) / (K * N)
-
-
-def Mean_squared_error_loss_gradient(Y, T):
-    N, K = Y.shape
-    return Squared_error_loss_gradient(Y, T) / (K * N)
 
 
 def cross_entropy_loss(y, t):
@@ -85,6 +64,7 @@ def Softmax_cross_entropy_loss(Y, T):
 def Softmax_cross_entropy_loss_gradient(Y, T):
     N, K = Y.shape
     return hadamard(softmax(Y), column_repeat(rows_sum(T), K)) - T
+
 
 def Softmax_cross_entropy_loss_gradient_one_hot(Y, T):
     return softmax(Y) - T

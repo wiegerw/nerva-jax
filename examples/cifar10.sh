@@ -1,9 +1,10 @@
 #!/bin/sh
 
 PYTHONPATH=../src
+dataset=../data/cifar10-flattened.npz
 
-if [ ! -f ../data/cifar10.npz ]; then
-    echo "Error: file ../data/cifar10.npz does not exist."
+if [ ! -f $dataset ]; then
+    echo "Error: file ../data/mnist.npz does not exist."
     echo "Please provide the correct location or run the prepare_datasets.sh script first."
     exit 1
 fi
@@ -17,4 +18,4 @@ python3 -u ../tools/mlp.py \
         --epochs=1 \
         --loss=SoftmaxCrossEntropy \
         --learning-rate="Constant(0.01)" \
-        --dataset=../data/cifar10.npz
+        --dataset=$dataset

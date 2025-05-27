@@ -6,15 +6,15 @@
 
 from typing import List, Tuple
 
-import jax.numpy as jnp
 import sklearn.datasets as dt
-from nerva_jax.activation_functions import ReLUActivation
-from nerva_jax.datasets import MemoryDataLoader
-from nerva_jax.layers import ActivationLayer, LinearLayer
-from nerva_jax.learning_rate import MultiStepLRScheduler
-from nerva_jax.loss_functions import SoftmaxCrossEntropyLossFunction
-from nerva_jax.multilayer_perceptron import MultilayerPerceptron
-from nerva_jax.training import sgd
+import torch
+from nerva_torch.activation_functions import ReLUActivation
+from nerva_torch.datasets import MemoryDataLoader
+from nerva_torch.layers import ActivationLayer, LinearLayer
+from nerva_torch.learning_rate import MultiStepLRScheduler
+from nerva_torch.loss_functions import SoftmaxCrossEntropyLossFunction
+from nerva_torch.multilayer_perceptron import MultilayerPerceptron
+from nerva_torch.training import sgd
 
 
 def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features, num_classes, num_redundant=2, class_sep=0.8, random_state=None):
@@ -29,9 +29,13 @@ def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features
     )
 
     # Split the dataset into a training and test set
-    train_batch = jnp.array(range(0, num_train_samples))
-    test_batch = jnp.array(range(num_train_samples, num_train_samples + num_test_samples))
-    return X[train_batch], T[train_batch], X[test_batch], T[test_batch]
+    train_batch = range(0, num_train_samples)
+    test_batch = range(num_train_samples, num_train_samples + num_test_samples)
+    Xtrain = torch.Tensor(X[train_batch])
+    Ttrain = torch.LongTensor(T[train_batch])
+    Xtest = torch.Tensor(X[test_batch])
+    Ttest = torch.LongTensor(T[test_batch])
+    return Xtrain, Ttrain, Xtest, Ttest
 
 
 def create_mlp(sizes: List[Tuple[int, int]]):
