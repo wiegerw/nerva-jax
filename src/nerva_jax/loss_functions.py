@@ -146,14 +146,6 @@ class SquaredErrorLossFunction(LossFunction):
         return Squared_error_loss_gradient(Y, T)
 
 
-class MeanSquaredErrorLossFunction(LossFunction):
-    def __call__(self, Y: Matrix, T: Matrix) -> float:
-        return Mean_squared_error_loss(Y, T)
-
-    def gradient(self, Y: Matrix, T: Matrix) -> Matrix:
-        return Mean_squared_error_loss_gradient(Y, T)
-
-
 class CrossEntropyLossFunction(LossFunction):
     def __call__(self, Y: Matrix, T: Matrix) -> float:
         return Cross_entropy_loss(Y, T)
@@ -197,8 +189,6 @@ class NegativeLogLikelihoodLossFunction(LossFunction):
 def parse_loss_function(text: str) -> LossFunction:
     if text == "SquaredError":
         return SquaredErrorLossFunction()
-    elif text == "MeanSquaredError":
-        return MeanSquaredErrorLossFunction()
     elif text == "CrossEntropy":
         return CrossEntropyLossFunction()
     elif text == "SoftmaxCrossEntropy":
