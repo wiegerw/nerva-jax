@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="description" content="Documentation for the nerva-rowwise repository.">
+<meta name="author" content="Wieger Wesselink">
+<meta name="copyright" content="Copyright 2024 Wieger Wesselink">
+<title>Nerva-JAX manual</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
+}
+pre.rouge .gr {
+  color: #f6f8fa;
+}
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
+}
+pre.rouge .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+pre.rouge .ges {
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .kc {
+  color: #0550ae;
+}
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
+}
+pre.rouge .nd {
+  color: #8250df;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+</style>
+</head>
+<body id="demo" class="book toc2 toc-left">
+<div id="header">
+<h1>Nerva-JAX manual</h1>
+<div class="details">
+<span id="author" class="author">Wieger Wesselink</span><br>
+<span id="email" class="email"><a href="mailto:j.w.wesselink@tue.nl">j.w.wesselink@tue.nl</a></span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle"><h3>Contents</h3></div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_installation">Installation</a></li>
+<li><a href="#_overview_of_the_code">Overview of the code</a>
+<ul class="sectlevel2">
+<li><a href="#_module_contents">Module contents</a></li>
+<li><a href="#_number_type">Number type</a></li>
+</ul>
+</li>
+<li><a href="#_api_user_guide">API / User guide</a>
+<ul class="sectlevel2">
+<li><a href="#_classes">Classes</a></li>
+<li><a href="#_training_a_neural_network">Training a neural network</a></li>
+</ul>
+</li>
+<li><a href="#_command_line_tools">Command line tools</a>
+<ul class="sectlevel2">
+<li><a href="#_the_tool_mlp_py">The tool mlp.py</a></li>
+<li><a href="#_the_tool_inspect_npz_py">The tool inspect_npz.py</a></li>
+</ul>
+</li>
+<li><a href="#io">Data Handling</a>
+<ul class="sectlevel2">
+<li><a href="#_npz_format">NPZ format</a></li>
+<li><a href="#preparing-data">Preparing data</a></li>
+<li><a href="#_storing_datasets_and_weights">Storing datasets and weights</a></li>
+</ul>
+</li>
+<li><a href="#_advanced_topics">Advanced Topics</a>
+<ul class="sectlevel2">
+<li><a href="#_matrix_operations">Matrix operations</a></li>
+</ul>
+</li>
+<li><a href="#_references">References</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<style>
+  .small-code .content pre {
+      font-size: 0.7em;
+  }
+</style>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Nerva-JAX Python Library</em> is a library for neural networks.
+It is part of the Nerva library collection <a href="https://github.com/wiegerw/nerva" class="bare">https://github.com/wiegerw/nerva</a>, that includes
+native C++ and Python implementations of neural networks. Originally the library was intended
+for experimenting with truly sparse neural networks. Nowadays, the library
+also aims to provide a transparent and accessible implementation of neural networks.</p>
+</div>
+<div class="paragraph">
+<p>This document describes the implementation of the <em>Nerva-JAX Python Library</em>. For initial versions
+of the library I took inspiration from lecture notes of
+<a href="https://www.cs.toronto.edu/~rgrosse/teaching.html">machine learning courses by Roger Grosse</a>, which I highly recommend.
+This influence may still be evident in the naming of symbols.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation">Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>nerva_jax</code> library can be installed in two ways: from the source repository or from the Python Package Index (PyPI).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="c"># Install from the local repository</span>
+pip <span class="nb">install</span> .</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="c"># Install directly from PyPI</span>
+pip <span class="nb">install </span>nerva-torch</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_the_code">Overview of the code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides an overview of the code in the <em>Nerva-JAX Python Library</em>. All core functionality is contained in the <code>nerva_jax</code> module.</p>
+</div>
+<div class="sect2">
+<h3 id="_module_contents">Module contents</h3>
+<div class="paragraph">
+<p>The most important files in the <code>nerva_jax</code> module are listed below. Each file implements a distinct part of the neural network library.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">File</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/multilayer_perceptron.py">multilayer_perceptron.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the <code>MultilayerPerceptron</code> class, representing a feedforward neural network with multiple layers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/layers.py">layers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements various neural network layers, such as fully connected or custom layers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/activation_functions.py">activation_functions.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides commonly used activation functions (e.g., ReLU, sigmoid, tanh) to introduce non-linearity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/loss_functions.py">loss_functions.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements loss functions used to quantify the difference between predictions and targets (e.g., cross-entropy, MSE).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/weights.py">weights.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides functions for initializing neural network weights, supporting different strategies for stability and performance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/optimizers.py">optimizers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines optimizer functions that update neural network parameters based on computed gradients (e.g., SGD, momentum).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/learning_rate_schedulers.py">learning_rate_schedulers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements learning rate schedulers to adjust the learning rate dynamically during training.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/training.py">training.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the stochastic gradient descent (SGD) algorithms for training multilayer perceptrons.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_number_type">Number type</h3>
+<div class="paragraph">
+<p>The <em>Nerva-JAX Python Library</em> uses 32-bit floating point numbers (float32) as its default number type. This choice balances memory usage and computational efficiency on both CPUs and GPUs. All computations, including feedforward, backpropagation, and gradient updates, are performed in this precision.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_user_guide">API / User guide</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_classes">Classes</h3>
+<div class="sect3">
+<h4 id="_class_layer">Class Layer</h4>
+<div class="paragraph">
+<p>The class <code>Layer</code> is the base class of all neural network layers. There are several different types of layers:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Layer</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LinearLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ActivationLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a pointwise activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SReLULayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a SReLU activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SoftmaxLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a softmax activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LogSoftmaxLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a logsoftmax activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BatchNormalizationLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A batch normalization layer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_class_multilayerperceptron">Class MultilayerPerceptron</h4>
+<div class="paragraph">
+<p>A multilayer perceptron (MLP) is modeled using the class <code>MultilayerPerceptron</code>. It contains a list of layers, and has member functions <code>feedforward</code>, <code>backpropagate</code> and <code>optimize</code> that can be used for training the neural network. Constructing an MLP can be done as follows:</p>
+</div>
+<div id="construct_mlp1" class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="cpp">    <span class="n">M</span> <span class="o">=</span> <span class="n">MultilayerPerceptron</span><span class="p">()</span>
+
+    <span class="cp"># configure layer 1
+</span>    <span class="n">layer1</span> <span class="o">=</span> <span class="n">ActivationLayer</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">ReLUActivation</span><span class="p">())</span>
+    <span class="n">xavier_normalized_weights</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">zero_bias</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">optimizer_W</span> <span class="o">=</span> <span class="n">MomentumOptimizer</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="s">"W"</span><span class="p">,</span> <span class="s">"DW"</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">optimizer_b</span> <span class="o">=</span> <span class="n">NesterovOptimizer</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"Db"</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">layer1</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">CompositeOptimizer</span><span class="p">([</span><span class="n">optimizer_W</span><span class="p">,</span> <span class="n">optimizer_b</span><span class="p">])</span>
+
+    <span class="cp"># configure layer 2
+</span>    <span class="n">layer2</span> <span class="o">=</span> <span class="n">ActivationLayer</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">LeakyReLUActivation</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">layer2</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"Xavier"</span><span class="p">)</span>
+    <span class="n">layer2</span><span class="p">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="s">"Momentum(0.8)"</span><span class="p">)</span>
+
+    <span class="cp"># configure layer 3
+</span>    <span class="n">layer3</span> <span class="o">=</span> <span class="n">LinearLayer</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">layer3</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"He"</span><span class="p">)</span>
+    <span class="n">layer3</span><span class="p">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="s">"GradientDescent"</span><span class="p">)</span>
+
+    <span class="n">M</span><span class="p">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">layer1</span><span class="p">,</span> <span class="n">layer2</span><span class="p">,</span> <span class="n">layer3</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This creates an MLP with three linear layers, and various activation functions, weight initializers and optimizers.</p>
+</div>
+<div class="paragraph">
+<p>Another way to construct MLPs is provided by the function <code>parse_multilayer_perceptron</code>, that parses an MLP from textual specifications:</p>
+</div>
+<div id="construct_mlp2" class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="cpp">    <span class="n">layer_specifications</span> <span class="o">=</span> <span class="p">[</span><span class="s">"ReLU"</span><span class="p">,</span> <span class="s">"LeakyReLU(0.5)"</span><span class="p">,</span> <span class="s">"Linear"</span><span class="p">]</span>
+    <span class="n">linear_layer_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+    <span class="n">linear_layer_optimizers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Nesterov(0.9)"</span><span class="p">,</span> <span class="s">"Momentum(0.8)"</span><span class="p">,</span> <span class="s">"GradientDescent"</span><span class="p">]</span>
+    <span class="n">linear_layer_weight_initializers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"XavierNormalized"</span><span class="p">,</span> <span class="s">"Xavier"</span><span class="p">,</span> <span class="s">"He"</span><span class="p">]</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">parse_multilayer_perceptron</span><span class="p">(</span><span class="n">layer_specifications</span><span class="p">,</span>
+                                    <span class="n">linear_layer_sizes</span><span class="p">,</span>
+                                    <span class="n">linear_layer_optimizers</span><span class="p">,</span>
+                                    <span class="n">linear_layer_weight_initializers</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that optimizers should not only be specified for linear layers, but also for batch normalization layers.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_class_lossfunction">Class LossFunction</h4>
+<div class="paragraph">
+<p>The class <code>LossFunction</code> is the base class of all loss functions. There are five loss functions available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SquaredErrorLoss</code></p>
+</li>
+<li>
+<p><code>CrossEntropyLoss</code></p>
+</li>
+<li>
+<p><code>LogisticCrossEntropyLoss</code></p>
+</li>
+<li>
+<p><code>NegativeLogLikelihoodLoss</code></p>
+</li>
+<li>
+<p><code>SoftmaxCrossEntropyLoss</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf">Nerva library specifications</a> document for precise definitions of these loss functions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_class_activationfunction">Class ActivationFunction</h4>
+<div class="paragraph">
+<p>The class <code>ActivationFunction</code> is the base class of all activation functions. The following activation functions are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ReLU</code></p>
+</li>
+<li>
+<p><code>Sigmoid</code></p>
+</li>
+<li>
+<p><code>Softmax</code></p>
+</li>
+<li>
+<p><code>LogSoftmax</code></p>
+</li>
+<li>
+<p><code>LeakyReLU</code></p>
+</li>
+<li>
+<p><code>AllReLU</code></p>
+</li>
+<li>
+<p><code>SReLU</code></p>
+</li>
+<li>
+<p><code>HyperbolicTangent</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf">Nerva library specifications</a> document for precise definitions of these activation functions.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_training_a_neural_network">Training a neural network</h3>
+<div class="paragraph">
+<p>The library provides two variants of stochastic gradient descent (SGD) training for multilayer perceptrons.
+The preferred interface is <code>stochastic_gradient_descent</code>, which accepts PyTorch-style <code>DataLoader</code> instances for
+training and test sets. This approach is the easiest in practice, since the <code>DataLoader</code> abstraction automatically
+handles batching, shuffling, and iteration over the dataset.</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="k">def</span> <span class="nf">stochastic_gradient_descent</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">loss</span><span class="p">:</span> <span class="n">LossFunction</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="n">LearningRateScheduler</span><span class="p">,</span>
+        <span class="n">train_loader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
+        <span class="n">test_loader</span><span class="p">:</span> <span class="n">DataLoader</span>
+       <span class="p">):</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nf">compute_statistics</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">training_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">timer</span> <span class="o">=</span> <span class="nc">StopWatch</span><span class="p">()</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>  <span class="c1"># update the learning at the start of each epoch
+</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+            <span class="n">Y</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">DY</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">SGDOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
+                <span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+
+            <span class="n">M</span><span class="p">.</span><span class="nf">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+            <span class="n">M</span><span class="p">.</span><span class="nf">optimize</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span>
+
+        <span class="n">seconds</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="nf">seconds</span><span class="p">()</span>
+        <span class="n">training_time</span> <span class="o">+=</span> <span class="n">seconds</span>
+        <span class="nf">compute_statistics</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">elapsed_seconds</span><span class="o">=</span><span class="n">seconds</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">Total training time for the </span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s"> epochs: </span><span class="si">{</span><span class="n">training_time</span><span class="si">:</span><span class="p">.</span><span class="mi">8</span><span class="n">f</span><span class="si">}</span><span class="s">s</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For educational purposes, a lower-level variant <code>stochastic_gradient_descent_plain</code> is also available.
+It operates directly on raw tensors in row layout (samples as rows), giving full control over batching and
+shuffling, but at the cost of additional boilerplate.</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="k">def</span> <span class="nf">stochastic_gradient_descent_plain</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span>
+                                      <span class="n">Xtrain</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span>
+                                      <span class="n">Ttrain</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span>
+                                      <span class="n">loss</span><span class="p">:</span> <span class="n">LossFunction</span><span class="p">,</span>
+                                      <span class="n">learning_rate</span><span class="p">:</span> <span class="n">LearningRateScheduler</span><span class="p">,</span>
+                                      <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                      <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                      <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span>
+                                     <span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># number of examples (row layout)
+</span>    <span class="n">I</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="n">batch_size</span>  <span class="c1"># number of full batches
+</span>    <span class="n">num_classes</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nf">output_size</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+            <span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>  <span class="c1"># update learning rate each epoch
+</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">K</span><span class="p">):</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">:</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">]</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="p">:]</span>   <span class="c1"># shape (batch_size, input_dim)
+</span>
+            <span class="c1"># Handle labels depending on format
+</span>            <span class="k">if</span> <span class="n">Ttrain</span><span class="p">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">Ttrain</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># already one-hot encoded
+</span>                <span class="n">T</span> <span class="o">=</span> <span class="n">Ttrain</span><span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># class indices -&gt; convert to one-hot of width equal to output size
+</span>                <span class="n">T</span> <span class="o">=</span> <span class="nf">to_one_hot</span><span class="p">(</span><span class="n">Ttrain</span><span class="p">[</span><span class="n">batch</span><span class="p">],</span> <span class="n">num_classes</span><span class="p">)</span>
+
+            <span class="n">Y</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">DY</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">SGDOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
+                <span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+
+            <span class="n">M</span><span class="p">.</span><span class="nf">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+            <span class="n">M</span><span class="p">.</span><span class="nf">optimize</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both functions support targets provided either as a one-dimensional tensor of class indices (the default
+convention used in PyTorch’s classification losses) or as a one-hot encoded matrix with as many columns
+as the output <code>Y</code>. If class indices are provided, they are internally converted to one-hot encoding using <code>to_one_hot</code>.</p>
+</div>
+<div class="paragraph">
+<p>Batching of the training data depends on the chosen interface. With <code>stochastic_gradient_descent</code>, batching and
+shuffling are handled automatically by the <code>DataLoader</code>. With <code>stochastic_gradient_descent_plain</code>, batching is
+implemented manually inside the training loop.</p>
+</div>
+<div class="paragraph">
+<p>In each epoch, every batch <code>(X, T)</code> goes through the three standard steps of stochastic gradient descent:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Feedforward:</strong> Given an input batch <code>X</code> and the current neural network parameters <code>Θ</code>, compute the outputs <code>Y</code>. In the code, this corresponds to <code>Y = M.feedforward(X)</code>.</p>
+</li>
+<li>
+<p><strong>Backpropagation:</strong> Given the outputs <code>Y</code> and the targets <code>T</code>, compute the gradient <code>DY</code> of <code>Y</code> with respect to the loss function. Then, using <code>Y</code> and <code>DY</code>, compute the gradients of the model parameters <code>DΘ</code>. These parameter gradients are stored internally in the model rather than returned. In the code, this step is performed by <code>M.backpropagate(Y, DY)</code>.</p>
+</li>
+<li>
+<p><strong>Optimization:</strong> Use the internally stored parameter gradients to update the parameters <code>Θ</code>. In the code, this corresponds to <code>M.optimize(lr)</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command_line_tools">Command line tools</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following command line tools are available. They can be found in the <code>tools</code> directory.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mlp.py</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A tool for training multilayer perceptrons.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inspect_npz.py</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A tool for inspecting the contents of a file in NumPy NPZ format.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_the_tool_mlp_py">The tool mlp.py</h3>
+<div class="paragraph">
+<p>The tool <code>mlp.py</code> can be used for training multilayer perceptrons. An example invocation of the <code>mlp.py</code> tool is</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python3 <span class="nt">-u</span> ../tools/mlp.py <span class="se">\</span>
+        <span class="nt">--layers</span><span class="o">=</span><span class="s2">"ReLU;ReLU;Linear"</span> <span class="se">\</span>
+        <span class="nt">--layer-sizes</span><span class="o">=</span><span class="s2">"3072;1024;512;10"</span> <span class="se">\</span>
+        <span class="nt">--layer-weights</span><span class="o">=</span><span class="s2">"Xavier;Xavier;Xavier"</span> <span class="se">\</span>
+        <span class="nt">--optimizers</span><span class="o">=</span><span class="s2">"Momentum(0.9);Momentum(0.9);Momentum(0.9)"</span> <span class="se">\</span>
+        <span class="nt">--batch-size</span><span class="o">=</span>100 <span class="se">\</span>
+        <span class="nt">--epochs</span><span class="o">=</span>5 <span class="se">\</span>
+        <span class="nt">--loss</span><span class="o">=</span>SoftmaxCrossEntropy <span class="se">\</span>
+        <span class="nt">--learning-rate</span><span class="o">=</span><span class="s2">"Constant(0.01)"</span> <span class="se">\</span>
+        <span class="nt">--load-dataset</span><span class="o">=</span><span class="nv">$dataset</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will train a <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> model using an MLP consisting of three linear layers with activation functions ReLU, ReLU and no activation. A script <code>prepare_data.py</code> is available in the <code>data</code> directory
+that can be used to download the dataset, flatten it and store it in <code>.npz</code> format. See the section <a href="#preparing-data">Preparing data</a> for details.</p>
+</div>
+<div class="paragraph">
+<p>The output may look like this:</p>
+</div>
+<div id="mlp_output" class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code>Loading dataset from file ../../data/cifar10-flattened.npz
+=== Nerva python model ===
+MultilayerPerceptron(
+  Dense(output_size=1024, activation=ReLU(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0),
+  Dense(output_size=1024, activation=ReLU(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0),
+  Dense(output_size=10, activation=NoActivation(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0)
+)
+loss = SoftmaxCrossEntropyLoss()
+scheduler = 0.01
+layer densities: 3145728/3145728 (100%), 1048576/1048576 (100%), 10240/10240 (100%)
+
+
+=== Training Nerva model ===
+epoch   0  lr: 0.01000000  loss: 2.30489253  train accuracy: 0.09768000  test accuracy: 0.09770000  time: 0.00000000s
+epoch   1  lr: 0.01000000  loss: 1.67161558  train accuracy: 0.40710000  test accuracy: 0.40870000  time: 14.79412249s
+epoch   2  lr: 0.01000000  loss: 1.57473959  train accuracy: 0.44548000  test accuracy: 0.44260000  time: 14.33901316s
+epoch   3  lr: 0.01000000  loss: 1.48164101  train accuracy: 0.47662000  test accuracy: 0.46680000  time: 14.62393199s
+epoch   4  lr: 0.01000000  loss: 1.40226001  train accuracy: 0.50328000  test accuracy: 0.48750000  time: 15.14273496s
+epoch   5  lr: 0.01000000  loss: 1.35031182  train accuracy: 0.52174000  test accuracy: 0.49900000  time: 15.16651454s
+epoch   6  lr: 0.01000000  loss: 1.31527882  train accuracy: 0.53150000  test accuracy: 0.50410000  time: 15.02228177s
+epoch   7  lr: 0.01000000  loss: 1.27560615  train accuracy: 0.54598000  test accuracy: 0.51150000  time: 14.99119695s
+epoch   8  lr: 0.01000000  loss: 1.24606835  train accuracy: 0.55446000  test accuracy: 0.51660000  time: 14.84064179s
+epoch   9  lr: 0.01000000  loss: 1.21105695  train accuracy: 0.56862000  test accuracy: 0.52180000  time: 14.82885451s
+epoch  10  lr: 0.01000000  loss: 1.19145860  train accuracy: 0.57378000  test accuracy: 0.52410000  time: 15.87854538s</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mlp_tool">mlp.py Command Line Options</h4>
+<div class="paragraph">
+<p>This section gives an overview of the command line interface of the <code>mlp.py</code> tool.</p>
+</div>
+<div class="sect4">
+<h5 id="_parameter_lists">Parameter Lists</h5>
+<div class="paragraph">
+<p>Some options accept a list of items. Lists must be <strong>semicolon-separated</strong>.
+For example: <code>--layers="ReLU;AllReLU(0.3);Linear"</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_named_parameters">Named Parameters</h5>
+<div class="paragraph">
+<p>Some items accept parameters using function-call syntax with <strong>commas</strong> to separate arguments.
+Use named parameters when needed, e.g. <code>AllReLU(alpha=0.3)</code>. If a parameter has a default value, it may be omitted: <code>SReLU()</code> is equivalent to <code>SReLU(al=0,tl=0,ar=0,tr=1)</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_general_options">General Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--help</code>
+Display help information.</p>
+</li>
+<li>
+<p><code>--debug</code>
+Enable debug output. Prints batches, weight matrices, bias vectors, and gradients.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_random_generator_options">Random Generator Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--seed &lt;value&gt;</code>
+Set the seed value for the random number generator.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_layer_configuration_options">Layer Configuration Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--layers &lt;value&gt;</code>
+Specify a semicolon-separated list of layers.
+Example: <code>--layers=ReLU;AllReLU(0.3);Linear</code>.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Linear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer without activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ReLU</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with ReLU activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Sigmoid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with sigmoid activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Softmax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with softmax activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LogSoftmax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with log-softmax activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HyperbolicTangent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with hyperbolic tangent activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AllReLU(&lt;alpha&gt;)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with AllReLU activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SReLU(&lt;al&gt;,&lt;tl&gt;,&lt;ar&gt;,&lt;tr&gt;)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with SReLU activation. Defaults: <code>al=0,tl=0,ar=0,tr=1</code>. Equivalent to ReLU when defaults are used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BatchNormalization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Batch normalization layer</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--layer-sizes &lt;value&gt;</code>
+Specify the sizes of linear layers (semicolon-separated).
+Example: <code>--layer-sizes=3072;1024;512;10</code>.</p>
+</li>
+<li>
+<p><code>--layer-weights &lt;value&gt;</code>
+Specify the weight initialization method for linear layers. Supported values:</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Xavier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xavier initialization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XavierNormalized</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normalized Xavier initialization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>He</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kaiming He initialization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Uniform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniform random initialization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zero</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All weights initialized to zero (usually not recommended)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_training_configuration_options">Training Configuration Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--epochs &lt;value&gt;</code>
+Set the number of training epochs. Default: 100.</p>
+</li>
+<li>
+<p><code>--batch-size &lt;value&gt;</code>
+Set the training batch size.</p>
+</li>
+<li>
+<p><code>--optimizers &lt;value&gt;</code>
+Specify a semicolon-separated list of optimizers for linear and batch normalization layers.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GradientDescent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard gradient descent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Momentum(mu)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Momentum optimization with parameter <code>mu</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Nesterov(mu)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nesterov momentum optimization</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--learning-rate &lt;value&gt;</code>
+Specify a semicolon-separated list of learning rate schedulers. If only one is given, it applies to all layers.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Constant(lr)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constant learning rate <code>lr</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TimeBased(lr, decay)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adaptive learning rate with decay</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>StepBased(lr, drop_rate, change_rate)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Step-based learning rate with scheduled drops</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MultistepLR(lr, milestones, gamma)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Drops learning rate at specified epoch milestones</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Exponential(lr, change_rate)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exponentially decreasing learning rate</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See also <a href="https://en.wikipedia.org/wiki/Learning_rate" class="bare">https://en.wikipedia.org/wiki/Learning_rate</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--loss &lt;value&gt;</code>
+Specify the loss function. Supported values:</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SquaredError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Squared error loss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CrossEntropy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cross entropy loss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LogisticCrossEntropy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logistic cross entropy loss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SoftmaxCrossEntropy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Softmax cross entropy (matches PyTorch)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NegativeLogLikelihood</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Negative log likelihood loss</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--load-weights &lt;value&gt;</code>
+Load weights and biases from a NumPy <code>.npz</code> file.
+Weight matrices keys: <code>W1,W2,&#8230;&#8203;</code>; bias vectors keys: <code>b1,b2,&#8230;&#8203;</code>.
+See <a href="https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html">numpy.lib.format</a>[numpy.lib.format].</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dataset_options">Dataset Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--load-dataset &lt;file&gt;</code>
+Load a dataset from a NumPy <code>.npz</code> file. The file <strong>must</strong> contain the following arrays:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Xtrain</code>: training inputs</p>
+</li>
+<li>
+<p><code>Ttrain</code>: training labels</p>
+</li>
+<li>
+<p><code>Xtest</code>: test inputs</p>
+</li>
+<li>
+<p><code>Ttest</code>: test labels</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other arrays will be ignored. The shapes should match the expected input and output dimensions of the network.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_tool_inspect_npz_py">The tool inspect_npz.py</h3>
+<div class="paragraph">
+<p>The tool <code>inspect_npz.py</code> can be used to inspect the contents of a dataset stored in <code>.npz</code> format.</p>
+</div>
+<div class="paragraph">
+<p>An example invocation of the <code>inspect_npz.py</code> tool is</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python inspect_npz.py data/cifar10-flattened.npz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output may look like this:</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre>Xtrain   (50000x3072  )  inf-norm = 1.00000000
+[[0.23137255 0.16862745 0.19607843 ... 0.54901961 0.32941176 0.28235294]
+ [0.60392157 0.49411765 0.41176471 ... 0.54509804 0.55686275 0.56470588]
+ [1.         0.99215686 0.99215686 ... 0.3254902  0.3254902  0.32941176]
+ ...
+ [0.1372549  0.15686275 0.16470588 ... 0.30196078 0.25882353 0.19607843]
+ [0.74117647 0.72941176 0.7254902  ... 0.6627451  0.67058824 0.67058824]
+ [0.89803922 0.9254902  0.91764706 ... 0.67843137 0.63529412 0.63137255]]
+
+Ttrain   (50000       )  inf-norm = 9.00000000
+[6 9 9 ... 9 1 1]
+
+Xtest    (10000x3072  )  inf-norm = 1.00000000
+[[0.61960784 0.62352941 0.64705882 ... 0.48627451 0.50588235 0.43137255]
+ [0.92156863 0.90588235 0.90980392 ... 0.69803922 0.74901961 0.78039216]
+ [0.61960784 0.61960784 0.54509804 ... 0.03137255 0.01176471 0.02745098]
+ ...
+ [0.07843137 0.0745098  0.05882353 ... 0.19607843 0.20784314 0.18431373]
+ [0.09803922 0.05882353 0.09019608 ... 0.31372549 0.31764706 0.31372549]
+ [0.28627451 0.38431373 0.38823529 ... 0.36862745 0.22745098 0.10196078]]
+
+Ttest    (10000       )  inf-norm = 9.00000000
+[3 8 8 ... 5 1 7]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the command line option <code>--shapes-only</code> a summary can be obtained:</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre>Xtrain   (50000x3072  )  inf-norm = 1.00000000
+Ttrain   (50000       )  inf-norm = 9.00000000
+Xtest    (10000x3072  )  inf-norm = 1.00000000
+Ttest    (10000       )  inf-norm = 9.00000000</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="io">Data Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Nerva-JAX Python Library</em> provides utilities for reading and writing datasets and the weights and biases of MLP models in NumPy <code>.npz</code> format.
+This format ensures portability between Python and C++ implementations.
+Currently, storing the complete model, including its architecture, is not supported.</p>
+</div>
+<div class="sect2">
+<h3 id="_npz_format">NPZ format</h3>
+<div class="paragraph">
+<p>The default storage format used in the Nerva libraries is the NumPy NPZ format (see <a href="https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html">numpy.lib.format</a>).
+A <code>.npz</code> file can store a dictionary of arrays in compressed form, which allows both datasets and model parameters to be saved efficiently.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="preparing-data">Preparing data</h3>
+<div class="paragraph">
+<p>The <code>mlp.py</code> utility expects training and testing data in <code>.npz</code> format.
+A helper script is provided to download and preprocess commonly used datasets, including <strong>MNIST</strong> and <strong>CIFAR-10</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The script is located at <code><a href="../../../data/prepare_data.py" class="bare">../../../data/prepare_data.py</a></code> and can be run from the command line.</p>
+</div>
+<div class="sect3">
+<h4 id="_mnist">MNIST</h4>
+<div class="paragraph">
+<p>To download and prepare MNIST:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python prepare_data.py <span class="nt">--dataset</span><span class="o">=</span>mnist <span class="nt">--download</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Download <code>mnist.npz</code> if it does not exist.</p>
+</li>
+<li>
+<p>Create a flattened and normalized version of the dataset as <code>mnist-flattened.npz</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The output file contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Xtrain</code>, <code>Xtest</code>: flattened and normalized image data</p>
+</li>
+<li>
+<p><code>Ttrain</code>, <code>Ttest</code>: corresponding label vectors</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cifar_10">CIFAR-10</h4>
+<div class="paragraph">
+<p>To download and prepare CIFAR-10:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python prepare_data.py <span class="nt">--dataset</span><span class="o">=</span>cifar10 <span class="nt">--download</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Download the CIFAR-10 binary dataset from <a href="https://www.cs.toronto.edu/~kriz/cifar.html" class="bare">https://www.cs.toronto.edu/~kriz/cifar.html</a></p>
+</li>
+<li>
+<p>Extract the archive</p>
+</li>
+<li>
+<p>Flatten and normalize RGB images into shape <code>[N, 3072]</code></p>
+</li>
+<li>
+<p>Save the result as <code>cifar10-flattened.npz</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The output file contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Xtrain</code>, <code>Xtest</code>: flattened image arrays with pixel values normalized to <code>[0, 1]</code></p>
+</li>
+<li>
+<p><code>Ttrain</code>, <code>Ttest</code>: integer class labels</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reusing_existing_files">Reusing Existing Files</h4>
+<div class="paragraph">
+<p>If the required <code>.npz</code> files already exist, the script will detect this and skip reprocessing.
+It is safe to rerun the script without overwriting existing files.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_help">Help</h4>
+<div class="paragraph">
+<p>To see all script options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python data/prepare_data.py <span class="nt">--help</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inspecting_npz_files">Inspecting <code>.npz</code> files</h4>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When constructing <code>MemoryDataLoader</code> instances from integer class labels, explicitly pass <code>num_classes</code>.
+If omitted, the loader infers it as <code>max(label) + 1</code>, which may underestimate the number of classes for small subsets, leading to one-hot vectors with too few columns and mismatched dimensions with the model output.</p>
+</div>
+<div class="paragraph">
+<p>To inspect <code>.npz</code> files interactively, you can use the <code>inspect_npz.py</code> tool (see Command Line Tools section).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_storing_datasets_and_weights">Storing datasets and weights</h3>
+<div class="paragraph">
+<p>The <code>mlp.py</code> utility supports saving and loading datasets and model parameters in <code>.npz</code> format.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use <code>--save-dataset</code> and <code>--load-dataset</code> to write or read datasets.</p>
+</li>
+<li>
+<p>Use <code>--save-weights</code> and <code>--load-weights</code> to store or restore the weights and biases of an MLP.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>.npz</code> file for datasets contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Xtrain</code>, <code>Ttrain</code>: training inputs and labels</p>
+</li>
+<li>
+<p><code>Xtest</code>, <code>Ttest</code>: test inputs and labels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>.npz</code> file for model parameters contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>W1</code>, <code>W2</code>, &#8230;&#8203; : weight matrices for each linear layer</p>
+</li>
+<li>
+<p><code>b1</code>, <code>b2</code>, &#8230;&#8203; : corresponding bias vectors</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All arrays use standard NumPy formats and can be inspected or manipulated in Python using <code>numpy.load()</code> and <code>numpy.savez()</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The architecture of the model (number of layers, activation functions, etc.) is <strong>not</strong> stored in the <code>.npz</code> file.
+This must be specified separately when reloading weights.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advanced_topics">Advanced Topics</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_matrix_operations">Matrix operations</h3>
+<div class="paragraph">
+<p>The most important part of the implementation of neural networks consists of matrix operations. In the implementation of activation functions, loss functions and neural network layers, many different matrix operations are needed. In Nerva a structured approach is followed to implement these components. All equations are expressed in terms of the matrix operations in the table below.</p>
+</div>
+<table id="table_matrix_operations" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. matrix operations</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(0_{m}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zeros(m)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with elements equal to 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(0_{mn}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zeros(m, n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times n\) matrix with elements equal to 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_{m}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ones(m)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with elements equal to 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_{mn}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ones(m, n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times n\) matrix with elements equal to 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\mathbb{I}_n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>identity(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(n \times n\) identity matrix</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X^\top\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X.transpose()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">transposition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(cX\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c * X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scalar multiplication, \(c \in \mathbb{R}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X + Y\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X + Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X - Y\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X - Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subtraction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X \cdot Z\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X * Z</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">matrix multiplication, also denoted as \(XZ\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(x^\top y~\) or \(~x y^\top\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dot(x,y)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dot product, \(x,y \in \mathbb{R}^{m \times 1}\) or \(x,y \in \mathbb{R}^{1 \times n}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X \odot Y\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hadamard(X,Y)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise product of \(X\) and \(Y\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\mathsf{diag}(X)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>diag(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">column vector that contains the diagonal of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\mathsf{Diag}(x)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Diag(x)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diagonal matrix with \(x\) as diagonal, \(x \in \mathbb{R}^{1 \times n}\)  or \(x \in \mathbb{R}^{m \times 1}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_m^\top \cdot X \cdot 1_n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>elements_sum(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sum of the elements of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(x \cdot 1_n^\top\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>column_repeat(x, n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(n\) copies of column vector \(x \in \mathbb{R}^{m \times 1}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_m \cdot x\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>row_repeat(x, m)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m\) copies of row vector \(x \in \mathbb{R}^{1 \times n}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_m^\top \cdot X\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns_sum(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 \times n\) row vector with sums of the columns of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X \cdot 1_n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rows_sum(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with sums of the rows of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\max(X)_{col}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns_max(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 \times n\) row vector with maximum values of the columns of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\max(X)_{row}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rows_max(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with maximum values of the rows of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\((1_m^\top \cdot X) / n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns_mean(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 \times n\) row vector with mean values of the columns of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\((X \cdot 1_n) / m\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rows_mean(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with mean values of the rows of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(f(X)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apply(f, X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: \mathbb{R} \rightarrow \mathbb{R}\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(e^X\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exp(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow e^x\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\log(X)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of the natural logarithm \(f: x \rightarrow \ln(x)\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 / X\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reciprocal(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow 1/x\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\sqrt{X}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sqrt(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow \sqrt{x}\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X^{-1/2}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inv_sqrt(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow x^{-1/2}\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\log(\sigma(X))\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log_sigmoid(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow \log(\sigma(x))\) to \(X\)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2025-09-02 10:02:56 UTC
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
