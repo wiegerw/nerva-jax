@@ -1,0 +1,790 @@
+@misc{weight-initialization,
+	title        = {{Weight Initialization for Deep Learning Neural Networks}},
+	author       = {Jason Brownlee},
+	year         = 2021,
+	howpublished = {\url{https://machinelearningmastery.com/weight-initialization-for-deep-learning-neural-networks/}}
+}
+@misc{back-propagation,
+	title        = {{CSC 321 Winter 2018 - Backpropagation}},
+	author       = {Roger Grosse},
+	year         = 2018,
+	howpublished = {\url{https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/readings/L06%20Backpropagation.pdf}}
+}
+@misc{kai-fabi-perceptron,
+	title        = {{A Multilayer Perceptron in C++}},
+	author       = {Kai Fabi},
+	year         = 2021,
+	howpublished = {\url{https://kaifabi.github.io/2021/01/14/micro-mlp.html}}
+}
+@misc{eigenweb,
+	title        = {Eigen v3},
+	author       = {Ga\"{e}l Guennebaud and Beno\^{i}t Jacob and others},
+	year         = 2010,
+	howpublished = {\url{https://eigen.tuxfamily.org}}
+}
+@misc{pytorch-sgd,
+	title        = {{SGD}},
+	author       = {PyTorch Contributors},
+	year         = 2022,
+	howpublished = {\url{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}}
+}
+@misc{keras-sgd,
+	title        = {{SGD}},
+	author       = {Keras Contributors},
+	year         = 2023,
+	howpublished = {\url{https://keras.io/api/optimizers/sgd/}}
+}
+@article{DBLP_journals_jmlr_SrivastavaHKSS14,
+	title        = {Dropout: a simple way to prevent neural networks from overfitting},
+	author       = {Nitish Srivastava and Geoffrey E. Hinton and Alex Krizhevsky and Ilya Sutskever and Ruslan Salakhutdinov},
+	year         = 2014,
+	journal      = {J. Mach. Learn. Res.},
+	volume       = 15,
+	number       = 1,
+	pages        = {1929--1958},
+	_doi          = {10.5555/2627435.2670313},
+	url          = {https://dl.acm.org/doi/10.5555/2627435.2670313},
+	timestamp    = {Thu, 02 Jun 2022 13:58:57 +0200},
+	biburl       = {https://dblp.org/rec/journals/jmlr/SrivastavaHKSS14.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+% This DOI cannot be found on https://doi.org.
+
+@misc{neural-networks-learning-and-evaluation,
+	title        = {{Neural Networks Part 3: Learning and Evaluation}},
+	author       = {Andrej Karpathy},
+	year         = 2022,
+	howpublished = {\url{https://cs231n.github.io/neural-networks-3/}}
+}
+@inproceedings{pmlr-v37-ioffe15,
+	title        = {Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift},
+	author       = {Ioffe, Sergey and Szegedy, Christian},
+	year         = 2015,
+	month        = {07--09 Jul},
+	booktitle    = {Proceedings of the 32nd International Conference on Machine Learning},
+	publisher    = {PMLR},
+	address      = {Lille, France},
+	series       = {Proceedings of Machine Learning Research},
+	volume       = 37,
+	pages        = {448--456},
+	url          = {https://proceedings.mlr.press/v37/ioffe15.html},
+	editor       = {Bach, Francis and Blei, David},
+	pdf          = {https://proceedings.mlr.press/v37/ioffe15.pdf},
+	abstract     = {Training Deep Neural Networks is complicated by the fact that the distribution of each layer’s inputs changes during training, as the parameters of the previous layers change. This slows down the training by requiring lower learning rates and careful parameter initialization, and makes it notoriously hard to train models with saturating nonlinearities. We refer to this phenomenon as internal covariate shift, and address the problem by normalizing layer inputs. Our method draws its strength from making normalization a part of the model architecture and performing the normalization for each training mini-batch. Batch Normalization allows us to use much higher learning rates and be less careful about initialization, and in some cases eliminates the need for Dropout. Applied to a stateof-the-art image classification model, Batch Normalization achieves the same accuracy with 14 times fewer training steps, and beats the original model by a significant margin. Using an ensemble of batch-normalized networks, we improve upon the best published result on ImageNet classification: reaching 4.82% top-5 test error, exceeding the accuracy of human raters.}
+}
+@book{magnus2019matrix,
+	title        = {Matrix Differential Calculus with Applications in Statistics and Econometrics},
+	author       = {Magnus, J.R. and Neudecker, H.},
+	year         = 2019,
+	publisher    = {Wiley},
+	series       = {Wiley Series in Probability and Statistics},
+	isbn         = 9781119541202,
+	url          = {https://books.google.nl/books?id=B2YpwAEACAAJ},
+	lccn         = 2018058855
+}
+@misc{gordon-matrix-differentials,
+	title        = {{Matrix differentials}},
+	author       = {Geoff Gordon},
+	year         = 2022,
+	howpublished = {\url{https://www.cs.cmu.edu/~10607/matrix-differential.pdf}}
+}
+@misc{yeh-batch-norm,
+	title        = {{Deriving Batch-Norm Backprop Equations}},
+	author       = {Chris Yeh},
+	year         = 2017,
+	howpublished = {\url{https://chrisyeh96.github.io/2017/08/28/deriving-batchnorm-backprop.html}}
+}
+@misc{matrix-cookbook,
+	title        = {{The Matrix Cookbook}},
+	author       = {Petersen, K. B. and Pedersen, M. S.},
+	year         = 2012,
+	howpublished = {\url{https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf}}
+}
+@misc{matrix-cheat-sheet,
+	title        = {{Matrix Differential Calculus Cheat Sheet}},
+	author       = {Stefan Harmeling},
+	year         = 2013,
+	howpublished = {\url{https://www.gatsby.ucl.ac.uk/teaching/courses/sntn/sntn-2017/resources/Matrix_derivatives_cribsheet.pdf}}
+}
+@article{DBLP_journals_corr_abs-2102-01732,
+	title        = {Truly Sparse Neural Networks at Scale},
+	author       = {Selima Curci and Decebal Constantin Mocanu and Mykola Pechenizkiy},
+	year         = 2021,
+	journal      = {CoRR},
+	volume       = {abs/2102.01732},
+	url          = {https://arxiv.org/abs/2102.01732},
+	eprinttype   = {arXiv},
+	eprint       = {2102.01732},
+	timestamp    = {Tue, 09 Feb 2021 13:35:56 +0100},
+	biburl       = {https://dblp.org/rec/journals/corr/abs-2102-01732.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@inproceedings{conf/aaai/JinXFWXY16,
+	title        = {Deep Learning with S-Shaped Rectified Linear Activation Units.},
+	author       = {Jin, Xiaojie and Xu, Chunyan and Feng, Jiashi and Wei, Yunchao and Xiong, Junjun and Yan, Shuicheng},
+	year         = 2016,
+	booktitle    = {AAAI},
+	publisher    = {AAAI Press},
+	pages        = {1737--1743},
+	url          = {https://dblp.uni-trier.de/db/conf/aaai/aaai2016.html#JinXFWXY16},
+	added-at     = {2016-04-21T00:00:00.000+0200},
+	biburl       = {https://www.bibsonomy.org/bibtex/2404c73b88d3ad1fbd97104d1d5afbdda/dblp},
+	editor       = {Schuurmans, Dale and Wellman, Michael P.},
+	ee           = {https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12358},
+	interhash    = {026922d5feb39648c7cd90b275332a31},
+	intrahash    = {404c73b88d3ad1fbd97104d1d5afbdda},
+	keywords     = {dblp},
+	timestamp    = {2016-04-22T11:37:42.000+0200}
+}
+@article{10.7717/peerj-cs.103,
+	title        = {SymPy: symbolic computing in Python},
+	author       = {Meurer, Aaron and others},
+	year         = 2017,
+	month        = jan,
+	journal      = {PeerJ Computer Science},
+	volume       = 3,
+	pages        = {e103},
+	_doi          = {10.7717/peerj-cs.103},
+	issn         = {2376-5992},
+	url          = {https://doi.org/10.7717/peerj-cs.103},
+	_comment     = {Meurer, Aaron and Smith, Christopher P. and Paprocki, Mateusz and \v{C}ert\'{i}k, Ond\v{r}ej and Kirpichev, Sergey B. and Rocklin, Matthew and Kumar, AMiT and Ivanov, Sergiu and Moore, Jason K. and Singh, Sartaj and Rathnayake, Thilina and Vig, Sean and Granger, Brian E. and Muller, Richard P. and Bonazzi, Francesco and Gupta, Harsh and Vats, Shivam and Johansson, Fredrik and Pedregosa, Fabian and Curry, Matthew J. and Terrel, Andy R. and Rou\v{c}ka, \v{S}t\v{e}p\'{a}n and Saboo, Ashutosh and Fernando, Isuru and Kulal, Sumith and Cimrman, Robert and Scopatz, Anthony},
+	keywords     = {Python, Computer algebra system, Symbolics},
+	abstract     = {SymPy is an open source computer algebra system written in pure Python. It is built with a focus on extensibility and ease of use, through both interactive and programmatic applications. These characteristics have led SymPy to become a popular symbolic library for the scientific Python ecosystem. This paper presents the architecture of SymPy, a description of its features, and a discussion of select submodules. The supplementary material provide additional examples and further outline details of the architecture and features of SymPy.}
+}
+@article{harris2020array,
+	title        = {Array programming with {NumPy}},
+	author       = {Charles R. Harris and others},
+	year         = 2020,
+	month        = sep,
+	journal      = {Nature},
+	publisher    = {Springer Science and Business Media {LLC}},
+	volume       = 585,
+	number       = 7825,
+	pages        = {357--362},
+	_doi          = {10.1038/s41586-020-2649-2},
+	url          = {https://doi.org/10.1038/s41586-020-2649-2},
+	_comment     = {Charles R. Harris and K. Jarrod Millman and St{\'{e}}fan J. van der Walt and Ralf Gommers and Pauli Virtanen and David Cournapeau and Eric Wieser and Julian Taylor and Sebastian Berg and Nathaniel J. Smith and Robert Kern and Matti Picus and Stephan Hoyer and Marten H. van Kerkwijk and Matthew Brett and Allan Haldane and Jaime Fern{\'{a}}ndez del R{\'{i}}o and Mark Wiebe and Pearu Peterson and Pierre G{\'{e}}rard-Marchant and Kevin Sheppard and Tyler Reddy and Warren Weckesser and Hameer Abbasi and Christoph Gohlke and Travis E. Oliphant}
+}
+@misc{tensorflow2015-whitepaper,
+	title        = {{TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+	author       = {Mart\'{i}n~Abadi and others},
+	year         = 2015,
+	url          = {https://www.tensorflow.org/},
+	note         = {Software available from tensorflow.org},
+	_comment     = {Mart\'{i}n~Abadi and Ashish~Agarwal and Paul~Barham and Eugene~Brevdo and Zhifeng~Chen and Craig~Citro and Greg~S.~Corrado and Andy~Davis and Jeffrey~Dean and Matthieu~Devin and Sanjay~Ghemawat and Ian~Goodfellow and Andrew~Harp and Geoffrey~Irving and Michael~Isard and Yangqing Jia and Rafal~Jozefowicz and Lukasz~Kaiser and Manjunath~Kudlur and Josh~Levenberg and Dandelion~Man\'{e} and Rajat~Monga and Sherry~Moore and Derek~Murray and Chris~Olah and Mike~Schuster and Jonathon~Shlens and Benoit~Steiner and Ilya~Sutskever and Kunal~Talwar and Paul~Tucker and Vincent~Vanhoucke and Vijay~Vasudevan and Fernanda~Vi\'{e}gas and Oriol~Vinyals and Pete~Warden and Martin~Wattenberg and Martin~Wicke and Yuan~Yu and Xiaoqiang~Zheng}
+}
+@inproceedings{DBLP_conf_nips_PaszkeGMLBCKLGA19,
+  author       = {Adam Paszke and
+                  Sam Gross and
+                  Francisco Massa and
+                  Adam Lerer and
+                  James Bradbury and
+                  Gregory Chanan and
+                  Trevor Killeen and
+                  Zeming Lin and
+                  Natalia Gimelshein and
+                  Luca Antiga and
+                  Alban Desmaison and
+                  Andreas K{\"{o}}pf and
+                  Edward Z. Yang and
+                  Zachary DeVito and
+                  Martin Raison and
+                  Alykhan Tejani and
+                  Sasank Chilamkurthy and
+                  Benoit Steiner and
+                  Lu Fang and
+                  Junjie Bai and
+                  Soumith Chintala},
+  editor       = {Hanna M. Wallach and
+                  Hugo Larochelle and
+                  Alina Beygelzimer and
+                  Florence d'Alch{\'{e}}{-}Buc and
+                  Emily B. Fox and
+                  Roman Garnett},
+  title        = {PyTorch: An Imperative Style, High-Performance Deep Learning Library},
+  booktitle    = {Advances in Neural Information Processing Systems 32: Annual Conference
+                  on Neural Information Processing Systems 2019, NeurIPS 2019, December
+                  8-14, 2019, Vancouver, BC, Canada},
+  pages        = {8024--8035},
+  year         = {2019},
+  url          = {https://proceedings.neurips.cc/paper/2019/hash/bdbca288fee7f92f2bfa9f7012727740-Abstract.html},
+  timestamp    = {Mon, 16 May 2022 15:41:51 +0200},
+  biburl       = {https://dblp.org/rec/conf/nips/PaszkeGMLBCKLGA19.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@software{jax2018github,
+	title        = {{JAX}: composable transformations of {P}ython+{N}um{P}y programs},
+	author       = {James Bradbury and Roy Frostig and Peter Hawkins and Matthew James Johnson and Chris Leary and Dougal Maclaurin and George Necula and Adam Paszke and Jake Vander{P}las and Skye Wanderman-{M}ilne and Qiao Zhang},
+	year         = 2018,
+	url          = {https://github.com/google/jax},
+	version      = {0.3.13}
+}
+@book{haykin1994neural,
+	title        = {Neural networks: a comprehensive foundation},
+	author       = {Haykin, Simon},
+	year         = 1994,
+	publisher    = {Prentice Hall PTR}
+}
+@article{DBLP_journals_corr_abs-2107-09384,
+	title        = {An induction proof of the backpropagation algorithm in matrix notation},
+	author       = {Dirk Ostwald and Franziska Us{\'{e}}e},
+	year         = 2021,
+	journal      = {CoRR},
+	volume       = {abs/2107.09384},
+	url          = {https://arxiv.org/abs/2107.09384},
+	eprinttype   = {arXiv},
+	eprint       = {2107.09384},
+	timestamp    = {Thu, 29 Jul 2021 12:42:39 +0200},
+	biburl       = {https://dblp.org/rec/journals/corr/abs-2107-09384.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@book{magnus99,
+	title        = {Matrix Differential Calculus with Applications in Statistics and Econometrics},
+	author       = {Magnus, Jan R. and Neudecker, Heinz},
+	year         = 1999,
+	publisher    = {John Wiley},
+	isbn         = {0471986321 9780471986324 047198633X 9780471986331},
+	abstract     = {This book provides a self-contained and unified treatment of matrix differential calculus, aimed at econometricians and statisticians. It can be used as a textbook for senior undergraduate or graduate courses on the subject, and will also be a valuable source for professional econometricians and statisticians who want to learn and apply these important techniques. The authors base their approach on differentials rather than derivatives, and they show that the use of differentials is elegant, easy and considerably more useful in applications. No specialist knowledge of matrix algebra or calculus is required, since the basics of matrix algebra are covered in the first three chapters with a thorough treatment of multivariable calculus provided in Chapters Four to Seven. Exercises are included in each chapter, and many examples which illustrate applications of the theory are considered in detail.},
+	added-at     = {2014-03-16T13:03:09.000+0100},
+	biburl       = {https://www.bibsonomy.org/bibtex/2c82317ecaf30079fa28c0fd5774e6780/ytyoun},
+	edition      = {Second},
+	interhash    = {76bd08d7316ac86cb1a7b88078010d57},
+	intrahash    = {c82317ecaf30079fa28c0fd5774e6780},
+	keywords     = {calculus economics linear.algebra matrix textbook},
+	refid        = 40467399,
+	timestamp    = {2016-05-31T14:11:33.000+0200}
+}
+@incollection{LaueMG2018,
+	title        = {Computing Higher Order Derivatives of Matrix and Tensor Expressions},
+	author       = {Laue, S\"{o}ren and Mitterreiter, Matthias and Giesen, Joachim},
+	year         = 2018,
+	booktitle    = {Advances in Neural Information Processing Systems (NeurIPS)}
+}
+@misc{Wesselink_Nerva_library_2024,
+	title        = {{The Nerva C++ Library}},
+	author       = {Wesselink, J.W.},
+	year         = 2024,
+	month        = mar,
+	url          = {https://github.com/wiegerw/nerva},
+	urldate      = {2024-03-11},
+	_note         = {\url{https://github.com/wiegerw/nerva}},
+	version      = {0.2.0}
+}
+@misc{Wesselink_Nerva_Python_libraries_2024,
+	title        = {{The Nerva Python Libraries}},
+	author       = {Wesselink, J.W.},
+	year         = 2024,
+	month        = mar,
+	url          = {https://github.com/wiegerw/nerva-[jax,numpy,sympy,tensorflow,torch]},
+	urldate      = {2024-03-11},
+	_note         = {\url{https://github.com/wiegerw/nerva-jax}},
+	version      = {0.2.0}
+}
+@inbook{Wang2014,
+	title        = {Intel Math Kernel Library},
+	author       = {Wang, Endong and Zhang, Qing and Shen, Bo and Zhang, Guangyong and Lu, Xiaowei and Wu, Qing and Wang, Yajuan},
+	year         = 2014,
+	booktitle    = {High-Performance Computing on the Intel® Xeon Phi{\texttrademark}: How to Fully Exploit MIC Architectures},
+	publisher    = {Springer International Publishing},
+	address      = {Cham},
+	pages        = {167--188},
+	doi          = {10.1007/978-3-319-06486-4_7},
+	isbn         = {978-3-319-06486-4},
+	_url          = {https://doi.org/10.1007/978-3-319-06486-4_7},
+	abstract     = {In order to achieve optimal performance on multi-core and multi-processor systems, we need to fully use the features of parallelism and manage the memory hierarchical characters efficiently. The performance of sequential codes relies on the instruction-level and register-level SIMD parallelism, and also on high-speed cache-blocking functions. Threading applications need advanced planning to achieve satisfactory load balancing.}
+}
+@article{Rumelhart:1986,
+	title        = {Learning internal representation by back-propagation errors},
+	author       = {D. E. Rumelhart and G. E. Hinton and R. J. Williams},
+	year         = 1986,
+	journal      = {Nature},
+	volume       = 323,
+	pages        = {533--536}
+}
+@article{DBLP_journals_jc_Baum88,
+	title        = {On the capabilities of multilayer perceptrons},
+	author       = {Eric B. Baum},
+	year         = 1988,
+	journal      = {J. Complex.},
+	volume       = 4,
+	number       = 3,
+	pages        = {193--215},
+	doi          = {10.1016/0885-064X(88)90020-9},
+	_url          = {https://doi.org/10.1016/0885-064X(88)90020-9},
+	timestamp    = {Tue, 16 Feb 2021 08:55:37 +0100},
+	biburl       = {https://dblp.org/rec/journals/jc/Baum88.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@article{McCulloch1943,
+	title        = {A logical calculus of the ideas immanent in nervous activity},
+	author       = {McCulloch, Warren S. and Pitts, Walter},
+	year         = 1943,
+	month        = {Dec},
+	day          = {01},
+	journal      = {The bulletin of mathematical biophysics},
+	volume       = 5,
+	number       = 4,
+	pages        = {115--133},
+	doi          = {10.1007/BF02478259},
+	issn         = {1522-9602},
+	_url          = {https://dx.doi.org/10.1007/BF02478259},
+	abstract     = {Because of the ``all-or-none'' character of nervous activity, neural events and the relations among them can be treated by means of propositional logic. It is found that the behavior of every net can be described in these terms, with the addition of more complicated logical means for nets containing circles; and that for any logical expression satisfying certain conditions, one can find a net behaving in the fashion it describes. It is shown that many particular choices among possible neurophysiological assumptions are equivalent, in the sense that for every net behaving under one assumption, there exists another net which behaves under the other and gives the same results, although perhaps not in the same time. Various applications of the calculus are discussed.}
+}
+@article{DBLP_journals_jmlr_BaydinPRS17,
+  author       = {Atilim Gunes Baydin and
+                  Barak A. Pearlmutter and
+                  Alexey Andreyevich Radul and
+                  Jeffrey Mark Siskind},
+  title        = {Automatic Differentiation in Machine Learning: a Survey},
+  journal      = {J. Mach. Learn. Res.},
+  volume       = {18},
+  pages        = {153:1--153:43},
+  year         = {2017},
+  url          = {https://jmlr.org/papers/v18/17-468.html},
+  timestamp    = {Wed, 10 Jul 2019 15:28:20 +0200},
+  biburl       = {https://dblp.org/rec/journals/jmlr/BaydinPRS17.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@book{zhang2023dive,
+	title        = {Dive into Deep Learning},
+	author       = {Zhang, Aston and Lipton, Zachary C. and Li, Mu and Smola, Alexander J.},
+	year         = 2023,
+	publisher    = {Cambridge University Press},
+	note         = {\url{https://D2L.ai}}
+}
+@article{DBLP_journals_spm_Deng12,
+  author       = {Li Deng},
+  title        = {The {MNIST} Database of Handwritten Digit Images for Machine Learning Research [Best of the Web]},
+  journal      = {{IEEE} Signal Process. Mag.},
+  volume       = {29},
+  number       = {6},
+  pages        = {141--142},
+  year         = {2012},
+  _url          = {https://doi.org/10.1109/MSP.2012.2211477},
+  doi          = {10.1109/MSP.2012.2211477},
+  timestamp    = {Thu, 09 Jan 2020 16:23:35 +0100},
+  biburl       = {https://dblp.org/rec/journals/spm/Deng12.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@techreport{krizhevsky2009learning,
+  added-at = {2021-01-21T03:01:11.000+0100},
+  author = {Krizhevsky, Alex},
+  biburl = {https://www.bibsonomy.org/bibtex/2fe5248afe57647d9c85c50a98a12145c/s364315},
+  interhash = {cc2d42f2b7ef6a4e76e47d1a50c8cd86},
+  intrahash = {fe5248afe57647d9c85c50a98a12145c},
+  keywords = {},
+  pages = {32--33},
+  timestamp = {2021-01-21T03:01:11.000+0100},
+  title = {Learning Multiple Layers of Features from Tiny Images},
+  url = {https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf},
+  year = 2009
+}
+
+@article{DBLP_journals_air_NarkhedeBS22,
+	title        = {A review on weight initialization strategies for neural networks},
+	author       = {Meenal V. Narkhede and Prashant P. Bartakke and Mukul S. Sutaone},
+	year         = 2022,
+	journal      = {Artif. Intell. Rev.},
+	volume       = 55,
+	number       = 1,
+	pages        = {291--322},
+	doi          = {10.1007/S10462-021-10033-Z},
+	_url          = {https://doi.org/10.1007/s10462-021-10033-z},
+	timestamp    = {Sat, 09 Apr 2022 12:26:35 +0200},
+	biburl       = {https://dblp.org/rec/journals/air/NarkhedeBS22.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@inproceedings{DBLP_conf_icml_IoffeS15,
+	title        = {Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift},
+	author       = {Sergey Ioffe and Christian Szegedy},
+	year         = 2015,
+	booktitle    = {Proceedings of the 32nd International Conference on Machine Learning, {ICML} 2015, Lille, France, 6-11 July 2015},
+	publisher    = {JMLR.org},
+	series       = {{JMLR} Workshop and Conference Proceedings},
+	volume       = 37,
+	pages        = {448--456},
+	url          = {https://proceedings.mlr.press/v37/ioffe15.html},
+	editor       = {Francis R. Bach and David M. Blei},
+	timestamp    = {Wed, 29 May 2019 08:41:45 +0200},
+	biburl       = {https://dblp.org/rec/conf/icml/IoffeS15.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@book{Goodfellow-et-al-2016,
+	title        = {Deep Learning},
+	author       = {Ian Goodfellow and Yoshua Bengio and Aaron Courville},
+	year         = 2016,
+	publisher    = {MIT Press},
+	note         = {\url{https://www.deeplearningbook.org}}
+}
+@article{DBLP_journals_corr_abs-1805-08266,
+	title        = {On the Selection of Initialization and Activation Function for Deep Neural Networks},
+	author       = {Soufiane Hayou and Arnaud Doucet and Judith Rousseau},
+	year         = 2018,
+	journal      = {CoRR},
+	volume       = {abs/1805.08266},
+	url          = {https://arxiv.org/abs/1805.08266},
+	eprinttype   = {arXiv},
+	eprint       = {1805.08266},
+	timestamp    = {Mon, 13 Aug 2018 16:48:30 +0200},
+	biburl       = {https://dblp.org/rec/journals/corr/abs-1805-08266.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@article{kelley1960gradient,
+	title        = {Gradient theory of optimal flight paths},
+	author       = {Kelley, Henry J},
+	year         = 1960,
+	journal      = {Ars Journal},
+	volume       = 30,
+	number       = 10,
+	pages        = {947--954}
+}
+@article{DBLP_journals_ijon_DubeySC22,
+	title        = {Activation functions in deep learning: {A} comprehensive survey and benchmark},
+	author       = {Shiv Ram Dubey and Satish Kumar Singh and Bidyut Baran Chaudhuri},
+	year         = 2022,
+	journal      = {Neurocomputing},
+	volume       = 503,
+	pages        = {92--108},
+	doi          = {10.1016/J.NEUCOM.2022.06.111},
+	_url          = {https://doi.org/10.1016/j.neucom.2022.06.111},
+	timestamp    = {Mon, 28 Aug 2023 21:31:44 +0200},
+	biburl       = {https://dblp.org/rec/journals/ijon/DubeySC22.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@article{math10244730,
+	title        = {Perceptron: Learning, Generalization, Model Selection, Fault Tolerance, and Role in the Deep Learning Era},
+	author       = {Du, Ke-Lin and Leung, Chi-Sing and Mow, Wai Ho and Swamy, M. N. S.},
+	year         = 2022,
+	journal      = {Mathematics},
+	volume       = 10,
+	number       = 24,
+	doi          = {10.3390/math10244730},
+	issn         = {2227-7390},
+	_url          = {https://www.mdpi.com/2227-7390/10/24/4730},
+	article-number = 4730,
+	abstract     = {The single-layer perceptron, introduced by Rosenblatt in 1958, is one of the earliest and simplest neural network models. However, it is incapable of classifying linearly inseparable patterns. A new era of neural network research started in 1986, when the backpropagation (BP) algorithm was rediscovered for training the multilayer perceptron (MLP) model. An MLP with a large number of hidden nodes can function as a universal approximator. To date, the MLP model is the most fundamental and important neural network model. It is also the most investigated neural network model. Even in this AI or deep learning era, the MLP is still among the few most investigated and used neural network models. Numerous new results have been obtained in the past three decades. This survey paper gives a comprehensive and state-of-the-art introduction to the perceptron model, with emphasis on learning, generalization, model selection and fault tolerance. The role of the perceptron model in the deep learning era is also described. This paper provides a concluding survey of perceptron learning, and it covers all the major achievements in the past seven decades. It also serves a tutorial for perceptron learning.}
+}
+@misc{chollet2015keras,
+	title        = {Keras},
+	author       = {Chollet, Fran\c{c}ois and others},
+	year         = 2015,
+	howpublished = {\url{https://keras.io}}
+}
+@online{PyPI,
+    author       = {{Python Software Foundation}},
+    title        = {Python Package Index - PyPI},
+    howpublished = {\url{https://pypi.org/}},
+    urldate      = {2023-12-14},
+    year         = {n.d.},
+    xnote        = {\url{https://pypi.org/}}
+}
+@inproceedings{DBLP_conf_bigdataconf_WuLBCIPWYZ19,
+	title        = {Demystifying Learning Rate Policies for High Accuracy Training of Deep Neural Networks},
+	author       = {Yanzhao Wu and Ling Liu and Juhyun Bae and Ka Ho Chow and Arun Iyengar and Calton Pu and Wenqi Wei and Lei Yu and Qi Zhang},
+	year         = 2019,
+	booktitle    = {2019 {IEEE} International Conference on Big Data {(IEEE} BigData), Los Angeles, CA, USA, December 9-12, 2019},
+	publisher    = {{IEEE}},
+	pages        = {1971--1980},
+	doi          = {10.1109/BIGDATA47090.2019.9006104},
+	_url          = {https://doi.org/10.1109/BigData47090.2019.9006104},
+	editor       = {Chaitanya K. Baru and Jun Huan and Latifur Khan and Xiaohua Hu and Ronay Ak and Yuanyuan Tian and Roger S. Barga and Carlo Zaniolo and Kisung Lee and Yanfang (Fanny) Ye},
+	timestamp    = {Thu, 28 Sep 2023 10:12:26 +0200},
+	biburl       = {https://dblp.org/rec/conf/bigdataconf/WuLBCIPWYZ19.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@inproceedings{DBLP_conf_icml_WanZZLF13,
+  author       = {Li Wan and
+                  Matthew D. Zeiler and
+                  Sixin Zhang and
+                  Yann LeCun and
+                  Rob Fergus},
+  title        = {Regularization of Neural Networks using DropConnect},
+  booktitle    = {Proceedings of the 30th International Conference on Machine Learning,
+                  {ICML} 2013, Atlanta, GA, USA, 16-21 June 2013},
+  series       = {{JMLR} Workshop and Conference Proceedings},
+  volume       = {28},
+  pages        = {1058--1066},
+  publisher    = {JMLR.org},
+  year         = {2013},
+  url          = {https://proceedings.mlr.press/v28/wan13.html},
+  timestamp    = {Wed, 29 May 2019 08:41:45 +0200},
+  biburl       = {https://dblp.org/rec/conf/icml/WanZZLF13.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@inproceedings{he2015delving_1,
+  added-at = {2022-01-19T10:53:07.000+0100},
+  author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  biburl = {https://www.bibsonomy.org/bibtex/224af17530d9ba66342b5074700bf6d1b/msteininger},
+  booktitle = {Proceedings of the IEEE international conference on computer vision},
+  interhash = {0b13164e63812ff4bafd89b6139fe961},
+  intrahash = {24af17530d9ba66342b5074700bf6d1b},
+  keywords = {imported},
+  pages = {1026--1034},
+  timestamp = {2022-01-19T10:53:07.000+0100},
+  title = {Delving deep into rectifiers: Surpassing human-level performance on imagenet classification},
+  year = 2015
+}
+
+@INPROCEEDINGS{he2015delving,
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={2015 IEEE International Conference on Computer Vision (ICCV)}, 
+  title={Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={1026-1034},
+  keywords={Training;Computational modeling;Adaptation models;Testing;Gaussian distribution;Biological neural networks},
+  doi={10.1109/ICCV.2015.123}
+}
+
+@inproceedings{pmlr-v9-glorot10a,
+  abstract = {Whereas before 2006 it appears that deep multi-layer neural networks were not successfully trained, since then several algorithms have been shown to successfully train them, with experimental results showing the superiority of deeper vs less deep architectures. All these experimental results were obtained with new initialization or training mechanisms. Our objective here is to understand better why standard gradient descent from random initialization is doing so poorly with deep neural networks, to better understand these recent relative successes and help design better algorithms in the future.  We first observe the influence of the non-linear activations functions. We find that the logistic sigmoid activation is unsuited for deep networks with random initialization because of its mean value, which can drive especially the top hidden layer into saturation. Surprisingly, we find that saturated units can move out of saturation by themselves, albeit slowly, and explaining the plateaus sometimes seen when training neural networks. We find that a new non-linearity that saturates less can often be beneficial. Finally, we study how activations and gradients vary across layers and during training, with the idea that training may be more difficult when the singular values of the Jacobian associated with each layer are far from 1.  Based on these considerations, we propose a new initialization scheme that brings substantially faster convergence.},
+  added-at = {2017-12-09T13:35:34.000+0100},
+  address = {Chia Laguna Resort, Sardinia, Italy},
+  author = {Glorot, Xavier and Bengio, Yoshua},
+  biburl = {https://www.bibsonomy.org/bibtex/2c0a4691d82570be264c5f392d8b71496/spdrnl},
+  booktitle = {Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics},
+  description = {Understanding the difficulty of training deep feedforward neural networks},
+  editor = {Teh, Yee Whye and Titterington, Mike},
+  interhash = {4f45a520bb65b6045bd237963ffee0ed},
+  intrahash = {c0a4691d82570be264c5f392d8b71496},
+  keywords = {deep tech},
+  month = {13--15 May},
+  pages = {249--256},
+  pdf = {https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf},
+  publisher = {PMLR},
+  series = {Proceedings of Machine Learning Research},
+  timestamp = {2017-12-09T13:35:34.000+0100},
+  title = {Understanding the difficulty of training deep feedforward neural networks},
+  url = {https://proceedings.mlr.press/v9/glorot10a.html},
+  volume = 9,
+  year = 2010
+}
+
+@inproceedings{journals/jmlr/GlorotB10,
+  added-at = {2019-05-29T00:00:00.000+0200},
+  author = {Glorot, Xavier and Bengio, Yoshua},
+  biburl = {https://www.bibsonomy.org/bibtex/221d2d1490c8404f823f1d36b294fce72/dblp},
+  booktitle = {AISTATS},
+  _crossref = {conf/aistats/2010},
+  editor = {Teh, Yee Whye and Titterington, D. Mike},
+  ee = {http://proceedings.mlr.press/v9/glorot10a.html},
+  interhash = {4f45a520bb65b6045bd237963ffee0ed},
+  intrahash = {21d2d1490c8404f823f1d36b294fce72},
+  keywords = {dblp},
+  pages = {249-256},
+  publisher = {JMLR.org},
+  series = {JMLR Proceedings},
+  timestamp = {2019-05-30T11:50:49.000+0200},
+  title = {Understanding the difficulty of training deep feedforward neural networks.},
+  url = {http://dblp.uni-trier.de/db/journals/jmlr/jmlrp9.html#GlorotB10},
+  volume = 9,
+  year = 2010
+}
+
+@article{Fuk75,
+  added-at = {2008-09-29T18:25:59.000+0200},
+  author = {Fukushima, K.},
+  biburl = {https://www.bibsonomy.org/bibtex/23d5b4a010202e252ffc2a07d815fc722/mcdiaz},
+  file = {#F#},
+  interhash = {4adb26de59891022dc4c21421ae1c64f},
+  intrahash = {3d5b4a010202e252ffc2a07d815fc722},
+  journal = {Biological Cybernetics},
+  keywords = {imported},
+  pages = {121-136},
+  timestamp = {2008-09-29T18:25:59.000+0200},
+  title = {Cognitron: a self-organizing multilayered neural network},
+  volume = 20,
+  year = 1975
+}
+@inproceedings{Maas2013RectifierNI,
+  added-at = {2021-07-31T11:11:36.000+0200},
+  author = {Maas, Andrew L.},
+  biburl = {https://www.bibsonomy.org/bibtex/2479ee3123c43b4a7eb5a329d93e7360f/t_seizinger},
+  description = {[PDF] Rectifier Nonlinearities Improve Neural Network Acoustic Models | Semantic Scholar},
+  interhash = {7d06d78b236f9cd266c455570c23d08c},
+  intrahash = {479ee3123c43b4a7eb5a329d93e7360f},
+  keywords = {bachelor_thesis},
+  timestamp = {2021-07-31T11:11:36.000+0200},
+  title = {Rectifier Nonlinearities Improve Neural Network Acoustic Models},
+  year = 2013
+}
+
+@article{hinton12_1,
+  added-at = {2016-11-26T13:10:09.000+0100},
+  author = {Hinton, G. and Deng, L. and Yu, D. and Dahl, G. and Mohamed, A. and Jaitly, N. and Senior, A. and Vanhoucke, V. and Nguyen, P. and Sainath, T. and Kingsbury, B.},
+  biburl = {https://www.bibsonomy.org/bibtex/2a88a7f48a108779b5ba23538d4d2ad52/machinelearning},
+  interhash = {997296347c8f752e790eafc42b2b5768},
+  intrahash = {a88a7f48a108779b5ba23538d4d2ad52},
+  journal = {IEEE Signal Process. Mag.},
+  keywords = {ml},
+  number = 6,
+  pages = {82-97},
+  timestamp = {2016-11-26T13:17:02.000+0100},
+  title = {Deep Neural Networks for Acoustic Modeling in Speech Recognition:
+               The Shared Views of Four Research Groups},
+  volume = 29,
+  year = 2012
+}
+
+@article{hinton12,
+  author={Hinton, Geoffrey and Deng, Li and Yu, Dong and Dahl, George E. and Mohamed, Abdel-rahman and Jaitly, Navdeep and Senior, Andrew and Vanhoucke, Vincent and Nguyen, Patrick and Sainath, Tara N. and Kingsbury, Brian},
+  journal={IEEE Signal Processing Magazine}, 
+  title={Deep Neural Networks for Acoustic Modeling in Speech Recognition: The Shared Views of Four Research Groups}, 
+  year={2012},
+  volume={29},
+  number={6},
+  pages={82-97},
+  keywords={Automatic speech recognition;Speech recognition;Hidden Markov models;Training;Gaussian processes;Acoustics;Neural networks;Data models},
+  doi={10.1109/MSP.2012.2205597}
+}
+
+@article{10.1093/imanum/draa038,
+    author = {Blanchard, Pierre and Higham, Desmond J and Higham, Nicholas J},
+    title = "{Accurately computing the log-sum-exp and softmax functions}",
+    journal = {IMA Journal of Numerical Analysis},
+    volume = {41},
+    number = {4},
+    pages = {2311-2330},
+    year = {2020},
+    month = {08},
+    abstract = "{Evaluating the log-sum-exp function or the softmax function is a key step in many modern data science algorithms, notably in inference and classification. Because of the exponentials that these functions contain, the evaluation is prone to overflow and underflow, especially in low-precision arithmetic. Software implementations commonly use alternative formulas that avoid overflow and reduce the chance of harmful underflow, employing a shift or another rewriting. Although mathematically equivalent, these variants behave differently in floating-point arithmetic and shifting can introduce subtractive cancellation. We give rounding error analyses of different evaluation algorithms and interpret the error bounds using condition numbers for the functions. We conclude, based on the analysis and numerical experiments, that the shifted formulas are of similar accuracy to the unshifted ones, so can safely be used, but that a division-free variant of softmax can suffer from loss of accuracy.}",
+    issn = {0272-4979},
+    doi = {10.1093/imanum/draa038},
+    _url = {https://doi.org/10.1093/imanum/draa038},
+    _eprint = {https://academic.oup.com/imajna/article-pdf/41/4/2311/40758053/draa038.pdf},
+}
+
+@inproceedings{DBLP_journals_corr_KingmaB14,
+  author       = {Diederik P. Kingma and
+                  Jimmy Ba},
+  editor       = {Yoshua Bengio and
+                  Yann LeCun},
+  title        = {Adam: {A} Method for Stochastic Optimization},
+  booktitle    = {3rd International Conference on Learning Representations, {ICLR} 2015,
+                  San Diego, CA, USA, May 7-9, 2015, Conference Track Proceedings},
+  year         = {2015},
+  url          = {https://arxiv.org/abs/1412.6980},
+  timestamp    = {Thu, 25 Jul 2019 14:25:37 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/KingmaB14.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{DBLP_journals_corr_Ruder16,
+  author       = {Sebastian Ruder},
+  title        = {An overview of gradient descent optimization algorithms},
+  journal      = {CoRR},
+  volume       = {abs/1609.04747},
+  year         = {2016},
+  url          = {https://arxiv.org/abs/1609.04747},
+  eprinttype    = {arXiv},
+  eprint       = {1609.04747},
+  timestamp    = {Mon, 13 Aug 2018 16:48:10 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/Ruder16.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@Article{math11030682,
+AUTHOR = {Tian, Yingjie and Zhang, Yuqi and Zhang, Haibin},
+TITLE = {Recent Advances in Stochastic Gradient Descent in Deep Learning},
+JOURNAL = {Mathematics},
+VOLUME = {11},
+YEAR = {2023},
+NUMBER = {3},
+ARTICLE-NUMBER = {682},
+_URL = {https://www.mdpi.com/2227-7390/11/3/682},
+ISSN = {2227-7390},
+ABSTRACT = {In the age of artificial intelligence, the best approach to handling huge amounts of data is a tremendously motivating and hard problem. Among machine learning models, stochastic gradient descent (SGD) is not only simple but also very effective. This study provides a detailed analysis of contemporary state-of-the-art deep learning applications, such as natural language processing (NLP), visual data processing, and voice and audio processing. Following that, this study introduces several versions of SGD and its variant, which are already in the PyTorch optimizer, including SGD, Adagrad, adadelta, RMSprop, Adam, AdamW, and so on. Finally, we propose theoretical conditions under which these methods are applicable and discover that there is still a gap between theoretical conditions under which the algorithms converge and practical applications, and how to bridge this gap is a question for the future.},
+DOI = {10.3390/math11030682}
+}
+
+@misc{wesselink2024nervatrulysparseimplementation,
+      title={Nerva: a Truly Sparse Implementation of Neural Networks}, 
+      author={Wieger Wesselink and Bram Grooten and Qiao Xiao and Cassio de Campos and Mykola Pechenizkiy},
+      year={2024},
+      eprint={2407.17437},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2407.17437}, 
+}
+
+@article{DBLP_journals_actanum_HighamM22,
+  author       = {Nicholas J. Higham and Th{\'{e}}o Mary},
+  title        = {Mixed precision algorithms in numerical linear algebra},
+  journal      = {Acta Numer.},
+  volume       = {31},
+  pages        = {347--414},
+  year         = {2022},
+  url          = {https://doi.org/10.1017/S0962492922000022},
+  _doi          = {10.1017/S0962492922000022},
+  timestamp    = {Sat, 25 Feb 2023 21:35:30 +0100},
+  biburl       = {https://dblp.org/rec/journals/actanum/HighamM22.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{DBLP_conf_icml_NikdanPIKA23,
+  author       = {Mahdi Nikdan and
+                  Tommaso Pegolotti and
+                  Eugenia Iofinova and
+                  Eldar Kurtic and
+                  Dan Alistarh},
+  editor       = {Andreas Krause and
+                  Emma Brunskill and
+                  Kyunghyun Cho and
+                  Barbara Engelhardt and
+                  Sivan Sabato and
+                  Jonathan Scarlett},
+  title        = {SparseProp: Efficient Sparse Backpropagation for Faster Training of
+                  Neural Networks at the Edge},
+  booktitle    = {International Conference on Machine Learning, {ICML} 2023, 23-29 July
+                  2023, Honolulu, Hawaii, {USA}},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {202},
+  pages        = {26215--26227},
+  publisher    = {{PMLR}},
+  year         = {2023},
+  url          = {https://proceedings.mlr.press/v202/nikdan23a.html},
+  timestamp    = {Mon, 28 Aug 2023 17:23:08 +0200},
+  biburl       = {https://dblp.org/rec/conf/icml/NikdanPIKA23.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{DBLP_journals_nca_LiuMMPP21,
+  author       = {Shiwei Liu and
+                  Decebal Constantin Mocanu and
+                  Amarsagar Reddy Ramapuram Matavalam and
+                  Yulong Pei and
+                  Mykola Pechenizkiy},
+  title        = {Sparse evolutionary deep learning with over one million artificial
+                  neurons on commodity hardware},
+  journal      = {Neural Comput. Appl.},
+  volume       = {33},
+  number       = {7},
+  pages        = {2589--2604},
+  year         = {2021},
+  url          = {https://doi.org/10.1007/s00521-020-05136-7},
+  _doi          = {10.1007/S00521-020-05136-7},
+  timestamp    = {Fri, 02 Aug 2024 14:40:36 +0200},
+  biburl       = {https://dblp.org/rec/journals/nca/LiuMMPP21.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{DBLP_journals_corr_abs-2405-15013,
+  author       = {Antoine Gonon and
+                  L{\'{e}}on Zheng and
+                  Pascal Carrivain and
+                  Quoc{-}Tung Le},
+  title        = {Make Inference Faster: Efficient {GPU} Memory Management for Butterfly
+                  Sparse Matrix Multiplication},
+  journal      = {CoRR},
+  volume       = {abs/2405.15013},
+  year         = {2024},
+  url          = {https://doi.org/10.48550/arXiv.2405.15013},
+  _doi          = {10.48550/ARXIV.2405.15013},
+  eprinttype    = {arXiv},
+  eprint       = {2405.15013},
+  timestamp    = {Wed, 19 Jun 2024 08:52:53 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-2405-15013.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}

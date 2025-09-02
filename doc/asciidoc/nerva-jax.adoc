@@ -1,0 +1,46 @@
+= Nerva-JAX manual
+:copyright: Copyright 2024 Wieger Wesselink
+:author: Wieger Wesselink
+:email: j.w.wesselink@tue.nl
+:doctype: book
+:toc: left
+:toc2:
+:toc-title: pass:[<h3>Contents</h3>]
+:css-signature: demo
+:stem: latexmath
+:icons: font
+:description: Documentation for the nerva-rowwise repository.
+:imagesdir: images
+:bibliography: ../nerva.bib
+
+ifdef::env-github[]
+:note-caption: :information_source:
+endif::[]
+
+++++
+<style>
+  .small-code .content pre {
+      font-size: 0.7em;
+  }
+</style>
+++++
+
+include::settings.adoc[]
+
+include::include/nerva-python-introduction.adoc[]
+
+include::include/nerva-python-installation.adoc[]
+
+include::include/nerva-python-overview-of-the-code.adoc[]
+
+include::include/nerva-python-api-user-guide.adoc[]
+
+include::include/nerva-python-command-line-tools.adoc[]
+
+include::include/io.adoc[]
+
+include::include/nerva-python-advanced-topics.adoc[]
+
+== References
+
+bibliography::[]

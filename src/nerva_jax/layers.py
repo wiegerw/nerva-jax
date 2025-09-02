@@ -2,21 +2,26 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
+"""Neural network layers used by the MultilayerPerceptron class.
+
+   Layers in this module operate on matrices with row layout (each row is a sample).
+   They expose a minimal interface with feedforward, backpropagate and optimize.
+"""
+
 import jax.numpy as jnp
 
 from nerva_jax.activation_functions import ActivationFunction, SReLUActivation, parse_activation
 from nerva_jax.matrix_operations import column_repeat, columns_mean, columns_sum, diag, elements_sum, hadamard, \
-    identity, ones, inv_sqrt, row_repeat, rows_sum, vector_size, zeros
+    identity, ones, inv_sqrt, row_repeat, rows_sum, vector_size, zeros, Matrix
 from nerva_jax.optimizers import CompositeOptimizer, parse_optimizer
 from nerva_jax.softmax_functions import log_softmax, softmax
 from nerva_jax.weight_initializers import set_layer_weights
 
-Matrix = jnp.ndarray
-
 
 class Layer(object):
     """
-    Base class for layers of a neural network with data in column layout
+    Base class for layers of a neural network with data in row layout
+    (each row is a sample: shape (N, D)).
     """
     def __init__(self):
         self.X = None
@@ -35,8 +40,9 @@ class Layer(object):
 
 
 class LinearLayer(Layer):
-    """
-    Linear layer of a neural network
+    """Linear layer: Y = X W^T + b.
+
+    Shapes: X (N, D) -> Y (N, K), W (K, D), b (K,).
     """
     def __init__(self, D: int, K: int):
         super().__init__()
@@ -83,9 +89,7 @@ class LinearLayer(Layer):
 
 
 class ActivationLayer(LinearLayer):
-    """
-    Linear layer with an activation function
-    """
+    """Linear layer followed by a pointwise activation function."""
     def __init__(self, D: int, K: int, act: ActivationFunction):
         super().__init__(D, K)
         self.Z = None
@@ -123,9 +127,9 @@ class ActivationLayer(LinearLayer):
 
 
 class SReLULayer(ActivationLayer):
-    """
-    Linear layer with an SReLU activation function. It adds learning of the parameters
-    al, tl, ar and tr.
+    """Activation layer with SReLU and trainable activation parameters.
+
+    In addition to W and b, this layer optimizes SReLU's (al, tl, ar, tr).
     """
     def __init__(self, D: int, K: int, act: SReLUActivation):
         super().__init__(D, K, act)
@@ -160,9 +164,7 @@ class SReLULayer(ActivationLayer):
 
 
 class SoftmaxLayer(LinearLayer):
-    """
-    Linear layer with a softmax activation function
-    """
+    """Linear layer followed by softmax over the last dimension."""
     def __init__(self, D: int, K: int):
         super().__init__(D, K)
         self.Z = None
@@ -197,9 +199,7 @@ class SoftmaxLayer(LinearLayer):
 
 
 class LogSoftmaxLayer(LinearLayer):
-    """
-    Linear layer with a log_softmax activation function
-    """
+    """Linear layer followed by log_softmax over the last dimension."""
     def __init__(self, D: int, K: int):
         super().__init__(D, K)
         self.Z = None
@@ -235,8 +235,10 @@ class LogSoftmaxLayer(LinearLayer):
 
 
 class BatchNormalizationLayer(Layer):
-    """
-    A batch normalization layer
+    """Batch normalization layer with per-feature gamma and beta.
+
+    Normalizes inputs across the batch using per-feature statistics.
+    Shapes: X (N, D) -> Y (N, D), gamma/beta (D,).
     """
     def __init__(self, D: int):
         super().__init__()
@@ -266,6 +268,7 @@ class BatchNormalizationLayer(Layer):
         return Y
 
     def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
+        """Compute gradients for gamma/beta and propagate DX through BN."""
         N, D = self.X.shape
         Z = self.Z
         gamma = self.gamma
@@ -298,6 +301,11 @@ def parse_linear_layer(text: str,
                        optimizer: str,
                        weight_initializer: str
                       ) -> Layer:
+    """Parse a textual layer spec and create a configured Layer instance.
+
+Supports Linear, Softmax, LogSoftmax, activation names (e.g. ReLU), and
+SReLU(...). The optimizer and weight initializer are applied.
+    """
     if text == 'Linear':
         layer = LinearLayer(D, K)
     elif text == 'Softmax':

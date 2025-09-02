@@ -2,28 +2,38 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
+"""Learning-rate schedulers.
+
+These schedulers are intentionally minimal and stateless unless noted
+(TimeBased updates its internal lr). The parser accepts textual forms such as
+"Constant(0.1)", "StepBased(0.1,0.5,10)", or "MultiStepLR(0.1;1,3,5;0.1)".
+"""
+
 import math
 import re
 from typing import List
 
 
 class LearningRateScheduler(object):
-    def __call__(self, epoch: int):
+    """Interface for epoch-indexed learning-rate schedules."""
+    def __call__(self, epoch: int) -> float:
         raise NotImplementedError
 
 
 class ConstantScheduler(LearningRateScheduler):
+    """Constant learning rate: returns the same lr for any epoch."""
     def __init__(self, lr: float):
         self.lr = lr
 
     def __str__(self):
         return f'ConstantScheduler(lr={self.lr})'
 
-    def __call__(self, epoch: int):
+    def __call__(self, epoch: int) -> float:
         return self.lr
 
 
 class TimeBasedScheduler(LearningRateScheduler):
+    """Time-based decay: lr = lr / (1 + decay * epoch)."""
     def __init__(self, lr: float, decay: float):
         self.lr = lr
         self.decay = decay
@@ -37,6 +47,7 @@ class TimeBasedScheduler(LearningRateScheduler):
 
 
 class StepBasedScheduler(LearningRateScheduler):
+    """Step decay: lr * drop_rate ^ floor((1+epoch)/change_rate)."""
     def __init__(self, lr: float, drop_rate: float, change_rate: float):
         self.lr = lr
         self.drop_rate = drop_rate
@@ -50,6 +61,7 @@ class StepBasedScheduler(LearningRateScheduler):
 
 
 class MultiStepLRScheduler(LearningRateScheduler):
+    """Multi-step decay: multiply lr by gamma at specified milestone epochs."""
     def __init__(self, lr: float, milestones: List[int], gamma: float):
         self.lr = lr
         self.milestones = milestones
@@ -69,6 +81,7 @@ class MultiStepLRScheduler(LearningRateScheduler):
 
 
 class ExponentialScheduler(LearningRateScheduler):
+    """Exponential decay: lr * exp(-change_rate * epoch)."""
     def __init__(self, lr: float, change_rate: float):
         self.lr = lr
         self.change_rate = change_rate
@@ -81,6 +94,12 @@ class ExponentialScheduler(LearningRateScheduler):
 
 
 def parse_learning_rate(text: str) -> LearningRateScheduler:
+    """Parse a textual learning-rate scheduler specification.
+
+Accepted forms include Constant(lr), TimeBased(lr,decay),
+StepBased(lr,drop_rate,change_rate), MultiStepLR(lr;milestones;gamma)
+and Exponential(lr,change_rate).
+    """
     try:
         if text.startswith('Constant'):
             m = re.match(r'Constant\((.*)\)', text)

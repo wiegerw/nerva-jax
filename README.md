@@ -1,207 +1,199 @@
-# The nerva-jax library
+# nerva-jax
 
-This repository contains an implementation of multilayer perceptrons in JAX.
-It is part of a group of five Python packages that can be installed via pip:
+[![PyPI](https://img.shields.io/pypi/v/nerva-jax.svg)](https://pypi.org/project/nerva-jax/)
+[![License: BSL-1.0](https://img.shields.io/badge/license-BSL%201.0-blue.svg)](https://opensource.org/licenses/BSL-1.0)
 
-* [nerva-jax](https://pypi.org/project/nerva_jax/) An implementation in [JAX](https://jax.readthedocs.io).
-* [nerva-numpy](https://pypi.org/project/nerva_numpy/) An implementation in [NumPy](https://numpy.org).
-* [nerva-sympy](https://pypi.org/project/nerva_sympy/) An implementation in [SymPy](https://www.sympy.org), used for validation and testing.
-* [nerva-tensorflow](https://pypi.org/project/nerva_tensorflow/) An implementation in [TensorFlow](https://www.tensorflow.org/).
-* [nerva-torch](https://pypi.org/project/nerva_torch/) An implementation in [PyTorch](https://pytorch.org/). 
+**`nerva-jax`** is a minimal, transparent implementation of multilayer perceptrons using **JAX** tensors.  
+It is part of the [Nerva](https://github.com/wiegerw/nerva) project — a suite of Python and C++ libraries that provide well-specified, inspectable implementations of neural networks.
 
-The packages can be installed standalone, except for `nerva-sympy` which requires
-installation of the other four. Each package has its own GitHub repository:
+➡️ **All equations in this repository are written in *batch (minibatch) matrix form***, meaning feedforward, backpropagation, and loss functions operate on minibatches of inputs rather than single examples.
 
-* [https://github.com/wiegerw/nerva-jax](https://github.com/wiegerw/nerva-jax/)
-* [https://github.com/wiegerw/nerva-numpy](https://github.com/wiegerw/nerva-numpy/)
-* [https://github.com/wiegerw/nerva-sympy](https://github.com/wiegerw/nerva-sympy/)
-* [https://github.com/wiegerw/nerva-tensorflow](https://github.com/wiegerw/nerva-tensorflow/)
-* [https://github.com/wiegerw/nerva-torch](https://github.com/wiegerw/nerva-torch/)
+## 🗺️ Overview
 
-## Purpose
+The `nerva` libraries aim to demystify neural networks by:
+- Providing precise mathematical specifications.
+- Implementing core concepts like backpropagation from scratch.
+- Avoiding automatic differentiation to foster understanding.
 
-The main purpose of these repositories is on the practical implementation of
-neural networks. We aim to achieve the following goals: 
-* To provide precise mathematical specifications of the execution of multilayer perceptrons.
-* To provide an overview of the equations for common layers, activation functions and loss functions.
-* To provide easily understandable implementations that match the specifications closely.
- 
-An important advantage of our implementations is that they 
-are fully transparent: even the implementation of
-backpropagation is provided in an accessible manner. Currently, the scope is
-limited to multilayer perceptrons. However, the approach can easily be
-generalized to more complex neural network architectures.
+Currently supported: **Multilayer Perceptrons (MLPs)**.  
+Future extensions to convolutional or recurrent networks are possible.
 
-## Installation
+---
 
-The code is available as the PyPI package [nerva-jax](https://pypi.org/project/nerva-jax/).
-It can be installed using
+## ❓ Why Use `nerva`
 
-```
+If you're learning or teaching how neural networks work, most modern frameworks (e.g., PyTorch, TensorFlow) can be too opaque. `nerva` is different:
+
+- Every function has a clear mathematical interpretation.
+- Gradient computations are written by hand — no autograd.
+- Includes symbolic validation to ensure correctness.
+- Modular and backend-agnostic: choose between JAX, NumPy, PyTorch, or TensorFlow.
+- Used as a reference implementation for research and education.
+- Modularity: the core operations rely on a small set of primitive [matrix operations](https://wiegerw.github.io/nerva-jax/doc/nerva-jax.html#_matrix_operations), making the logic easy to inspect, test, and validate.
+
+---
+
+## 📦 Available Python Packages
+
+Each backend has a dedicated PyPI package and GitHub repository:
+
+| Package             | Backend     | PyPI                                               | GitHub                                                  |
+|---------------------|-------------|----------------------------------------------------|----------------------------------------------------------|
+| `nerva-jax`         | JAX         | [nerva-jax](https://pypi.org/project/nerva-jax/)           | [repo](https://github.com/wiegerw/nerva-jax)            |
+| `nerva-numpy`       | NumPy       | [nerva-numpy](https://pypi.org/project/nerva-numpy/)       | [repo](https://github.com/wiegerw/nerva-numpy)          |
+| `nerva-tensorflow`  | TensorFlow  | [nerva-tensorflow](https://pypi.org/project/nerva-tensorflow/) | [repo](https://github.com/wiegerw/nerva-tensorflow)     |
+| `nerva-torch`       | PyTorch     | [nerva-torch](https://pypi.org/project/nerva-torch/)       | [repo](https://github.com/wiegerw/nerva-torch)          |
+| `nerva-sympy`       | SymPy       | [nerva-sympy](https://pypi.org/project/nerva-sympy/)       | [repo](https://github.com/wiegerw/nerva-sympy)          |
+
+> 📝 `nerva-sympy` is intended for validation and testing — it depends on the other four.
+
+See the [nerva meta-repo](https://github.com/wiegerw/nerva) for an overview of all Python and C++ variants.
+
+---
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
 pip install nerva-jax
 ```
 
-## Licensing
+### Example: Define and Train an MLP
 
-The code is available under the [Boost Software License 1.0](http://www.boost.org/LICENSE_1_0.txt).
-A [local copy](https://github.com/wiegerw/nerva-jax/blob/main/LICENSE) is included in the repository.
-
-## Using the library
-
-### Multilayer perceptrons
-Our multilayer perceptron class has a straightforward implementation:
 ```python
-class MultilayerPerceptron(object):
-
-    def feedforward(self, X: Matrix) -> Matrix:
-        for layer in self.layers:
-            X = layer.feedforward(X)
-        return X
-
-    def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
-        for layer in reversed(self.layers):
-            layer.backpropagate(Y, DY)
-            Y, DY = layer.X, layer.DX
-
-    def optimize(self, lr: float):
-        for layer in self.layers:
-            layer.optimize(lr)
-```
-A multilayer perceptron can be constructed like this:
-```python
-    M = MultilayerPerceptron()
-
-    input_size = 3072
-    output_size = 1024
-    act = AllReLUActivation(0.3)
-    layer = ActivationLayer(input_size, output_size, act)
+# Create a new MLP model
+M = MultilayerPerceptron()
+M.layers = [
+    ActivationLayer(784, 1024, ReLUActivation()),
+    ActivationLayer(1024, 512, ReLUActivation()),
+    LinearLayer(512, 10)
+]
+for layer in M.layers:
     layer.set_optimizer('Momentum(0.9)')
-    layer.set_weights('Xavier')   
-    M.layers.append(layer)
-    ...
+    layer.set_weights('Xavier')
+
+loss = SoftmaxCrossEntropyLossFunction()
+learning_rate = ConstantScheduler(0.01)
+epochs = 10
+
+# Load data
+train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
+
+# Train the network
+sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
 ```
-An example of a layer is the softmax layer. Note that the feedforward and
-backpropagation implementations exactly match with the equations given in the documentation.
+
+> 🔍 Inputs should be of shape `(N, 784)`, where `N` is the batch size.  
+> Targets can be one-hot encoded or integer class indices from `0` to `9`.
+
+> 📘 See [`examples/train_mnist.py`](examples/train_mnist.py) for a full training setup.
+
+---
+
+## 🧱 Architecture
+
+Each major concept is implemented through clear interface classes. Implementations are modular and easy to replace:
+
+| Concept               | Interface Class        | Example Implementations                         |
+|------------------------|------------------------|--------------------------------------------------|
+| Layer                 | `Layer`                | `ActivationLayer`, `LinearLayer`                |
+| Activation Function   | `ActivationFunction`   | `ReLUActivation`, `SigmoidActivation`           |
+| Loss Function         | `LossFunction`         | `SoftmaxCrossEntropyLossFunction`               |
+| Optimizer             | `Optimizer`            | `GradientDescentOptimizer`, `MomentumOptimizer` |
+| Learning Rate Schedule| `LearningRateScheduler`| `ConstantScheduler`, `ExponentialScheduler`     |
+
+---
+
+## 🛠 Features
+
+- Feedforward and backpropagation logic match documented equations exactly.
+- Formulas use batch matrix form, enabling efficient computation over minibatches.
+- Customizable optimizers per parameter group using a composite pattern.
+- Symbolic gradient validation using [nerva-sympy](https://github.com/wiegerw/nerva-sympy).
+- Lightweight command-line interface for experiments.
+
+---
+
+## 📚 Documentation
+
+The full documentation is hosted on GitHub Pages:
+
+- [📖 Documentation Landing Page](https://wiegerw.github.io/nerva-jax/)
+
+From there you can access:
+- [API Reference (Sphinx)](https://wiegerw.github.io/nerva-jax/sphinx/)
+- [nerva-jax Manual](https://wiegerw.github.io/nerva-jax/nerva-jax.html)
+- [Mathematical Specifications (PDF)](https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf)
+
+
+Relevant papers:
+
+1. [**Nerva: a Truly Sparse Implementation of Neural Networks**](https://arxiv.org/abs/2407.17437)
+2. _Batch Matrix-form Equations and Implementation of Multilayer Perceptrons_ (🔗 TODO)
+
+---
+
+## 🧪 Training Loop Internals
+
+A mini-batch gradient descent loop with forward, backward, and optimizer steps can be implemented in just a few lines of code:
+
 ```python
-class SoftmaxLayer(LinearLayer):
-
-    def feedforward(self, X: Matrix) -> Matrix:
-        ...
-        Z = W @ X + column_repeat(b, N)
-        Y = softmax_colwise(Z)
-        ...
-
-    def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
-        ...
-        DZ = hadamard(Y, DY - row_repeat(diag(Y.T @ DY).T, K))
-        DW = DZ @ X.T
-        Db = rows_sum(DZ)
-        DX = W.T @ DZ
-        ...
-```
-The gradients computed by backpropagation are used to update the parameters of
-the neural network using an *optimizer*. The user has full control over how to
-update them. The composite design pattern is used to achieve this:
-```python
-    optimizer_W = MomentumOptimizer(layer.W, layer.DW, 0.9)
-    optimizer_b = NesterovOptimizer(layer.b, layer.Db, 0.9)
-    layer.optimizer = CompositeOptimizer(optimizer_W, optimizer_b)
-```
-Here `W` and `b` are the weights and bias of a linear layer, and `DW` and
-`Db` are the gradients of these parameters with respect to the loss function.
-Other parameters can be learned as well, see for example the SReLU layer.
-
-### Training
-
-For training of an MLP we provide an implementation of stochastic gradient descent
-in the file `training.py` that looks like this:
-
-```python
-def stochastic_gradient_descent(M: MultilayerPerceptron,
-                                epochs: int,
-                                loss: LossFunction,
-                                learning_rate: LearningRateScheduler,
-                                train_loader: DataLoader):
+def sgd(M: MultilayerPerceptron,
+        epochs: int,
+        loss: LossFunction,
+        learning_rate: LearningRateScheduler,
+        train_loader: DataLoader):
 
     for epoch in range(epochs):
         lr = learning_rate(epoch)
+
+        # Iterate over mini-batches X with target T
         for (X, T) in train_loader:
             Y = M.feedforward(X)
-            DY = loss.gradient(Y, T) / Y.shape[0]  # divide by the number of examples
+            DY = loss.gradient(Y, T) / Y.shape[0]
             M.backpropagate(Y, DY)
             M.optimize(lr)
 ```
 
-Here `train_loader` is an object similar to a `DataLoader` in PyTorch that splits
-a dataset into batches of inputs `X` and expected outputs `T`.
-Training of an MLP consists of three steps:
-1. **feedforward** Given an input batch `X` and expected outputs `T`, compute the output `Y`.
-2. **backpropagation** Given outputs `Y` and expected outputs `T`, compute the
- gradient of the MLP parameters with respect to a given loss function `L`.
-3. **optimization** Update the MLP parameters using the gradient computed in step 2.
+---
 
-These steps are performed for each input batch of a dataset, and this process is
-repeated `epoch` times.
+## ✅ Symbolic Validation (Softmax Layer Example)
 
-#### Command line scripts
-For convenience, a command line script `tools/mlp.py` is included that can be
-used to do a training experiment. An example invocation of this script is
-provided in `examples/cifar10.sh`:
+We validate the manually written backpropagation code using symbolic differentiation via `nerva-sympy`.
 
-```bash
-mlp.py --layers="ReLU;ReLU;Linear" \
-       --sizes="3072,1024,512,10" \
-       --optimizers="Momentum(0.9);Momentum(0.9);Momentum(0.9)" \
-       --init-weights="Xavier,Xavier,Xavier" \
-       --batch-size=100 \
-       --epochs=10 \
-       --loss=SoftmaxCrossEntropy \
-       --learning-rate="Constant(0.01)" \
-       --dataset="cifar10.npz"
-```
-The output of this script may look like this:
-``` text
-$ ./cifar10.sh 
-Loading dataset from file ../data/cifar10.npz
-epoch   0  lr: 0.01000000  loss: 2.49815798  train accuracy: 0.10048000  test accuracy: 0.10110000  time: 0.00000000s
-epoch   1  lr: 0.01000000  loss: 1.64330590  train accuracy: 0.41250000  test accuracy: 0.40890000  time: 11.27521224s
-epoch   2  lr: 0.01000000  loss: 1.54620886  train accuracy: 0.44674000  test accuracy: 0.43910000  time: 11.33507117s
-epoch   3  lr: 0.01000000  loss: 1.46849191  train accuracy: 0.47462000  test accuracy: 0.46280000  time: 11.30941587s
-epoch   4  lr: 0.01000000  loss: 1.40283990  train accuracy: 0.49964000  test accuracy: 0.48370000  time: 11.30728618s
-epoch   5  lr: 0.01000000  loss: 1.36808932  train accuracy: 0.51214000  test accuracy: 0.49030000  time: 11.32811917s
-epoch   6  lr: 0.01000000  loss: 1.33309329  train accuracy: 0.52786000  test accuracy: 0.49490000  time: 11.27888232s
-epoch   7  lr: 0.01000000  loss: 1.31322646  train accuracy: 0.53440000  test accuracy: 0.49800000  time: 11.29106200s
-epoch   8  lr: 0.01000000  loss: 1.29327416  train accuracy: 0.53940000  test accuracy: 0.49850000  time: 11.42966828s
-epoch   9  lr: 0.01000000  loss: 1.27069771  train accuracy: 0.55052000  test accuracy: 0.50120000  time: 11.30879241s
-epoch  10  lr: 0.01000000  loss: 1.24060512  train accuracy: 0.56160000  test accuracy: 0.50690000  time: 11.42121017s
-Total training time for the 10 epochs: 113.28471981s
-```
-
-### Validation
-We do not rely on auto differentiation for the backpropagation. Instead, we provide
-explicit implementations for it. Since the derivation of these equations is
-error-prone, the results have to be validated. A common way to do this is to
-rely on gradient checking using numerical approximations. Instead, we are using
-symbolic differentation of SymPy. This is provided in the `nerva-sympy` package.
-Gradient checking of the softmax layer looks like this: 
+This example validates the gradient of the **softmax layer**. It also illustrates how the gradients `DZ`, `DW`, `Db` and `DX` of the intermediate variable `Z`, the weights `W`, bias `b` and input `X` are calculated from the output `Y` and its gradient `DY`.
 
 ```python
-    # backpropagation
-    DZ = hadamard(Y, DY - row_repeat(diag(Y.T * DY).T, K))
-    DW = DZ * X.T
-    Db = rows_sum(DZ)
-    DX = W.T * DZ
+# Backpropagation gradients
+DZ = hadamard(Y, DY - row_repeat(diag(Y.T * DY).T, K))
+DW = DZ * X.T
+Db = rows_sum(DZ)
+DX = W.T * DZ
 
-    # check gradients using symbolic differentiation
-    DW1 = gradient(loss(Y), w)
-    Db1 = gradient(loss(Y), b)
-    DX1 = gradient(loss(Y), x)
-    DZ1 = gradient(loss(Y), z)
-    self.assertTrue(equal_matrices(DW, DW1))
-    self.assertTrue(equal_matrices(Db, Db1))
-    self.assertTrue(equal_matrices(DX, DX1))
-    self.assertTrue(equal_matrices(DZ, DZ1))
+# Symbolic comparison
+DW1 = gradient(loss(Y), w)
+assert equal_matrices(DW, DW1)
 ```
-An advantage of this approach is that errors can be found in an early stage.
-Moreover, the source of such errors can be detected by checking intermediate
-results.
+
+## 🔢 Implementation via Matrix Operations
+
+The validated backpropagation formulae are implemented directly using the library's core set of primitive matrix operations. This approach provides a significant advantage in clarity and maintainability by expressing all computations from loss functions and activation layers to gradient calculations through a single, global vocabulary of operations.
+
+This stands in contrast to implementations that use hundreds of lines of scattered, special-case logic for the same mathematical result. By reducing complex formulae to a concise sequence of well-defined primitives, the implementation becomes both more readable and far easier to verify and debug.
+
+For a complete reference of all available operations, see the [Table of Matrix Operations](https://wiegerw.github.io/nerva-jax/nerva-jax.html#_matrix_operations).
+
+---
+
+## 📜 License
+
+Distributed under the [Boost Software License 1.0](http://www.boost.org/LICENSE_1_0.txt).  
+[License file](https://github.com/wiegerw/nerva-jax/blob/main/LICENSE)
+
+---
+
+## 🙋 Contributing
+
+Bug reports and contributions are welcome via the [GitHub issue tracker](https://github.com/wiegerw/nerva-jax/issues).
+

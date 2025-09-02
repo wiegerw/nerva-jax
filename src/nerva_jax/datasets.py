@@ -2,55 +2,50 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
+"""In-memory data loader helpers and one-hot conversions.
+
+The DataLoader defined here mirrors a small subset of the PyTorch
+DataLoader API but operates on in-memory tensors loaded from .npz files.
+"""
+
 from pathlib import Path
-from typing import Tuple
+from typing import Union, Tuple
 
 import jax.numpy as jnp
-import numpy as np
+from nerva_jax.matrix_operations import Matrix
+from nerva_jax.utilities import load_dict_from_npz
 
 
-def to_one_hot(x: jnp.ndarray, n_classes: int):
-    """
-    Converts a tensor of class indices to a one-hot encoded tensor.
-
-    Args:
-        x (torch.LongTensor): Tensor of class indices.
-        num_classes (int): Number of classes.
-
-    Returns:
-        torch.Tensor: One-hot encoded tensor of shape (len(x), num_classes).
-    """
-    one_hot = np.zeros((len(x), n_classes), dtype=float)
-    one_hot[np.arange(len(x)), x] = 1
+def to_one_hot(x: Matrix, num_classes: int):
+    """Convert class index tensor to one-hot matrix with num_classes columns."""
+    one_hot = jnp.zeros((len(x), num_classes), dtype=float)
+    one_hot = one_hot.at[jnp.arange(len(x)), x].set(1)
     return jnp.array(one_hot)
 
 
-def from_one_hot(one_hot: jnp.ndarray) -> jnp.ndarray:
-    """
-    Converts a one-hot encoded tensor back to a tensor of class indices.
-
-    Args:
-        one_hot (jnp.ndarray): One-hot encoded tensor of shape (N, num_classes).
-
-    Returns:
-        jnp.ndarray: Tensor of class indices of shape (N,).
-    """
+def from_one_hot(one_hot: Matrix) -> Matrix:
+    """Convert one-hot encoded rows to class index tensor."""
     return jnp.argmax(one_hot, axis=1)
 
 
 class MemoryDataLoader(object):
-    """
-    A data loader with an interface similar to torch.utils.data.DataLoader.
+    """A minimal in-memory data loader with an interface similar to torch.utils.data.DataLoader.
+
+    Notes / Warning:
+
+    - When `Tdata` contains class indices (shape (N,) or (N,1)), this loader will one-hot encode
+      the labels. If `num_classes` is not provided, it will be inferred as `max(Tdata) + 1`.
+    - On small datasets or subsets where some classes are absent, this inference can underestimate
+      the true number of classes and produce one-hot targets with too few columns. This may cause
+      dimension mismatches with the model output during training/evaluation.
+    - To avoid this, pass `num_classes` explicitly whenever you know the total number of classes.
     """
 
-    def __init__(self, Xdata: jnp.ndarray, Tdata: jnp.ndarray, batch_size: int=True, num_classes=0):
-        """
-        :param Xdata: a dataset with row layout
-        :param Tdata: the expected targets. In case of a classification task the targets may be specified as a vector
-                      of integers that denote the expected classes. In such a case the targets will be expanded on the
-                      fly using one hot encoding.
-        :param batch_size: the batch size
-        :param num_classes: the number of classes in case of a classification problem, 0 otherwise
+    def __init__(self, Xdata: Matrix, Tdata: Matrix, batch_size: int, num_classes=0):
+        """Iterate batches over row-major tensors; one-hot encode targets if needed.
+
+        If Tdata is a vector of class indices and num_classes > 0 (or can be
+        inferred), batches yield (X, one_hot(T)). Otherwise, targets are returned as-is.
         """
         self.Xdata = Xdata
         self.Tdata = Tdata
@@ -63,33 +58,51 @@ class MemoryDataLoader(object):
         K = N // self.batch_size  # K is the number of batches
         for k in range(K):
             batch = jnp.array(range(k * self.batch_size, (k + 1) * self.batch_size))
-            Xbatch = self.Xdata[batch]
-            Tbatch = self.Tdata[batch]
-            yield Xbatch, to_one_hot(Tbatch, self.num_classes) if self.num_classes else Tbatch
+            yield self.Xdata[batch], to_one_hot(self.Tdata[batch], self.num_classes) if self.num_classes else self.Tdata[batch]
+
     def __len__(self):
-        """
-        Returns the number of batches
-        """
+        """Number of batches."""
         return self.Xdata.shape[0] // self.batch_size
 
 
 DataLoader = MemoryDataLoader
 
 
+def max_(X: Matrix) -> Union[int, float]:
+    """Return the maximum element of X as a Python scalar."""
+    return jnp.max(X).item()
+
+
+def infer_num_classes(Ttrain: Matrix, Ttest: Matrix) -> int:
+    """Infer total number of classes from targets.
+
+    - If either Ttrain or Ttest is one-hot encoded (2D with width > 1), use that width.
+    - Otherwise assume class indices and return max over both + 1.
+    """
+    if len(Ttrain.shape) == 2 and Ttrain.shape[1] > 1:
+        return int(Ttrain.shape[1])
+    if len(Ttest.shape) == 2 and Ttest.shape[1] > 1:
+        return int(Ttest.shape[1])
+
+    max_train = max_(Ttrain)
+    max_test = max_(Ttest)
+
+    return int(max(max_train, max_test) + 1)
+
+
 def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[MemoryDataLoader, MemoryDataLoader]:
-    """
-    Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors
-    :param filename: a file in NumPy .npz format
-    :param batch_size: the batch size of the data loader
-    :return: a tuple of data loaders
-    """
+    """Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors."""
     path = Path(filename)
     print(f'Loading dataset from file {path}')
     if not path.exists():
         raise RuntimeError(f"Could not load file '{path}'")
 
-    data = dict(jnp.load(filename, allow_pickle=True))
+    data = load_dict_from_npz(filename)
     Xtrain, Ttrain, Xtest, Ttest = data['Xtrain'], data['Ttrain'], data['Xtest'], data['Ttest']
-    train_loader = MemoryDataLoader(jnp.array(Xtrain), jnp.array(Ttrain), batch_size)
-    test_loader = MemoryDataLoader(jnp.array(Xtest), jnp.array(Ttest), batch_size)
+
+    # Determine number of classes robustly to avoid underestimating when some classes are absent
+    num_classes = infer_num_classes(Ttrain, Ttest)
+
+    train_loader = MemoryDataLoader(jnp.array(Xtrain), jnp.array(Ttrain), batch_size, num_classes=num_classes)
+    test_loader = MemoryDataLoader(jnp.array(Xtest), jnp.array(Ttest), batch_size, num_classes=num_classes)
     return train_loader, test_loader

@@ -1,0 +1,29 @@
+name: Deploy AsciiDoc documentation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: asciidoctor/docker-asciidoctor:latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Build AsciiDoc HTML
+        run: |
+          gem install asciidoctor-bibtex
+          bash doc/build_asciidoc_documentation.sh
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output_directory
+          destination_dir: .
+          keep_files: true

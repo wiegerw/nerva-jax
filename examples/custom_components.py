@@ -6,30 +6,28 @@
 
 from pathlib import Path
 
-import torch
+import jax.numpy as jnp
+import numpy as np
 
-from nerva_torch.activation_functions import ActivationFunction, \
-    HyperbolicTangentActivation
-from nerva_torch.datasets import create_npz_dataloaders
-from nerva_torch.layers import ActivationLayer, LinearLayer
-from nerva_torch.learning_rate import TimeBasedScheduler
-from nerva_torch.loss_functions import LossFunction
-from nerva_torch.matrix_operations import elements_sum
-from nerva_torch.multilayer_perceptron import MultilayerPerceptron
-from nerva_torch.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
-from nerva_torch.training import sgd
-from nerva_torch.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
-
-Matrix = torch.Tensor
+from nerva_jax.activation_functions import ActivationFunction, HyperbolicTangentActivation
+from nerva_jax.datasets import create_npz_dataloaders
+from nerva_jax.layers import ActivationLayer, LinearLayer
+from nerva_jax.learning_rate import TimeBasedScheduler
+from nerva_jax.loss_functions import LossFunction
+from nerva_jax.matrix_operations import elements_sum, Matrix
+from nerva_jax.multilayer_perceptron import MultilayerPerceptron
+from nerva_jax.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
+from nerva_jax.training import stochastic_gradient_descent
+from nerva_jax.weight_initializers import zero_bias, xavier_normalized_weights
 
 
 # Define a custom activation function
 def Elu(alpha):
-    return lambda X: torch.where(X > 0, X, alpha * (torch.exp(X) - 1))
+    return lambda X: jnp.where(X > 0, X, alpha * (jnp.exp(X) - 1))
 
 
 def Elu_gradient(alpha):
-    return lambda X: torch.where(X > 0, torch.ones_like(X), alpha * torch.exp(X))
+    return lambda X: jnp.where(X > 0, jnp.ones_like(X), alpha * jnp.exp(X))
 
 
 class ELUActivation(ActivationFunction):
@@ -44,10 +42,10 @@ class ELUActivation(ActivationFunction):
 
 
 # Define a custom weight initializer
-def set_weights_lecun(W: Matrix):
+def lecun_weights(W: Matrix) -> Matrix:
     K, D = W.shape
-    stddev = torch.sqrt(torch.tensor(1.0 / D))
-    W.data = torch.randn(K, D) * stddev
+    stddev = jnp.sqrt(1.0 / D)
+    return np.random.randn(K, D) * stddev
 
 
 # Define a custom loss function
@@ -56,7 +54,7 @@ class AbsoluteErrorLossFunction(LossFunction):
         return elements_sum(abs(Y - T))
 
     def gradient(self, Y: Matrix, T: Matrix) -> Matrix:
-        return torch.sign(Y - T)
+        return jnp.sign(Y - T)
 
 
 def main():
@@ -70,16 +68,16 @@ def main():
 
     # configure layer 1
     layer1 = ActivationLayer(784, 1024, ELUActivation(0.1))
-    set_weights_xavier_normalized(layer1.W)
-    set_bias_to_zero(layer1.b)
-    optimizer_W = MomentumOptimizer(layer1.W, layer1.DW, 0.9)
-    optimizer_b = NesterovOptimizer(layer1.b, layer1.Db, 0.75)
+    xavier_normalized_weights(layer1.W)
+    zero_bias(layer1.b)
+    optimizer_W = MomentumOptimizer(layer1, "W", "DW", 0.9)
+    optimizer_b = NesterovOptimizer(layer1, "b", "Db", 0.75)
     layer1.optimizer = CompositeOptimizer([optimizer_W, optimizer_b])
 
     # configure layer 2
     layer2 = ActivationLayer(1024, 512, HyperbolicTangentActivation())
-    set_weights_lecun(layer1.W)
-    set_bias_to_zero(layer1.b)
+    layer1.W = lecun_weights(layer1.W)
+    layer1.b = zero_bias(layer1.b)
     layer2.set_optimizer("Momentum(0.8)")
 
     # configure layer 3
@@ -93,9 +91,9 @@ def main():
 
     learning_rate = TimeBasedScheduler(lr=0.1, decay=0.09)
 
-    epochs = 100
+    epochs = 5
 
-    sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
+    stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
 
 
 if __name__ == '__main__':

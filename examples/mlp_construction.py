@@ -6,32 +6,27 @@
 
 from pathlib import Path
 
-from nerva_torch.activation_functions import ReLUActivation, LeakyReLUActivation
-from nerva_torch.datasets import create_npz_dataloaders
-from nerva_torch.layers import ActivationLayer, LinearLayer
-from nerva_torch.learning_rate import TimeBasedScheduler
-from nerva_torch.loss_functions import SoftmaxCrossEntropyLossFunction
-from nerva_torch.multilayer_perceptron import MultilayerPerceptron
-from nerva_torch.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
-from nerva_torch.training import sgd
-from nerva_torch.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
+from nerva_jax.activation_functions import ReLUActivation, LeakyReLUActivation
+from nerva_jax.datasets import create_npz_dataloaders
+from nerva_jax.layers import ActivationLayer, LinearLayer
+from nerva_jax.learning_rate import TimeBasedScheduler
+from nerva_jax.loss_functions import SoftmaxCrossEntropyLossFunction
+from nerva_jax.multilayer_perceptron import MultilayerPerceptron, parse_multilayer_perceptron
+from nerva_jax.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
+from nerva_jax.training import stochastic_gradient_descent
+from nerva_jax.weight_initializers import zero_bias, xavier_normalized_weights
 
 
-def main():
-    if not Path("../data/mnist-flattened.npz").exists():
-        print("Error: MNIST dataset not found. Please provide the correct location or run the prepare_datasets.py script first.")
-        return
-
-    train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
-
+def construct_mlp1() -> MultilayerPerceptron:
+    # tag::construct1[]
     M = MultilayerPerceptron()
 
     # configure layer 1
     layer1 = ActivationLayer(784, 1024, ReLUActivation())
-    set_weights_xavier_normalized(layer1.W)
-    set_bias_to_zero(layer1.b)
-    optimizer_W = MomentumOptimizer(layer1.W, layer1.DW, 0.9)
-    optimizer_b = NesterovOptimizer(layer1.b, layer1.Db, 0.75)
+    xavier_normalized_weights(layer1.W)
+    zero_bias(layer1.b)
+    optimizer_W = MomentumOptimizer(layer1, "W", "DW", 0.9)
+    optimizer_b = NesterovOptimizer(layer1, "b", "Db", 0.75)
     layer1.optimizer = CompositeOptimizer([optimizer_W, optimizer_b])
 
     # configure layer 2
@@ -45,14 +40,41 @@ def main():
     layer3.set_optimizer("GradientDescent")
 
     M.layers = [layer1, layer2, layer3]
+    # end::construct1[]
+
+    return M
+
+
+def construct_mlp2() -> MultilayerPerceptron:
+    # tag::construct2[]
+    layer_specifications = ["ReLU", "LeakyReLU(0.5)", "Linear"]
+    linear_layer_sizes = [784, 1024, 512, 10]
+    linear_layer_optimizers = ["Nesterov(0.9)", "Momentum(0.8)", "GradientDescent"]
+    linear_layer_weight_initializers = ["XavierNormalized", "Xavier", "He"]
+    M = parse_multilayer_perceptron(layer_specifications,
+                                    linear_layer_sizes,
+                                    linear_layer_optimizers,
+                                    linear_layer_weight_initializers)
+    # end::construct2[]
+    return M
+
+
+def main():
+    if not Path("../data/mnist-flattened.npz").exists():
+        print("Error: MNIST dataset not found. Please provide the correct location or run the prepare_datasets.py script first.")
+        return
+
+    train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
 
     loss = SoftmaxCrossEntropyLossFunction()
-
     learning_rate = TimeBasedScheduler(lr=0.1, decay=0.09)
+    epochs = 5
 
-    epochs = 100
+    M1 = construct_mlp1()
+    stochastic_gradient_descent(M1, epochs, loss, learning_rate, train_loader, test_loader)
 
-    sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
+    M2 = construct_mlp2()
+    stochastic_gradient_descent(M2, epochs, loss, learning_rate, train_loader, test_loader)
 
 
 if __name__ == '__main__':

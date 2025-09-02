@@ -13,8 +13,9 @@ def make_argument_parser():
     cmdline_parser = argparse.ArgumentParser()
 
     # model parameters
-    cmdline_parser.add_argument('--sizes', type=str, default='3072,128,64,10', help='A comma separated list of layer sizes, e.g. "3072,128,64,10".')
     cmdline_parser.add_argument('--layers', type=str, help='A semi-colon separated lists of layer specifications.')
+    cmdline_parser.add_argument('--layer-sizes', type=str, default='3072,128,64,10', help='A comma separated list of layer sizes, e.g. "3072,128,64,10".')
+    cmdline_parser.add_argument('--layer-weights', type=str, help='Weight initialization method for new layers (e.g. "Xavier").')
 
     # learning rate
     cmdline_parser.add_argument("--learning-rate", type=str, help="The learning rate scheduler")
@@ -30,11 +31,10 @@ def make_argument_parser():
     cmdline_parser.add_argument("--optimizers", type=str, help="The optimizers (GradientDescent, Momentum(<mu>), Nesterov(<mu>))", default="GradientDescent")
 
     # dataset
-    cmdline_parser.add_argument('--dataset', type=str, help='The .npz file containing train and test data')
+    cmdline_parser.add_argument('--load-dataset', type=str, help='The .npz file containing train and test data')
 
     # weights
-    cmdline_parser.add_argument('--weights', type=str, help='The .npz file containing weights and bias values')
-    cmdline_parser.add_argument('--init-weights', type=str, help='The weight initializers (Xavier, XavierNormalized, He)')
+    cmdline_parser.add_argument('--load-weights', type=str, help='Load model weights and biases from a .npz file.')
 
     # logging
     cmdline_parser.add_argument("--debug", help="Log intermediate values", action="store_true")
@@ -46,9 +46,9 @@ def main():
     cmdline_parser = make_argument_parser()
     args = cmdline_parser.parse_args()
 
-    linear_layer_sizes = [int(s) for s in args.sizes.split(',')]
+    linear_layer_sizes = [int(s) for s in args.layer_sizes.split(';')]
     layer_specifications = args.layers.split(';')
-    linear_layer_weight_initializers = args.init_weights.split(',')
+    linear_layer_weight_initializers = args.layer_weights.split(';')
     linear_layer_optimizers = args.optimizers.split(';')
 
     train(layer_specifications,
@@ -59,8 +59,8 @@ def main():
           args.epochs,
           args.loss,
           args.learning_rate,
-          args.weights,
-          args.dataset,
+          args.load_weights,
+          args.load_dataset,
           args.debug
          )
 

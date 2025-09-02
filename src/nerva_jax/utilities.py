@@ -2,18 +2,23 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
+"""Miscellaneous utilities (formatting, timing, parsing, I/O)."""
+
 import re
 import time
 from typing import Dict
 
 import jax.numpy as jnp
+from nerva_jax.matrix_operations import Matrix
 
 
 def set_jax_options():
+    """Configure NumPy print options for readable output."""
     jnp.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=True, linewidth=160)
 
 
-def pp(name: str, x: jnp.ndarray):
+def pp(name: str, x: Matrix):
+    """Print matrix header."""
     if x.ndim == 1:
         print(f'{name} ({x.shape[0]})\n{x}')
     else:
@@ -25,10 +30,12 @@ class StopWatch(object):
         self.start = time.perf_counter()
 
     def seconds(self):
+        """Get elapsed time in seconds since creation or last reset."""
         end = time.perf_counter()
         return end - self.start
 
     def reset(self):
+        """Reset the timer to the current time."""
         self.start = time.perf_counter()
 
 
@@ -38,6 +45,7 @@ class FunctionCall:
         self.arguments = arguments
 
     def has_key(self, key: str) -> bool:
+        """Check if the given key exists in parsed arguments."""
         return key in self.arguments
 
     def get_value(self, key: str) -> str:
@@ -112,11 +120,11 @@ def parse_function_call(text: str) -> FunctionCall:
     error()
 
 
-def load_dict_from_npz(filename: str) -> Dict[str, jnp.ndarray]:
+def load_dict_from_npz(filename: str) -> Dict[str, Matrix]:
     """
     Loads a dictionary from a file in .npz format
     :param filename: a file name
     :return: a dictionary
     """
 
-    return dict(jnp.load(filename, allow_pickle=True))
+    return dict(jnp.load(filename, allow_pickle=False))

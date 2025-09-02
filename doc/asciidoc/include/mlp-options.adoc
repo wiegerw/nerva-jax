@@ -1,6 +1,5 @@
-// tag::mlptool-options[]
-[[mlp_tool]]
-==== {mlptool} command line options
+[[mlp_tool_options]]
+==== Command line options of {mlptool}
 This section gives an overview of the command line interface of the `{mlptool}` tool.
 
 ===== Parameters lists
@@ -8,24 +7,25 @@ This section gives an overview of the command line interface of the `{mlptool}` 
 Some command line options take a list of items as input, for example a list of layers. These items must be separated by semicolons, e.g. `--layers="ReLU;ReLU;Linear"`.
 
 ===== Named parameters
-Some of the items take parameters. For this we use a function call syntax with named parameters, e.g. `AllReLU(alpha=0.3)`. In case that there is only one parameter, the name may be omitted: `AllReLU(0.3)`. If the parameters have default values, they may be omitted. For example, `TReLU` or `TReLU()` is equivalent to `TReLU(al=0,tl=0,ar=0,tr=1)`.
-// end::mlptool-options[]
+Some of the items take parameters. For this we use a function call syntax with named parameters, e.g. `AllReLU(alpha=0.3)`. In case that there is only one parameter, the name may be omitted: `AllReLU(0.3)`. If the parameters have default values, they may be omitted. For example, `SReLU` or `SReLU()` is equivalent to `SReLU(al=0,tl=0,ar=0,tr=1)`.
 
-// tag::general-options[]
 ===== General options
+
 * `-?`, `-h`, `--help`
 Display help information.
+
+ifndef::no-cpp[]
+* `--verbose`, `-v`
+Show verbose output.
+endif::no-cpp[]
+
 * `--debug`, `-d`
 Show debug output. This prints batches, weight matrices, bias vectors, gradients etc.
-// end::general-options[]
 
-// tag::random-generator-options[]
 ===== Random generator options
 * `--seed <value>`
 A seed value for the random generator.
-// end::random-generator-options[]
 
-// tag::layer-configuration-options[]
 ===== Layer configuration options
 * `--layers <value>`
 A semicolon separated list of layers. For example, `--layers=ReLU;AllReLU(0.3);Linear` is used to specify a neural network with three layers with an ReLU, AllReLU and no activation function. The following layers are supported:
@@ -58,8 +58,10 @@ A semicolon separated list of layers. For example, `--layers=ReLU;AllReLU(0.3);L
 |Linear layer with SReLU activation. The default value for the parameters are `al=0, tl=0, ar=0, tr=1`. For these
 values `SReLU` coincides with `ReLU`.
 
+ifndef::no-cpp[]
 |`TReLU(<epsilon>)`
 |Linear layer with trimmed ReLU activation
+endif::no-cpp[]
 
 |`BatchNormalization`
 |Batch normalization layer
@@ -94,9 +96,7 @@ The generator that is used for initializing the weights of the linear layers. Th
 |`Zero`
 |All weights are zero (N.B. This usually doesn't work)
 |===
-// end::layer-configuration-options[]
 
-// tag::training-configuration-options[]
 ===== Training configuration options
 * `--epochs <value>`
 The number of epochs of the training (default: 100).
@@ -176,11 +176,21 @@ Save weights and biases to a dictionary in NumPy `.npz` format.
 The weight matrices are stored with keys `W1,W2,...` and the bias vectors with keys `b1,b2,...`.
 See also
 link:https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html[numpy.lib.format].
-// end::training-configuration-options[]
 
-
-// tag::dataset-options[]
 ===== Dataset options
+
+* `--load-data <value>`
+Load the dataset from a file in NumPy `.npz` format. See
+
+* `--save-data <value>`
+Save the dataset to a file in NumPy `.npz` format. See
+
+ifndef::no-cpp-python[]
+* `--preprocessed <directory>`
+A directory containing datasets named `epoch0.npz`, `epoch1.npz`, ... See <<io>> for information about the `.npz` format. This can for example be used to precompute augmented datasets. A script link:../python/tools/generate_cifar10_augmented_datasets.py[generate_cifar10_augmented_datasets.py] is available for creating augmented CIFAR-10 datasets.
+endif::no-cpp-python[]
+
+ifndef::no-cpp[]
 * `--cifar10 <directory>`
 Specify the directory where the binary version of the
 link:https://www.cs.toronto.edu/~kriz/cifar.html[CIFAR-10] dataset is stored. This is a directory with subdirectory `cifar-10-batches-bin` for the C++ version or `cifar-10-batches-py` for the Python version of the dataset.
@@ -188,18 +198,32 @@ link:https://www.cs.toronto.edu/~kriz/cifar.html[CIFAR-10] dataset is stored. Th
 Specify the directory where the https://en.wikipedia.org/wiki/MNIST_database[MNIST] dataset is stored.
 It should be stored in a file named `mnist.npz`, that can be downloaded https://s3.amazonaws.com/img-datasets/mnist.npz[here].
 
-* `--load-data <value>`
-Load the dataset from a file in NumPy `.npz` format. See
-* `--save-data <value>`
-Save the dataset to a file in NumPy `.npz` format. See
-
 * `--normalize`
 Normalize the dataset.
-* `--preprocessed <directory>`
-A directory containing datasets named `epoch0.npz`, `epoch1.npz`, ... See <<io>> for information about the `.npz` format. This can for example be used to precompute augmented datasets. A script link:../python/tools/generate_cifar10_augmented_datasets.py[generate_cifar10_augmented_datasets.py] is available for creating augmented CIFAR-10 datasets.
-// end::dataset-options[]
 
-// tag::pruning-options[]
+* `--generate-data <name>`
+Specify a synthetic dataset that is generated on the fly. The following datasets are supported:
+|===
+|Specification |Description |Features |Classes
+
+|`checkerboard`
+|A checkerboard pattern, see also link:https://kaifishr.github.io/2021/01/14/micro-mlp.html#checkerboard[checkerboard].
+|2
+|2
+
+|`mini`
+|A dataset with random values.
+|3
+|2
+|===
+
+* `--dataset-size <value>`
+The size of the generated dataset (default: 1000).
+`--save-weights` for information about the format.
+`--load-weights` for information about the format.
+endif::no-cpp[]
+
+ifndef::no-cpp-python[]
 ===== Pruning and growing options
 * `--prune <strategy>`
 The strategy used for pruning sparse weight matrices. The following strategies are supported:
@@ -228,9 +252,7 @@ The strategy used for growing in sparse weight matrices. The following strategie
 * `--grow-weights <value>`
 The weight generation function used for growing weights.
 See `--layer-weights` for supported values. The default value is `Xavier`.
-// end::pruning-options[]
 
-// tag::computation-options[]
 ===== Computation options
 * `--computation <value>`
 The computation mode that is used for backpropagation. This is used for performance measurements. The following computation modes are available:
@@ -256,12 +278,12 @@ A threshold value used to set small elements of weight matrices to zero.
 The number of threads used by the MKL and OMP libraries.
 * `--gradient-step <value>`
 If this value is set, gradient checks are performed with the given step size. This is very slow, and should only be used for debugging.
-// end::computation-options[]
 
-// tag::miscellaneous-options[]
 ===== Miscellaneous options
+
 * `--info`
 Print detailed information about the multilayer perceptron.
+
 * `--timer`
 Print timer messages. The following values are supported:
 |===
@@ -279,6 +301,8 @@ Print timer messages. The following values are supported:
 
 * `--precision <value>`
 The precision used for printing matrix elements.
+
 * `--edgeitems <value>`
 The edgeitems used for printing matrices. This sets the number of border rows and columns that are printed.
-// end::miscellaneous-options[]
+
+endif::no-cpp-python[]

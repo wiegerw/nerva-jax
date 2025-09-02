@@ -2,56 +2,50 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
+"""Weight and bias initialization helpers for linear layers."""
+
 import jax.numpy as jnp
 import numpy as np
+from nerva_jax.matrix_operations import Matrix
 
-Matrix = jnp.ndarray
 
-
-def set_bias_to_zero(b: Matrix):
+def zero_bias(b: Matrix):
+    """Zero bias."""
     return jnp.zeros_like(b)
 
 
-def set_weights_xavier(W: Matrix):
+def xavier_weights(W: Matrix):
+    """Initialize weights using Xavier/Glorot initialization."""
     K, D = W.shape
-    xavier_stddev = np.sqrt(2.0 / (K + D))
+    xavier_stddev = jnp.sqrt(2.0 / (K + D))
     return jnp.array(np.random.randn(K, D) * xavier_stddev)
 
 
-def set_bias_xavier(b: Matrix):
-    return set_bias_to_zero(b)
-
-
-def set_weights_xavier_normalized(W: Matrix):
+def xavier_normalized_weights(W: Matrix):
+    """Initialize weights using normalized Xavier initialization."""
     K, D = W.shape
-    xavier_stddev = np.sqrt(2.0 / (K + D))
+    xavier_stddev = jnp.sqrt(2.0 / (K + D))
     return jnp.array(np.random.randn(K, D) * xavier_stddev)
 
 
-def set_bias_xavier_normalized(b: Matrix):
-    return set_bias_to_zero(b)
-
-
-def set_weights_he(W: Matrix):
+def he_weights(W: Matrix):
+    """Initialize weights using He initialization for ReLU networks."""
     K, D = W.shape
-    he_stddev = np.sqrt(2.0 / D)
+    he_stddev = jnp.sqrt(2.0 / D)
     random_matrix = np.random.randn(K, D)
     return jnp.array(random_matrix * he_stddev)
 
 
-def set_bias_he(b: Matrix):
-    return set_bias_to_zero(b)
-
-
 def set_layer_weights(layer, text: str):
+    """Initialize a layer's parameters according to a named scheme."""
     if text == 'Xavier':
-        layer.W = set_weights_xavier(layer.W)
-        layer.b = set_bias_xavier(layer.b)
+        layer.W = xavier_weights(layer.W)
+        layer.b = zero_bias(layer.b)
     elif text == 'XavierNormalized':
-        layer.W = set_weights_xavier_normalized(layer.W)
-        layer.b = set_bias_xavier_normalized(layer.b)
+        layer.W = xavier_normalized_weights(layer.W)
+        layer.b = zero_bias(layer.b)
     elif text == 'He':
-        layer.W = set_weights_he(layer.W)
-        layer.b = set_bias_he(layer.b)
+        layer.W = he_weights(layer.W)
+        layer.b = zero_bias(layer.b)
     else:
         raise RuntimeError(f'Could not parse weight initializer "{text}"')
