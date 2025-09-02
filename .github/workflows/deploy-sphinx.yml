@@ -22,7 +22,8 @@ jobs:
       - name: Install Sphinx
         run: |
           python -m pip install --upgrade pip
-          python -m pip install sphinx sphinx-rtd-theme jax jax.numpy
+          python -m pip install sphinx sphinx-rtd-theme
+          pip install --upgrade "jax[cpu]"
 
       - name: Build Sphinx HTML
         run: bash doc/build_sphinx_documentation.sh
