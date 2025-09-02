@@ -43,12 +43,16 @@
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
 </ul>
 
         </div>
@@ -79,6 +83,7 @@
 
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
@@ -97,6 +102,7 @@
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
+ | <a href="#X"><strong>X</strong></a>
  | <a href="#Z"><strong>Z</strong></a>
  
 </div>
@@ -104,6 +110,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.ActivationFunction">ActivationFunction (class in nerva_jax.activation_functions)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.ActivationLayer">ActivationLayer (class in nerva_jax.layers)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.All_relu">All_relu() (in module nerva_jax.activation_functions)</a>
 </li>
@@ -122,6 +130,34 @@
   </ul></td>
 </tr></table>
 
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.ActivationLayer.backpropagate">backpropagate() (nerva_jax.layers.ActivationLayer method)</a>
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.BatchNormalizationLayer.backpropagate">(nerva_jax.layers.BatchNormalizationLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.Layer.backpropagate">(nerva_jax.layers.Layer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer.backpropagate">(nerva_jax.layers.LinearLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LogSoftmaxLayer.backpropagate">(nerva_jax.layers.LogSoftmaxLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.SoftmaxLayer.backpropagate">(nerva_jax.layers.SoftmaxLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.SReLULayer.backpropagate">(nerva_jax.layers.SReLULayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.backpropagate">(nerva_jax.multilayer_perceptron.MultilayerPerceptron method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.BatchNormalizationLayer">BatchNormalizationLayer (class in nerva_jax.layers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -135,10 +171,16 @@
 </li>
       <li><a href="_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.CompositeOptimizer">CompositeOptimizer (class in nerva_jax.optimizers)</a>
 </li>
-      <li><a href="_autosummary/nerva_jax.learning_rate.html#nerva_jax.learning_rate.ConstantScheduler">ConstantScheduler (class in nerva_jax.learning_rate)</a>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.compute_accuracy">compute_accuracy() (in module nerva_jax.training)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.compute_loss">compute_loss() (in module nerva_jax.training)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.compute_statistics">compute_statistics() (in module nerva_jax.training)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.learning_rate.html#nerva_jax.learning_rate.ConstantScheduler">ConstantScheduler (class in nerva_jax.learning_rate)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.create_npz_dataloaders">create_npz_dataloaders() (in module nerva_jax.datasets)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.Cross_entropy_loss">Cross_entropy_loss() (in module nerva_jax.loss_functions)</a>
@@ -159,10 +201,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.DataLoader">DataLoader (in module nerva_jax.datasets)</a>
 </li>
-      <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.Diag">Diag() (in module nerva_jax.matrix_operations)</a>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.SGDOptions.debug">debug (nerva_jax.training.SGDOptions attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.Diag">Diag() (in module nerva_jax.matrix_operations)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.diag">diag() (in module nerva_jax.matrix_operations)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.dot">dot() (in module nerva_jax.matrix_operations)</a>
@@ -187,10 +231,26 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.from_one_hot">from_one_hot() (in module nerva_jax.datasets)</a>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.ActivationLayer.feedforward">feedforward() (nerva_jax.layers.ActivationLayer method)</a>
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.BatchNormalizationLayer.feedforward">(nerva_jax.layers.BatchNormalizationLayer method)</a>
 </li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.Layer.feedforward">(nerva_jax.layers.Layer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer.feedforward">(nerva_jax.layers.LinearLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LogSoftmaxLayer.feedforward">(nerva_jax.layers.LogSoftmaxLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.SoftmaxLayer.feedforward">(nerva_jax.layers.SoftmaxLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.feedforward">(nerva_jax.multilayer_perceptron.MultilayerPerceptron method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.from_one_hot">from_one_hot() (in module nerva_jax.datasets)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.FunctionCall">FunctionCall (class in nerva_jax.utilities)</a>
 </li>
   </ul></td>
@@ -245,6 +305,8 @@
 </li>
       <li><a href="_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.FunctionCall.has_key">has_key() (nerva_jax.utilities.FunctionCall method)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.weight_initializers.html#nerva_jax.weight_initializers.he_weights">he_weights() (in module nerva_jax.weight_initializers)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.Hyperbolic_tangent">Hyperbolic_tangent() (in module nerva_jax.activation_functions)</a>
@@ -263,10 +325,18 @@
 </li>
       <li><a href="_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.infer_num_classes">infer_num_classes() (in module nerva_jax.datasets)</a>
 </li>
-      <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.inv_sqrt">inv_sqrt() (in module nerva_jax.matrix_operations)</a>
+      <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.info">info() (nerva_jax.multilayer_perceptron.MultilayerPerceptron method)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.BatchNormalizationLayer.input_size">input_size() (nerva_jax.layers.BatchNormalizationLayer method)</a>
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer.input_size">(nerva_jax.layers.LinearLayer method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.inv_sqrt">inv_sqrt() (in module nerva_jax.matrix_operations)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.is_column_vector">is_column_vector() (in module nerva_jax.matrix_operations)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.is_row_vector">is_row_vector() (in module nerva_jax.matrix_operations)</a>
@@ -297,6 +367,8 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.Layer">Layer (class in nerva_jax.layers)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.Leaky_relu">Leaky_relu() (in module nerva_jax.activation_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.Leaky_relu_gradient">Leaky_relu_gradient() (in module nerva_jax.activation_functions)</a>
@@ -305,16 +377,20 @@
 </li>
       <li><a href="_autosummary/nerva_jax.learning_rate.html#nerva_jax.learning_rate.LearningRateScheduler">LearningRateScheduler (class in nerva_jax.learning_rate)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer">LinearLayer (class in nerva_jax.layers)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.load_dict_from_npz">load_dict_from_npz() (in module nerva_jax.utilities)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.load_weights_and_bias">load_weights_and_bias() (nerva_jax.multilayer_perceptron.MultilayerPerceptron method)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.log">log() (in module nerva_jax.matrix_operations)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.log_sigmoid">log_sigmoid() (in module nerva_jax.matrix_operations)</a>
 </li>
-      <li><a href="_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.log_softmax">log_softmax() (in module nerva_jax.softmax_functions)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.log_softmax">log_softmax() (in module nerva_jax.softmax_functions)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.log_softmax_jacobian">log_softmax_jacobian() (in module nerva_jax.softmax_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.Logistic_cross_entropy_loss">Logistic_cross_entropy_loss() (in module nerva_jax.loss_functions)</a>
@@ -328,6 +404,8 @@
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction">LogisticCrossEntropyLossFunction (class in nerva_jax.loss_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.LogSoftmaxFunction">LogSoftmaxFunction (class in nerva_jax.softmax_functions)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LogSoftmaxLayer">LogSoftmaxLayer (class in nerva_jax.layers)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.LossFunction">LossFunction (class in nerva_jax.loss_functions)</a>
 </li>
@@ -351,22 +429,32 @@
 </li>
         <li><a href="_autosummary/nerva_jax.datasets.html#module-nerva_jax.datasets">nerva_jax.datasets</a>
 </li>
+        <li><a href="_autosummary/nerva_jax.layers.html#module-nerva_jax.layers">nerva_jax.layers</a>
+</li>
         <li><a href="_autosummary/nerva_jax.learning_rate.html#module-nerva_jax.learning_rate">nerva_jax.learning_rate</a>
 </li>
         <li><a href="_autosummary/nerva_jax.loss_functions.html#module-nerva_jax.loss_functions">nerva_jax.loss_functions</a>
 </li>
         <li><a href="_autosummary/nerva_jax.matrix_operations.html#module-nerva_jax.matrix_operations">nerva_jax.matrix_operations</a>
 </li>
+        <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#module-nerva_jax.multilayer_perceptron">nerva_jax.multilayer_perceptron</a>
+</li>
         <li><a href="_autosummary/nerva_jax.optimizers.html#module-nerva_jax.optimizers">nerva_jax.optimizers</a>
 </li>
         <li><a href="_autosummary/nerva_jax.softmax_functions.html#module-nerva_jax.softmax_functions">nerva_jax.softmax_functions</a>
 </li>
+        <li><a href="_autosummary/nerva_jax.training.html#module-nerva_jax.training">nerva_jax.training</a>
+</li>
         <li><a href="_autosummary/nerva_jax.utilities.html#module-nerva_jax.utilities">nerva_jax.utilities</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.weight_initializers.html#module-nerva_jax.weight_initializers">nerva_jax.weight_initializers</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.MomentumOptimizer">MomentumOptimizer (class in nerva_jax.optimizers)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron">MultilayerPerceptron (class in nerva_jax.multilayer_perceptron)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.learning_rate.html#nerva_jax.learning_rate.MultiStepLRScheduler">MultiStepLRScheduler (class in nerva_jax.learning_rate)</a>
 </li>
@@ -408,14 +496,19 @@
 </li>
       </ul></li>
       <li>
+    nerva_jax.layers
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.layers.html#module-nerva_jax.layers">module</a>
+</li>
+      </ul></li>
+      <li>
     nerva_jax.learning_rate
 
       <ul>
         <li><a href="_autosummary/nerva_jax.learning_rate.html#module-nerva_jax.learning_rate">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     nerva_jax.loss_functions
 
@@ -423,11 +516,20 @@
         <li><a href="_autosummary/nerva_jax.loss_functions.html#module-nerva_jax.loss_functions">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     nerva_jax.matrix_operations
 
       <ul>
         <li><a href="_autosummary/nerva_jax.matrix_operations.html#module-nerva_jax.matrix_operations">module</a>
+</li>
+      </ul></li>
+      <li>
+    nerva_jax.multilayer_perceptron
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#module-nerva_jax.multilayer_perceptron">module</a>
 </li>
       </ul></li>
       <li>
@@ -445,10 +547,24 @@
 </li>
       </ul></li>
       <li>
+    nerva_jax.training
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.training.html#module-nerva_jax.training">module</a>
+</li>
+      </ul></li>
+      <li>
     nerva_jax.utilities
 
       <ul>
         <li><a href="_autosummary/nerva_jax.utilities.html#module-nerva_jax.utilities">module</a>
+</li>
+      </ul></li>
+      <li>
+    nerva_jax.weight_initializers
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.weight_initializers.html#module-nerva_jax.weight_initializers">module</a>
 </li>
       </ul></li>
       <li><a href="_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.NesterovOptimizer">NesterovOptimizer (class in nerva_jax.optimizers)</a>
@@ -461,10 +577,22 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.ones">ones() (in module nerva_jax.matrix_operations)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.Layer.optimize">optimize() (nerva_jax.layers.Layer method)</a>
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.optimize">(nerva_jax.multilayer_perceptron.MultilayerPerceptron method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.Optimizer">Optimizer (class in nerva_jax.optimizers)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.BatchNormalizationLayer.output_size">output_size() (nerva_jax.layers.BatchNormalizationLayer method)</a>
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer.output_size">(nerva_jax.layers.LinearLayer method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -477,13 +605,21 @@
 </li>
       <li><a href="_autosummary/nerva_jax.learning_rate.html#nerva_jax.learning_rate.parse_learning_rate">parse_learning_rate() (in module nerva_jax.learning_rate)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.parse_linear_layer">parse_linear_layer() (in module nerva_jax.layers)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.parse_loss_function">parse_loss_function() (in module nerva_jax.loss_functions)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.parse_loss_function">parse_loss_function() (in module nerva_jax.loss_functions)</a>
+      <li><a href="_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.parse_multilayer_perceptron">parse_multilayer_perceptron() (in module nerva_jax.multilayer_perceptron)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.parse_optimizer">parse_optimizer() (in module nerva_jax.optimizers)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.pp">pp() (in module nerva_jax.utilities)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.print_batch_debug_info">print_batch_debug_info() (in module nerva_jax.training)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.print_epoch">print_epoch() (in module nerva_jax.training)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.product">product() (in module nerva_jax.matrix_operations)</a>
 </li>
@@ -523,6 +659,20 @@
 </li>
       <li><a href="_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.set_jax_options">set_jax_options() (in module nerva_jax.utilities)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.weight_initializers.html#nerva_jax.weight_initializers.set_layer_weights">set_layer_weights() (in module nerva_jax.weight_initializers)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.BatchNormalizationLayer.set_optimizer">set_optimizer() (nerva_jax.layers.BatchNormalizationLayer method)</a>
+
+      <ul>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer.set_optimizer">(nerva_jax.layers.LinearLayer method)</a>
+</li>
+        <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.SReLULayer.set_optimizer">(nerva_jax.layers.SReLULayer method)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.LinearLayer.set_weights">set_weights() (nerva_jax.layers.LinearLayer method)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.SGDOptions">SGDOptions (class in nerva_jax.training)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.Sigmoid">Sigmoid() (in module nerva_jax.activation_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.Sigmoid_gradient">Sigmoid_gradient() (in module nerva_jax.activation_functions)</a>
@@ -549,18 +699,20 @@
 </li>
       <li><a href="_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.SoftmaxFunction">SoftmaxFunction (class in nerva_jax.softmax_functions)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.SoftmaxLayer">SoftmaxLayer (class in nerva_jax.layers)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.sqrt">sqrt() (in module nerva_jax.matrix_operations)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.square">square() (in module nerva_jax.matrix_operations)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.Squared_error_loss">Squared_error_loss() (in module nerva_jax.loss_functions)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.squared_error_loss">squared_error_loss() (in module nerva_jax.loss_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.Squared_error_loss_gradient">Squared_error_loss_gradient() (in module nerva_jax.loss_functions)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.squared_error_loss_gradient">squared_error_loss_gradient() (in module nerva_jax.loss_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.loss_functions.html#nerva_jax.loss_functions.SquaredErrorLossFunction">SquaredErrorLossFunction (class in nerva_jax.loss_functions)</a>
@@ -570,6 +722,8 @@
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.Srelu_gradient">Srelu_gradient() (in module nerva_jax.activation_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.activation_functions.html#nerva_jax.activation_functions.SReLUActivation">SReLUActivation (class in nerva_jax.activation_functions)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.layers.html#nerva_jax.layers.SReLULayer">SReLULayer (class in nerva_jax.layers)</a>
 </li>
       <li><a href="_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.stable_log_softmax">stable_log_softmax() (in module nerva_jax.softmax_functions)</a>
 </li>
@@ -599,6 +753,10 @@
 </li>
       <li><a href="_autosummary/nerva_jax.learning_rate.html#nerva_jax.learning_rate.StepBasedScheduler">StepBasedScheduler (class in nerva_jax.learning_rate)</a>
 </li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.stochastic_gradient_descent">stochastic_gradient_descent() (in module nerva_jax.training)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.stochastic_gradient_descent_plain">stochastic_gradient_descent_plain() (in module nerva_jax.training)</a>
+</li>
       <li><a href="_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.StopWatch">StopWatch (class in nerva_jax.utilities)</a>
 </li>
   </ul></td>
@@ -612,6 +770,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.to_one_hot">to_one_hot() (in module nerva_jax.datasets)</a>
+</li>
+      <li><a href="_autosummary/nerva_jax.training.html#nerva_jax.training.train">train() (in module nerva_jax.training)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -642,8 +802,24 @@
   </ul></td>
 </tr></table>
 
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.weight_initializers.html#nerva_jax.weight_initializers.xavier_normalized_weights">xavier_normalized_weights() (in module nerva_jax.weight_initializers)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.weight_initializers.html#nerva_jax.weight_initializers.xavier_weights">xavier_weights() (in module nerva_jax.weight_initializers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="Z">Z</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_jax.weight_initializers.html#nerva_jax.weight_initializers.zero_bias">zero_bias() (in module nerva_jax.weight_initializers)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.zeros">zeros() (in module nerva_jax.matrix_operations)</a>
 </li>

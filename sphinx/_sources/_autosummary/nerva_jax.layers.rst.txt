@@ -1,0 +1,24 @@
+nerva\_jax.layers
+=================
+
+.. automodule:: nerva_jax.layers
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse_linear_layer
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ActivationLayer
+      BatchNormalizationLayer
+      Layer
+      LinearLayer
+      LogSoftmaxLayer
+      SReLULayer
+      SoftmaxLayer
+   

@@ -19,7 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="nerva_jax.softmax_functions" href="nerva_jax.softmax_functions.html" /> 
+    <link rel="next" title="nerva_jax.weight_initializers" href="nerva_jax.weight_initializers.html" />
+    <link rel="prev" title="nerva_jax.training" href="nerva_jax.training.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,11 +46,14 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.utilities</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.set_jax_options"><code class="docutils literal notranslate"><span class="pre">set_jax_options()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.pp"><code class="docutils literal notranslate"><span class="pre">pp()</span></code></a></li>
@@ -69,6 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz"><code class="docutils literal notranslate"><span class="pre">load_dict_from_npz()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
 </ul>
 
         </div>
@@ -103,13 +108,13 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz" title="nerva_jax.utilities.load_dict_from_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict_from_npz</span></code></a>(filename)</p></td>
-<td><p>Loads a dictionary from a file in .npz format :param filename: a file name :return: a dictionary</p></td>
+<td><p>Loads a dictionary from a file in .npz format :param filename: a file name :return: a dictionary with tensors</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.parse_function_call" title="nerva_jax.utilities.parse_function_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_function_call</span></code></a>(text)</p></td>
 <td><p>Parse a string of the shape <cite>NAME(key1=value1, key2=value2, ...)</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp" title="nerva_jax.utilities.pp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp</span></code></a>(name, x)</p></td>
-<td><p>Print matrix header.</p></td>
+<td><p>Pretty-print a tensor with name and shape info.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.set_jax_options" title="nerva_jax.utilities.set_jax_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_jax_options</span></code></a>()</p></td>
 <td><p>Configure NumPy print options for readable output.</p></td>
@@ -136,7 +141,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_jax.utilities.pp">
 <span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#pp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.pp" title="Link to this definition"></a></dt>
-<dd><p>Print matrix header.</p>
+<dd><p>Pretty-print a tensor with name and shape info.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -197,7 +202,7 @@ If there is only one parameter, it is allowed to pass <cite>NAME(value)</cite> i
 <span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">load_dict_from_npz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">jax.numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#load_dict_from_npz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.load_dict_from_npz" title="Link to this definition"></a></dt>
 <dd><p>Loads a dictionary from a file in .npz format
 :param filename: a file name
-:return: a dictionary</p>
+:return: a dictionary with tensors</p>
 </dd></dl>
 
 </section>
@@ -206,7 +211,8 @@ If there is only one parameter, it is allowed to pass <cite>NAME(value)</cite> i
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="nerva_jax.softmax_functions.html" class="btn btn-neutral float-left" title="nerva_jax.softmax_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.training.html" class="btn btn-neutral float-left" title="nerva_jax.training" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.weight_initializers.html" class="btn btn-neutral float-right" title="nerva_jax.weight_initializers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,0 +1,16 @@
+nerva\_jax.weight\_initializers
+===============================
+
+.. automodule:: nerva_jax.weight_initializers
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      he_weights
+      set_layer_weights
+      xavier_normalized_weights
+      xavier_weights
+      zero_bias
+   

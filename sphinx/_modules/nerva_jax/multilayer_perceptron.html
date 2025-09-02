@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.multilayer_perceptron &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.layers.html">nerva_jax.layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.training.html">nerva_jax.training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nerva_jax.multilayer_perceptron</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nerva_jax.multilayer_perceptron</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 Wieger Wesselink.</span>
+<span class="c1"># Distributed under the Boost Software License, Version 1.0.</span>
+<span class="c1"># (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)</span>
+
+<span class="sd">&quot;&quot;&quot;A simple multilayer perceptron (MLP) class.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">BatchNormalizationLayer</span><span class="p">,</span> <span class="n">LinearLayer</span><span class="p">,</span> <span class="n">parse_linear_layer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dict_from_npz</span><span class="p">,</span> <span class="n">pp</span>
+
+
+<div class="viewcode-block" id="MultilayerPerceptron">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultilayerPerceptron</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multilayer perceptron</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">layers</span><span class="p">:</span>
+            <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">layers</span>
+
+<div class="viewcode-block" id="MultilayerPerceptron.feedforward">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.feedforward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">feedforward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">X</span></div>
+
+
+<div class="viewcode-block" id="MultilayerPerceptron.backpropagate">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.backpropagate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backpropagate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">DY</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">):</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+            <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">DX</span></div>
+
+
+<div class="viewcode-block" id="MultilayerPerceptron.optimize">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.optimize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerPerceptron.info">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">LinearLayer</span><span class="p">):</span>
+                <span class="n">pp</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;W</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+                <span class="n">pp</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;b</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="MultilayerPerceptron.load_weights_and_bias">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.load_weights_and_bias">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_weights_and_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads the weights and biases from a file in .npz format</span>
+
+<span class="sd">        The weight matrices are stored using the keys W1, W2, ... and the bias vectors using the keys b1, b2, ...</span>
+<span class="sd">        :param filename: the name of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Loading weights and bias from </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">load_dict_from_npz</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">LinearLayer</span><span class="p">):</span>
+                <span class="n">layer</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;W</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+                <span class="n">layer</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;b</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="parse_multilayer_perceptron">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.parse_multilayer_perceptron">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_multilayer_perceptron</span><span class="p">(</span><span class="n">layer_specifications</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                                <span class="n">linear_layer_sizes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                                <span class="n">optimizers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                                <span class="n">linear_layer_weight_initializers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultilayerPerceptron</span><span class="p">:</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct an MLP from textual layer specs and size/optimizer configs.</span>
+
+<span class="sd">    layer_specifications: e.g. [&quot;ReLU&quot;, &quot;BatchNormalization&quot;, &quot;LogSoftmax&quot;]</span>
+<span class="sd">    linear_layer_sizes: e.g. [784, 128, 10] for two linear layers</span>
+<span class="sd">    optimizers: one per layer (including BatchNormalization)</span>
+<span class="sd">    linear_layer_weight_initializers: one per linear layer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">linear_layer_weight_initializers</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">linear_layer_sizes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">linear_layer_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">optimizer_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">linear_layer_sizes</span><span class="p">[</span><span class="n">linear_layer_index</span><span class="p">]</span>  <span class="c1"># the input size of the current layer</span>
+
+    <span class="k">for</span> <span class="n">specification</span> <span class="ow">in</span> <span class="n">layer_specifications</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">specification</span> <span class="o">==</span> <span class="s1">&#39;BatchNormalization&#39;</span><span class="p">:</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">BatchNormalizationLayer</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+            <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizers</span><span class="p">[</span><span class="n">optimizer_index</span><span class="p">]</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="p">)</span>
+            <span class="n">optimizer_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">K</span> <span class="o">=</span> <span class="n">linear_layer_sizes</span><span class="p">[</span><span class="n">linear_layer_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># the output size of the layer</span>
+            <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizers</span><span class="p">[</span><span class="n">optimizer_index</span><span class="p">]</span>
+            <span class="n">weight_initializer</span> <span class="o">=</span> <span class="n">linear_layer_weight_initializers</span><span class="p">[</span><span class="n">linear_layer_index</span><span class="p">]</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">parse_linear_layer</span><span class="p">(</span><span class="n">specification</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">weight_initializer</span><span class="p">)</span>
+            <span class="n">optimizer_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">linear_layer_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">K</span>
+        <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">MultilayerPerceptron</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.layers &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nerva_jax.learning_rate" href="nerva_jax.learning_rate.html" />
+    <link rel="prev" title="nerva_jax.datasets" href="nerva_jax.datasets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.layers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.Layer"><code class="docutils literal notranslate"><span class="pre">Layer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.Layer.feedforward"><code class="docutils literal notranslate"><span class="pre">Layer.feedforward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.Layer.backpropagate"><code class="docutils literal notranslate"><span class="pre">Layer.backpropagate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.Layer.optimize"><code class="docutils literal notranslate"><span class="pre">Layer.optimize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.LinearLayer"><code class="docutils literal notranslate"><span class="pre">LinearLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LinearLayer.feedforward"><code class="docutils literal notranslate"><span class="pre">LinearLayer.feedforward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LinearLayer.backpropagate"><code class="docutils literal notranslate"><span class="pre">LinearLayer.backpropagate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LinearLayer.input_size"><code class="docutils literal notranslate"><span class="pre">LinearLayer.input_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LinearLayer.output_size"><code class="docutils literal notranslate"><span class="pre">LinearLayer.output_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LinearLayer.set_optimizer"><code class="docutils literal notranslate"><span class="pre">LinearLayer.set_optimizer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LinearLayer.set_weights"><code class="docutils literal notranslate"><span class="pre">LinearLayer.set_weights()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.ActivationLayer"><code class="docutils literal notranslate"><span class="pre">ActivationLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.ActivationLayer.feedforward"><code class="docutils literal notranslate"><span class="pre">ActivationLayer.feedforward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.ActivationLayer.backpropagate"><code class="docutils literal notranslate"><span class="pre">ActivationLayer.backpropagate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.SReLULayer"><code class="docutils literal notranslate"><span class="pre">SReLULayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.SReLULayer.backpropagate"><code class="docutils literal notranslate"><span class="pre">SReLULayer.backpropagate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.SReLULayer.set_optimizer"><code class="docutils literal notranslate"><span class="pre">SReLULayer.set_optimizer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.SoftmaxLayer"><code class="docutils literal notranslate"><span class="pre">SoftmaxLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.SoftmaxLayer.feedforward"><code class="docutils literal notranslate"><span class="pre">SoftmaxLayer.feedforward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.SoftmaxLayer.backpropagate"><code class="docutils literal notranslate"><span class="pre">SoftmaxLayer.backpropagate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.LogSoftmaxLayer"><code class="docutils literal notranslate"><span class="pre">LogSoftmaxLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LogSoftmaxLayer.feedforward"><code class="docutils literal notranslate"><span class="pre">LogSoftmaxLayer.feedforward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.LogSoftmaxLayer.backpropagate"><code class="docutils literal notranslate"><span class="pre">LogSoftmaxLayer.backpropagate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer"><code class="docutils literal notranslate"><span class="pre">BatchNormalizationLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer.feedforward"><code class="docutils literal notranslate"><span class="pre">BatchNormalizationLayer.feedforward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer.backpropagate"><code class="docutils literal notranslate"><span class="pre">BatchNormalizationLayer.backpropagate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer.input_size"><code class="docutils literal notranslate"><span class="pre">BatchNormalizationLayer.input_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer.output_size"><code class="docutils literal notranslate"><span class="pre">BatchNormalizationLayer.output_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer.set_optimizer"><code class="docutils literal notranslate"><span class="pre">BatchNormalizationLayer.set_optimizer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.layers.parse_linear_layer"><code class="docutils literal notranslate"><span class="pre">parse_linear_layer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.training.html">nerva_jax.training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_jax.html">nerva_jax</a></li>
+      <li class="breadcrumb-item active">nerva_jax.layers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nerva_jax.layers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nerva_jax.layers">
+<span id="nerva-jax-layers"></span><h1>nerva_jax.layers<a class="headerlink" href="#module-nerva_jax.layers" title="Link to this heading"></a></h1>
+<p>Neural network layers used by the MultilayerPerceptron class.</p>
+<p>Layers in this module operate on matrices with row layout (each row is a sample).
+They expose a minimal interface with feedforward, backpropagate and optimize.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.layers.parse_linear_layer" title="nerva_jax.layers.parse_linear_layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_linear_layer</span></code></a>(text, D, K, optimizer, ...)</p></td>
+<td><p>Parse a textual layer spec and create a configured Layer instance.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.layers.ActivationLayer" title="nerva_jax.layers.ActivationLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ActivationLayer</span></code></a>(D, K, act)</p></td>
+<td><p>Linear layer followed by a pointwise activation function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.layers.BatchNormalizationLayer" title="nerva_jax.layers.BatchNormalizationLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatchNormalizationLayer</span></code></a>(D)</p></td>
+<td><p>Batch normalization layer with per-feature gamma and beta.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.layers.Layer" title="nerva_jax.layers.Layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Layer</span></code></a>()</p></td>
+<td><p>Base class for layers of a neural network with data in row layout (each row is a sample: shape (N, D)).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.layers.LinearLayer" title="nerva_jax.layers.LinearLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearLayer</span></code></a>(D, K)</p></td>
+<td><p>Linear layer: Y = X W^T + b.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.layers.LogSoftmaxLayer" title="nerva_jax.layers.LogSoftmaxLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogSoftmaxLayer</span></code></a>(D, K)</p></td>
+<td><p>Linear layer followed by log_softmax over the last dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.layers.SReLULayer" title="nerva_jax.layers.SReLULayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SReLULayer</span></code></a>(D, K, act)</p></td>
+<td><p>Activation layer with SReLU and trainable activation parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.layers.SoftmaxLayer" title="nerva_jax.layers.SoftmaxLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SoftmaxLayer</span></code></a>(D, K)</p></td>
+<td><p>Linear layer followed by softmax over the last dimension.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.Layer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.Layer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for layers of a neural network with data in row layout
+(each row is a sample: shape (N, D)).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.Layer.feedforward">
+<span class="sig-name descname"><span class="pre">feedforward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#Layer.feedforward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.Layer.feedforward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.Layer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#Layer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.Layer.backpropagate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.Layer.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#Layer.optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.Layer.optimize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">LinearLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.layers.Layer" title="nerva_jax.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
+<p>Linear layer: Y = X W^T + b.</p>
+<p>Shapes: X (N, D) -&gt; Y (N, K), W (K, D), b (K,).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer.feedforward">
+<span class="sig-name descname"><span class="pre">feedforward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer.feedforward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer.feedforward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer.backpropagate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer.input_size">
+<span class="sig-name descname"><span class="pre">input_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer.input_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer.input_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer.output_size">
+<span class="sig-name descname"><span class="pre">output_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer.output_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer.output_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer.set_optimizer">
+<span class="sig-name descname"><span class="pre">set_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer.set_optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer.set_optimizer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LinearLayer.set_weights">
+<span class="sig-name descname"><span class="pre">set_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight_initializer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LinearLayer.set_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LinearLayer.set_weights" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.ActivationLayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">ActivationLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nerva_jax.activation_functions.html#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><span class="pre">ActivationFunction</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#ActivationLayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.ActivationLayer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.layers.LinearLayer" title="nerva_jax.layers.LinearLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearLayer</span></code></a></p>
+<p>Linear layer followed by a pointwise activation function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.ActivationLayer.feedforward">
+<span class="sig-name descname"><span class="pre">feedforward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#ActivationLayer.feedforward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.ActivationLayer.feedforward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.ActivationLayer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#ActivationLayer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.ActivationLayer.backpropagate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.SReLULayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">SReLULayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nerva_jax.activation_functions.html#nerva_jax.activation_functions.SReLUActivation" title="nerva_jax.activation_functions.SReLUActivation"><span class="pre">SReLUActivation</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#SReLULayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.SReLULayer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.layers.ActivationLayer" title="nerva_jax.layers.ActivationLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationLayer</span></code></a></p>
+<p>Activation layer with SReLU and trainable activation parameters.</p>
+<p>In addition to W and b, this layer optimizes SReLU’s (al, tl, ar, tr).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.SReLULayer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#SReLULayer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.SReLULayer.backpropagate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.SReLULayer.set_optimizer">
+<span class="sig-name descname"><span class="pre">set_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#SReLULayer.set_optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.SReLULayer.set_optimizer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.SoftmaxLayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">SoftmaxLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#SoftmaxLayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.SoftmaxLayer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.layers.LinearLayer" title="nerva_jax.layers.LinearLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearLayer</span></code></a></p>
+<p>Linear layer followed by softmax over the last dimension.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.SoftmaxLayer.feedforward">
+<span class="sig-name descname"><span class="pre">feedforward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#SoftmaxLayer.feedforward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.SoftmaxLayer.feedforward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.SoftmaxLayer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#SoftmaxLayer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.SoftmaxLayer.backpropagate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.LogSoftmaxLayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">LogSoftmaxLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LogSoftmaxLayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LogSoftmaxLayer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.layers.LinearLayer" title="nerva_jax.layers.LinearLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearLayer</span></code></a></p>
+<p>Linear layer followed by log_softmax over the last dimension.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LogSoftmaxLayer.feedforward">
+<span class="sig-name descname"><span class="pre">feedforward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LogSoftmaxLayer.feedforward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LogSoftmaxLayer.feedforward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.LogSoftmaxLayer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#LogSoftmaxLayer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.LogSoftmaxLayer.backpropagate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.layers.BatchNormalizationLayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">BatchNormalizationLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#BatchNormalizationLayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.BatchNormalizationLayer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.layers.Layer" title="nerva_jax.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
+<p>Batch normalization layer with per-feature gamma and beta.</p>
+<p>Normalizes inputs across the batch using per-feature statistics.
+Shapes: X (N, D) -&gt; Y (N, D), gamma/beta (D,).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.BatchNormalizationLayer.feedforward">
+<span class="sig-name descname"><span class="pre">feedforward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#BatchNormalizationLayer.feedforward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.BatchNormalizationLayer.feedforward" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.BatchNormalizationLayer.backpropagate">
+<span class="sig-name descname"><span class="pre">backpropagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DY</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#BatchNormalizationLayer.backpropagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.BatchNormalizationLayer.backpropagate" title="Link to this definition"></a></dt>
+<dd><p>Compute gradients for gamma/beta and propagate DX through BN.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.BatchNormalizationLayer.input_size">
+<span class="sig-name descname"><span class="pre">input_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#BatchNormalizationLayer.input_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.BatchNormalizationLayer.input_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.BatchNormalizationLayer.output_size">
+<span class="sig-name descname"><span class="pre">output_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#BatchNormalizationLayer.output_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.BatchNormalizationLayer.output_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.layers.BatchNormalizationLayer.set_optimizer">
+<span class="sig-name descname"><span class="pre">set_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/layers.html#BatchNormalizationLayer.set_optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.BatchNormalizationLayer.set_optimizer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.layers.parse_linear_layer">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.layers.</span></span><span class="sig-name descname"><span class="pre">parse_linear_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_initializer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#nerva_jax.layers.Layer" title="nerva_jax.layers.Layer"><span class="pre">Layer</span></a></span></span><a class="reference internal" href="../_modules/nerva_jax/layers.html#parse_linear_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.layers.parse_linear_layer" title="Link to this definition"></a></dt>
+<dd><p>Parse a textual layer spec and create a configured Layer instance.</p>
+<p>Supports Linear, Softmax, LogSoftmax, activation names (e.g. ReLU), and
+SReLU(…). The optimizer and weight initializer are applied.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nerva_jax.datasets.html" class="btn btn-neutral float-left" title="nerva_jax.datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.learning_rate.html" class="btn btn-neutral float-right" title="nerva_jax.learning_rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

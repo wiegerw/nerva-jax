@@ -43,12 +43,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
 </ul>
 
         </div>
@@ -101,7 +105,7 @@
 <div class="viewcode-block" id="pp">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.utilities.html#nerva_jax.utilities.pp">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pp</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print matrix header.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pretty-print a tensor with name and shape info.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -237,7 +241,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Loads a dictionary from a file in .npz format</span>
 <span class="sd">    :param filename: a file name</span>
-<span class="sd">    :return: a dictionary</span>
+<span class="sd">    :return: a dictionary with tensors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span></div>

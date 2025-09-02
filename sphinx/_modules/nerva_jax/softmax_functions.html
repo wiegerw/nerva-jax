@@ -43,12 +43,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
 </ul>
 
         </div>
@@ -88,6 +92,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Diag</span><span class="p">,</span> <span class="n">column_repeat</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">is_row_vector</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">reciprocal</span><span class="p">,</span> \
     <span class="n">row_repeat</span><span class="p">,</span> <span class="n">rows_max</span><span class="p">,</span> <span class="n">rows_sum</span><span class="p">,</span> <span class="n">Matrix</span>
+
 
 <div class="viewcode-block" id="softmax">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.softmax">[docs]</a>
@@ -166,9 +171,12 @@
     <span class="k">return</span> <span class="n">log_softmax_jacobian</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
+
 <div class="viewcode-block" id="SoftmaxFunction">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.SoftmaxFunction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SoftmaxFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callable implementing row-wise softmax and its Jacobian.&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
@@ -183,6 +191,8 @@
 <div class="viewcode-block" id="StableSoftmaxFunction">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.StableSoftmaxFunction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StableSoftmaxFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callable implementing numerically stable row-wise softmax and its Jacobian.&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">stable_softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
@@ -197,6 +207,8 @@
 <div class="viewcode-block" id="LogSoftmaxFunction">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.LogSoftmaxFunction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LogSoftmaxFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callable implementing row-wise log-softmax and its Jacobian.&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">log_softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
@@ -211,6 +223,8 @@
 <div class="viewcode-block" id="StableLogSoftmaxFunction">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.softmax_functions.html#nerva_jax.softmax_functions.StableLogSoftmaxFunction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StableLogSoftmaxFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callable implementing numerically stable row-wise log-softmax and its Jacobian.&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">stable_log_softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 

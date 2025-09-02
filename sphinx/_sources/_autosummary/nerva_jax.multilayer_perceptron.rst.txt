@@ -1,0 +1,18 @@
+nerva\_jax.multilayer\_perceptron
+=================================
+
+.. automodule:: nerva_jax.multilayer_perceptron
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse_multilayer_perceptron
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      MultilayerPerceptron
+   
