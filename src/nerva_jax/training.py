@@ -30,6 +30,7 @@ def print_epoch(epoch, lr, loss, train_accuracy, test_accuracy, elapsed):
           f'time: {elapsed:.8f}s'
          )
 
+
 def compute_accuracy(M: MultilayerPerceptron, data_loader: DataLoader):
     """Compute mean classification accuracy for a model over a data loader."""
     N = len(data_loader.dataset)  # N is the number of examples
@@ -76,12 +77,12 @@ def print_batch_debug_info(epoch: int, batch_idx: int,
 
 # tag::sgd[]
 def stochastic_gradient_descent(M: MultilayerPerceptron,
-        epochs: int,
-        loss: LossFunction,
-        learning_rate: LearningRateScheduler,
-        train_loader: DataLoader,
-        test_loader: DataLoader
-       ):
+                                epochs: int,
+                                loss: LossFunction,
+                                learning_rate: LearningRateScheduler,
+                                train_loader: DataLoader,
+                                test_loader: DataLoader
+                                ):
 # end::sgd[]
     """
     Run a simple stochastic gradient descent (SGD) training loop using PyTorch data loaders.
@@ -189,12 +190,11 @@ def stochastic_gradient_descent_plain(M: MultilayerPerceptron,
             batch = I[k * batch_size: (k + 1) * batch_size]
             X = Xtrain[batch, :]   # shape (batch_size, input_dim)
 
-            # Handle labels depending on format
+            # Convert labels to one-hot if needed
             if Ttrain.ndim == 2 and Ttrain.shape[1] > 1:
                 # already one-hot encoded
                 T = Ttrain[batch, :]
             else:
-                # class indices -> convert to one-hot of width equal to output size
                 T = to_one_hot(Ttrain[batch], num_classes)
 
             Y = M.feedforward(X)

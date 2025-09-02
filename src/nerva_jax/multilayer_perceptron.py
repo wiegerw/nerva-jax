@@ -68,10 +68,10 @@ def parse_multilayer_perceptron(layer_specifications: List[str],
 
     """Construct an MLP from textual layer specs and size/optimizer configs.
 
-layer_specifications: e.g. ["ReLU", "BatchNormalization", "LogSoftmax"]
-linear_layer_sizes: e.g. [784, 128, 10] for two linear layers
-optimizers: one per layer (including BatchNormalization)
-linear_layer_weight_initializers: one per linear layer
+    layer_specifications: e.g. ["ReLU", "BatchNormalization", "LogSoftmax"]
+    linear_layer_sizes: e.g. [784, 128, 10] for two linear layers
+    optimizers: one per layer (including BatchNormalization)
+    linear_layer_weight_initializers: one per linear layer
     """
     assert len(linear_layer_weight_initializers) == len(linear_layer_sizes) - 1
     layers = []

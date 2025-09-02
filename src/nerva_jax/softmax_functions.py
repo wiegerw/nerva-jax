@@ -11,6 +11,7 @@ import jax.numpy as jnp
 from nerva_jax.matrix_operations import Diag, column_repeat, exp, hadamard, identity, is_row_vector, log, reciprocal, \
     row_repeat, rows_max, rows_sum, Matrix
 
+
 def softmax(X: Matrix) -> Matrix:
     """Row-wise softmax with explicit normalization (numerically unsafe)."""
     N, D = X.shape
@@ -64,7 +65,10 @@ def stable_log_softmax_jacobian(x: Matrix) -> Matrix:
     """Jacobian matrix of stable log_softmax (same as log_softmax)."""
     return log_softmax_jacobian(x)
 
+
 class SoftmaxFunction(object):
+    """Callable implementing row-wise softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return softmax(X)
 
@@ -73,6 +77,8 @@ class SoftmaxFunction(object):
 
 
 class StableSoftmaxFunction(object):
+    """Callable implementing numerically stable row-wise softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return stable_softmax(X)
 
@@ -81,6 +87,8 @@ class StableSoftmaxFunction(object):
 
 
 class LogSoftmaxFunction(object):
+    """Callable implementing row-wise log-softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return log_softmax(X)
 
@@ -89,6 +97,8 @@ class LogSoftmaxFunction(object):
 
 
 class StableLogSoftmaxFunction(object):
+    """Callable implementing numerically stable row-wise log-softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return stable_log_softmax(X)
 

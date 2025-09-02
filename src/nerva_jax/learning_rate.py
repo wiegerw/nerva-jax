@@ -96,9 +96,9 @@ class ExponentialScheduler(LearningRateScheduler):
 def parse_learning_rate(text: str) -> LearningRateScheduler:
     """Parse a textual learning-rate scheduler specification.
 
-Accepted forms include Constant(lr), TimeBased(lr,decay),
-StepBased(lr,drop_rate,change_rate), MultiStepLR(lr;milestones;gamma)
-and Exponential(lr,change_rate).
+    Accepted forms include Constant(lr), TimeBased(lr,decay),
+    StepBased(lr,drop_rate,change_rate), MultiStepLR(lr;milestones;gamma)
+    and Exponential(lr,change_rate).
     """
     try:
         if text.startswith('Constant'):

@@ -18,7 +18,7 @@ def set_jax_options():
 
 
 def pp(name: str, x: Matrix):
-    """Print matrix header."""
+    """Pretty-print a tensor with name and shape info."""
     if x.ndim == 1:
         print(f'{name} ({x.shape[0]})\n{x}')
     else:
@@ -124,7 +124,7 @@ def load_dict_from_npz(filename: str) -> Dict[str, Matrix]:
     """
     Loads a dictionary from a file in .npz format
     :param filename: a file name
-    :return: a dictionary
+    :return: a dictionary with tensors
     """
 
     return dict(jnp.load(filename, allow_pickle=False))

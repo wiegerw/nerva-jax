@@ -166,9 +166,9 @@ class SReLUActivation(ActivationFunction):
 def parse_activation(text: str) -> ActivationFunction:
     """Parse a textual activation specification into an ActivationFunction.
 
-Examples include "ReLU", "Sigmoid", "HyperbolicTangent",
-"AllReLU(alpha=0.1)", "LeakyReLU(alpha=0.1)", and
-"SReLU(al=0, tl=0, ar=0, tr=1)".
+    Examples include "ReLU", "Sigmoid", "HyperbolicTangent",
+    "AllReLU(alpha=0.1)", "LeakyReLU(alpha=0.1)", and
+    "SReLU(al=0, tl=0, ar=0, tr=1)".
     """
     try:
         func = parse_function_call(text)

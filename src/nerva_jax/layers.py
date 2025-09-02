@@ -303,8 +303,8 @@ def parse_linear_layer(text: str,
                       ) -> Layer:
     """Parse a textual layer spec and create a configured Layer instance.
 
-Supports Linear, Softmax, LogSoftmax, activation names (e.g. ReLU), and
-SReLU(...). The optimizer and weight initializer are applied.
+    Supports Linear, Softmax, LogSoftmax, activation names (e.g. ReLU), and
+    SReLU(...). The optimizer and weight initializer are applied.
     """
     if text == 'Linear':
         layer = LinearLayer(D, K)

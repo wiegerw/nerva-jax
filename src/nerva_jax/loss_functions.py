@@ -228,8 +228,8 @@ class NegativeLogLikelihoodLossFunction(LossFunction):
 def parse_loss_function(text: str) -> LossFunction:
     """Parse a loss function name into a LossFunction instance.
 
-Supported names: SquaredError, CrossEntropy, SoftmaxCrossEntropy,
-LogisticCrossEntropy, NegativeLogLikelihood.
+    Supported names: SquaredError, CrossEntropy, SoftmaxCrossEntropy,
+    LogisticCrossEntropy, NegativeLogLikelihood.
     """
     if text == "SquaredError":
         return SquaredErrorLossFunction()
