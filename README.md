@@ -55,7 +55,15 @@ See the [nerva meta-repo](https://github.com/wiegerw/nerva) for an overview of a
 
 ### Installation
 
+The library can be installed in two ways: from the source repository or from the Python Package Index (PyPI).
+
 ```bash
+# Install from the local repository
+pip install .
+```
+
+```bash
+# Install directly from PyPI
 pip install nerva-jax
 ```
 
