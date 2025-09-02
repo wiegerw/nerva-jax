@@ -1,0 +1,23 @@
+nerva\_jax.datasets
+===================
+
+.. automodule:: nerva_jax.datasets
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_npz_dataloaders
+      from_one_hot
+      infer_num_classes
+      max_
+      to_one_hot
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DataLoader
+      MemoryDataLoader
+   

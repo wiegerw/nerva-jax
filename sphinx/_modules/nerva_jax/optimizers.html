@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.optimizers &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nerva_jax.optimizers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nerva_jax.optimizers</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 Wieger Wesselink.</span>
+<span class="c1"># Distributed under the Boost Software License, Version 1.0.</span>
+<span class="c1"># (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)</span>
+
+<span class="sd">&quot;&quot;&quot;Optimizers used to adjusts the model&#39;s parameters based on the gradients.</span>
+
+<span class="sd">   Only SGD, Momentum and Nesterov variants are provided. The parser creates</span>
+<span class="sd">   factory callables from textual specifications like &quot;Momentum(mu=0.9)&quot;.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_function_call</span>
+
+
+<div class="viewcode-block" id="Optimizer">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.Optimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Optimizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Minimal optimizer interface used by layers to update parameters.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Optimizer.update">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.Optimizer.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CompositeOptimizer">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.CompositeOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CompositeOptimizer</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Combines multiple optimizers to update different parameter groups.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optimizer</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizers</span> <span class="o">=</span> <span class="n">optimizers</span>
+
+<div class="viewcode-block" id="CompositeOptimizer.update">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.CompositeOptimizer.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update all contained optimizers with the given learning rate.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">optimizer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizers</span><span class="p">:</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GradientDescentOptimizer">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.GradientDescentOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GradientDescentOptimizer</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Standard gradient descent optimizer: x -= eta * grad.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Store the names of the x and Dx attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span> <span class="o">=</span> <span class="n">attr_x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_Dx</span> <span class="o">=</span> <span class="n">attr_Dx</span>
+
+<div class="viewcode-block" id="GradientDescentOptimizer.update">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.GradientDescentOptimizer.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply gradient descent update step.&quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">)</span>
+        <span class="n">Dx</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_Dx</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">Dx</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MomentumOptimizer">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.MomentumOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MomentumOptimizer</span><span class="p">(</span><span class="n">GradientDescentOptimizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gradient descent with momentum for accelerated convergence.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MomentumOptimizer.update">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.MomentumOptimizer.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply momentum update step.&quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">)</span>
+        <span class="n">Dx</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_Dx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span> <span class="o">-</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">Dx</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="NesterovOptimizer">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.NesterovOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NesterovOptimizer</span><span class="p">(</span><span class="n">MomentumOptimizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Nesterov accelerated gradient descent optimizer.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NesterovOptimizer.update">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.NesterovOptimizer.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply Nesterov accelerated gradient update step.&quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">)</span>
+        <span class="n">Dx</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_Dx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_x_prev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span> <span class="o">-</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">Dx</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_x</span> <span class="o">-</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">Dx</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="parse_optimizer">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.optimizers.html#nerva_jax.optimizers.parse_optimizer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_optimizer</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Optimizer</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a textual optimizer specification into a factory function.</span>
+
+<span class="sd">    Returns a callable that takes (x, Dx) and produces an Optimizer.</span>
+<span class="sd">    Supported names: GradientDescent, Momentum(mu=...), Nesterov(mu=...).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">parse_function_call</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;GradientDescent&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">:</span> <span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Momentum&#39;</span><span class="p">:</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">:</span> <span class="n">MomentumOptimizer</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Nesterov&#39;</span><span class="p">:</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">:</span> <span class="n">NesterovOptimizer</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr_x</span><span class="p">,</span> <span class="n">attr_Dx</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not parse optimizer &quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

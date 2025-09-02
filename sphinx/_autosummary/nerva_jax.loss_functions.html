@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.loss_functions &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nerva_jax.matrix_operations" href="nerva_jax.matrix_operations.html" />
+    <link rel="prev" title="nerva_jax.learning_rate" href="nerva_jax.learning_rate.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.loss_functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.squared_error_loss"><code class="docutils literal notranslate"><span class="pre">squared_error_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.squared_error_loss_gradient"><code class="docutils literal notranslate"><span class="pre">squared_error_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Squared_error_loss"><code class="docutils literal notranslate"><span class="pre">Squared_error_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Squared_error_loss_gradient"><code class="docutils literal notranslate"><span class="pre">Squared_error_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">Cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">Cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">softmax_cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">softmax_cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient_one_hot"><code class="docutils literal notranslate"><span class="pre">softmax_cross_entropy_loss_gradient_one_hot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">Softmax_cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">Softmax_cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient_one_hot"><code class="docutils literal notranslate"><span class="pre">Softmax_cross_entropy_loss_gradient_one_hot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">stable_softmax_cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">stable_softmax_cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient_one_hot"><code class="docutils literal notranslate"><span class="pre">stable_softmax_cross_entropy_loss_gradient_one_hot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">Stable_softmax_cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">Stable_softmax_cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient_one_hot"><code class="docutils literal notranslate"><span class="pre">Stable_softmax_cross_entropy_loss_gradient_one_hot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.logistic_cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">logistic_cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.logistic_cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">logistic_cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Logistic_cross_entropy_loss"><code class="docutils literal notranslate"><span class="pre">Logistic_cross_entropy_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Logistic_cross_entropy_loss_gradient"><code class="docutils literal notranslate"><span class="pre">Logistic_cross_entropy_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.negative_log_likelihood_loss"><code class="docutils literal notranslate"><span class="pre">negative_log_likelihood_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.negative_log_likelihood_loss_gradient"><code class="docutils literal notranslate"><span class="pre">negative_log_likelihood_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Negative_log_likelihood_loss"><code class="docutils literal notranslate"><span class="pre">Negative_log_likelihood_loss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.Negative_log_likelihood_loss_gradient"><code class="docutils literal notranslate"><span class="pre">Negative_log_likelihood_loss_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.LossFunction"><code class="docutils literal notranslate"><span class="pre">LossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.LossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">LossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.SquaredErrorLossFunction"><code class="docutils literal notranslate"><span class="pre">SquaredErrorLossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.SquaredErrorLossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">SquaredErrorLossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.CrossEntropyLossFunction"><code class="docutils literal notranslate"><span class="pre">CrossEntropyLossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.CrossEntropyLossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">CrossEntropyLossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction"><code class="docutils literal notranslate"><span class="pre">SoftmaxCrossEntropyLossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">SoftmaxCrossEntropyLossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction"><code class="docutils literal notranslate"><span class="pre">StableSoftmaxCrossEntropyLossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">StableSoftmaxCrossEntropyLossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction"><code class="docutils literal notranslate"><span class="pre">LogisticCrossEntropyLossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">LogisticCrossEntropyLossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihoodLossFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction.gradient"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihoodLossFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.loss_functions.parse_loss_function"><code class="docutils literal notranslate"><span class="pre">parse_loss_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_jax.html">nerva_jax</a></li>
+      <li class="breadcrumb-item active">nerva_jax.loss_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nerva_jax.loss_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nerva_jax.loss_functions">
+<span id="nerva-jax-loss-functions"></span><h1>nerva_jax.loss_functions<a class="headerlink" href="#module-nerva_jax.loss_functions" title="Link to this heading"></a></h1>
+<p>Analytic loss functions and their gradients used during training.</p>
+<p>Functions are provided in vector (lowercase) and matrix (uppercase) forms.
+Concrete LossFunction classes wrap these for use in the training loop.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Cross_entropy_loss" title="nerva_jax.loss_functions.Cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cross_entropy_loss</span></code></a>(Y, T)</p></td>
+<td><p>Cross entropy loss for matrices: -sum(T ⊙ log(Y)).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Cross_entropy_loss_gradient" title="nerva_jax.loss_functions.Cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cross_entropy_loss_gradient</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Logistic_cross_entropy_loss" title="nerva_jax.loss_functions.Logistic_cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Logistic_cross_entropy_loss</span></code></a>(Y, T)</p></td>
+<td><p>Logistic cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Logistic_cross_entropy_loss_gradient" title="nerva_jax.loss_functions.Logistic_cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Logistic_cross_entropy_loss_gradient</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of logistic cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Negative_log_likelihood_loss" title="nerva_jax.loss_functions.Negative_log_likelihood_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Negative_log_likelihood_loss</span></code></a>(Y, T)</p></td>
+<td><p>Negative log likelihood loss for matrices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Negative_log_likelihood_loss_gradient" title="nerva_jax.loss_functions.Negative_log_likelihood_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Negative_log_likelihood_loss_gradient</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of negative log likelihood loss for matrices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss" title="nerva_jax.loss_functions.Softmax_cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Softmax_cross_entropy_loss</span></code></a>(Y, T)</p></td>
+<td><p>Softmax cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient" title="nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Softmax_cross_entropy_loss_gradient</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of softmax cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient_one_hot" title="nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient_one_hot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Softmax_cross_entropy_loss_gradient_one_hot</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of softmax cross entropy for one-hot targets (matrices).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Squared_error_loss" title="nerva_jax.loss_functions.Squared_error_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Squared_error_loss</span></code></a>(Y, T)</p></td>
+<td><p>Squared error loss for matrices: sum of ||Y - T||².</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Squared_error_loss_gradient" title="nerva_jax.loss_functions.Squared_error_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Squared_error_loss_gradient</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of squared error loss for matrices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss" title="nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stable_softmax_cross_entropy_loss</span></code></a>(Y, T)</p></td>
+<td><p>Stable softmax cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient" title="nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stable_softmax_cross_entropy_loss_gradient</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of stable softmax cross entropy loss for matrices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient_one_hot" title="nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient_one_hot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stable_softmax_cross_entropy_loss_gradient_one_hot</span></code></a>(Y, T)</p></td>
+<td><p>Gradient of stable softmax cross entropy for one-hot targets (matrices).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.cross_entropy_loss" title="nerva_jax.loss_functions.cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_entropy_loss</span></code></a>(y, t)</p></td>
+<td><p>Cross entropy loss for vectors: -t^T log(y).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.cross_entropy_loss_gradient" title="nerva_jax.loss_functions.cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_entropy_loss_gradient</span></code></a>(y, t)</p></td>
+<td><p>Gradient of cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.logistic_cross_entropy_loss" title="nerva_jax.loss_functions.logistic_cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logistic_cross_entropy_loss</span></code></a>(y, t)</p></td>
+<td><p>Logistic cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.logistic_cross_entropy_loss_gradient" title="nerva_jax.loss_functions.logistic_cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logistic_cross_entropy_loss_gradient</span></code></a>(y, t)</p></td>
+<td><p>Gradient of logistic cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.negative_log_likelihood_loss" title="nerva_jax.loss_functions.negative_log_likelihood_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">negative_log_likelihood_loss</span></code></a>(y, t)</p></td>
+<td><p>Negative log likelihood loss for vectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.negative_log_likelihood_loss_gradient" title="nerva_jax.loss_functions.negative_log_likelihood_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">negative_log_likelihood_loss_gradient</span></code></a>(y, t)</p></td>
+<td><p>Gradient of negative log likelihood loss for vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.parse_loss_function" title="nerva_jax.loss_functions.parse_loss_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_loss_function</span></code></a>(text)</p></td>
+<td><p>Parse a loss function name into a LossFunction instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss" title="nerva_jax.loss_functions.softmax_cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">softmax_cross_entropy_loss</span></code></a>(y, t)</p></td>
+<td><p>Softmax cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient" title="nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">softmax_cross_entropy_loss_gradient</span></code></a>(y, t)</p></td>
+<td><p>Gradient of softmax cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient_one_hot" title="nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient_one_hot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">softmax_cross_entropy_loss_gradient_one_hot</span></code></a>(y, t)</p></td>
+<td><p>Gradient of softmax cross entropy for one-hot targets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.squared_error_loss" title="nerva_jax.loss_functions.squared_error_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">squared_error_loss</span></code></a>(y, t)</p></td>
+<td><p>Squared error loss for vectors: ||y - t||².</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.squared_error_loss_gradient" title="nerva_jax.loss_functions.squared_error_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">squared_error_loss_gradient</span></code></a>(y, t)</p></td>
+<td><p>Gradient of squared error loss for vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss" title="nerva_jax.loss_functions.stable_softmax_cross_entropy_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stable_softmax_cross_entropy_loss</span></code></a>(y, t)</p></td>
+<td><p>Stable softmax cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient" title="nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stable_softmax_cross_entropy_loss_gradient</span></code></a>(y, t)</p></td>
+<td><p>Gradient of stable softmax cross entropy loss for vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient_one_hot" title="nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient_one_hot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stable_softmax_cross_entropy_loss_gradient_one_hot</span></code></a>(y, t)</p></td>
+<td><p>Gradient of stable softmax cross entropy for one-hot targets.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.CrossEntropyLossFunction" title="nerva_jax.loss_functions.CrossEntropyLossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CrossEntropyLossFunction</span></code></a>()</p></td>
+<td><p>Cross entropy loss function for classification with probabilities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction" title="nerva_jax.loss_functions.LogisticCrossEntropyLossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogisticCrossEntropyLossFunction</span></code></a>()</p></td>
+<td><p>Logistic cross entropy loss for binary classification.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LossFunction</span></code></a>()</p></td>
+<td><p>Interface for loss functions with value and gradient on batch matrices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction" title="nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NegativeLogLikelihoodLossFunction</span></code></a>()</p></td>
+<td><p>Negative log likelihood loss for probabilistic outputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction" title="nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SoftmaxCrossEntropyLossFunction</span></code></a>()</p></td>
+<td><p>Softmax cross entropy loss for classification with logits.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.SquaredErrorLossFunction" title="nerva_jax.loss_functions.SquaredErrorLossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SquaredErrorLossFunction</span></code></a>()</p></td>
+<td><p>Squared error loss function for regression tasks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction" title="nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StableSoftmaxCrossEntropyLossFunction</span></code></a>()</p></td>
+<td><p>Numerically stable softmax cross entropy loss for classification.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.squared_error_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">squared_error_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#squared_error_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.squared_error_loss" title="Link to this definition"></a></dt>
+<dd><p>Squared error loss for vectors: ||y - t||².</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.squared_error_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">squared_error_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#squared_error_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.squared_error_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of squared error loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Squared_error_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Squared_error_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Squared_error_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Squared_error_loss" title="Link to this definition"></a></dt>
+<dd><p>Squared error loss for matrices: sum of ||Y - T||².</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Squared_error_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Squared_error_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Squared_error_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Squared_error_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of squared error loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Cross entropy loss for vectors: -t^T log(y).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Cross entropy loss for matrices: -sum(T ⊙ log(Y)).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.softmax_cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">softmax_cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#softmax_cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Softmax cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">softmax_cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#softmax_cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of softmax cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient_one_hot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">softmax_cross_entropy_loss_gradient_one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#softmax_cross_entropy_loss_gradient_one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.softmax_cross_entropy_loss_gradient_one_hot" title="Link to this definition"></a></dt>
+<dd><p>Gradient of softmax cross entropy for one-hot targets.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Softmax_cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Softmax_cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Softmax_cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Softmax cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Softmax_cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Softmax_cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of softmax cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient_one_hot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Softmax_cross_entropy_loss_gradient_one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Softmax_cross_entropy_loss_gradient_one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Softmax_cross_entropy_loss_gradient_one_hot" title="Link to this definition"></a></dt>
+<dd><p>Gradient of softmax cross entropy for one-hot targets (matrices).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.stable_softmax_cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax_cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#stable_softmax_cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Stable softmax cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax_cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#stable_softmax_cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of stable softmax cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient_one_hot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax_cross_entropy_loss_gradient_one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#stable_softmax_cross_entropy_loss_gradient_one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.stable_softmax_cross_entropy_loss_gradient_one_hot" title="Link to this definition"></a></dt>
+<dd><p>Gradient of stable softmax cross entropy for one-hot targets.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Stable_softmax_cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Stable_softmax_cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Stable softmax cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Stable_softmax_cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Stable_softmax_cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of stable softmax cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient_one_hot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Stable_softmax_cross_entropy_loss_gradient_one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Stable_softmax_cross_entropy_loss_gradient_one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Stable_softmax_cross_entropy_loss_gradient_one_hot" title="Link to this definition"></a></dt>
+<dd><p>Gradient of stable softmax cross entropy for one-hot targets (matrices).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.logistic_cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">logistic_cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#logistic_cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.logistic_cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Logistic cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.logistic_cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">logistic_cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#logistic_cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.logistic_cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of logistic cross entropy loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Logistic_cross_entropy_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Logistic_cross_entropy_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Logistic_cross_entropy_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Logistic_cross_entropy_loss" title="Link to this definition"></a></dt>
+<dd><p>Logistic cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Logistic_cross_entropy_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Logistic_cross_entropy_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Logistic_cross_entropy_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Logistic_cross_entropy_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of logistic cross entropy loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.negative_log_likelihood_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">negative_log_likelihood_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#negative_log_likelihood_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.negative_log_likelihood_loss" title="Link to this definition"></a></dt>
+<dd><p>Negative log likelihood loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.negative_log_likelihood_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">negative_log_likelihood_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#negative_log_likelihood_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.negative_log_likelihood_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of negative log likelihood loss for vectors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Negative_log_likelihood_loss">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Negative_log_likelihood_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Negative_log_likelihood_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Negative_log_likelihood_loss" title="Link to this definition"></a></dt>
+<dd><p>Negative log likelihood loss for matrices.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.Negative_log_likelihood_loss_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">Negative_log_likelihood_loss_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#Negative_log_likelihood_loss_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.Negative_log_likelihood_loss_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of negative log likelihood loss for matrices.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.LossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">LossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface for loss functions with value and gradient on batch matrices.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.LossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.SquaredErrorLossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">SquaredErrorLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SquaredErrorLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SquaredErrorLossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
+<p>Squared error loss function for regression tasks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.SquaredErrorLossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SquaredErrorLossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SquaredErrorLossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.CrossEntropyLossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">CrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#CrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.CrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
+<p>Cross entropy loss function for classification with probabilities.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.CrossEntropyLossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#CrossEntropyLossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.CrossEntropyLossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">SoftmaxCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SoftmaxCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
+<p>Softmax cross entropy loss for classification with logits.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SoftmaxCrossEntropyLossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">StableSoftmaxCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#StableSoftmaxCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
+<p>Numerically stable softmax cross entropy loss for classification.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#StableSoftmaxCrossEntropyLossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.LogisticCrossEntropyLossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">LogisticCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LogisticCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
+<p>Logistic cross entropy loss for binary classification.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.LogisticCrossEntropyLossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LogisticCrossEntropyLossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">NegativeLogLikelihoodLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#NegativeLogLikelihoodLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
+<p>Negative log likelihood loss for probabilistic outputs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#NegativeLogLikelihoodLossFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.loss_functions.parse_loss_function">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">parse_loss_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><span class="pre">LossFunction</span></a></span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#parse_loss_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.parse_loss_function" title="Link to this definition"></a></dt>
+<dd><p>Parse a loss function name into a LossFunction instance.</p>
+<p>Supported names: SquaredError, CrossEntropy, SoftmaxCrossEntropy,
+LogisticCrossEntropy, NegativeLogLikelihood.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nerva_jax.learning_rate.html" class="btn btn-neutral float-left" title="nerva_jax.learning_rate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.matrix_operations.html" class="btn btn-neutral float-right" title="nerva_jax.matrix_operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

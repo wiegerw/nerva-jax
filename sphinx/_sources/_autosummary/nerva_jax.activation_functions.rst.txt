@@ -1,0 +1,36 @@
+nerva\_jax.activation\_functions
+================================
+
+.. automodule:: nerva_jax.activation_functions
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      All_relu
+      All_relu_gradient
+      Hyperbolic_tangent
+      Hyperbolic_tangent_gradient
+      Leaky_relu
+      Leaky_relu_gradient
+      Relu
+      Relu_gradient
+      Sigmoid
+      Sigmoid_gradient
+      Srelu
+      Srelu_gradient
+      parse_activation
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ActivationFunction
+      AllReLUActivation
+      HyperbolicTangentActivation
+      LeakyReLUActivation
+      ReLUActivation
+      SReLUActivation
+      SigmoidActivation
+   

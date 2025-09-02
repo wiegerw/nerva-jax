@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.datasets &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nerva_jax.learning_rate" href="nerva_jax.learning_rate.html" />
+    <link rel="prev" title="nerva_jax.activation_functions" href="nerva_jax.activation_functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.to_one_hot"><code class="docutils literal notranslate"><span class="pre">to_one_hot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.from_one_hot"><code class="docutils literal notranslate"><span class="pre">from_one_hot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.MemoryDataLoader"><code class="docutils literal notranslate"><span class="pre">MemoryDataLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.max_"><code class="docutils literal notranslate"><span class="pre">max_()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.infer_num_classes"><code class="docutils literal notranslate"><span class="pre">infer_num_classes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.datasets.create_npz_dataloaders"><code class="docutils literal notranslate"><span class="pre">create_npz_dataloaders()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_jax.html">nerva_jax</a></li>
+      <li class="breadcrumb-item active">nerva_jax.datasets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nerva_jax.datasets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nerva_jax.datasets">
+<span id="nerva-jax-datasets"></span><h1>nerva_jax.datasets<a class="headerlink" href="#module-nerva_jax.datasets" title="Link to this heading"></a></h1>
+<p>In-memory data loader helpers and one-hot conversions.</p>
+<p>The DataLoader defined here mirrors a small subset of the PyTorch
+DataLoader API but operates on in-memory tensors loaded from .npz files.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.datasets.create_npz_dataloaders" title="nerva_jax.datasets.create_npz_dataloaders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_npz_dataloaders</span></code></a>(filename[, batch_size])</p></td>
+<td><p>Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.datasets.from_one_hot" title="nerva_jax.datasets.from_one_hot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_one_hot</span></code></a>(one_hot)</p></td>
+<td><p>Convert one-hot encoded rows to class index tensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.datasets.infer_num_classes" title="nerva_jax.datasets.infer_num_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_num_classes</span></code></a>(Ttrain, Ttest)</p></td>
+<td><p>Infer total number of classes from targets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.datasets.max_" title="nerva_jax.datasets.max_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_</span></code></a>(X)</p></td>
+<td><p>Return the maximum element of X as a Python scalar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.datasets.to_one_hot" title="nerva_jax.datasets.to_one_hot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_one_hot</span></code></a>(x, num_classes)</p></td>
+<td><p>Convert class index tensor to one-hot matrix with num_classes columns.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.datasets.DataLoader" title="nerva_jax.datasets.DataLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataLoader</span></code></a></p></td>
+<td><p>alias of <a class="reference internal" href="#nerva_jax.datasets.MemoryDataLoader" title="nerva_jax.datasets.MemoryDataLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryDataLoader</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.datasets.MemoryDataLoader" title="nerva_jax.datasets.MemoryDataLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MemoryDataLoader</span></code></a>(Xdata, Tdata, batch_size[, ...])</p></td>
+<td><p>A minimal in-memory data loader with an interface similar to torch.utils.data.DataLoader.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.datasets.to_one_hot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">to_one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/datasets.html#to_one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.datasets.to_one_hot" title="Link to this definition"></a></dt>
+<dd><p>Convert class index tensor to one-hot matrix with num_classes columns.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.datasets.from_one_hot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">from_one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">one_hot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/datasets.html#from_one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.datasets.from_one_hot" title="Link to this definition"></a></dt>
+<dd><p>Convert one-hot encoded rows to class index tensor.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.datasets.MemoryDataLoader">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">MemoryDataLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Xdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/datasets.html#MemoryDataLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.datasets.MemoryDataLoader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A minimal in-memory data loader with an interface similar to torch.utils.data.DataLoader.</p>
+<p>Notes / Warning:</p>
+<ul class="simple">
+<li><p>When <cite>Tdata</cite> contains class indices (shape (N,) or (N,1)), this loader will one-hot encode
+the labels. If <cite>num_classes</cite> is not provided, it will be inferred as <cite>max(Tdata) + 1</cite>.</p></li>
+<li><p>On small datasets or subsets where some classes are absent, this inference can underestimate
+the true number of classes and produce one-hot targets with too few columns. This may cause
+dimension mismatches with the model output during training/evaluation.</p></li>
+<li><p>To avoid this, pass <cite>num_classes</cite> explicitly whenever you know the total number of classes.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nerva_jax.datasets.DataLoader">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">DataLoader</span></span><a class="headerlink" href="#nerva_jax.datasets.DataLoader" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#nerva_jax.datasets.MemoryDataLoader" title="nerva_jax.datasets.MemoryDataLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryDataLoader</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.datasets.max_">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">max_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/nerva_jax/datasets.html#max_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.datasets.max_" title="Link to this definition"></a></dt>
+<dd><p>Return the maximum element of X as a Python scalar.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.datasets.infer_num_classes">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">infer_num_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ttrain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ttest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_jax/datasets.html#infer_num_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.datasets.infer_num_classes" title="Link to this definition"></a></dt>
+<dd><p>Infer total number of classes from targets.</p>
+<ul class="simple">
+<li><p>If either Ttrain or Ttest is one-hot encoded (2D with width &gt; 1), use that width.</p></li>
+<li><p>Otherwise assume class indices and return max over both + 1.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.datasets.create_npz_dataloaders">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.datasets.</span></span><span class="sig-name descname"><span class="pre">create_npz_dataloaders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nerva_jax.datasets.MemoryDataLoader" title="nerva_jax.datasets.MemoryDataLoader"><span class="pre">MemoryDataLoader</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#nerva_jax.datasets.MemoryDataLoader" title="nerva_jax.datasets.MemoryDataLoader"><span class="pre">MemoryDataLoader</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/nerva_jax/datasets.html#create_npz_dataloaders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.datasets.create_npz_dataloaders" title="Link to this definition"></a></dt>
+<dd><p>Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nerva_jax.activation_functions.html" class="btn btn-neutral float-left" title="nerva_jax.activation_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.learning_rate.html" class="btn btn-neutral float-right" title="nerva_jax.learning_rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.matrix_operations &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nerva_jax.optimizers" href="nerva_jax.optimizers.html" />
+    <link rel="prev" title="nerva_jax.loss_functions" href="nerva_jax.loss_functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.matrix_operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.is_vector"><code class="docutils literal notranslate"><span class="pre">is_vector()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.is_column_vector"><code class="docutils literal notranslate"><span class="pre">is_column_vector()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.is_row_vector"><code class="docutils literal notranslate"><span class="pre">is_row_vector()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.vector_size"><code class="docutils literal notranslate"><span class="pre">vector_size()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.is_square"><code class="docutils literal notranslate"><span class="pre">is_square()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.dot"><code class="docutils literal notranslate"><span class="pre">dot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.zeros"><code class="docutils literal notranslate"><span class="pre">zeros()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.ones"><code class="docutils literal notranslate"><span class="pre">ones()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.identity"><code class="docutils literal notranslate"><span class="pre">identity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.hadamard"><code class="docutils literal notranslate"><span class="pre">hadamard()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.diag"><code class="docutils literal notranslate"><span class="pre">diag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.Diag"><code class="docutils literal notranslate"><span class="pre">Diag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.elements_sum"><code class="docutils literal notranslate"><span class="pre">elements_sum()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.column_repeat"><code class="docutils literal notranslate"><span class="pre">column_repeat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.row_repeat"><code class="docutils literal notranslate"><span class="pre">row_repeat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.columns_sum"><code class="docutils literal notranslate"><span class="pre">columns_sum()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.rows_sum"><code class="docutils literal notranslate"><span class="pre">rows_sum()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.columns_max"><code class="docutils literal notranslate"><span class="pre">columns_max()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.rows_max"><code class="docutils literal notranslate"><span class="pre">rows_max()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.columns_mean"><code class="docutils literal notranslate"><span class="pre">columns_mean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.rows_mean"><code class="docutils literal notranslate"><span class="pre">rows_mean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.apply"><code class="docutils literal notranslate"><span class="pre">apply()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.exp"><code class="docutils literal notranslate"><span class="pre">exp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.log"><code class="docutils literal notranslate"><span class="pre">log()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.reciprocal"><code class="docutils literal notranslate"><span class="pre">reciprocal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.square"><code class="docutils literal notranslate"><span class="pre">square()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.sqrt"><code class="docutils literal notranslate"><span class="pre">sqrt()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.inv_sqrt"><code class="docutils literal notranslate"><span class="pre">inv_sqrt()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.log_sigmoid"><code class="docutils literal notranslate"><span class="pre">log_sigmoid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_jax.html">nerva_jax</a></li>
+      <li class="breadcrumb-item active">nerva_jax.matrix_operations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nerva_jax.matrix_operations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nerva_jax.matrix_operations">
+<span id="nerva-jax-matrix-operations"></span><h1>nerva_jax.matrix_operations<a class="headerlink" href="#module-nerva_jax.matrix_operations" title="Link to this heading"></a></h1>
+<p>Matrix operations built on top of torch to support the math in the library.</p>
+<p>The functions here intentionally mirror the names in the accompanying docs.
+They operate on 1D/2D tensors and keep broadcasting explicit for clarity.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.Diag" title="nerva_jax.matrix_operations.Diag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Diag</span></code></a>(x)</p></td>
+<td><p>Create diagonal matrix with x as diagonal.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.apply" title="nerva_jax.matrix_operations.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(f, X)</p></td>
+<td><p>Element-wise application of function f to X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.column_repeat" title="nerva_jax.matrix_operations.column_repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">column_repeat</span></code></a>(x, n)</p></td>
+<td><p>Repeat column vector x horizontally n times.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.columns_max" title="nerva_jax.matrix_operations.columns_max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">columns_max</span></code></a>(X)</p></td>
+<td><p>Returns a column vector with the maximum values of each row in X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.columns_mean" title="nerva_jax.matrix_operations.columns_mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">columns_mean</span></code></a>(X)</p></td>
+<td><p>Returns a column vector with the mean values of each row in X.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.columns_sum" title="nerva_jax.matrix_operations.columns_sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">columns_sum</span></code></a>(X)</p></td>
+<td><p>Sum over columns (returns row vector).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.diag" title="nerva_jax.matrix_operations.diag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diag</span></code></a>(X)</p></td>
+<td><p>Extract diagonal of X as a vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.dot" title="nerva_jax.matrix_operations.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(x, y)</p></td>
+<td><p>Dot product of vectors x and y.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.elements_sum" title="nerva_jax.matrix_operations.elements_sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elements_sum</span></code></a>(X)</p></td>
+<td><p>Returns the sum of the elements of X.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.exp" title="nerva_jax.matrix_operations.exp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exp</span></code></a>(X)</p></td>
+<td><p>Element-wise exponential exp(X).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.hadamard" title="nerva_jax.matrix_operations.hadamard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hadamard</span></code></a>(X, Y)</p></td>
+<td><p>Element-wise product X ⊙ Y.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.identity" title="nerva_jax.matrix_operations.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(n)</p></td>
+<td><p>Returns the nxn identity matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.inv_sqrt" title="nerva_jax.matrix_operations.inv_sqrt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inv_sqrt</span></code></a>(X)</p></td>
+<td><p>Element-wise inverse square root X^(-1/2) with epsilon for stability.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.is_column_vector" title="nerva_jax.matrix_operations.is_column_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_column_vector</span></code></a>(x)</p></td>
+<td><p>Check if x can be treated as a column vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.is_row_vector" title="nerva_jax.matrix_operations.is_row_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_row_vector</span></code></a>(x)</p></td>
+<td><p>Check if x can be treated as a row vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.is_square" title="nerva_jax.matrix_operations.is_square"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_square</span></code></a>(X)</p></td>
+<td><p>Check if X is a square matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.is_vector" title="nerva_jax.matrix_operations.is_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_vector</span></code></a>(x)</p></td>
+<td><p>Check if x is a 1D tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.log" title="nerva_jax.matrix_operations.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log</span></code></a>(X)</p></td>
+<td><p>Element-wise natural logarithm log(X).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.log_sigmoid" title="nerva_jax.matrix_operations.log_sigmoid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_sigmoid</span></code></a>(X)</p></td>
+<td><p>Element-wise log(sigmoid(X)) computed stably.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.ones" title="nerva_jax.matrix_operations.ones"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ones</span></code></a>(m[, n])</p></td>
+<td><p>Returns an mxn matrix with all elements equal to 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.product" title="nerva_jax.matrix_operations.product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code></a>(X, Y)</p></td>
+<td><p>Matrix multiplication X &#64; Y.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.reciprocal" title="nerva_jax.matrix_operations.reciprocal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal</span></code></a>(X)</p></td>
+<td><p>Element-wise reciprocal 1/X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.row_repeat" title="nerva_jax.matrix_operations.row_repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_repeat</span></code></a>(x, m)</p></td>
+<td><p>Repeat row vector x vertically m times.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.rows_max" title="nerva_jax.matrix_operations.rows_max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rows_max</span></code></a>(X)</p></td>
+<td><p>Returns a row vector with the maximum values of each column in X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.rows_mean" title="nerva_jax.matrix_operations.rows_mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rows_mean</span></code></a>(X)</p></td>
+<td><p>Returns a row vector with the mean values of each column in X.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.rows_sum" title="nerva_jax.matrix_operations.rows_sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rows_sum</span></code></a>(X)</p></td>
+<td><p>Sum over rows (returns column vector).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.sqrt" title="nerva_jax.matrix_operations.sqrt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sqrt</span></code></a>(X)</p></td>
+<td><p>Element-wise square root √X.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.square" title="nerva_jax.matrix_operations.square"><code class="xref py py-obj docutils literal notranslate"><span class="pre">square</span></code></a>(X)</p></td>
+<td><p>Element-wise square X².</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.vector_size" title="nerva_jax.matrix_operations.vector_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vector_size</span></code></a>(x)</p></td>
+<td><p>Get size along first dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.zeros" title="nerva_jax.matrix_operations.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeros</span></code></a>(m[, n])</p></td>
+<td><p>Returns an mxn matrix with all elements equal to 0.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.is_vector">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#is_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.is_vector" title="Link to this definition"></a></dt>
+<dd><p>Check if x is a 1D tensor.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.is_column_vector">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_column_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#is_column_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.is_column_vector" title="Link to this definition"></a></dt>
+<dd><p>Check if x can be treated as a column vector.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.is_row_vector">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_row_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#is_row_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.is_row_vector" title="Link to this definition"></a></dt>
+<dd><p>Check if x can be treated as a row vector.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.vector_size">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">vector_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#vector_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.vector_size" title="Link to this definition"></a></dt>
+<dd><p>Get size along first dimension.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.is_square">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#is_square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.is_square" title="Link to this definition"></a></dt>
+<dd><p>Check if X is a square matrix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.dot">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#dot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.dot" title="Link to this definition"></a></dt>
+<dd><p>Dot product of vectors x and y.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.zeros">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.zeros" title="Link to this definition"></a></dt>
+<dd><p>Returns an mxn matrix with all elements equal to 0.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.ones">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">ones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#ones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.ones" title="Link to this definition"></a></dt>
+<dd><p>Returns an mxn matrix with all elements equal to 1.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.identity">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.identity" title="Link to this definition"></a></dt>
+<dd><p>Returns the nxn identity matrix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.product">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.product" title="Link to this definition"></a></dt>
+<dd><p>Matrix multiplication X &#64; Y.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.hadamard">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">hadamard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#hadamard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.hadamard" title="Link to this definition"></a></dt>
+<dd><p>Element-wise product X ⊙ Y.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.diag">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.diag" title="Link to this definition"></a></dt>
+<dd><p>Extract diagonal of X as a vector.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.Diag">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">Diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#Diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.Diag" title="Link to this definition"></a></dt>
+<dd><p>Create diagonal matrix with x as diagonal.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.elements_sum">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">elements_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#elements_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.elements_sum" title="Link to this definition"></a></dt>
+<dd><p>Returns the sum of the elements of X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.column_repeat">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">column_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#column_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.column_repeat" title="Link to this definition"></a></dt>
+<dd><p>Repeat column vector x horizontally n times.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.row_repeat">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">row_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#row_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.row_repeat" title="Link to this definition"></a></dt>
+<dd><p>Repeat row vector x vertically m times.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.columns_sum">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#columns_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.columns_sum" title="Link to this definition"></a></dt>
+<dd><p>Sum over columns (returns row vector).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.rows_sum">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#rows_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.rows_sum" title="Link to this definition"></a></dt>
+<dd><p>Sum over rows (returns column vector).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.columns_max">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#columns_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.columns_max" title="Link to this definition"></a></dt>
+<dd><p>Returns a column vector with the maximum values of each row in X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.rows_max">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#rows_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.rows_max" title="Link to this definition"></a></dt>
+<dd><p>Returns a row vector with the maximum values of each column in X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.columns_mean">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#columns_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.columns_mean" title="Link to this definition"></a></dt>
+<dd><p>Returns a column vector with the mean values of each row in X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.rows_mean">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#rows_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.rows_mean" title="Link to this definition"></a></dt>
+<dd><p>Returns a row vector with the mean values of each column in X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.apply">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.apply" title="Link to this definition"></a></dt>
+<dd><p>Element-wise application of function f to X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.exp">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.exp" title="Link to this definition"></a></dt>
+<dd><p>Element-wise exponential exp(X).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.log">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.log" title="Link to this definition"></a></dt>
+<dd><p>Element-wise natural logarithm log(X).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.reciprocal">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">reciprocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#reciprocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.reciprocal" title="Link to this definition"></a></dt>
+<dd><p>Element-wise reciprocal 1/X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.square">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.square" title="Link to this definition"></a></dt>
+<dd><p>Element-wise square X².</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.sqrt">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.sqrt" title="Link to this definition"></a></dt>
+<dd><p>Element-wise square root √X.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.inv_sqrt">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">inv_sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#inv_sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.inv_sqrt" title="Link to this definition"></a></dt>
+<dd><p>Element-wise inverse square root X^(-1/2) with epsilon for stability.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.log_sigmoid">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#log_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.log_sigmoid" title="Link to this definition"></a></dt>
+<dd><p>Element-wise log(sigmoid(X)) computed stably.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nerva_jax.loss_functions.html" class="btn btn-neutral float-left" title="nerva_jax.loss_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.optimizers.html" class="btn btn-neutral float-right" title="nerva_jax.optimizers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

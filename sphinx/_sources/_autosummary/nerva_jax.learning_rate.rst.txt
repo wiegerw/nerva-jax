@@ -1,0 +1,23 @@
+nerva\_jax.learning\_rate
+=========================
+
+.. automodule:: nerva_jax.learning_rate
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse_learning_rate
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ConstantScheduler
+      ExponentialScheduler
+      LearningRateScheduler
+      MultiStepLRScheduler
+      StepBasedScheduler
+      TimeBasedScheduler
+   

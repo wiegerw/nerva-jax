@@ -1,0 +1,28 @@
+nerva\_jax.softmax\_functions
+=============================
+
+.. automodule:: nerva_jax.softmax_functions
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      log_softmax
+      log_softmax_jacobian
+      softmax
+      softmax_jacobian
+      stable_log_softmax
+      stable_log_softmax_jacobian
+      stable_softmax
+      stable_softmax_jacobian
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      LogSoftmaxFunction
+      SoftmaxFunction
+      StableLogSoftmaxFunction
+      StableSoftmaxFunction
+   

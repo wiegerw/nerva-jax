@@ -1,0 +1,22 @@
+nerva\_jax.optimizers
+=====================
+
+.. automodule:: nerva_jax.optimizers
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse_optimizer
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CompositeOptimizer
+      GradientDescentOptimizer
+      MomentumOptimizer
+      NesterovOptimizer
+      Optimizer
+   

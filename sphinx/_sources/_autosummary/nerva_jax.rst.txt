@@ -1,0 +1,24 @@
+﻿nerva\_jax
+==========
+
+.. automodule:: nerva_jax
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   activation_functions
+   datasets
+   layers
+   learning_rate
+   loss_functions
+   matrix_operations
+   multilayer_perceptron
+   optimizers
+   softmax_functions
+   training
+   utilities
+   weight_initializers

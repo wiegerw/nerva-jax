@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.activation_functions &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nerva_jax.datasets" href="nerva_jax.datasets.html" />
+    <link rel="prev" title="nerva_jax" href="nerva_jax.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.activation_functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Relu"><code class="docutils literal notranslate"><span class="pre">Relu()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Relu_gradient"><code class="docutils literal notranslate"><span class="pre">Relu_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Leaky_relu"><code class="docutils literal notranslate"><span class="pre">Leaky_relu()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Leaky_relu_gradient"><code class="docutils literal notranslate"><span class="pre">Leaky_relu_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.All_relu"><code class="docutils literal notranslate"><span class="pre">All_relu()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.All_relu_gradient"><code class="docutils literal notranslate"><span class="pre">All_relu_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Hyperbolic_tangent"><code class="docutils literal notranslate"><span class="pre">Hyperbolic_tangent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Hyperbolic_tangent_gradient"><code class="docutils literal notranslate"><span class="pre">Hyperbolic_tangent_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Sigmoid"><code class="docutils literal notranslate"><span class="pre">Sigmoid()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Sigmoid_gradient"><code class="docutils literal notranslate"><span class="pre">Sigmoid_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Srelu"><code class="docutils literal notranslate"><span class="pre">Srelu()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.Srelu_gradient"><code class="docutils literal notranslate"><span class="pre">Srelu_gradient()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction"><code class="docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction.gradient"><code class="docutils literal notranslate"><span class="pre">ActivationFunction.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.ReLUActivation"><code class="docutils literal notranslate"><span class="pre">ReLUActivation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.ReLUActivation.gradient"><code class="docutils literal notranslate"><span class="pre">ReLUActivation.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.LeakyReLUActivation"><code class="docutils literal notranslate"><span class="pre">LeakyReLUActivation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.LeakyReLUActivation.gradient"><code class="docutils literal notranslate"><span class="pre">LeakyReLUActivation.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.AllReLUActivation"><code class="docutils literal notranslate"><span class="pre">AllReLUActivation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.AllReLUActivation.gradient"><code class="docutils literal notranslate"><span class="pre">AllReLUActivation.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.HyperbolicTangentActivation"><code class="docutils literal notranslate"><span class="pre">HyperbolicTangentActivation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.HyperbolicTangentActivation.gradient"><code class="docutils literal notranslate"><span class="pre">HyperbolicTangentActivation.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.SigmoidActivation"><code class="docutils literal notranslate"><span class="pre">SigmoidActivation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.SigmoidActivation.gradient"><code class="docutils literal notranslate"><span class="pre">SigmoidActivation.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.SReLUActivation"><code class="docutils literal notranslate"><span class="pre">SReLUActivation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.activation_functions.SReLUActivation.gradient"><code class="docutils literal notranslate"><span class="pre">SReLUActivation.gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.activation_functions.parse_activation"><code class="docutils literal notranslate"><span class="pre">parse_activation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.utilities.html">nerva_jax.utilities</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_jax.html">nerva_jax</a></li>
+      <li class="breadcrumb-item active">nerva_jax.activation_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nerva_jax.activation_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nerva_jax.activation_functions">
+<span id="nerva-jax-activation-functions"></span><h1>nerva_jax.activation_functions<a class="headerlink" href="#module-nerva_jax.activation_functions" title="Link to this heading"></a></h1>
+<p>Activation functions and utilities used by the MLP implementation.</p>
+<p>This module provides simple callable classes for common activations and a parser
+that turns textual specifications into activation instances (e.g. “ReLU”,
+“LeakyReLU(alpha=0.1)”, “SReLU(al=0, tl=0, ar=0, tr=1)”).</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.All_relu" title="nerva_jax.activation_functions.All_relu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">All_relu</span></code></a>(alpha)</p></td>
+<td><p>AllReLU factory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.All_relu_gradient" title="nerva_jax.activation_functions.All_relu_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">All_relu_gradient</span></code></a>(alpha)</p></td>
+<td><p>Gradient factory for AllReLU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Hyperbolic_tangent" title="nerva_jax.activation_functions.Hyperbolic_tangent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hyperbolic_tangent</span></code></a>(X)</p></td>
+<td><p>Hyperbolic tangent activation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Hyperbolic_tangent_gradient" title="nerva_jax.activation_functions.Hyperbolic_tangent_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hyperbolic_tangent_gradient</span></code></a>(X)</p></td>
+<td><p>Gradient of tanh: 1 - tanh²(X).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Leaky_relu" title="nerva_jax.activation_functions.Leaky_relu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Leaky_relu</span></code></a>(alpha)</p></td>
+<td><p>Leaky ReLU factory: max(X, alpha * X).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Leaky_relu_gradient" title="nerva_jax.activation_functions.Leaky_relu_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Leaky_relu_gradient</span></code></a>(alpha)</p></td>
+<td><p>Gradient factory for leaky ReLU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Relu" title="nerva_jax.activation_functions.Relu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Relu</span></code></a>(X)</p></td>
+<td><p>Rectified linear unit activation: max(0, X).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Relu_gradient" title="nerva_jax.activation_functions.Relu_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Relu_gradient</span></code></a>(X)</p></td>
+<td><p>Gradient of ReLU: 1 where X &gt; 0, 0 elsewhere.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Sigmoid" title="nerva_jax.activation_functions.Sigmoid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sigmoid</span></code></a>(X)</p></td>
+<td><p>Sigmoid activation: 1 / (1 + exp(-X)).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Sigmoid_gradient" title="nerva_jax.activation_functions.Sigmoid_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sigmoid_gradient</span></code></a>(X)</p></td>
+<td><p>Gradient of sigmoid: σ(X) * (1 - σ(X)).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Srelu" title="nerva_jax.activation_functions.Srelu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Srelu</span></code></a>(al, tl, ar, tr)</p></td>
+<td><p>SReLU factory: smooth rectified linear with learnable parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.Srelu_gradient" title="nerva_jax.activation_functions.Srelu_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Srelu_gradient</span></code></a>(al, tl, ar, tr)</p></td>
+<td><p>Gradient factory for SReLU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.parse_activation" title="nerva_jax.activation_functions.parse_activation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_activation</span></code></a>(text)</p></td>
+<td><p>Parse a textual activation specification into an ActivationFunction.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a>()</p></td>
+<td><p>Interface for activation functions with value and gradient methods.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.AllReLUActivation" title="nerva_jax.activation_functions.AllReLUActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllReLUActivation</span></code></a>(alpha)</p></td>
+<td><p>AllReLU activation (alternative parameterization of leaky ReLU).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.HyperbolicTangentActivation" title="nerva_jax.activation_functions.HyperbolicTangentActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HyperbolicTangentActivation</span></code></a>()</p></td>
+<td><p>Hyperbolic tangent activation function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.LeakyReLUActivation" title="nerva_jax.activation_functions.LeakyReLUActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LeakyReLUActivation</span></code></a>(alpha)</p></td>
+<td><p>Leaky ReLU activation: max(x, alpha * x).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.ReLUActivation" title="nerva_jax.activation_functions.ReLUActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReLUActivation</span></code></a>()</p></td>
+<td><p>ReLU activation function: max(0, x).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.SReLUActivation" title="nerva_jax.activation_functions.SReLUActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SReLUActivation</span></code></a>([al, tl, ar, tr])</p></td>
+<td><p>Smooth rectified linear activation with learnable parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.activation_functions.SigmoidActivation" title="nerva_jax.activation_functions.SigmoidActivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SigmoidActivation</span></code></a>()</p></td>
+<td><p>Sigmoid activation function: 1 / (1 + exp(-x)).</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Relu">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Relu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Relu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Relu" title="Link to this definition"></a></dt>
+<dd><p>Rectified linear unit activation: max(0, X).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Relu_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Relu_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Relu_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Relu_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of ReLU: 1 where X &gt; 0, 0 elsewhere.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Leaky_relu">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Leaky_relu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Leaky_relu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Leaky_relu" title="Link to this definition"></a></dt>
+<dd><p>Leaky ReLU factory: max(X, alpha * X).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Leaky_relu_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Leaky_relu_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Leaky_relu_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Leaky_relu_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient factory for leaky ReLU.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.All_relu">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">All_relu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#All_relu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.All_relu" title="Link to this definition"></a></dt>
+<dd><p>AllReLU factory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.All_relu_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">All_relu_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#All_relu_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.All_relu_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient factory for AllReLU.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Hyperbolic_tangent">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Hyperbolic_tangent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Hyperbolic_tangent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Hyperbolic_tangent" title="Link to this definition"></a></dt>
+<dd><p>Hyperbolic tangent activation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Hyperbolic_tangent_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Hyperbolic_tangent_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Hyperbolic_tangent_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Hyperbolic_tangent_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of tanh: 1 - tanh²(X).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Sigmoid">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Sigmoid" title="Link to this definition"></a></dt>
+<dd><p>Sigmoid activation: 1 / (1 + exp(-X)).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Sigmoid_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Sigmoid_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Sigmoid_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Sigmoid_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient of sigmoid: σ(X) * (1 - σ(X)).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Srelu">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Srelu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">al</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Srelu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Srelu" title="Link to this definition"></a></dt>
+<dd><p>SReLU factory: smooth rectified linear with learnable parameters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.Srelu_gradient">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">Srelu_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">al</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#Srelu_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.Srelu_gradient" title="Link to this definition"></a></dt>
+<dd><p>Gradient factory for SReLU.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.ActivationFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">ActivationFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ActivationFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ActivationFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface for activation functions with value and gradient methods.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.ActivationFunction.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ActivationFunction.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ActivationFunction.gradient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.ReLUActivation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">ReLUActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ReLUActivation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
+<p>ReLU activation function: max(0, x).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.ReLUActivation.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ReLUActivation.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ReLUActivation.gradient" title="Link to this definition"></a></dt>
+<dd><p>Compute gradient of ReLU.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.LeakyReLUActivation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">LeakyReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#LeakyReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.LeakyReLUActivation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
+<p>Leaky ReLU activation: max(x, alpha * x).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.LeakyReLUActivation.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#LeakyReLUActivation.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.LeakyReLUActivation.gradient" title="Link to this definition"></a></dt>
+<dd><p>Compute gradient of leaky ReLU.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.AllReLUActivation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">AllReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#AllReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.AllReLUActivation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
+<p>AllReLU activation (alternative parameterization of leaky ReLU).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.AllReLUActivation.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#AllReLUActivation.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.AllReLUActivation.gradient" title="Link to this definition"></a></dt>
+<dd><p>Compute gradient of AllReLU.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.HyperbolicTangentActivation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">HyperbolicTangentActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#HyperbolicTangentActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.HyperbolicTangentActivation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
+<p>Hyperbolic tangent activation function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.HyperbolicTangentActivation.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#HyperbolicTangentActivation.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.HyperbolicTangentActivation.gradient" title="Link to this definition"></a></dt>
+<dd><p>Compute gradient of hyperbolic tangent.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.SigmoidActivation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">SigmoidActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SigmoidActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SigmoidActivation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
+<p>Sigmoid activation function: 1 / (1 + exp(-x)).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.SigmoidActivation.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SigmoidActivation.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SigmoidActivation.gradient" title="Link to this definition"></a></dt>
+<dd><p>Compute gradient of sigmoid.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.SReLUActivation">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">SReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">al</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SReLUActivation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
+<p>Smooth rectified linear activation with learnable parameters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.SReLUActivation.gradient">
+<span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SReLUActivation.gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SReLUActivation.gradient" title="Link to this definition"></a></dt>
+<dd><p>Compute gradient of SReLU with current parameters.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.activation_functions.parse_activation">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">parse_activation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><span class="pre">ActivationFunction</span></a></span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#parse_activation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.parse_activation" title="Link to this definition"></a></dt>
+<dd><p>Parse a textual activation specification into an ActivationFunction.</p>
+<p>Examples include “ReLU”, “Sigmoid”, “HyperbolicTangent”,
+“AllReLU(alpha=0.1)”, “LeakyReLU(alpha=0.1)”, and
+“SReLU(al=0, tl=0, ar=0, tr=1)”.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nerva_jax.html" class="btn btn-neutral float-left" title="nerva_jax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.datasets.html" class="btn btn-neutral float-right" title="nerva_jax.datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

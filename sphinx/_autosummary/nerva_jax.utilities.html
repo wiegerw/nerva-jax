@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nerva_jax.utilities &mdash; nerva_jax  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="nerva_jax.softmax_functions" href="nerva_jax.softmax_functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            nerva_jax
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.matrix_operations.html">nerva_jax.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.optimizers.html">nerva_jax.optimizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.softmax_functions.html">nerva_jax.softmax_functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.set_jax_options"><code class="docutils literal notranslate"><span class="pre">set_jax_options()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.pp"><code class="docutils literal notranslate"><span class="pre">pp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.StopWatch"><code class="docutils literal notranslate"><span class="pre">StopWatch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.StopWatch.seconds"><code class="docutils literal notranslate"><span class="pre">StopWatch.seconds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.StopWatch.reset"><code class="docutils literal notranslate"><span class="pre">StopWatch.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.FunctionCall"><code class="docutils literal notranslate"><span class="pre">FunctionCall</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.FunctionCall.has_key"><code class="docutils literal notranslate"><span class="pre">FunctionCall.has_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.FunctionCall.get_value"><code class="docutils literal notranslate"><span class="pre">FunctionCall.get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.FunctionCall.as_scalar"><code class="docutils literal notranslate"><span class="pre">FunctionCall.as_scalar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.FunctionCall.as_string"><code class="docutils literal notranslate"><span class="pre">FunctionCall.as_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.parse_function_call"><code class="docutils literal notranslate"><span class="pre">parse_function_call()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz"><code class="docutils literal notranslate"><span class="pre">load_dict_from_npz()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nerva_jax</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_jax.html">nerva_jax</a></li>
+      <li class="breadcrumb-item active">nerva_jax.utilities</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nerva_jax.utilities.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nerva_jax.utilities">
+<span id="nerva-jax-utilities"></span><h1>nerva_jax.utilities<a class="headerlink" href="#module-nerva_jax.utilities" title="Link to this heading"></a></h1>
+<p>Miscellaneous utilities (formatting, timing, parsing, I/O).</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz" title="nerva_jax.utilities.load_dict_from_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict_from_npz</span></code></a>(filename)</p></td>
+<td><p>Loads a dictionary from a file in .npz format :param filename: a file name :return: a dictionary</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.parse_function_call" title="nerva_jax.utilities.parse_function_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_function_call</span></code></a>(text)</p></td>
+<td><p>Parse a string of the shape <cite>NAME(key1=value1, key2=value2, ...)</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp" title="nerva_jax.utilities.pp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp</span></code></a>(name, x)</p></td>
+<td><p>Print matrix header.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.set_jax_options" title="nerva_jax.utilities.set_jax_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_jax_options</span></code></a>()</p></td>
+<td><p>Configure NumPy print options for readable output.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.FunctionCall" title="nerva_jax.utilities.FunctionCall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FunctionCall</span></code></a>(name, arguments)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.StopWatch" title="nerva_jax.utilities.StopWatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWatch</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.set_jax_options">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">set_jax_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#set_jax_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.set_jax_options" title="Link to this definition"></a></dt>
+<dd><p>Configure NumPy print options for readable output.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.pp">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#pp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.pp" title="Link to this definition"></a></dt>
+<dd><p>Print matrix header.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.utilities.StopWatch">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">StopWatch</span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#StopWatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.StopWatch" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.utilities.StopWatch.seconds">
+<span class="sig-name descname"><span class="pre">seconds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#StopWatch.seconds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.StopWatch.seconds" title="Link to this definition"></a></dt>
+<dd><p>Get elapsed time in seconds since creation or last reset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.utilities.StopWatch.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#StopWatch.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.StopWatch.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset the timer to the current time.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nerva_jax.utilities.FunctionCall">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">FunctionCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#FunctionCall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.FunctionCall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.utilities.FunctionCall.has_key">
+<span class="sig-name descname"><span class="pre">has_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#FunctionCall.has_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.FunctionCall.has_key" title="Link to this definition"></a></dt>
+<dd><p>Check if the given key exists in parsed arguments.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.utilities.FunctionCall.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#FunctionCall.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.FunctionCall.get_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.utilities.FunctionCall.as_scalar">
+<span class="sig-name descname"><span class="pre">as_scalar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#FunctionCall.as_scalar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.FunctionCall.as_scalar" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.utilities.FunctionCall.as_string">
+<span class="sig-name descname"><span class="pre">as_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#FunctionCall.as_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.FunctionCall.as_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.parse_function_call">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">parse_function_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#nerva_jax.utilities.FunctionCall" title="nerva_jax.utilities.FunctionCall"><span class="pre">FunctionCall</span></a></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#parse_function_call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.parse_function_call" title="Link to this definition"></a></dt>
+<dd><p>Parse a string of the shape <cite>NAME(key1=value1, key2=value2, …)</cite>.
+If there are no arguments the parentheses may be omitted.
+If there is only one parameter, it is allowed to pass <cite>NAME(value)</cite> instead of <cite>NAME(key=value)</cite></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.load_dict_from_npz">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">load_dict_from_npz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">jax.numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#load_dict_from_npz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.load_dict_from_npz" title="Link to this definition"></a></dt>
+<dd><p>Loads a dictionary from a file in .npz format
+:param filename: a file name
+:return: a dictionary</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nerva_jax.softmax_functions.html" class="btn btn-neutral float-left" title="nerva_jax.softmax_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

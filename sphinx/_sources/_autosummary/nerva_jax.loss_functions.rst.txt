@@ -1,0 +1,52 @@
+nerva\_jax.loss\_functions
+==========================
+
+.. automodule:: nerva_jax.loss_functions
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      Cross_entropy_loss
+      Cross_entropy_loss_gradient
+      Logistic_cross_entropy_loss
+      Logistic_cross_entropy_loss_gradient
+      Negative_log_likelihood_loss
+      Negative_log_likelihood_loss_gradient
+      Softmax_cross_entropy_loss
+      Softmax_cross_entropy_loss_gradient
+      Softmax_cross_entropy_loss_gradient_one_hot
+      Squared_error_loss
+      Squared_error_loss_gradient
+      Stable_softmax_cross_entropy_loss
+      Stable_softmax_cross_entropy_loss_gradient
+      Stable_softmax_cross_entropy_loss_gradient_one_hot
+      cross_entropy_loss
+      cross_entropy_loss_gradient
+      logistic_cross_entropy_loss
+      logistic_cross_entropy_loss_gradient
+      negative_log_likelihood_loss
+      negative_log_likelihood_loss_gradient
+      parse_loss_function
+      softmax_cross_entropy_loss
+      softmax_cross_entropy_loss_gradient
+      softmax_cross_entropy_loss_gradient_one_hot
+      squared_error_loss
+      squared_error_loss_gradient
+      stable_softmax_cross_entropy_loss
+      stable_softmax_cross_entropy_loss_gradient
+      stable_softmax_cross_entropy_loss_gradient_one_hot
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CrossEntropyLossFunction
+      LogisticCrossEntropyLossFunction
+      LossFunction
+      NegativeLogLikelihoodLossFunction
+      SoftmaxCrossEntropyLossFunction
+      SquaredErrorLossFunction
+      StableSoftmaxCrossEntropyLossFunction
+   

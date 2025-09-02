@@ -1,0 +1,22 @@
+nerva\_jax.utilities
+====================
+
+.. automodule:: nerva_jax.utilities
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      load_dict_from_npz
+      parse_function_call
+      pp
+      set_jax_options
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FunctionCall
+      StopWatch
+   

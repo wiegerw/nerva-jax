@@ -1,0 +1,41 @@
+nerva\_jax.matrix\_operations
+=============================
+
+.. automodule:: nerva_jax.matrix_operations
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      Diag
+      apply
+      column_repeat
+      columns_max
+      columns_mean
+      columns_sum
+      diag
+      dot
+      elements_sum
+      exp
+      hadamard
+      identity
+      inv_sqrt
+      is_column_vector
+      is_row_vector
+      is_square
+      is_vector
+      log
+      log_sigmoid
+      ones
+      product
+      reciprocal
+      row_repeat
+      rows_max
+      rows_mean
+      rows_sum
+      sqrt
+      square
+      vector_size
+      zeros
+   
