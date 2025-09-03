@@ -674,35 +674,35 @@ pip <span class="nb">install </span>nerva-torch</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/multilayer_perceptron.py">multilayer_perceptron.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/multilayer_perceptron.py">multilayer_perceptron.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Defines the <code>MultilayerPerceptron</code> class, representing a feedforward neural network with multiple layers.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/layers.py">layers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/layers.py">layers.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implements various neural network layers, such as fully connected or custom layers.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/activation_functions.py">activation_functions.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/activation_functions.py">activation_functions.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Provides commonly used activation functions (e.g., ReLU, sigmoid, tanh) to introduce non-linearity.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/loss_functions.py">loss_functions.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/loss_functions.py">loss_functions.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implements loss functions used to quantify the difference between predictions and targets (e.g., cross-entropy, MSE).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/weights.py">weights.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/weight_initializers.py">weight_initializers.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Provides functions for initializing neural network weights, supporting different strategies for stability and performance.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/optimizers.py">optimizers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/optimizers.py">optimizers.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Defines optimizer functions that update neural network parameters based on computed gradients (e.g., SGD, momentum).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/learning_rate_schedulers.py">learning_rate_schedulers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/learning_rate.py">learning_rate.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implements learning rate schedulers to adjust the learning rate dynamically during training.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="../../../src/nerva_jax/training.py">training.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/training.py">training.py</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Contains the stochastic gradient descent (SGD) algorithms for training multilayer perceptrons.</p></td>
 </tr>
 </tbody>
@@ -1490,7 +1490,7 @@ A <code>.npz</code> file can store a dictionary of arrays in compressed form, wh
 A helper script is provided to download and preprocess commonly used datasets, including <strong>MNIST</strong> and <strong>CIFAR-10</strong>.</p>
 </div>
 <div class="paragraph">
-<p>The script is located at <code><a href="../../../data/prepare_data.py" class="bare">../../../data/prepare_data.py</a></code> and can be run from the command line.</p>
+<p>The script is located at <code><a href="https://github.com/wiegerw/nerva-jax/blob/main/data/prepare_data.py">data/prepare_data.py</a></code> and can be run from the command line.</p>
 </div>
 <div class="sect3">
 <h4 id="_mnist">MNIST</h4>
@@ -1586,7 +1586,7 @@ It is safe to rerun the script without overwriting existing files.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">python data/prepare_data.py <span class="nt">--help</span></code></pre>
+<pre class="rouge highlight"><code data-lang="bash">python prepare_data.py <span class="nt">--help</span></code></pre>
 </div>
 </div>
 </div>
@@ -1861,7 +1861,7 @@ This must be specified separately when reloading weights.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-09-02 15:53:25 UTC
+Last updated 2025-09-03 10:24:47 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
