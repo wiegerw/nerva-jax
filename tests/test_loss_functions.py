@@ -3,19 +3,13 @@
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
 import unittest
-from nerva_jax.loss_functions import SoftmaxCrossEntropyLossFunction, LossFunction, SquaredErrorLossFunction, \
+
+from nerva_jax.loss_functions import SoftmaxCrossEntropyLossFunction, SquaredErrorLossFunction, \
     NegativeLogLikelihoodLossFunction, CrossEntropyLossFunction, LogisticCrossEntropyLossFunction
-from nerva_jax.loss_functions import Squared_error_loss, Softmax_cross_entropy_loss
-from utilities import random_float_matrix, make_target, to_tensor, almost_equal
+from utilities import to_tensor
 
 
 class TestLossFunctions(unittest.TestCase):
-    def _test_loss(self, name: str, loss: LossFunction, expected_loss: float, Y, T):
-        print(f"\n=== test_loss {name} ===\n")
-        L = loss(Y, T)
-        self.assertTrue(almost_equal(expected_loss, L, 1e-5))
-
-
     def test_losses_for_case(self):
         Y = to_tensor([
             [0.23759169, 0.42272727, 0.33968104],
@@ -43,7 +37,7 @@ class TestLossFunctions(unittest.TestCase):
         ]
 
         for loss_fn, expected in losses:
-            L = loss_fn(Y, T).item()
+            L = loss_fn(Y, T)
             self.assertAlmostEqual(L, expected, places=5, msg=f"{loss_fn.__class__.__name__} failed: got {L}, expected {expected}")
     
     def test_loss2(self):

@@ -50,13 +50,13 @@ def almost_equal(a: Union[float, int, jnp.ndarray],
                  rel_tol: float = 1e-5,
                  abs_tol: float = 1e-8) -> bool:
     """
-    Compare two numeric scalars approximately.
+    Compare two numeric scalars (float, int, or 0-d NumPy array) approximately.
     Returns True if close within given relative and absolute tolerances.
     """
-    if isinstance(a, jnp.ndarray):
-        a = float(a)
-    if isinstance(b, jnp.ndarray):
-        b = float(b)
+    if isinstance(a, np.ndarray):
+        a = a.item()
+    if isinstance(b, np.ndarray):
+        b = b.item()
     return math.isclose(float(a), float(b), rel_tol=rel_tol, abs_tol=abs_tol)
 
 
@@ -112,6 +112,14 @@ def assert_tensors_are_close(name1: str, X1: jnp.ndarray,
         raise AssertionError(
             f"Arrays {name1} and {name2} are not close. Max diff: {max_diff:.8f}"
         )
+
+
+def as_float(x: jnp.ndarray) -> float:
+    """Convert a 0-d JAX array to a float."""
+    if x.ndim != 0:
+        raise ValueError("Input array must be 0-dimensional")
+    return float(x.item())
+
 
 # ------------------------
 # Test generation

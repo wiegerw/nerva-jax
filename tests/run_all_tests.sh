@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-# Run all tests in this tests-torch folder (mirrors nerva-*/tests behavior).
+
+# Copyright 2025 Wieger Wesselink.
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
+
+# Run all tests in this folder.
 # - Uses pytest if available (preferred for clearer, verbose output)
 # - Falls back to Python's unittest discovery otherwise
 # - Sets PYTHONPATH so tests import the local package from ../src

@@ -20,8 +20,10 @@ from nerva_jax.optimizers import MomentumOptimizer, NesterovOptimizer, Composite
 from nerva_jax.training import stochastic_gradient_descent
 from nerva_jax.weight_initializers import zero_bias, xavier_normalized_weights
 
+# ------------------------
+# Custom activation function
+# ------------------------
 
-# Define a custom activation function
 def Elu(alpha):
     return lambda X: jnp.where(X > 0, X, alpha * (jnp.exp(X) - 1))
 
@@ -41,14 +43,20 @@ class ELUActivation(ActivationFunction):
         return Elu_gradient(self.alpha)(X)
 
 
-# Define a custom weight initializer
+# ------------------------
+# Custom weight initializer
+# ------------------------
+
 def lecun_weights(W: Matrix) -> Matrix:
     K, D = W.shape
     stddev = jnp.sqrt(1.0 / D)
     return np.random.randn(K, D) * stddev
 
 
-# Define a custom loss function
+# ------------------------
+# Custom loss function
+# ------------------------
+
 class AbsoluteErrorLossFunction(LossFunction):
     def __call__(self, Y: Matrix, T: Matrix) -> float:
         return elements_sum(abs(Y - T))
