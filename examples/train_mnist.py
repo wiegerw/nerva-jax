@@ -26,6 +26,7 @@ def sgd(M: MultilayerPerceptron,
        ):
 
     training_time = 0.0
+    compute_statistics(M, learning_rate(0), loss, train_loader, test_loader, 0, elapsed_seconds=0.0)
 
     for epoch in range(epochs):
         timer = StopWatch()
