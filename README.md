@@ -29,7 +29,7 @@ If you're learning or teaching how neural networks work, most modern frameworks 
 - Includes symbolic validation to ensure correctness.
 - Modular and backend-agnostic: choose between JAX, NumPy, PyTorch, or TensorFlow.
 - Used as a reference implementation for research and education.
-- Modularity: the core operations rely on a small set of primitive [matrix operations](https://wiegerw.github.io/nerva-jax/doc/nerva-jax.html#_matrix_operations), making the logic easy to inspect, test, and validate.
+- Modularity: the core operations rely on a small set of primitive [matrix operations](https://wiegerw.github.io/nerva-jax/nerva-jax.html#_matrix_operations), making the logic easy to inspect, test, and validate.
 
 ---
 

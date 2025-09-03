@@ -1,8 +1,4 @@
-ifndef::python-root[:python-root: ../..]
-ifndef::package[:package: nerva_jax]
-ifndef::package-folder[:package-folder: nerva-jax]
 ifndef::library[:library: pass:q[_Nerva-JAX Python Library_]]
 ifndef::mlptool[:mlptool: mlp.py]
 ifndef::module[:module: nerva_jax]
-ifndef::root[:root: ../../..]
-:no-cpp:
+:repo-url: https://github.com/wiegerw/nerva-jax/blob/main
