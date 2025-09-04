@@ -84,8 +84,8 @@ def main():
 
     # configure layer 2
     layer2 = ActivationLayer(1024, 512, HyperbolicTangentActivation())
-    layer1.W = lecun_weights(layer1.W)
-    layer1.b = zero_bias(layer1.b)
+    layer2.W = lecun_weights(layer2.W)
+    layer2.b = zero_bias(layer2.b)
     layer2.set_optimizer("Momentum(0.8)")
 
     # configure layer 3
