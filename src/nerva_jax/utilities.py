@@ -9,6 +9,7 @@ import time
 from typing import Dict
 
 import jax.numpy as jnp
+import numpy as np
 from nerva_jax.matrix_operations import Matrix
 
 
@@ -121,10 +122,15 @@ def parse_function_call(text: str) -> FunctionCall:
 
 
 def load_dict_from_npz(filename: str) -> Dict[str, Matrix]:
-    """
-    Loads a dictionary from a file in .npz format
-    :param filename: a file name
-    :return: a dictionary with tensors
-    """
-
+    """Loads a dictionary from a file in .npz format"""
     return dict(jnp.load(filename, allow_pickle=False))
+
+
+def save_dict_to_npz(filename: str, data: Dict[str, jnp.ndarray]):
+    """Saves a dictionary of JAX arrays to a compressed .npz file."""
+    if not filename.endswith(".npz"):
+        filename += ".npz"
+
+    # convert JAX arrays to NumPy before saving
+    numpy_data = {key: np.array(value) for key, value in data.items()}
+    np.savez_compressed(filename, **numpy_data)

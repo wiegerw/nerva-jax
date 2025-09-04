@@ -9,7 +9,7 @@ from typing import List
 import jax.numpy as jnp
 from nerva_jax.layers import BatchNormalizationLayer, LinearLayer, parse_linear_layer
 from nerva_jax.matrix_operations import Matrix
-from nerva_jax.utilities import load_dict_from_npz, pp
+from nerva_jax.utilities import load_dict_from_npz, pp, save_dict_to_npz
 
 
 class MultilayerPerceptron(object):
@@ -58,6 +58,21 @@ class MultilayerPerceptron(object):
                 layer.W = jnp.array(data[f'W{index}'])
                 layer.b = jnp.array(data[f'b{index}'])
                 index += 1
+
+    def save_weights_and_bias(self, filename: str):
+        """Saves the weights and biases to a file in compressed .npz format.
+
+        The weight matrices are stored using the keys W1, W2, ... and the bias vectors using the keys b1, b2, ...
+        """
+        print(f"Saving weights and bias to {filename}")
+        data = {}
+        index = 1
+        for layer in self.layers:
+            if isinstance(layer, LinearLayer):
+                data[f"W{index}"] = layer.W
+                data[f"b{index}"] = layer.b
+                index += 1
+        save_dict_to_npz(filename, data)
 
 
 def parse_multilayer_perceptron(layer_specifications: List[str],
