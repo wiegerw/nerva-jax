@@ -7,7 +7,6 @@
 import random
 from typing import List
 import jax.numpy as jnp
-
 from nerva_jax.datasets import DataLoader, create_npz_dataloaders, to_one_hot
 from nerva_jax.learning_rate import LearningRateScheduler, parse_learning_rate
 from nerva_jax.loss_functions import LossFunction, parse_loss_function
@@ -15,20 +14,65 @@ from nerva_jax.matrix_operations import Matrix
 from nerva_jax.multilayer_perceptron import MultilayerPerceptron, parse_multilayer_perceptron
 from nerva_jax.utilities import StopWatch, pp, set_jax_options
 
+class TrainOptions:
+    debug = False
+    print_statistics = True
+    print_digits = 6
 
-class SGDOptions(object):
-    debug=False
+
+def _get_columns():
+    """Return column specifications as (name, width, format)."""
+    digits = TrainOptions.print_digits
+    float_width = digits + 6  # space for integer part + dot + decimals
+
+    return [
+        ("epoch", 5, "d"),                # integer, right-aligned
+        ("lr", float_width, f".{digits}f"),
+        ("loss", float_width, f".{digits}f"),
+        ("train_acc", float_width, f".{digits}f"),
+        ("test_acc", float_width, f".{digits}f"),
+        ("time (s)", float_width, f".{digits}f"),
+    ]
 
 
-def print_epoch(epoch, lr, loss, train_accuracy, test_accuracy, elapsed):
-    """Print formatted training statistics for one epoch."""
-    print(f'epoch {epoch:3}  '
-          f'lr: {lr:.8f}  '
-          f'loss: {loss:.8f}  '
-          f'train accuracy: {train_accuracy:.8f}  '
-          f'test accuracy: {test_accuracy:.8f}  '
-          f'time: {elapsed:.8f}s'
-         )
+def print_epoch_header():
+    if not TrainOptions.print_statistics:
+        return
+    cols = _get_columns()
+    header_fmt = " | ".join([f"{{:>{w}}}" for _, w, _ in cols])
+    total_width = sum(w for _, w, _ in cols) + 3 * (len(cols) - 1)
+
+    print("-" * total_width)
+    print(header_fmt.format(*[name for name, _, _ in cols]))
+    print("-" * total_width)
+
+
+def print_epoch_line(epoch, lr, loss, train_accuracy, test_accuracy, elapsed):
+    cols = _get_columns()
+    row_fmt = " | ".join([f"{{:>{w}{fmt}}}" for _, w, fmt in cols])
+    print(row_fmt.format(epoch, lr, loss, train_accuracy, test_accuracy, elapsed))
+
+
+def print_epoch_footer(total_time):
+    if not TrainOptions.print_statistics:
+        return
+    cols = _get_columns()
+    total_width = sum(w for _, w, _ in cols) + 3 * (len(cols) - 1)
+    digits = TrainOptions.print_digits
+
+    print("-" * total_width)
+    print(f"Total training time: {total_time:.{digits}f} s")
+
+
+def print_batch_debug_info(epoch: int, batch_idx: int,
+                           M: MultilayerPerceptron,
+                           X: Matrix, Y: Matrix, DY: Matrix):
+    """Print detailed debug information for a training batch."""
+    print(f'epoch: {epoch} batch: {batch_idx}')
+    M.info()
+    pp("X", X)
+    pp("Y", Y)
+    pp("DY", DY)
 
 
 def compute_accuracy(M: MultilayerPerceptron, data_loader: DataLoader):
@@ -55,24 +99,13 @@ def compute_loss(M: MultilayerPerceptron, data_loader: DataLoader, loss: LossFun
 
 def compute_statistics(M, lr, loss, train_loader, test_loader, epoch, elapsed_seconds=0.0, print_statistics=True):
     """Compute and optionally print loss and accuracy statistics."""
-    if print_statistics:
+    if TrainOptions.print_statistics:
         train_loss = compute_loss(M, train_loader, loss)
         train_accuracy = compute_accuracy(M, train_loader)
         test_accuracy = compute_accuracy(M, test_loader)
-        print_epoch(epoch, lr, train_loss, train_accuracy, test_accuracy, elapsed_seconds)
+        print_epoch_line(epoch, lr, train_loss, train_accuracy, test_accuracy, elapsed_seconds)
     else:
         print(f'epoch {epoch:3}')
-
-
-def print_batch_debug_info(epoch: int, batch_idx: int,
-                           M: MultilayerPerceptron,
-                           X: Matrix, Y: Matrix, DY: Matrix):
-    """Print detailed debug information for a training batch."""
-    print(f'epoch: {epoch} batch: {batch_idx}')
-    M.info()
-    pp("X", X)
-    pp("Y", Y)
-    pp("DY", DY)
 
 
 # tag::sgd[]
@@ -110,6 +143,7 @@ def stochastic_gradient_descent(M: MultilayerPerceptron,
         - Prints statistics and training time to standard output.
     """
 # tag::sgd[]
+    print_epoch_header()
     lr = learning_rate(0)
     compute_statistics(M, lr, loss, train_loader, test_loader, epoch=0)
     training_time = 0.0
@@ -122,7 +156,7 @@ def stochastic_gradient_descent(M: MultilayerPerceptron,
             Y = M.feedforward(X)
             DY = loss.gradient(Y, T) / X.shape[0]
 
-            if SGDOptions.debug:
+            if TrainOptions.debug:
                 print_batch_debug_info(epoch, k, M, X, Y, DY)
 
             M.backpropagate(Y, DY)
@@ -132,7 +166,7 @@ def stochastic_gradient_descent(M: MultilayerPerceptron,
         training_time += seconds
         compute_statistics(M, lr, loss, train_loader, test_loader, epoch=epoch + 1, elapsed_seconds=seconds)
 
-    print(f'Total training time for the {epochs} epochs: {training_time:.8f}s\n')
+    print_epoch_footer(training_time)
 # end::sgd[]
 
 
@@ -191,7 +225,7 @@ def stochastic_gradient_descent_plain(M: MultilayerPerceptron,
             X = Xtrain[batch, :]   # shape (batch_size, input_dim)
 
             # Convert labels to one-hot if needed
-            if Ttrain.ndim == 2 and Ttrain.shape[1] > 1:
+            if len(Ttrain.shape) == 2 and Ttrain.shape[1] > 1:
                 # already one-hot encoded
                 T = Ttrain[batch, :]
             else:
@@ -200,7 +234,7 @@ def stochastic_gradient_descent_plain(M: MultilayerPerceptron,
             Y = M.feedforward(X)
             DY = loss.gradient(Y, T) / X.shape[0]
 
-            if SGDOptions.debug:
+            if TrainOptions.debug:
                 print_batch_debug_info(epoch, k, M, X, Y, DY)
 
             M.backpropagate(Y, DY)
@@ -222,7 +256,8 @@ def train(layer_specifications: List[str],
          ):
     """High-level training convenience that wires parsing, data and SGD."""
 
-    SGDOptions.debug = debug
+    TrainOptions.debug = debug
+    set_numpy_options()
     set_jax_options()
     loss = parse_loss_function(loss)
     learning_rate = parse_learning_rate(learning_rate)
