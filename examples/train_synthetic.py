@@ -12,7 +12,7 @@ from nerva_jax.activation_functions import ReLUActivation
 from nerva_jax.datasets import MemoryDataLoader
 from nerva_jax.layers import ActivationLayer, LinearLayer
 from nerva_jax.learning_rate import MultiStepLRScheduler
-from nerva_jax.loss_functions import SoftmaxCrossEntropyLossFunction
+from nerva_jax.loss_functions import StableSoftmaxCrossEntropyLossFunction
 from nerva_jax.multilayer_perceptron import MultilayerPerceptron
 from nerva_jax.training import stochastic_gradient_descent
 
@@ -35,7 +35,6 @@ def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features
     Ttrain = T[train_batch].astype(np.int64)
     Xtest = X[test_batch].astype(np.float32)
     Ttest = T[test_batch].astype(np.int64)
-
     return Xtrain, Ttrain, Xtest, Ttest
 
 
@@ -66,7 +65,7 @@ def main():
     test_loader = MemoryDataLoader(Xtest, Ttest, batch_size=batch_size, num_classes=num_classes)
 
     M = create_mlp([(num_features, 200), (200, 200), (200, num_classes)])
-    loss = SoftmaxCrossEntropyLossFunction()
+    loss = StableSoftmaxCrossEntropyLossFunction()
     epochs = 5
     learning_rate = MultiStepLRScheduler(lr=0.1, milestones=[10, 15], gamma=0.3)
     stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
