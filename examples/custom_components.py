@@ -98,11 +98,8 @@ def main():
     M.layers = [layer1, layer2, layer3]
 
     loss: LossFunction = AbsoluteErrorLossFunction()
-
     learning_rate = TimeBasedScheduler(lr=0.1, decay=0.09)
-
     epochs = 5
-
     stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
 
 
