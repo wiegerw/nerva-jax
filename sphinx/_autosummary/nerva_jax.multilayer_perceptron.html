@@ -57,6 +57,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#nerva_jax.multilayer_perceptron.MultilayerPerceptron.optimize"><code class="docutils literal notranslate"><span class="pre">MultilayerPerceptron.optimize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#nerva_jax.multilayer_perceptron.MultilayerPerceptron.info"><code class="docutils literal notranslate"><span class="pre">MultilayerPerceptron.info()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#nerva_jax.multilayer_perceptron.MultilayerPerceptron.load_weights_and_bias"><code class="docutils literal notranslate"><span class="pre">MultilayerPerceptron.load_weights_and_bias()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nerva_jax.multilayer_perceptron.MultilayerPerceptron.save_weights_and_bias"><code class="docutils literal notranslate"><span class="pre">MultilayerPerceptron.save_weights_and_bias()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.multilayer_perceptron.parse_multilayer_perceptron"><code class="docutils literal notranslate"><span class="pre">parse_multilayer_perceptron()</span></code></a></li>
@@ -144,6 +145,13 @@
 <dd><p>Loads the weights and biases from a file in .npz format</p>
 <p>The weight matrices are stored using the keys W1, W2, … and the bias vectors using the keys b1, b2, …
 :param filename: the name of the file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nerva_jax.multilayer_perceptron.MultilayerPerceptron.save_weights_and_bias">
+<span class="sig-name descname"><span class="pre">save_weights_and_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/multilayer_perceptron.html#MultilayerPerceptron.save_weights_and_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.multilayer_perceptron.MultilayerPerceptron.save_weights_and_bias" title="Link to this definition"></a></dt>
+<dd><p>Saves the weights and biases to a file in compressed .npz format.</p>
+<p>The weight matrices are stored using the keys W1, W2, … and the bias vectors using the keys b1, b2, …</p>
 </dd></dl>
 
 </dd></dl>

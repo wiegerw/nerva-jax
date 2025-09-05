@@ -91,7 +91,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">BatchNormalizationLayer</span><span class="p">,</span> <span class="n">LinearLayer</span><span class="p">,</span> <span class="n">parse_linear_layer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dict_from_npz</span><span class="p">,</span> <span class="n">pp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dict_from_npz</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">save_dict_to_npz</span>
 
 
 <div class="viewcode-block" id="MultilayerPerceptron">
@@ -156,6 +156,24 @@
                 <span class="n">layer</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;W</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
                 <span class="n">layer</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;b</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
                 <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="MultilayerPerceptron.save_weights_and_bias">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.save_weights_and_bias">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_weights_and_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves the weights and biases to a file in compressed .npz format.</span>
+
+<span class="sd">        The weight matrices are stored using the keys W1, W2, ... and the bias vectors using the keys b1, b2, ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving weights and bias to </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">LinearLayer</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">W</span>
+                <span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;b</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">b</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">save_dict_to_npz</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 </div>
 
 

@@ -11,6 +11,8 @@ nerva\_jax.utilities
       load_dict_from_npz
       parse_function_call
       pp
+      pp_numpy
+      save_dict_to_npz
       set_jax_options
    
    .. rubric:: Classes

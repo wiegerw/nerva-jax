@@ -56,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.utilities</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.set_jax_options"><code class="docutils literal notranslate"><span class="pre">set_jax_options()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.pp_numpy"><code class="docutils literal notranslate"><span class="pre">pp_numpy()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.pp"><code class="docutils literal notranslate"><span class="pre">pp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.StopWatch"><code class="docutils literal notranslate"><span class="pre">StopWatch</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#nerva_jax.utilities.StopWatch.seconds"><code class="docutils literal notranslate"><span class="pre">StopWatch.seconds()</span></code></a></li>
@@ -71,6 +72,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.parse_function_call"><code class="docutils literal notranslate"><span class="pre">parse_function_call()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz"><code class="docutils literal notranslate"><span class="pre">load_dict_from_npz()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.save_dict_to_npz"><code class="docutils literal notranslate"><span class="pre">save_dict_to_npz()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.weight_initializers.html">nerva_jax.weight_initializers</a></li>
@@ -108,13 +110,19 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz" title="nerva_jax.utilities.load_dict_from_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict_from_npz</span></code></a>(filename)</p></td>
-<td><p>Loads a dictionary from a file in .npz format :param filename: a file name :return: a dictionary with tensors</p></td>
+<td><p>Loads a dictionary from a file in .npz format</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.parse_function_call" title="nerva_jax.utilities.parse_function_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_function_call</span></code></a>(text)</p></td>
 <td><p>Parse a string of the shape <cite>NAME(key1=value1, key2=value2, ...)</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp" title="nerva_jax.utilities.pp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp</span></code></a>(name, x)</p></td>
-<td><p>Pretty-print a tensor with name and shape info.</p></td>
+<td><p>Pretty-print a tensor with name and shape info, using NumPy formatting.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp_numpy" title="nerva_jax.utilities.pp_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp_numpy</span></code></a>(name, arr)</p></td>
+<td><p>Internal helper: pretty-print using NumPy arrays only.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.save_dict_to_npz" title="nerva_jax.utilities.save_dict_to_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_dict_to_npz</span></code></a>(filename, data)</p></td>
+<td><p>Saves a dictionary of JAX arrays to a compressed .npz file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.set_jax_options" title="nerva_jax.utilities.set_jax_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_jax_options</span></code></a>()</p></td>
 <td><p>Configure NumPy print options for readable output.</p></td>
@@ -139,9 +147,15 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.pp_numpy">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">pp_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#pp_numpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.pp_numpy" title="Link to this definition"></a></dt>
+<dd><p>Internal helper: pretty-print using NumPy arrays only.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="nerva_jax.utilities.pp">
 <span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#pp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.pp" title="Link to this definition"></a></dt>
-<dd><p>Pretty-print a tensor with name and shape info.</p>
+<dd><p>Pretty-print a tensor with name and shape info, using NumPy formatting.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -200,9 +214,13 @@ If there is only one parameter, it is allowed to pass <cite>NAME(value)</cite> i
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_jax.utilities.load_dict_from_npz">
 <span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">load_dict_from_npz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">jax.numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#load_dict_from_npz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.load_dict_from_npz" title="Link to this definition"></a></dt>
-<dd><p>Loads a dictionary from a file in .npz format
-:param filename: a file name
-:return: a dictionary with tensors</p>
+<dd><p>Loads a dictionary from a file in .npz format</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.save_dict_to_npz">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">save_dict_to_npz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">jax.numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#save_dict_to_npz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.save_dict_to_npz" title="Link to this definition"></a></dt>
+<dd><p>Saves a dictionary of JAX arrays to a compressed .npz file.</p>
 </dd></dl>
 
 </section>
