@@ -18,12 +18,20 @@ def set_jax_options():
     jnp.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=True, linewidth=160)
 
 
-def pp(name: str, x: Matrix):
-    """Pretty-print a tensor with name and shape info."""
-    if x.ndim == 1:
-        print(f'{name} ({x.shape[0]})\n{x}')
+def pp_numpy(name: str, arr: np.ndarray):
+    """Internal helper: pretty-print using NumPy arrays only."""
+    if arr.ndim == 1:
+        print(f"{name} ({arr.shape[0]})")
+    elif arr.ndim == 2:
+        print(f"{name} ({arr.shape[0]}x{arr.shape[1]})")
     else:
-        print(f'{name} ({x.shape[0]}x{x.shape[1]})\n{x}')
+        print(f"{name} {arr.shape}")
+    print(arr)
+
+
+def pp(name: str, x: jnp.ndarray):
+    """Pretty-print a tensor with name and shape info, using NumPy formatting."""
+    pp_numpy(name, np.array(x))
 
 
 class StopWatch(object):
