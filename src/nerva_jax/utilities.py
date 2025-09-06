@@ -131,7 +131,7 @@ def parse_function_call(text: str) -> FunctionCall:
 
 def load_dict_from_npz(filename: str) -> Dict[str, Matrix]:
     """Loads a dictionary from a file in .npz format"""
-    return dict(jnp.load(filename, allow_pickle=False))
+    return dict(np.load(filename, allow_pickle=False))
 
 
 def save_dict_to_npz(filename: str, data: Dict[str, jnp.ndarray]):
