@@ -9,7 +9,7 @@ from typing import List, Tuple
 import sklearn.datasets as dt
 import numpy as np
 from nerva_jax.activation_functions import ReLUActivation
-from nerva_jax.datasets import MemoryDataLoader
+from nerva_jax.datasets import DataLoader
 from nerva_jax.layers import ActivationLayer, LinearLayer
 from nerva_jax.learning_rate import MultiStepLRScheduler
 from nerva_jax.loss_functions import StableSoftmaxCrossEntropyLossFunction
@@ -47,7 +47,7 @@ def create_mlp(sizes: List[Tuple[int, int]]):
         else:
             layer = ActivationLayer(input_size, output_size, ReLUActivation())
         layer.set_optimizer('Momentum(0.9)')
-        layer.set_weights('Xavier')
+        layer.set_weights('XavierNormal')
         M.layers.append(layer)
 
     return M
@@ -61,8 +61,8 @@ def main():
     batch_size = 100
 
     Xtrain, Ttrain, Xtest, Ttest = generate_synthetic_dataset(num_train_samples, num_test_samples, num_features, num_classes)
-    train_loader = MemoryDataLoader(Xtrain, Ttrain, batch_size=batch_size, num_classes=num_classes)
-    test_loader = MemoryDataLoader(Xtest, Ttest, batch_size=batch_size, num_classes=num_classes)
+    train_loader = DataLoader(Xtrain, Ttrain, batch_size=batch_size, num_classes=num_classes)
+    test_loader = DataLoader(Xtest, Ttest, batch_size=batch_size, num_classes=num_classes)
 
     M = create_mlp([(num_features, 200), (200, 200), (200, num_classes)])
     loss = StableSoftmaxCrossEntropyLossFunction()

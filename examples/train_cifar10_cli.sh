@@ -17,7 +17,7 @@ fi
 python3 -u ../tools/mlp.py \
         --layers="ReLU;ReLU;Linear" \
         --layer-sizes="3072;1024;512;10" \
-        --layer-weights="Xavier;Xavier;Xavier" \
+        --layer-weights="XavierNormal;XavierNormal;XavierNormal" \
         --optimizers="Momentum(0.9);Momentum(0.9);Momentum(0.9)" \
         --batch-size=100 \
         --epochs=5 \

@@ -86,7 +86,7 @@ def main():
         layer.set_optimizer('Momentum(0.9)')
 
         # Set the weight initialization method
-        layer.set_weights('Xavier')
+        layer.set_weights('XavierNormal')
 
     # Define the loss function
     loss = StableSoftmaxCrossEntropyLossFunction()

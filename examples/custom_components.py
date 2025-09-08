@@ -18,7 +18,7 @@ from nerva_jax.matrix_operations import elements_sum, Matrix
 from nerva_jax.multilayer_perceptron import MultilayerPerceptron
 from nerva_jax.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
 from nerva_jax.training import stochastic_gradient_descent
-from nerva_jax.weight_initializers import zero_bias, xavier_normalized_weights
+from nerva_jax.weight_initializers import bias_zero, weights_xavier_normal
 
 
 # ------------------------
@@ -49,7 +49,7 @@ class ELUActivation(ActivationFunction):
 # Custom weight initializer
 # ------------------------
 
-def lecun_weights(W: Matrix) -> Matrix:
+def weights_lecun(W: Matrix) -> Matrix:
     K, D = W.shape
     stddev = jnp.sqrt(1.0 / D)
     return np.random.randn(K, D) * stddev
@@ -78,21 +78,21 @@ def main():
 
     # configure layer 1
     layer1 = ActivationLayer(784, 1024, ELUActivation(0.1))
-    xavier_normalized_weights(layer1.W)
-    zero_bias(layer1.b)
+    layer1.W = weights_xavier_normal(layer1.W)
+    layer1.b = bias_zero(layer1.b)
     optimizer_W = MomentumOptimizer(layer1, "W", "DW", 0.9)
     optimizer_b = NesterovOptimizer(layer1, "b", "Db", 0.75)
     layer1.optimizer = CompositeOptimizer([optimizer_W, optimizer_b])
 
     # configure layer 2
     layer2 = ActivationLayer(1024, 512, HyperbolicTangentActivation())
-    layer2.W = lecun_weights(layer2.W)
-    layer2.b = zero_bias(layer2.b)
+    layer2.W = weights_lecun(layer2.W)
+    layer2.b = bias_zero(layer2.b)
     layer2.set_optimizer("Momentum(0.8)")
 
     # configure layer 3
     layer3 = LinearLayer(512, 10)
-    layer3.set_weights("He")
+    layer3.set_weights("HeNormal")
     layer3.set_optimizer("GradientDescent")
 
     M.layers = [layer1, layer2, layer3]

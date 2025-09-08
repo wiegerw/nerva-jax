@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import List
 
 from nerva_jax.learning_rate import ConstantScheduler
-from nerva_jax.datasets import MemoryDataLoader, from_one_hot
+from nerva_jax.datasets import DataLoader, from_one_hot
 from nerva_jax.loss_functions import SoftmaxCrossEntropyLossFunction
 from nerva_jax.matrix_operations import Matrix
 from nerva_jax.multilayer_perceptron import parse_multilayer_perceptron, MultilayerPerceptron
@@ -47,7 +47,7 @@ class MLPSpec:
 
 def construct_mlp(linear_layer_sizes: List[int]):
     layer_specifications = ["ReLU", "ReLU", "Linear"]
-    linear_layer_weights = ["Xavier", "Xavier", "Xavier"]
+    linear_layer_weights = ["XavierNormal", "XavierNormal", "XavierNormal"]
     layer_optimizers = ["GradientDescent", "GradientDescent", "GradientDescent"]
     return parse_multilayer_perceptron(layer_specifications,
                                        linear_layer_sizes,
@@ -113,13 +113,13 @@ class TestMLP(unittest.TestCase):
         assert_tensors_are_close("DY (sgd_plain after)", DY, "DY2", spec.DY2, atol=1e-3, rtol=1e-3)
 
     def _test_sgd_loader(self, spec: MLPSpec):
-        """Test stochastic_gradient_descent with MemoryDataLoader against precomputed values."""
+        """Test stochastic_gradient_descent with DataLoader against precomputed values."""
         M = self._initialize_mlp(spec)
         loss = SoftmaxCrossEntropyLossFunction()
         lr_sched = ConstantScheduler(spec.lr)
 
-        train_loader = MemoryDataLoader(spec.X, from_one_hot(spec.T), batch_size=spec.batch_size, num_classes=spec.sizes[-1])
-        test_loader = MemoryDataLoader(spec.X, from_one_hot(spec.T), batch_size=spec.batch_size, num_classes=spec.sizes[-1])
+        train_loader = DataLoader(spec.X, from_one_hot(spec.T), batch_size=spec.batch_size, num_classes=spec.sizes[-1])
+        test_loader = DataLoader(spec.X, from_one_hot(spec.T), batch_size=spec.batch_size, num_classes=spec.sizes[-1])
 
         # First forward pass before training
         Y = M.feedforward(spec.X)

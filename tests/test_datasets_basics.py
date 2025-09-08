@@ -7,7 +7,7 @@ import tempfile
 import unittest
 import numpy as np
 from utilities import randn, to_long, equal_tensors
-from nerva_jax.datasets import to_one_hot, from_one_hot, MemoryDataLoader, infer_num_classes, create_npz_dataloaders
+from nerva_jax.datasets import to_one_hot, from_one_hot, DataLoader, infer_num_classes, create_npz_dataloaders
 from nerva_jax.matrix_operations import identity
 
 
@@ -21,14 +21,16 @@ class TestDatasetsBasics(unittest.TestCase):
     def test_memory_dataloader_batches_and_shapes(self):
         X = randn(10, 4)
         T = to_long([0, 1, 0, 2, 1, 2, 0, 1, 2, 2])
-        loader = MemoryDataLoader(X, T, batch_size=3)  # num_classes inferred -> 3
+        loader = DataLoader(X, T, batch_size=3)  # num_classes inferred -> 4
         batches = list(iter(loader))
-        # floor(10/3) = 3 batches
-        self.assertEqual(len(batches), 3)
-        for Xi, Ti in batches:
-            self.assertEqual(Xi.shape[0], 3)
-            # one-hot
-            self.assertEqual(Ti.shape[1], 3)
+        self.assertEqual(len(batches), 4)
+        for i, (Xi, Ti) in enumerate(batches):
+            if i < 3:
+                self.assertEqual(Xi.shape[0], 3)
+                self.assertEqual(Ti.shape[0], 3)
+            else:
+                self.assertEqual(Xi.shape[0], 1)
+                self.assertEqual(Ti.shape[0], 1)
 
     def test_infer_num_classes_indices_vs_onehot(self):
         Ttrain = to_long([0, 1, 2, 1])

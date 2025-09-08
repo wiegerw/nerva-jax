@@ -106,20 +106,26 @@ Specify the weight initialization method for linear layers. Supported values:
 |===
 |Specification |Description
 
-|`Xavier`
-|Xavier initialization
+|`XavierNormal`
+|Xavier Glorot weights (normal distribution)
 
-|`XavierNormalized`
-|Normalized Xavier initialization
+|`XavierUniform`
+|Xavier Glorot weights (uniform distribution)
 
-|`He`
-|Kaiming He initialization
+|`HeNormal`
+|Kaiming He weights (normal distribution)
+
+|`HeUniform`
+|Kaiming He weights (uniform distribution)
+
+|`Normal`
+|Normal distribution
 
 |`Uniform`
-|Uniform random initialization
+|Uniform distribution
 
 |`Zero`
-|All weights initialized to zero (usually not recommended)
+|All weights are zero (N.B. This is not recommended for training)
 |===
 // end::layer-configuration-options[]
 

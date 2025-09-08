@@ -28,7 +28,7 @@ def from_one_hot(one_hot: Matrix) -> Matrix:
     return jnp.argmax(one_hot, axis=1)
 
 
-class MemoryDataLoader(object):
+class DataLoader(object):
     """A minimal in-memory data loader with an interface similar to torch.utils.data.DataLoader.
 
     Notes / Warning:
@@ -54,18 +54,25 @@ class MemoryDataLoader(object):
         self.num_classes = int(Tdata.max() + 1) if num_classes == 0 and len(Tdata.shape) == 1 else num_classes
 
     def __iter__(self):
-        N = self.Xdata.shape[0]  # N is the number of examples
-        K = N // self.batch_size  # K is the number of batches
-        for k in range(K):
-            batch = jnp.array(range(k * self.batch_size, (k + 1) * self.batch_size))
-            yield self.Xdata[batch], to_one_hot(self.Tdata[batch], self.num_classes) if self.num_classes else self.Tdata[batch]
+        N = self.Xdata.shape[0]  # total number of examples
+        for start in range(0, N, self.batch_size):
+            end = min(start + self.batch_size, N)
+            batch = slice(start, end)
+            Xbatch = self.Xdata[batch]
+            Tbatch = self.Tdata[batch]
+            if self.num_classes:
+                Tbatch = to_one_hot(Tbatch, self.num_classes)
+            yield Xbatch, Tbatch
 
     def __len__(self):
-        """Number of batches."""
-        return self.Xdata.shape[0] // self.batch_size
+        """Number of batches (including incomplete last batch)."""
+        N = self.Xdata.shape[0]
+        return (N + self.batch_size - 1) // self.batch_size  # ceiling division
 
-
-DataLoader = MemoryDataLoader
+    @property
+    def dataset_size(self):
+        """Total number of examples."""
+        return int(self.Xdata.shape[0])
 
 
 def max_(X: Matrix) -> Union[int, float]:
@@ -90,7 +97,7 @@ def infer_num_classes(Ttrain: Matrix, Ttest: Matrix) -> int:
     return int(max(max_train, max_test) + 1)
 
 
-def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[MemoryDataLoader, MemoryDataLoader]:
+def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[DataLoader, DataLoader]:
     """Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors."""
     path = Path(filename)
     print(f'Loading dataset from file {path}')
@@ -103,6 +110,6 @@ def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[MemoryD
     # Determine number of classes robustly to avoid underestimating when some classes are absent
     num_classes = infer_num_classes(Ttrain, Ttest)
 
-    train_loader = MemoryDataLoader(jnp.array(Xtrain), jnp.array(Ttrain), batch_size, num_classes=num_classes)
-    test_loader = MemoryDataLoader(jnp.array(Xtest), jnp.array(Ttest), batch_size, num_classes=num_classes)
+    train_loader = DataLoader(jnp.array(Xtrain), jnp.array(Ttrain), batch_size, num_classes=num_classes)
+    test_loader = DataLoader(jnp.array(Xtest), jnp.array(Ttest), batch_size, num_classes=num_classes)
     return train_loader, test_loader
