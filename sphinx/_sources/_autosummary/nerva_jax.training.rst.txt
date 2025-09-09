@@ -12,7 +12,9 @@ nerva\_jax.training
       compute_loss
       compute_statistics
       print_batch_debug_info
-      print_epoch
+      print_epoch_footer
+      print_epoch_header
+      print_epoch_line
       stochastic_gradient_descent
       stochastic_gradient_descent_plain
       train
@@ -21,5 +23,5 @@ nerva\_jax.training
 
    .. autosummary::
    
-      SGDOptions
+      TrainOptions
    

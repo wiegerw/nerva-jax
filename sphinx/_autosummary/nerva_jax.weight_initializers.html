@@ -55,10 +55,16 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.utilities.html">nerva_jax.utilities</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.weight_initializers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.zero_bias"><code class="docutils literal notranslate"><span class="pre">zero_bias()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.xavier_weights"><code class="docutils literal notranslate"><span class="pre">xavier_weights()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.xavier_normalized_weights"><code class="docutils literal notranslate"><span class="pre">xavier_normalized_weights()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.he_weights"><code class="docutils literal notranslate"><span class="pre">he_weights()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.bias_uniform"><code class="docutils literal notranslate"><span class="pre">bias_uniform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.bias_normal"><code class="docutils literal notranslate"><span class="pre">bias_normal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.bias_zero"><code class="docutils literal notranslate"><span class="pre">bias_zero()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_uniform"><code class="docutils literal notranslate"><span class="pre">weights_uniform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_normal"><code class="docutils literal notranslate"><span class="pre">weights_normal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_zero"><code class="docutils literal notranslate"><span class="pre">weights_zero()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_xavier_uniform"><code class="docutils literal notranslate"><span class="pre">weights_xavier_uniform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_xavier_normal"><code class="docutils literal notranslate"><span class="pre">weights_xavier_normal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_he_normal"><code class="docutils literal notranslate"><span class="pre">weights_he_normal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.weights_he_uniform"><code class="docutils literal notranslate"><span class="pre">weights_he_uniform()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.weight_initializers.set_layer_weights"><code class="docutils literal notranslate"><span class="pre">set_layer_weights()</span></code></a></li>
 </ul>
 </li>
@@ -95,45 +101,107 @@
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.he_weights" title="nerva_jax.weight_initializers.he_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">he_weights</span></code></a>(W)</p></td>
-<td><p>Initialize weights using He initialization for ReLU networks.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.bias_normal" title="nerva_jax.weight_initializers.bias_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bias_normal</span></code></a>(b[, mean, std])</p></td>
+<td><p>Normal (Gaussian) initialization with given mean and std.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.bias_uniform" title="nerva_jax.weight_initializers.bias_uniform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bias_uniform</span></code></a>(b_[, a, b])</p></td>
+<td><p>Uniform initialization within [a, b).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.bias_zero" title="nerva_jax.weight_initializers.bias_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bias_zero</span></code></a>(b)</p></td>
+<td><p>Initialize biases to zero.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.set_layer_weights" title="nerva_jax.weight_initializers.set_layer_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_layer_weights</span></code></a>(layer, text)</p></td>
 <td><p>Initialize a layer's parameters according to a named scheme.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.xavier_normalized_weights" title="nerva_jax.weight_initializers.xavier_normalized_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xavier_normalized_weights</span></code></a>(W)</p></td>
-<td><p>Initialize weights using normalized Xavier initialization.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_he_normal" title="nerva_jax.weight_initializers.weights_he_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_he_normal</span></code></a>(W)</p></td>
+<td><p>He / Kaiming normal initialization (for ReLU).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.xavier_weights" title="nerva_jax.weight_initializers.xavier_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xavier_weights</span></code></a>(W)</p></td>
-<td><p>Initialize weights using Xavier/Glorot initialization.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_he_uniform" title="nerva_jax.weight_initializers.weights_he_uniform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_he_uniform</span></code></a>(W)</p></td>
+<td><p>He / Kaiming uniform initialization (for ReLU, less common).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.zero_bias" title="nerva_jax.weight_initializers.zero_bias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_bias</span></code></a>(b)</p></td>
-<td><p>Zero bias.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_normal" title="nerva_jax.weight_initializers.weights_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_normal</span></code></a>(W[, mean, std])</p></td>
+<td><p>Normal (Gaussian) initialization with given mean and std.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_uniform" title="nerva_jax.weight_initializers.weights_uniform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_uniform</span></code></a>(W[, a, b])</p></td>
+<td><p>Uniform initialization within [a, b).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_xavier_normal" title="nerva_jax.weight_initializers.weights_xavier_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_xavier_normal</span></code></a>(W)</p></td>
+<td><p>Xavier / Glorot normal initialization (for tanh/sigmoid).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_xavier_uniform" title="nerva_jax.weight_initializers.weights_xavier_uniform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_xavier_uniform</span></code></a>(W)</p></td>
+<td><p>Xavier / Glorot uniform initialization (for tanh/sigmoid).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.weight_initializers.weights_zero" title="nerva_jax.weight_initializers.weights_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights_zero</span></code></a>(W)</p></td>
+<td><p>Initialize weights to zero.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
-<dt class="sig sig-object py" id="nerva_jax.weight_initializers.zero_bias">
-<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">zero_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#zero_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.zero_bias" title="Link to this definition"></a></dt>
-<dd><p>Zero bias.</p>
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.bias_uniform">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">bias_uniform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#bias_uniform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.bias_uniform" title="Link to this definition"></a></dt>
+<dd><p>Uniform initialization within [a, b).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nerva_jax.weight_initializers.xavier_weights">
-<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">xavier_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#xavier_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.xavier_weights" title="Link to this definition"></a></dt>
-<dd><p>Initialize weights using Xavier/Glorot initialization.</p>
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.bias_normal">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">bias_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#bias_normal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.bias_normal" title="Link to this definition"></a></dt>
+<dd><p>Normal (Gaussian) initialization with given mean and std.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nerva_jax.weight_initializers.xavier_normalized_weights">
-<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">xavier_normalized_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#xavier_normalized_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.xavier_normalized_weights" title="Link to this definition"></a></dt>
-<dd><p>Initialize weights using normalized Xavier initialization.</p>
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.bias_zero">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">bias_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#bias_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.bias_zero" title="Link to this definition"></a></dt>
+<dd><p>Initialize biases to zero.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nerva_jax.weight_initializers.he_weights">
-<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">he_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#he_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.he_weights" title="Link to this definition"></a></dt>
-<dd><p>Initialize weights using He initialization for ReLU networks.</p>
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_uniform">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_uniform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_uniform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_uniform" title="Link to this definition"></a></dt>
+<dd><p>Uniform initialization within [a, b).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_normal">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_normal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_normal" title="Link to this definition"></a></dt>
+<dd><p>Normal (Gaussian) initialization with given mean and std.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_zero">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_zero" title="Link to this definition"></a></dt>
+<dd><p>Initialize weights to zero.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_xavier_uniform">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_xavier_uniform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_xavier_uniform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_xavier_uniform" title="Link to this definition"></a></dt>
+<dd><p>Xavier / Glorot uniform initialization (for tanh/sigmoid).</p>
+<p>K = fan-out (output size)
+D = fan-in  (input size)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_xavier_normal">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_xavier_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_xavier_normal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_xavier_normal" title="Link to this definition"></a></dt>
+<dd><p>Xavier / Glorot normal initialization (for tanh/sigmoid).</p>
+<p>K = fan-out (output size)
+D = fan-in  (input size)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_he_normal">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_he_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_he_normal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_he_normal" title="Link to this definition"></a></dt>
+<dd><p>He / Kaiming normal initialization (for ReLU).</p>
+<p>K = fan-out (output size)
+D = fan-in  (input size)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.weight_initializers.weights_he_uniform">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">weights_he_uniform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/weight_initializers.html#weights_he_uniform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.weight_initializers.weights_he_uniform" title="Link to this definition"></a></dt>
+<dd><p>He / Kaiming uniform initialization (for ReLU, less common).</p>
+<p>K = fan-out (output size)
+D = fan-in  (input size)</p>
 </dd></dl>
 
 <dl class="py function">

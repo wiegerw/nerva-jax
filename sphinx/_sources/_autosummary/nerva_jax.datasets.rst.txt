@@ -19,5 +19,4 @@ nerva\_jax.datasets
    .. autosummary::
    
       DataLoader
-      MemoryDataLoader
    

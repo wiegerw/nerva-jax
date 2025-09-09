@@ -8,9 +8,15 @@ nerva\_jax.weight\_initializers
 
    .. autosummary::
    
-      he_weights
+      bias_normal
+      bias_uniform
+      bias_zero
       set_layer_weights
-      xavier_normalized_weights
-      xavier_weights
-      zero_bias
+      weights_he_normal
+      weights_he_uniform
+      weights_normal
+      weights_uniform
+      weights_xavier_normal
+      weights_xavier_uniform
+      weights_zero
    
