@@ -776,20 +776,20 @@ pip <span class="nb">install </span>nerva-torch</code></pre>
 
     <span class="cp"># configure layer 1
 </span>    <span class="n">layer1</span> <span class="o">=</span> <span class="n">ActivationLayer</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">ReLUActivation</span><span class="p">())</span>
-    <span class="n">xavier_normalized_weights</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">W</span><span class="p">)</span>
-    <span class="n">zero_bias</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">layer1</span><span class="p">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">weights_xavier_normal</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">layer1</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">bias_zero</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">b</span><span class="p">)</span>
     <span class="n">optimizer_W</span> <span class="o">=</span> <span class="n">MomentumOptimizer</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="s">"W"</span><span class="p">,</span> <span class="s">"DW"</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
     <span class="n">optimizer_b</span> <span class="o">=</span> <span class="n">NesterovOptimizer</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"Db"</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
     <span class="n">layer1</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">CompositeOptimizer</span><span class="p">([</span><span class="n">optimizer_W</span><span class="p">,</span> <span class="n">optimizer_b</span><span class="p">])</span>
 
     <span class="cp"># configure layer 2
 </span>    <span class="n">layer2</span> <span class="o">=</span> <span class="n">ActivationLayer</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">LeakyReLUActivation</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
-    <span class="n">layer2</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"Xavier"</span><span class="p">)</span>
+    <span class="n">layer2</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"XavierNormal"</span><span class="p">)</span>
     <span class="n">layer2</span><span class="p">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="s">"Momentum(0.8)"</span><span class="p">)</span>
 
     <span class="cp"># configure layer 3
 </span>    <span class="n">layer3</span> <span class="o">=</span> <span class="n">LinearLayer</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="n">layer3</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"He"</span><span class="p">)</span>
+    <span class="n">layer3</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"HeNormal"</span><span class="p">)</span>
     <span class="n">layer3</span><span class="p">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="s">"GradientDescent"</span><span class="p">)</span>
 
     <span class="n">M</span><span class="p">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">layer1</span><span class="p">,</span> <span class="n">layer2</span><span class="p">,</span> <span class="n">layer3</span><span class="p">]</span></code></pre>
@@ -806,7 +806,7 @@ pip <span class="nb">install </span>nerva-torch</code></pre>
 <pre class="rouge highlight"><code data-lang="cpp">    <span class="n">layer_specifications</span> <span class="o">=</span> <span class="p">[</span><span class="s">"ReLU"</span><span class="p">,</span> <span class="s">"LeakyReLU(0.5)"</span><span class="p">,</span> <span class="s">"Linear"</span><span class="p">]</span>
     <span class="n">linear_layer_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
     <span class="n">linear_layer_optimizers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Nesterov(0.9)"</span><span class="p">,</span> <span class="s">"Momentum(0.8)"</span><span class="p">,</span> <span class="s">"GradientDescent"</span><span class="p">]</span>
-    <span class="n">linear_layer_weight_initializers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"XavierNormalized"</span><span class="p">,</span> <span class="s">"Xavier"</span><span class="p">,</span> <span class="s">"He"</span><span class="p">]</span>
+    <span class="n">linear_layer_weight_initializers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"XavierNormal"</span><span class="p">,</span> <span class="s">"XavierUniform"</span><span class="p">,</span> <span class="s">"HeNormal"</span><span class="p">]</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">parse_multilayer_perceptron</span><span class="p">(</span><span class="n">layer_specifications</span><span class="p">,</span>
                                     <span class="n">linear_layer_sizes</span><span class="p">,</span>
                                     <span class="n">linear_layer_optimizers</span><span class="p">,</span>
@@ -900,6 +900,7 @@ handles batching, shuffling, and iteration over the dataset.</p>
                                 <span class="n">train_loader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
                                 <span class="n">test_loader</span><span class="p">:</span> <span class="n">DataLoader</span>
                                 <span class="p">):</span>
+    <span class="nf">print_epoch_header</span><span class="p">()</span>
     <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="nf">compute_statistics</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">training_time</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -912,7 +913,7 @@ handles batching, shuffling, and iteration over the dataset.</p>
             <span class="n">Y</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
             <span class="n">DY</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-            <span class="k">if</span> <span class="n">SGDOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">TrainOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
                 <span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
 
             <span class="n">M</span><span class="p">.</span><span class="nf">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
@@ -922,7 +923,7 @@ handles batching, shuffling, and iteration over the dataset.</p>
         <span class="n">training_time</span> <span class="o">+=</span> <span class="n">seconds</span>
         <span class="nf">compute_statistics</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">elapsed_seconds</span><span class="o">=</span><span class="n">seconds</span><span class="p">)</span>
 
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">Total training time for the </span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s"> epochs: </span><span class="si">{</span><span class="n">training_time</span><span class="si">:</span><span class="p">.</span><span class="mi">8</span><span class="n">f</span><span class="si">}</span><span class="s">s</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span></code></pre>
+    <span class="nf">print_epoch_footer</span><span class="p">(</span><span class="n">training_time</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -956,7 +957,7 @@ shuffling, but at the cost of additional boilerplate.</p>
             <span class="n">X</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="p">:]</span>   <span class="c1"># shape (batch_size, input_dim)
 </span>
             <span class="c1"># Convert labels to one-hot if needed
-</span>            <span class="k">if</span> <span class="n">Ttrain</span><span class="p">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">Ttrain</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span>            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">Ttrain</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">Ttrain</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c1"># already one-hot encoded
 </span>                <span class="n">T</span> <span class="o">=</span> <span class="n">Ttrain</span><span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="p">:]</span>
             <span class="k">else</span><span class="p">:</span>
@@ -965,7 +966,7 @@ shuffling, but at the cost of additional boilerplate.</p>
             <span class="n">Y</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
             <span class="n">DY</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-            <span class="k">if</span> <span class="n">SGDOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">TrainOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
                 <span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
 
             <span class="n">M</span><span class="p">.</span><span class="nf">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
@@ -1039,7 +1040,7 @@ implemented manually inside the training loop.</p>
 <pre class="rouge highlight"><code data-lang="bash">python3 <span class="nt">-u</span> ../tools/mlp.py <span class="se">\</span>
         <span class="nt">--layers</span><span class="o">=</span><span class="s2">"ReLU;ReLU;Linear"</span> <span class="se">\</span>
         <span class="nt">--layer-sizes</span><span class="o">=</span><span class="s2">"3072;1024;512;10"</span> <span class="se">\</span>
-        <span class="nt">--layer-weights</span><span class="o">=</span><span class="s2">"Xavier;Xavier;Xavier"</span> <span class="se">\</span>
+        <span class="nt">--layer-weights</span><span class="o">=</span><span class="s2">"XavierNormal;XavierNormal;XavierNormal"</span> <span class="se">\</span>
         <span class="nt">--optimizers</span><span class="o">=</span><span class="s2">"Momentum(0.9);Momentum(0.9);Momentum(0.9)"</span> <span class="se">\</span>
         <span class="nt">--batch-size</span><span class="o">=</span>100 <span class="se">\</span>
         <span class="nt">--epochs</span><span class="o">=</span>5 <span class="se">\</span>
@@ -1215,24 +1216,32 @@ Specify the weight initialization method for linear layers. Supported values:</p
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Xavier</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Xavier initialization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XavierNormal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xavier Glorot weights (normal distribution)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XavierNormalized</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Normalized Xavier initialization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XavierUniform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xavier Glorot weights (uniform distribution)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>He</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kaiming He initialization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HeNormal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kaiming He weights (normal distribution)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HeUniform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kaiming He weights (uniform distribution)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Normal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normal distribution</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Uniform</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uniform random initialization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniform distribution</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zero</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All weights initialized to zero (usually not recommended)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All weights are zero (N.B. This is not recommended for training)</p></td>
 </tr>
 </tbody>
 </table>
@@ -1861,7 +1870,7 @@ This must be specified separately when reloading weights.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-09-06 14:36:46 UTC
+Last updated 2025-09-09 07:13:24 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
