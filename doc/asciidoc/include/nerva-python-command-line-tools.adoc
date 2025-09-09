@@ -29,30 +29,18 @@ The output may look like this:
 [.small-code]
 [source]
 ----
-Loading dataset from file ../../data/cifar10-flattened.npz
-=== Nerva python model ===
-MultilayerPerceptron(
-  Dense(output_size=1024, activation=ReLU(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0),
-  Dense(output_size=1024, activation=ReLU(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0),
-  Dense(output_size=10, activation=NoActivation(), optimizer=Nesterov(0.9), weight_initializer=Xavier, dropout=0.0)
-)
-loss = SoftmaxCrossEntropyLoss()
-scheduler = 0.01
-layer densities: 3145728/3145728 (100%), 1048576/1048576 (100%), 10240/10240 (100%)
-
-
-=== Training Nerva model ===
-epoch   0  lr: 0.01000000  loss: 2.30489253  train accuracy: 0.09768000  test accuracy: 0.09770000  time: 0.00000000s
-epoch   1  lr: 0.01000000  loss: 1.67161558  train accuracy: 0.40710000  test accuracy: 0.40870000  time: 14.79412249s
-epoch   2  lr: 0.01000000  loss: 1.57473959  train accuracy: 0.44548000  test accuracy: 0.44260000  time: 14.33901316s
-epoch   3  lr: 0.01000000  loss: 1.48164101  train accuracy: 0.47662000  test accuracy: 0.46680000  time: 14.62393199s
-epoch   4  lr: 0.01000000  loss: 1.40226001  train accuracy: 0.50328000  test accuracy: 0.48750000  time: 15.14273496s
-epoch   5  lr: 0.01000000  loss: 1.35031182  train accuracy: 0.52174000  test accuracy: 0.49900000  time: 15.16651454s
-epoch   6  lr: 0.01000000  loss: 1.31527882  train accuracy: 0.53150000  test accuracy: 0.50410000  time: 15.02228177s
-epoch   7  lr: 0.01000000  loss: 1.27560615  train accuracy: 0.54598000  test accuracy: 0.51150000  time: 14.99119695s
-epoch   8  lr: 0.01000000  loss: 1.24606835  train accuracy: 0.55446000  test accuracy: 0.51660000  time: 14.84064179s
-epoch   9  lr: 0.01000000  loss: 1.21105695  train accuracy: 0.56862000  test accuracy: 0.52180000  time: 14.82885451s
-epoch  10  lr: 0.01000000  loss: 1.19145860  train accuracy: 0.57378000  test accuracy: 0.52410000  time: 15.87854538s
+Loading dataset from file ../data/cifar10-flattened.npz
+--------------------------------------------------------------------------------
+epoch |           lr |         loss |    train_acc |     test_acc |     time (s)
+--------------------------------------------------------------------------------
+    0 |     0.010000 |     2.408590 |     0.097760 |     0.096000 |     0.000000
+    1 |     0.010000 |     1.645980 |     0.412700 |     0.410500 |     3.572163
+    2 |     0.010000 |     1.548570 |     0.448900 |     0.440100 |     3.586480
+    3 |     0.010000 |     1.475506 |     0.477560 |     0.465100 |     4.450712
+    4 |     0.010000 |     1.431293 |     0.491620 |     0.474800 |     4.429117
+    5 |     0.010000 |     1.369700 |     0.513900 |     0.494300 |     4.489507
+--------------------------------------------------------------------------------
+Total training time: 20.527979 s
 ----
 
 include::command-line-tools.adoc[tags=mlptool-options]

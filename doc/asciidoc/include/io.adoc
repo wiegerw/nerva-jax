@@ -76,7 +76,7 @@ python prepare_data.py --help
 
 [WARNING]
 ====
-When constructing `MemoryDataLoader` instances from integer class labels, explicitly pass `num_classes`.
+When constructing `DataLoader` instances from integer class labels, explicitly pass `num_classes`.
 If omitted, the loader infers it as `max(label) + 1`, which may underestimate the number of classes for small subsets, leading to one-hot vectors with too few columns and mismatched dimensions with the model output.
 
 To inspect `.npz` files interactively, you can use the `inspect_npz.py` tool (see Command Line Tools section).
@@ -140,7 +140,7 @@ This must be specified separately when reloading weights.
 //
 // [WARNING]
 // ====
-// When constructing `MemoryDataLoader` instances from integer class labels, explicitly pass `num_classes`.
+// When constructing `DataLoader` instances from integer class labels, explicitly pass `num_classes`.
 // If omitted, the loader infers it as `max(label) + 1`, which may underestimate the number of classes for small subsets, leading to one-hot vectors with too few columns and mismatched dimensions with the model output.
 // ====
 //
