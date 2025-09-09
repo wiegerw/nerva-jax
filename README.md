@@ -78,10 +78,10 @@ M.layers = [
     LinearLayer(512, 10)
 ]
 for layer in M.layers:
-    layer.set_optimizer('Momentum(0.9)')
-    layer.set_weights('Xavier')
+    layer.set_optimizer("Momentum(0.9)")
+    layer.set_weights("XavierNormal")
 
-loss = SoftmaxCrossEntropyLossFunction()
+loss = StableSoftmaxCrossEntropyLossFunction()
 learning_rate = ConstantScheduler(0.01)
 epochs = 10
 
@@ -89,15 +89,8 @@ epochs = 10
 train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
 
 # Train the network
-sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
+stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
 ```
-
-> 🔍 Inputs should be of shape `(N, 784)`, where `N` is the batch size.  
-> Targets can be one-hot encoded or integer class indices from `0` to `9`.
-
-> 📘 See [`examples/train_mnist.py`](examples/train_mnist.py) for a full training setup.
-
----
 
 ## 🧱 Architecture
 
@@ -147,11 +140,11 @@ Relevant papers:
 A mini-batch gradient descent loop with forward, backward, and optimizer steps can be implemented in just a few lines of code:
 
 ```python
-def sgd(M: MultilayerPerceptron,
-        epochs: int,
-        loss: LossFunction,
-        learning_rate: LearningRateScheduler,
-        train_loader: DataLoader):
+def stochastic_gradient_descent(M: MultilayerPerceptron,
+                                epochs: int,
+                                loss: LossFunction,
+                                learning_rate: LearningRateScheduler,
+                                train_loader: DataLoader):
 
     for epoch in range(epochs):
         lr = learning_rate(epoch)
@@ -168,7 +161,7 @@ def sgd(M: MultilayerPerceptron,
 
 ## ✅ Symbolic Validation (Softmax Layer Example)
 
-We validate the manually written backpropagation code using symbolic differentiation via `nerva-sympy`.
+We validate the manually written backpropagation code using symbolic differentiation via [SymPy](https://www.sympy.org/).
 
 This example validates the gradient of the **softmax layer**. It also illustrates how the gradients `DZ`, `DW`, `Db` and `DX` of the intermediate variable `Z`, the weights `W`, bias `b` and input `X` are calculated from the output `Y` and its gradient `DY`.
 
