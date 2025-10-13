@@ -48,6 +48,11 @@ class GradientDescentOptimizer(Optimizer):
         x1 = x - eta * Dx
         setattr(self.obj, self.attr_x, x1)
 
+    def __repr__(self) -> str:
+        return "GradientDescent()"
+
+    __str__ = __repr__
+
 
 class MomentumOptimizer(GradientDescentOptimizer):
     """Gradient descent with momentum for accelerated convergence."""
@@ -65,6 +70,12 @@ class MomentumOptimizer(GradientDescentOptimizer):
         x1 = x + self.delta_x
         setattr(self.obj, self.attr_x, x1)
 
+    def __repr__(self) -> str:
+        return f"Momentum(mu={float(self.mu)})"
+
+    __str__ = __repr__
+
+
 class NesterovOptimizer(MomentumOptimizer):
     """Nesterov accelerated gradient descent optimizer."""
     def __init__(self, obj, attr_x: str, attr_Dx: str, mu: float):
@@ -78,6 +89,11 @@ class NesterovOptimizer(MomentumOptimizer):
         self.delta_x = self.mu * self.delta_x - eta * Dx
         x1 = x + self.mu * self.delta_x - eta * Dx
         setattr(self.obj, self.attr_x, x1)
+
+    def __repr__(self) -> str:
+        return f"Nesterov(mu={float(self.mu)})"
+
+    __str__ = __repr__
 
 
 def parse_optimizer(text: str) -> Callable[[Any, str, str], Optimizer]:

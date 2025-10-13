@@ -95,6 +95,11 @@ class ReLUActivation(ActivationFunction):
         """Compute gradient of ReLU."""
         return Relu_gradient(X)
 
+    def __repr__(self) -> str:
+        return "ReLU"
+
+    __str__ = __repr__
+
 
 class LeakyReLUActivation(ActivationFunction):
     """Leaky ReLU activation: max(x, alpha * x)."""
@@ -108,6 +113,11 @@ class LeakyReLUActivation(ActivationFunction):
     def gradient(self, X: Matrix) -> Matrix:
         """Compute gradient of leaky ReLU."""
         return Leaky_relu_gradient(self.alpha)(X)
+
+    def __repr__(self) -> str:
+        return f"LeakyReLU(alpha={float(self.alpha)})"
+
+    __str__ = __repr__
 
 
 class AllReLUActivation(ActivationFunction):
@@ -123,6 +133,11 @@ class AllReLUActivation(ActivationFunction):
         """Compute gradient of AllReLU."""
         return All_relu_gradient(self.alpha)(X)
 
+    def __repr__(self) -> str:
+        return f"AllReLU(alpha={float(self.alpha)})"
+
+    __str__ = __repr__
+
 
 class HyperbolicTangentActivation(ActivationFunction):
     """Hyperbolic tangent activation function."""
@@ -133,6 +148,11 @@ class HyperbolicTangentActivation(ActivationFunction):
         """Compute gradient of hyperbolic tangent."""
         return Hyperbolic_tangent_gradient(X)
 
+    def __repr__(self) -> str:
+        return "HyperbolicTangent"
+
+    __str__ = __repr__
+
 
 class SigmoidActivation(ActivationFunction):
     """Sigmoid activation function: 1 / (1 + exp(-x))."""
@@ -142,6 +162,11 @@ class SigmoidActivation(ActivationFunction):
     def gradient(self, X: Matrix) -> Matrix:
         """Compute gradient of sigmoid."""
         return Sigmoid_gradient(X)
+
+    def __repr__(self) -> str:
+        return "Sigmoid"
+
+    __str__ = __repr__
 
 
 class SReLUActivation(ActivationFunction):
@@ -161,6 +186,12 @@ class SReLUActivation(ActivationFunction):
         """Compute gradient of SReLU with current parameters."""
         al, tl, ar, tr = self.x
         return Srelu_gradient(al, tl, ar, tr)(X)
+
+    def __repr__(self) -> str:
+        al, tl, ar, tr = [float(v) for v in self.x]
+        return f"SReLU(al={al}, tl={tl}, ar={ar}, tr={tr})"
+
+    __str__ = __repr__
 
 
 def parse_activation(text: str) -> ActivationFunction:
