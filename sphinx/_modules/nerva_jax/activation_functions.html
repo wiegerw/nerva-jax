@@ -222,7 +222,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gradient of ReLU.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Relu_gradient</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;ReLU&quot;</span>
+
+    <span class="fm">__str__</span> <span class="o">=</span> <span class="fm">__repr__</span></div>
 
 
 
@@ -242,7 +247,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gradient of leaky ReLU.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Leaky_relu_gradient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;LeakyReLU(alpha=</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="fm">__str__</span> <span class="o">=</span> <span class="fm">__repr__</span></div>
 
 
 
@@ -262,7 +272,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gradient of AllReLU.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">All_relu_gradient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;AllReLU(alpha=</span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="fm">__str__</span> <span class="o">=</span> <span class="fm">__repr__</span></div>
 
 
 
@@ -278,7 +293,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gradient of hyperbolic tangent.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Hyperbolic_tangent_gradient</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;HyperbolicTangent&quot;</span>
+
+    <span class="fm">__str__</span> <span class="o">=</span> <span class="fm">__repr__</span></div>
 
 
 
@@ -294,7 +314,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gradient of sigmoid.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Sigmoid_gradient</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Sigmoid&quot;</span>
+
+    <span class="fm">__str__</span> <span class="o">=</span> <span class="fm">__repr__</span></div>
 
 
 
@@ -319,7 +344,13 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gradient of SReLU with current parameters.&quot;&quot;&quot;</span>
         <span class="n">al</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">ar</span><span class="p">,</span> <span class="n">tr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span>
         <span class="k">return</span> <span class="n">Srelu_gradient</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">ar</span><span class="p">,</span> <span class="n">tr</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span></div>
-</div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">al</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">ar</span><span class="p">,</span> <span class="n">tr</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">]</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;SReLU(al=</span><span class="si">{</span><span class="n">al</span><span class="si">}</span><span class="s2">, tl=</span><span class="si">{</span><span class="n">tl</span><span class="si">}</span><span class="s2">, ar=</span><span class="si">{</span><span class="n">ar</span><span class="si">}</span><span class="s2">, tr=</span><span class="si">{</span><span class="n">tr</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="fm">__str__</span> <span class="o">=</span> <span class="fm">__repr__</span></div>
 
 
 
