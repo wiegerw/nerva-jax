@@ -30,6 +30,12 @@ class CompositeOptimizer(Optimizer):
         for optimizer in self.optimizers:
             optimizer.update(eta)
 
+    def __repr__(self) -> str:
+        optimizers_str = ", ".join(str(opt) for opt in self.optimizers)
+        return f"CompositeOptimizer([{optimizers_str}])"
+
+    __str__ = __repr__
+
 
 class GradientDescentOptimizer(Optimizer):
     """Standard gradient descent optimizer: x -= eta * grad."""

@@ -14,13 +14,17 @@ import jax.numpy as jnp
 from nerva_jax.utilities import parse_function_call
 from nerva_jax.matrix_operations import Matrix
 
+# Naming conventions:
+# - lowercase functions operate on real numbers
+# - uppercase functions operate on matrices
 
-def Relu(X: Matrix):
+
+def Relu(X: Matrix) -> Matrix:
     """Rectified linear unit activation: max(0, X)."""
     return jnp.maximum(0, X)
 
 
-def Relu_gradient(X: Matrix):
+def Relu_gradient(X: Matrix) -> Matrix:
     """Gradient of ReLU: 1 where X > 0, 0 elsewhere."""
     return jnp.where(X > 0, 1, 0)
 
@@ -45,22 +49,22 @@ def All_relu_gradient(alpha):
     return lambda X: jnp.where(X < 0, alpha, 1)
 
 
-def Hyperbolic_tangent(X: Matrix):
+def Hyperbolic_tangent(X: Matrix) -> Matrix:
     """Hyperbolic tangent activation."""
     return jnp.tanh(X)
 
 
-def Hyperbolic_tangent_gradient(X: Matrix):
+def Hyperbolic_tangent_gradient(X: Matrix) -> Matrix:
     """Gradient of tanh: 1 - tanh²(X)."""
     return 1 - jnp.tanh(X) ** 2
 
 
-def Sigmoid(X: Matrix):
+def Sigmoid(X: Matrix) -> Matrix:
     """Sigmoid activation: 1 / (1 + exp(-X))."""
     return 1 / (1 + jnp.exp(-X))
 
 
-def Sigmoid_gradient(X: Matrix):
+def Sigmoid_gradient(X: Matrix) -> Matrix:
     """Gradient of sigmoid: σ(X) * (1 - σ(X))."""
     return Sigmoid(X) * (1 - Sigmoid(X))
 

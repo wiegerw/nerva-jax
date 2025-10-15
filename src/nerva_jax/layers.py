@@ -183,7 +183,7 @@ class SoftmaxLayer(LinearLayer):
         return Y
 
     def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
-        K, N = self.Z.shape
+        N, K = self.Z.shape
         X = self.X
         W = self.W
 
@@ -218,7 +218,7 @@ class LogSoftmaxLayer(LinearLayer):
         return Y
 
     def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
-        K, N = self.Z.shape
+        N, K = self.Z.shape
         X = self.X
         W = self.W
         Z = self.Z
