@@ -323,7 +323,7 @@
 <div class="viewcode-block" id="SoftmaxLayer.backpropagate">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.layers.html#nerva_jax.layers.SoftmaxLayer.backpropagate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">backpropagate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">DY</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">K</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">N</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span>
         <span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span>
 
@@ -367,7 +367,7 @@
 <div class="viewcode-block" id="LogSoftmaxLayer.backpropagate">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.layers.html#nerva_jax.layers.LogSoftmaxLayer.backpropagate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">backpropagate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">DY</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">K</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">N</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span>
         <span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span>
