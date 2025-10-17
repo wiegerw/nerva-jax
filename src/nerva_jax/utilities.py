@@ -4,6 +4,7 @@
 
 """Miscellaneous utilities (formatting, timing, parsing, I/O)."""
 
+import os
 import re
 import time
 from typing import Dict
@@ -16,6 +17,14 @@ from nerva_jax.matrix_operations import Matrix
 def set_jax_options():
     """Configure NumPy print options for readable output."""
     jnp.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=True, linewidth=160)
+
+
+def disable_gpu():
+    """Disable GPU usage for JAX."""
+    os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+    os.environ.setdefault("CUDA_DEVICE_ORDER", "PCI_BUS_ID")
+    os.environ.setdefault("JAX_PLATFORMS", "cpu")
+    os.environ.setdefault("OPENAI_ACCELERATE_DISABLE_CUDA", "1")
 
 
 def pp_numpy(name: str, arr: np.ndarray):
