@@ -17,23 +17,23 @@ def to_tensor(array: Union[Sequence, np.ndarray]) -> jnp.ndarray:
     """
     Convert a Python list or NumPy array to a JAX array.
     - Float arrays become float32.
-    - Integer arrays become int64.
+    - Integer arrays become int32.
     """
     if isinstance(array, np.ndarray):
         if np.issubdtype(array.dtype, np.integer):
-            return jnp.array(array, dtype=jnp.int64)
+            return jnp.array(array, dtype=jnp.int32)
         else:
             return jnp.array(array, dtype=jnp.float32)
     # Assume Python sequence
     arr = np.array(array)
     if np.issubdtype(arr.dtype, np.integer):
-        return jnp.array(arr, dtype=jnp.int64)
+        return jnp.array(arr, dtype=jnp.int32)
     return jnp.array(arr, dtype=jnp.float32)
 
 
 def to_long(array: Union[Sequence, np.ndarray]) -> jnp.ndarray:
-    """Convert a Python list or NumPy array to int64 JAX array."""
-    return jnp.array(array, dtype=jnp.int64)
+    """Convert a Python list or NumPy array to int32 JAX array."""
+    return jnp.array(array, dtype=jnp.int32)
 
 
 # ------------------------
