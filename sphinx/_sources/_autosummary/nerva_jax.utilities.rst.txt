@@ -8,6 +8,7 @@ nerva\_jax.utilities
 
    .. autosummary::
    
+      disable_gpu
       load_dict_from_npz
       parse_function_call
       pp

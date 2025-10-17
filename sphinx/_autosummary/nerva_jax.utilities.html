@@ -56,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.training.html">nerva_jax.training</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.utilities</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.set_jax_options"><code class="docutils literal notranslate"><span class="pre">set_jax_options()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.disable_gpu"><code class="docutils literal notranslate"><span class="pre">disable_gpu()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.pp_numpy"><code class="docutils literal notranslate"><span class="pre">pp_numpy()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.pp"><code class="docutils literal notranslate"><span class="pre">pp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.utilities.StopWatch"><code class="docutils literal notranslate"><span class="pre">StopWatch</span></code></a><ul>
@@ -109,22 +110,25 @@
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz" title="nerva_jax.utilities.load_dict_from_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict_from_npz</span></code></a>(filename)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.disable_gpu" title="nerva_jax.utilities.disable_gpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_gpu</span></code></a>()</p></td>
+<td><p>Disable GPU usage for JAX.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.load_dict_from_npz" title="nerva_jax.utilities.load_dict_from_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict_from_npz</span></code></a>(filename)</p></td>
 <td><p>Loads a dictionary from a file in .npz format</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.parse_function_call" title="nerva_jax.utilities.parse_function_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_function_call</span></code></a>(text)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.parse_function_call" title="nerva_jax.utilities.parse_function_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_function_call</span></code></a>(text)</p></td>
 <td><p>Parse a string of the shape <cite>NAME(key1=value1, key2=value2, ...)</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp" title="nerva_jax.utilities.pp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp</span></code></a>(name, x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp" title="nerva_jax.utilities.pp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp</span></code></a>(name, x)</p></td>
 <td><p>Pretty-print a tensor with name and shape info, using NumPy formatting.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp_numpy" title="nerva_jax.utilities.pp_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp_numpy</span></code></a>(name, arr)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.pp_numpy" title="nerva_jax.utilities.pp_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pp_numpy</span></code></a>(name, arr)</p></td>
 <td><p>Internal helper: pretty-print using NumPy arrays only.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.save_dict_to_npz" title="nerva_jax.utilities.save_dict_to_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_dict_to_npz</span></code></a>(filename, data)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.save_dict_to_npz" title="nerva_jax.utilities.save_dict_to_npz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_dict_to_npz</span></code></a>(filename, data)</p></td>
 <td><p>Saves a dictionary of JAX arrays to a compressed .npz file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.utilities.set_jax_options" title="nerva_jax.utilities.set_jax_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_jax_options</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.utilities.set_jax_options" title="nerva_jax.utilities.set_jax_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_jax_options</span></code></a>()</p></td>
 <td><p>Configure NumPy print options for readable output.</p></td>
 </tr>
 </tbody>
@@ -144,6 +148,12 @@
 <dt class="sig sig-object py" id="nerva_jax.utilities.set_jax_options">
 <span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">set_jax_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#set_jax_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.set_jax_options" title="Link to this definition"></a></dt>
 <dd><p>Configure NumPy print options for readable output.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.utilities.disable_gpu">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.utilities.</span></span><span class="sig-name descname"><span class="pre">disable_gpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/utilities.html#disable_gpu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.utilities.disable_gpu" title="Link to this definition"></a></dt>
+<dd><p>Disable GPU usage for JAX.</p>
 </dd></dl>
 
 <dl class="py function">
