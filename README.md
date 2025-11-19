@@ -125,13 +125,19 @@ The full documentation is hosted on GitHub Pages:
 From there you can access:
 - [API Reference (Sphinx)](https://wiegerw.github.io/nerva-jax/sphinx/)
 - [nerva-jax Manual](https://wiegerw.github.io/nerva-jax/nerva-jax.html)
-- [Mathematical Specifications (PDF)](https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf)
 
 
 Relevant papers:
 
-1. [**Nerva: a Truly Sparse Implementation of Neural Networks**](https://arxiv.org/abs/2407.17437)
-2. _Batch Matrix-form Equations and Implementation of Multilayer Perceptrons_ (🔗 TODO)
+1. **Nerva: a Truly Sparse Implementation of Neural Networks**
+
+   [arXiv:2407.17437](https://arxiv.org/abs/2407.17437)
+   Introduces the library and reports sparse training experiments.
+
+2. **Batch Matrix-form Equations and Implementation of Multilayer Perceptrons**
+
+   [arXiv:2511.11918](https://arxiv.org/abs/2511.11918)
+   Includes mathematical specifications and derivations.
 
 ---
 
