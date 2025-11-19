@@ -1,3 +1,0 @@
-include::../settings.adoc[]
-
-include::introduction.adoc[]

@@ -1,6 +1,0 @@
-include::../settings.adoc[]
-
-== Advanced Topics
-
-include::matrix-operations.adoc[]
-

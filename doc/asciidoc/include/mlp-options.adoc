@@ -81,20 +81,26 @@ The generator that is used for initializing the weights of the linear layers. Th
 |===
 |Specification |Description
 
-|`Xavier`
-|Xavier weights
+|`XavierNormal`
+|Xavier Glorot weights (normal distribution)
 
-|`XavierNormalized`
-|Normalized Xavier weights
+|`XavierUniform`
+|Xavier Glorot weights (uniform distribution)
 
-|`He`
-|Kaiming He weights
+|`HeNormal`
+|Kaiming He weights (normal distribution)
+
+|`HeUniform`
+|Kaiming He weights (uniform distribution)
+
+|`Normal`
+|Normal distribution
 
 |`Uniform`
-|Uniform weights
+|Uniform distribution
 
 |`Zero`
-|All weights are zero (N.B. This usually doesn't work)
+|All weights are zero (N.B. This is not recommended for training)
 |===
 
 ===== Training configuration options
