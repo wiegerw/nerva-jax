@@ -1,4 +1,4 @@
-== Matrix operations
+=== Matrix operations
 The most important part of the implementation of neural networks consists of matrix operations. In the implementation of activation functions, loss functions and neural network layers, many different matrix operations are needed. In Nerva a structured approach is followed to implement these components. All equations are expressed in terms of the matrix operations in the table below.
 
 .matrix operations
