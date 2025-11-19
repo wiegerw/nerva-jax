@@ -566,12 +566,36 @@ pre.rouge .gs {
 <div id="toc" class="toc2">
 <div id="toctitle"><h3>Contents</h3></div>
 <ul class="sectlevel1">
-<li><a href="#io">I/O</a>
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_installation">Installation</a></li>
+<li><a href="#_overview_of_the_code">Overview of the code</a>
+<ul class="sectlevel2">
+<li><a href="#_module_contents">Module contents</a></li>
+<li><a href="#_number_type">Number type</a></li>
+</ul>
+</li>
+<li><a href="#_api_user_guide">API / User guide</a>
+<ul class="sectlevel2">
+<li><a href="#_classes">Classes</a></li>
+<li><a href="#_training_a_neural_network">Training a neural network</a></li>
+</ul>
+</li>
+<li><a href="#_command_line_tools">Command line tools</a>
+<ul class="sectlevel2">
+<li><a href="#_the_tool_mlp_py">The tool mlp.py</a></li>
+<li><a href="#_the_tool_inspect_npz_py">The tool inspect_npz.py</a></li>
+</ul>
+</li>
+<li><a href="#io">Data Handling</a>
 <ul class="sectlevel2">
 <li><a href="#_npz_format">NPZ format</a></li>
 <li><a href="#preparing-data">Preparing data</a></li>
 <li><a href="#_storing_datasets_and_weights">Storing datasets and weights</a></li>
-<li><a href="#_storing_datasets_and_weights_2">Storing datasets and weights</a></li>
+</ul>
+</li>
+<li><a href="#_advanced_topics">Advanced Topics</a>
+<ul class="sectlevel2">
+<li><a href="#_matrix_operations">Matrix operations</a></li>
 </ul>
 </li>
 <li><a href="#_references">References</a></li>
@@ -586,48 +610,889 @@ pre.rouge .gs {
       font-size: 0.7em;
   }
 </style>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Unresolved directive in nerva-jax.adoc - include::include/nerva-python-introduction.adoc[]</p>
+<p>The <em>Nerva-JAX Python Library</em> is a library for neural networks.
+It is part of the Nerva library collection <a href="https://github.com/wiegerw/nerva" class="bare">https://github.com/wiegerw/nerva</a>, that includes
+native C++ and Python implementations of neural networks. Originally the library was intended
+for experimenting with truly sparse neural networks. Nowadays, the library
+also aims to provide a transparent and accessible implementation of neural networks.</p>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in nerva-jax.adoc - include::include/nerva-python-installation.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in nerva-jax.adoc - include::include/nerva-python-overview-of-the-code.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in nerva-jax.adoc - include::include/nerva-python-api-user-guide.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in nerva-jax.adoc - include::include/nerva-python-command-line-tools.adoc[]</p>
+<p>This document describes the implementation of the <em>Nerva-JAX Python Library</em>. For initial versions
+of the library I took inspiration from lecture notes of
+<a href="https://www.cs.toronto.edu/~rgrosse/teaching.html">machine learning courses by Roger Grosse</a>, which I highly recommend.
+This influence may still be evident in the naming of symbols.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="io">I/O</h2>
+<h2 id="_installation">Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <em>Nerva-JAX Python Library</em> has support for reading and writing datasets and weights + biases of a model in NumPy NPZ format.
-This format is used for portability between C++ and Python implementations. There is no support yet for storing a complete model, including its architecture.</p>
+<p>The <code>nerva_jax</code> library can be installed in two ways: from the source repository or from the Python Package Index (PyPI).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="c"># Install from the local repository</span>
+pip <span class="nb">install</span> .</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="c"># Install directly from PyPI</span>
+pip <span class="nb">install </span>nerva-torch</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_the_code">Overview of the code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides an overview of the code in the <em>Nerva-JAX Python Library</em>. All core functionality is contained in the <code>nerva_jax</code> module.</p>
+</div>
+<div class="sect2">
+<h3 id="_module_contents">Module contents</h3>
+<div class="paragraph">
+<p>The most important files in the <code>nerva_jax</code> module are listed below. Each file implements a distinct part of the neural network library.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">File</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/multilayer_perceptron.py">multilayer_perceptron.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the <code>MultilayerPerceptron</code> class, representing a feedforward neural network with multiple layers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/layers.py">layers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements various neural network layers, such as fully connected or custom layers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/activation_functions.py">activation_functions.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides commonly used activation functions (e.g., ReLU, sigmoid, tanh) to introduce non-linearity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/loss_functions.py">loss_functions.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements loss functions used to quantify the difference between predictions and targets (e.g., cross-entropy, MSE).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/weight_initializers.py">weight_initializers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides functions for initializing neural network weights, supporting different strategies for stability and performance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/optimizers.py">optimizers.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines optimizer functions that update neural network parameters based on computed gradients (e.g., SGD, momentum).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/learning_rate.py">learning_rate.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implements learning rate schedulers to adjust the learning rate dynamically during training.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://github.com/wiegerw/nerva-jax/blob/main/src/nerva_jax/training.py">training.py</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the stochastic gradient descent (SGD) algorithms for training multilayer perceptrons.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_number_type">Number type</h3>
+<div class="paragraph">
+<p>The <em>Nerva-JAX Python Library</em> uses 32-bit floating point numbers (float32) as its default number type. This choice balances memory usage and computational efficiency on both CPUs and GPUs. All computations, including feedforward, backpropagation, and gradient updates, are performed in this precision.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_user_guide">API / User guide</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_classes">Classes</h3>
+<div class="sect3">
+<h4 id="_class_layer">Class Layer</h4>
+<div class="paragraph">
+<p>The class <code>Layer</code> is the base class of all neural network layers. There are several different types of layers:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Layer</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LinearLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ActivationLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a pointwise activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SReLULayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a SReLU activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SoftmaxLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a softmax activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LogSoftmaxLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A linear layer followed by a logsoftmax activation function.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BatchNormalizationLayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A batch normalization layer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_class_multilayerperceptron">Class MultilayerPerceptron</h4>
+<div class="paragraph">
+<p>A multilayer perceptron (MLP) is modeled using the class <code>MultilayerPerceptron</code>. It contains a list of layers, and has member functions <code>feedforward</code>, <code>backpropagate</code> and <code>optimize</code> that can be used for training the neural network. Constructing an MLP can be done as follows:</p>
+</div>
+<div id="construct_mlp1" class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="cpp">    <span class="n">M</span> <span class="o">=</span> <span class="n">MultilayerPerceptron</span><span class="p">()</span>
+
+    <span class="cp"># configure layer 1
+</span>    <span class="n">layer1</span> <span class="o">=</span> <span class="n">ActivationLayer</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">ReLUActivation</span><span class="p">())</span>
+    <span class="n">layer1</span><span class="p">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">weights_xavier_normal</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">layer1</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">bias_zero</span><span class="p">(</span><span class="n">layer1</span><span class="p">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">optimizer_W</span> <span class="o">=</span> <span class="n">MomentumOptimizer</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="s">"W"</span><span class="p">,</span> <span class="s">"DW"</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">optimizer_b</span> <span class="o">=</span> <span class="n">NesterovOptimizer</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"Db"</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">layer1</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">CompositeOptimizer</span><span class="p">([</span><span class="n">optimizer_W</span><span class="p">,</span> <span class="n">optimizer_b</span><span class="p">])</span>
+
+    <span class="cp"># configure layer 2
+</span>    <span class="n">layer2</span> <span class="o">=</span> <span class="n">ActivationLayer</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">LeakyReLUActivation</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">layer2</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"XavierNormal"</span><span class="p">)</span>
+    <span class="n">layer2</span><span class="p">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="s">"Momentum(0.8)"</span><span class="p">)</span>
+
+    <span class="cp"># configure layer 3
+</span>    <span class="n">layer3</span> <span class="o">=</span> <span class="n">LinearLayer</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">layer3</span><span class="p">.</span><span class="n">set_weights</span><span class="p">(</span><span class="s">"HeNormal"</span><span class="p">)</span>
+    <span class="n">layer3</span><span class="p">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="s">"GradientDescent"</span><span class="p">)</span>
+
+    <span class="n">M</span><span class="p">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">layer1</span><span class="p">,</span> <span class="n">layer2</span><span class="p">,</span> <span class="n">layer3</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This creates an MLP with three linear layers, and various activation functions, weight initializers and optimizers.</p>
+</div>
+<div class="paragraph">
+<p>Another way to construct MLPs is provided by the function <code>parse_multilayer_perceptron</code>, that parses an MLP from textual specifications:</p>
+</div>
+<div id="construct_mlp2" class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="cpp">    <span class="n">layer_specifications</span> <span class="o">=</span> <span class="p">[</span><span class="s">"ReLU"</span><span class="p">,</span> <span class="s">"LeakyReLU(0.5)"</span><span class="p">,</span> <span class="s">"Linear"</span><span class="p">]</span>
+    <span class="n">linear_layer_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+    <span class="n">linear_layer_optimizers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Nesterov(0.9)"</span><span class="p">,</span> <span class="s">"Momentum(0.8)"</span><span class="p">,</span> <span class="s">"GradientDescent"</span><span class="p">]</span>
+    <span class="n">linear_layer_weight_initializers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"XavierNormal"</span><span class="p">,</span> <span class="s">"XavierUniform"</span><span class="p">,</span> <span class="s">"HeNormal"</span><span class="p">]</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">parse_multilayer_perceptron</span><span class="p">(</span><span class="n">layer_specifications</span><span class="p">,</span>
+                                    <span class="n">linear_layer_sizes</span><span class="p">,</span>
+                                    <span class="n">linear_layer_optimizers</span><span class="p">,</span>
+                                    <span class="n">linear_layer_weight_initializers</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that optimizers should not only be specified for linear layers, but also for batch normalization layers.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_class_lossfunction">Class LossFunction</h4>
+<div class="paragraph">
+<p>The class <code>LossFunction</code> is the base class of all loss functions. There are five loss functions available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SquaredErrorLoss</code></p>
+</li>
+<li>
+<p><code>CrossEntropyLoss</code></p>
+</li>
+<li>
+<p><code>LogisticCrossEntropyLoss</code></p>
+</li>
+<li>
+<p><code>NegativeLogLikelihoodLoss</code></p>
+</li>
+<li>
+<p><code>SoftmaxCrossEntropyLoss</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf">Nerva library specifications</a> document for precise definitions of these loss functions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_class_activationfunction">Class ActivationFunction</h4>
+<div class="paragraph">
+<p>The class <code>ActivationFunction</code> is the base class of all activation functions. The following activation functions are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ReLU</code></p>
+</li>
+<li>
+<p><code>Sigmoid</code></p>
+</li>
+<li>
+<p><code>Softmax</code></p>
+</li>
+<li>
+<p><code>LogSoftmax</code></p>
+</li>
+<li>
+<p><code>LeakyReLU</code></p>
+</li>
+<li>
+<p><code>AllReLU</code></p>
+</li>
+<li>
+<p><code>SReLU</code></p>
+</li>
+<li>
+<p><code>HyperbolicTangent</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://wiegerw.github.io/nerva-rowwise/pdf/nerva-library-specifications.pdf">Nerva library specifications</a> document for precise definitions of these activation functions.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_training_a_neural_network">Training a neural network</h3>
+<div class="paragraph">
+<p>The library provides two variants of stochastic gradient descent (SGD) training for multilayer perceptrons.
+The preferred interface is <code>stochastic_gradient_descent</code>, which accepts PyTorch-style <code>DataLoader</code> instances for
+training and test sets. This approach is the easiest in practice, since the <code>DataLoader</code> abstraction automatically
+handles batching, shuffling, and iteration over the dataset.</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="k">def</span> <span class="nf">stochastic_gradient_descent</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span>
+                                <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                <span class="n">loss</span><span class="p">:</span> <span class="n">LossFunction</span><span class="p">,</span>
+                                <span class="n">learning_rate</span><span class="p">:</span> <span class="n">LearningRateScheduler</span><span class="p">,</span>
+                                <span class="n">train_loader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
+                                <span class="n">test_loader</span><span class="p">:</span> <span class="n">DataLoader</span>
+                                <span class="p">):</span>
+    <span class="nf">print_epoch_header</span><span class="p">()</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nf">compute_statistics</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">training_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">timer</span> <span class="o">=</span> <span class="nc">StopWatch</span><span class="p">()</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>  <span class="c1"># update the learning at the start of each epoch
+</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+            <span class="n">Y</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">DY</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">TrainOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
+                <span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+
+            <span class="n">M</span><span class="p">.</span><span class="nf">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+            <span class="n">M</span><span class="p">.</span><span class="nf">optimize</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span>
+
+        <span class="n">seconds</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="nf">seconds</span><span class="p">()</span>
+        <span class="n">training_time</span> <span class="o">+=</span> <span class="n">seconds</span>
+        <span class="nf">compute_statistics</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">elapsed_seconds</span><span class="o">=</span><span class="n">seconds</span><span class="p">)</span>
+
+    <span class="nf">print_epoch_footer</span><span class="p">(</span><span class="n">training_time</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For educational purposes, a lower-level variant <code>stochastic_gradient_descent_plain</code> is also available.
+It operates directly on raw tensors in row layout (samples as rows), giving full control over batching and
+shuffling, but at the cost of additional boilerplate.</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="k">def</span> <span class="nf">stochastic_gradient_descent_plain</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span>
+                                      <span class="n">Xtrain</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span>
+                                      <span class="n">Ttrain</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span>
+                                      <span class="n">loss</span><span class="p">:</span> <span class="n">LossFunction</span><span class="p">,</span>
+                                      <span class="n">learning_rate</span><span class="p">:</span> <span class="n">LearningRateScheduler</span><span class="p">,</span>
+                                      <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                      <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                      <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span>
+                                     <span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># number of examples (row layout)
+</span>    <span class="n">I</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="n">batch_size</span>  <span class="c1"># number of full batches
+</span>    <span class="n">num_classes</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nf">output_size</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+            <span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>  <span class="c1"># update learning rate each epoch
+</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">K</span><span class="p">):</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">:</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">]</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">Xtrain</span><span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="p">:]</span>   <span class="c1"># shape (batch_size, input_dim)
+</span>
+            <span class="c1"># Convert labels to one-hot if needed
+</span>            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">Ttrain</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">Ttrain</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># already one-hot encoded
+</span>                <span class="n">T</span> <span class="o">=</span> <span class="n">Ttrain</span><span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="nf">to_one_hot</span><span class="p">(</span><span class="n">Ttrain</span><span class="p">[</span><span class="n">batch</span><span class="p">],</span> <span class="n">num_classes</span><span class="p">)</span>
+
+            <span class="n">Y</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">feedforward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">DY</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">gradient</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">TrainOptions</span><span class="p">.</span><span class="n">debug</span><span class="p">:</span>
+                <span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+
+            <span class="n">M</span><span class="p">.</span><span class="nf">backpropagate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">DY</span><span class="p">)</span>
+            <span class="n">M</span><span class="p">.</span><span class="nf">optimize</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both functions support targets provided either as a one-dimensional tensor of class indices (the default
+convention used in PyTorch’s classification losses) or as a one-hot encoded matrix with as many columns
+as the output <code>Y</code>. If class indices are provided, they are internally converted to one-hot encoding using <code>to_one_hot</code>.</p>
+</div>
+<div class="paragraph">
+<p>Batching of the training data depends on the chosen interface. With <code>stochastic_gradient_descent</code>, batching and
+shuffling are handled automatically by the <code>DataLoader</code>. With <code>stochastic_gradient_descent_plain</code>, batching is
+implemented manually inside the training loop.</p>
+</div>
+<div class="paragraph">
+<p>In each epoch, every batch <code>(X, T)</code> goes through the three standard steps of stochastic gradient descent:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Feedforward:</strong> Given an input batch <code>X</code> and the current neural network parameters <code>Θ</code>, compute the outputs <code>Y</code>. In the code, this corresponds to <code>Y = M.feedforward(X)</code>.</p>
+</li>
+<li>
+<p><strong>Backpropagation:</strong> Given the outputs <code>Y</code> and the targets <code>T</code>, compute the gradient <code>DY</code> of <code>Y</code> with respect to the loss function. Then, using <code>Y</code> and <code>DY</code>, compute the gradients of the model parameters <code>DΘ</code>. These parameter gradients are stored internally in the model rather than returned. In the code, this step is performed by <code>M.backpropagate(Y, DY)</code>.</p>
+</li>
+<li>
+<p><strong>Optimization:</strong> Use the internally stored parameter gradients to update the parameters <code>Θ</code>. In the code, this corresponds to <code>M.optimize(lr)</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command_line_tools">Command line tools</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following command line tools are available. They can be found in the <code>tools</code> directory.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mlp.py</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A tool for training multilayer perceptrons.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inspect_npz.py</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A tool for inspecting the contents of a file in NumPy NPZ format.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_the_tool_mlp_py">The tool mlp.py</h3>
+<div class="paragraph">
+<p>The tool <code>mlp.py</code> can be used for training multilayer perceptrons. An example invocation of the <code>mlp.py</code> tool is</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python3 <span class="nt">-u</span> ../tools/mlp.py <span class="se">\</span>
+        <span class="nt">--layers</span><span class="o">=</span><span class="s2">"ReLU;ReLU;Linear"</span> <span class="se">\</span>
+        <span class="nt">--layer-sizes</span><span class="o">=</span><span class="s2">"3072;1024;512;10"</span> <span class="se">\</span>
+        <span class="nt">--layer-weights</span><span class="o">=</span><span class="s2">"XavierNormal;XavierNormal;XavierNormal"</span> <span class="se">\</span>
+        <span class="nt">--optimizers</span><span class="o">=</span><span class="s2">"Momentum(0.9);Momentum(0.9);Momentum(0.9)"</span> <span class="se">\</span>
+        <span class="nt">--batch-size</span><span class="o">=</span>100 <span class="se">\</span>
+        <span class="nt">--epochs</span><span class="o">=</span>5 <span class="se">\</span>
+        <span class="nt">--loss</span><span class="o">=</span>SoftmaxCrossEntropy <span class="se">\</span>
+        <span class="nt">--learning-rate</span><span class="o">=</span><span class="s2">"Constant(0.01)"</span> <span class="se">\</span>
+        <span class="nt">--load-dataset</span><span class="o">=</span><span class="nv">$dataset</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will train a <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> model using an MLP consisting of three linear layers with activation functions ReLU, ReLU and no activation. A script <code>prepare_data.py</code> is available in the <code>data</code> directory
+that can be used to download the dataset, flatten it and store it in <code>.npz</code> format. See the section <a href="#preparing-data">Preparing data</a> for details.</p>
+</div>
+<div class="paragraph">
+<p>The output may look like this:</p>
+</div>
+<div id="mlp_output" class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code>Loading dataset from file ../data/cifar10-flattened.npz
+--------------------------------------------------------------------------------
+epoch |           lr |         loss |    train_acc |     test_acc |     time (s)
+--------------------------------------------------------------------------------
+    0 |     0.010000 |     2.408590 |     0.097760 |     0.096000 |     0.000000
+    1 |     0.010000 |     1.645980 |     0.412700 |     0.410500 |     3.572163
+    2 |     0.010000 |     1.548570 |     0.448900 |     0.440100 |     3.586480
+    3 |     0.010000 |     1.475506 |     0.477560 |     0.465100 |     4.450712
+    4 |     0.010000 |     1.431293 |     0.491620 |     0.474800 |     4.429117
+    5 |     0.010000 |     1.369700 |     0.513900 |     0.494300 |     4.489507
+--------------------------------------------------------------------------------
+Total training time: 20.527979 s</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mlp_tool">mlp.py Command Line Options</h4>
+<div class="paragraph">
+<p>This section gives an overview of the command line interface of the <code>mlp.py</code> tool.</p>
+</div>
+<div class="sect4">
+<h5 id="_parameter_lists">Parameter Lists</h5>
+<div class="paragraph">
+<p>Some options accept a list of items. Lists must be <strong>semicolon-separated</strong>.
+For example: <code>--layers="ReLU;AllReLU(0.3);Linear"</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_named_parameters">Named Parameters</h5>
+<div class="paragraph">
+<p>Some items accept parameters using function-call syntax with <strong>commas</strong> to separate arguments.
+Use named parameters when needed, e.g. <code>AllReLU(alpha=0.3)</code>. If a parameter has a default value, it may be omitted: <code>SReLU()</code> is equivalent to <code>SReLU(al=0,tl=0,ar=0,tr=1)</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_general_options">General Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--help</code>
+Display help information.</p>
+</li>
+<li>
+<p><code>--debug</code>
+Enable debug output. Prints batches, weight matrices, bias vectors, and gradients.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_random_generator_options">Random Generator Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--seed &lt;value&gt;</code>
+Set the seed value for the random number generator.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_layer_configuration_options">Layer Configuration Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--layers &lt;value&gt;</code>
+Specify a semicolon-separated list of layers.
+Example: <code>--layers=ReLU;AllReLU(0.3);Linear</code>.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Linear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer without activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ReLU</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with ReLU activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Sigmoid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with sigmoid activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Softmax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with softmax activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LogSoftmax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with log-softmax activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HyperbolicTangent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with hyperbolic tangent activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AllReLU(&lt;alpha&gt;)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with AllReLU activation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SReLU(&lt;al&gt;,&lt;tl&gt;,&lt;ar&gt;,&lt;tr&gt;)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear layer with SReLU activation. Defaults: <code>al=0,tl=0,ar=0,tr=1</code>. Equivalent to ReLU when defaults are used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BatchNormalization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Batch normalization layer</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--layer-sizes &lt;value&gt;</code>
+Specify the sizes of linear layers (semicolon-separated).
+Example: <code>--layer-sizes=3072;1024;512;10</code>.</p>
+</li>
+<li>
+<p><code>--layer-weights &lt;value&gt;</code>
+Specify the weight initialization method for linear layers. Supported values:</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XavierNormal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xavier Glorot weights (normal distribution)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XavierUniform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xavier Glorot weights (uniform distribution)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HeNormal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kaiming He weights (normal distribution)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HeUniform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kaiming He weights (uniform distribution)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Normal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normal distribution</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Uniform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniform distribution</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zero</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All weights are zero (N.B. This is not recommended for training)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_training_configuration_options">Training Configuration Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--epochs &lt;value&gt;</code>
+Set the number of training epochs. Default: 100.</p>
+</li>
+<li>
+<p><code>--batch-size &lt;value&gt;</code>
+Set the training batch size.</p>
+</li>
+<li>
+<p><code>--optimizers &lt;value&gt;</code>
+Specify a semicolon-separated list of optimizers for linear and batch normalization layers.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GradientDescent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard gradient descent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Momentum(mu)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Momentum optimization with parameter <code>mu</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Nesterov(mu)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nesterov momentum optimization</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--learning-rate &lt;value&gt;</code>
+Specify a semicolon-separated list of learning rate schedulers. If only one is given, it applies to all layers.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Constant(lr)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constant learning rate <code>lr</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TimeBased(lr, decay)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adaptive learning rate with decay</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>StepBased(lr, drop_rate, change_rate)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Step-based learning rate with scheduled drops</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MultistepLR(lr, milestones, gamma)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Drops learning rate at specified epoch milestones</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Exponential(lr, change_rate)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exponentially decreasing learning rate</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See also <a href="https://en.wikipedia.org/wiki/Learning_rate" class="bare">https://en.wikipedia.org/wiki/Learning_rate</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--loss &lt;value&gt;</code>
+Specify the loss function. Supported values:</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Specification</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SquaredError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Squared error loss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CrossEntropy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cross entropy loss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LogisticCrossEntropy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logistic cross entropy loss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SoftmaxCrossEntropy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Softmax cross entropy (matches PyTorch)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NegativeLogLikelihood</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Negative log likelihood loss</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--load-weights &lt;value&gt;</code>
+Load weights and biases from a NumPy <code>.npz</code> file.
+Weight matrices keys: <code>W1,W2,&#8230;&#8203;</code>; bias vectors keys: <code>b1,b2,&#8230;&#8203;</code>.
+See <a href="https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html">numpy.lib.format</a>[numpy.lib.format].</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dataset_options">Dataset Options</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--load-dataset &lt;file&gt;</code>
+Load a dataset from a NumPy <code>.npz</code> file. The file <strong>must</strong> contain the following arrays:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Xtrain</code>: training inputs</p>
+</li>
+<li>
+<p><code>Ttrain</code>: training labels</p>
+</li>
+<li>
+<p><code>Xtest</code>: test inputs</p>
+</li>
+<li>
+<p><code>Ttest</code>: test labels</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other arrays will be ignored. The shapes should match the expected input and output dimensions of the network.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_tool_inspect_npz_py">The tool inspect_npz.py</h3>
+<div class="paragraph">
+<p>The tool <code>inspect_npz.py</code> can be used to inspect the contents of a dataset stored in <code>.npz</code> format.</p>
+</div>
+<div class="paragraph">
+<p>An example invocation of the <code>inspect_npz.py</code> tool is</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">python inspect_npz.py data/cifar10-flattened.npz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output may look like this:</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre>Xtrain   (50000x3072  )  inf-norm = 1.00000000
+[[0.23137255 0.16862745 0.19607843 ... 0.54901961 0.32941176 0.28235294]
+ [0.60392157 0.49411765 0.41176471 ... 0.54509804 0.55686275 0.56470588]
+ [1.         0.99215686 0.99215686 ... 0.3254902  0.3254902  0.32941176]
+ ...
+ [0.1372549  0.15686275 0.16470588 ... 0.30196078 0.25882353 0.19607843]
+ [0.74117647 0.72941176 0.7254902  ... 0.6627451  0.67058824 0.67058824]
+ [0.89803922 0.9254902  0.91764706 ... 0.67843137 0.63529412 0.63137255]]
+
+Ttrain   (50000       )  inf-norm = 9.00000000
+[6 9 9 ... 9 1 1]
+
+Xtest    (10000x3072  )  inf-norm = 1.00000000
+[[0.61960784 0.62352941 0.64705882 ... 0.48627451 0.50588235 0.43137255]
+ [0.92156863 0.90588235 0.90980392 ... 0.69803922 0.74901961 0.78039216]
+ [0.61960784 0.61960784 0.54509804 ... 0.03137255 0.01176471 0.02745098]
+ ...
+ [0.07843137 0.0745098  0.05882353 ... 0.19607843 0.20784314 0.18431373]
+ [0.09803922 0.05882353 0.09019608 ... 0.31372549 0.31764706 0.31372549]
+ [0.28627451 0.38431373 0.38823529 ... 0.36862745 0.22745098 0.10196078]]
+
+Ttest    (10000       )  inf-norm = 9.00000000
+[3 8 8 ... 5 1 7]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the command line option <code>--shapes-only</code> a summary can be obtained:</p>
+</div>
+<div class="listingblock small-code">
+<div class="content">
+<pre>Xtrain   (50000x3072  )  inf-norm = 1.00000000
+Ttrain   (50000       )  inf-norm = 9.00000000
+Xtest    (10000x3072  )  inf-norm = 1.00000000
+Ttest    (10000       )  inf-norm = 9.00000000</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="io">Data Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>Nerva-JAX Python Library</em> provides utilities for reading and writing datasets and the weights and biases of MLP models in NumPy <code>.npz</code> format.
+This format ensures portability between Python and C++ implementations.
+Currently, storing the complete model, including its architecture, is not supported.</p>
 </div>
 <div class="sect2">
 <h3 id="_npz_format">NPZ format</h3>
 <div class="paragraph">
-<p>The default storage format used in the Nerva libraries is the NumPy NPZ format, see <a href="https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html">numpy.lib.format</a>. The reason for choosing this format is portability between C++ and Python implementations. A file in <code>.npz</code> format can be used to store a dictionary of arrays in a compressed format.</p>
+<p>The default storage format used in the Nerva libraries is the NumPy NPZ format (see <a href="https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html">numpy.lib.format</a>).
+A <code>.npz</code> file can store a dictionary of arrays in compressed form, which allows both datasets and model parameters to be saved efficiently.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="preparing-data">Preparing data</h3>
 <div class="paragraph">
-<p>The mlp.py tool requires training and testing data to be stored in <code>.npz</code> format. To help with this, a script is provided to download and preprocess datasets commonly used in experiments, including <strong>MNIST</strong> and <strong>CIFAR-10</strong>.</p>
+<p>The <code>mlp.py</code> utility expects training and testing data in <code>.npz</code> format.
+A helper script is provided to download and preprocess commonly used datasets, including <strong>MNIST</strong> and <strong>CIFAR-10</strong>.</p>
 </div>
 <div class="paragraph">
-<p>The script is located at <a href="{root}/data/prepare_data.py" class="bare">{root}/data/prepare_data.py</a> and can be run from the command line.</p>
+<p>The script is located at <code><a href="https://github.com/wiegerw/nerva-jax/blob/main/data/prepare_data.py">data/prepare_data.py</a></code> and can be run from the command line.</p>
 </div>
 <div class="sect3">
 <h4 id="_mnist">MNIST</h4>
 <div class="paragraph">
-<p>To download and prepare the MNIST dataset, run:</p>
+<p>To download and prepare MNIST:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -640,7 +1505,7 @@ This format is used for portability between C++ and Python implementations. Ther
 <div class="ulist">
 <ul>
 <li>
-<p>Download <code>mnist.npz</code> from the official source if not already present.</p>
+<p>Download <code>mnist.npz</code> if it does not exist.</p>
 </li>
 <li>
 <p>Create a flattened and normalized version of the dataset as <code>mnist-flattened.npz</code>.</p>
@@ -664,7 +1529,7 @@ This format is used for portability between C++ and Python implementations. Ther
 <div class="sect3">
 <h4 id="_cifar_10">CIFAR-10</h4>
 <div class="paragraph">
-<p>To download and prepare the CIFAR-10 dataset, run:</p>
+<p>To download and prepare CIFAR-10:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -683,7 +1548,7 @@ This format is used for portability between C++ and Python implementations. Ther
 <p>Extract the archive</p>
 </li>
 <li>
-<p>Flatten and normalize the RGB images into shape <code>[N, 3072]</code></p>
+<p>Flatten and normalize RGB images into shape <code>[N, 3072]</code></p>
 </li>
 <li>
 <p>Save the result as <code>cifar10-flattened.npz</code></p>
@@ -691,7 +1556,7 @@ This format is used for portability between C++ and Python implementations. Ther
 </ul>
 </div>
 <div class="paragraph">
-<p>As with MNIST, the <code>.npz</code> file will contain:</p>
+<p>The output file contains:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -707,92 +1572,86 @@ This format is used for portability between C++ and Python implementations. Ther
 <div class="sect3">
 <h4 id="_reusing_existing_files">Reusing Existing Files</h4>
 <div class="paragraph">
-<p>If the required <code>.npz</code> files already exist, the script will detect this and skip reprocessing. You can safely rerun the script without overwriting files.</p>
+<p>If the required <code>.npz</code> files already exist, the script will detect this and skip reprocessing.
+It is safe to rerun the script without overwriting existing files.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_help">Help</h4>
 <div class="paragraph">
-<p>For help with usage, run:</p>
+<p>To see all script options:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="bash">python data/prepare_data.py <span class="nt">--help</span></code></pre>
+<pre class="rouge highlight"><code data-lang="bash">python prepare_data.py <span class="nt">--help</span></code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>This displays all options, including how to customize the output directory.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_inspecting_npz_files">Inspecting <code>.npz</code> files</h4>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>To inspect the contents of a <code>.npz</code> file (such as <code>mnist-flattened.npz</code> or <code>cifar10-flattened.npz</code>), you can use the <code>inspect_npz.py</code> utility included in the distribution:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash">python tools/inspect_npz.py data/mnist-flattened.npz</code></pre>
-</div>
+<p>When constructing <code>DataLoader</code> instances from integer class labels, explicitly pass <code>num_classes</code>.
+If omitted, the loader infers it as <code>max(label) + 1</code>, which may underestimate the number of classes for small subsets, leading to one-hot vectors with too few columns and mismatched dimensions with the model output.</p>
 </div>
 <div class="paragraph">
-<p>This prints the shape and values of each array stored in the file. To print only the names, shapes, and norms without dumping the full contents, use:</p>
+<p>To inspect <code>.npz</code> files interactively, you can use the <code>inspect_npz.py</code> tool (see Command Line Tools section).</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="bash">python tools/inspect_npz.py data/mnist-flattened.npz <span class="nt">--shapes-only</span></code></pre>
-</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_storing_datasets_and_weights">Storing datasets and weights</h3>
 <div class="paragraph">
-<p>The <code>mlp.py</code> tool has options <code>--load-weights</code> and <code>--save-weights</code> for loading and saving the weights and bias vectors of an MLP, and options <code>--load-data</code> and <code>--save-data</code> for loading and saving a dataset in NPZ format. The keys in the dictionary for the weight matrices and bias vectors of linear layers are <code>W1, W2, &#8230;&#8203;</code> and <code>b1, b2, &#8230;&#8203;</code>. The keys for the training data plus targets are <code>Xtrain</code> and <code>Ttrain</code>, while for the test data plus targets we use <code>Xtest</code> and <code>Ttest</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_storing_datasets_and_weights_2">Storing datasets and weights</h3>
-<div class="paragraph">
-<p>The mlp.py tool supports saving and loading both datasets and model parameters using the NumPy <code>.npz</code> format. This ensures compatibility between Python and C++ implementations by storing everything in a standard dictionary of arrays.</p>
+<p>The <code>mlp.py</code> utility supports saving and loading datasets and model parameters in <code>.npz</code> format.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Use <code>--save-data</code> and <code>--load-data</code> to write or read datasets.</p>
+<p>Use <code>--save-dataset</code> and <code>--load-dataset</code> to write or read datasets.</p>
 </li>
 <li>
-<p>Use <code>--save-weights</code> and <code>--load-weights</code> to store or restore the weights and biases of a trained model.</p>
+<p>Use <code>--save-weights</code> and <code>--load-weights</code> to store or restore the weights and biases of an MLP.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>.npz</code> file for datasets contains the following keys:</p>
+<p>The <code>.npz</code> file for datasets contains:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Xtrain</code>, <code>Ttrain</code>: input features and target labels for the training set</p>
+<p><code>Xtrain</code>, <code>Ttrain</code>: training inputs and labels</p>
 </li>
 <li>
-<p><code>Xtest</code>, <code>Ttest</code>: input features and target labels for the test set</p>
+<p><code>Xtest</code>, <code>Ttest</code>: test inputs and labels</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>.npz</code> file for model parameters stores each layer&#8217;s weights and biases under the keys:</p>
+<p>The <code>.npz</code> file for model parameters contains:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>W1</code>, <code>W2</code>, <code>&#8230;&#8203;</code>: weight matrices for the first, second, etc. linear layer</p>
+<p><code>W1</code>, <code>W2</code>, &#8230;&#8203; : weight matrices for each linear layer</p>
 </li>
 <li>
-<p><code>b1</code>, <code>b2</code>, <code>&#8230;&#8203;</code>: corresponding bias vectors</p>
+<p><code>b1</code>, <code>b2</code>, &#8230;&#8203; : corresponding bias vectors</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These arrays use standard NumPy formats and can be inspected or manipulated easily in Python using <code>numpy.load()</code> and <code>numpy.savez()</code>.</p>
+<p>All arrays use standard NumPy formats and can be inspected or manipulated in Python using <code>numpy.load()</code> and <code>numpy.savez()</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -801,14 +1660,192 @@ This format is used for portability between C++ and Python implementations. Ther
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-    Note: The architecture of the model (e.g., number of layers or activation functions) is not stored in the <code>.npz</code> file. This must be specified separately when reloading weights.
+<div class="paragraph">
+<p>The architecture of the model (number of layers, activation functions, etc.) is <strong>not</strong> stored in the <code>.npz</code> file.
+This must be specified separately when reloading weights.</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in nerva-jax.adoc - include::include/nerva-python-advanced-topics.adoc[]</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advanced_topics">Advanced Topics</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_matrix_operations">Matrix operations</h3>
+<div class="paragraph">
+<p>The most important part of the implementation of neural networks consists of matrix operations. In the implementation of activation functions, loss functions and neural network layers, many different matrix operations are needed. In Nerva a structured approach is followed to implement these components. All equations are expressed in terms of the matrix operations in the table below.</p>
+</div>
+<table id="table_matrix_operations" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. matrix operations</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(0_{m}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zeros(m)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with elements equal to 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(0_{mn}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zeros(m, n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times n\) matrix with elements equal to 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_{m}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ones(m)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with elements equal to 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_{mn}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ones(m, n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times n\) matrix with elements equal to 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\mathbb{I}_n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>identity(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(n \times n\) identity matrix</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X^\top\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X.transpose()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">transposition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(cX\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c * X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scalar multiplication, \(c \in \mathbb{R}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X + Y\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X + Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X - Y\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X - Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subtraction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X \cdot Z\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>X * Z</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">matrix multiplication, also denoted as \(XZ\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(x^\top y~\) or \(~x y^\top\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dot(x,y)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dot product, \(x,y \in \mathbb{R}^{m \times 1}\) or \(x,y \in \mathbb{R}^{1 \times n}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X \odot Y\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hadamard(X,Y)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise product of \(X\) and \(Y\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\mathsf{diag}(X)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>diag(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">column vector that contains the diagonal of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\mathsf{Diag}(x)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Diag(x)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diagonal matrix with \(x\) as diagonal, \(x \in \mathbb{R}^{1 \times n}\)  or \(x \in \mathbb{R}^{m \times 1}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_m^\top \cdot X \cdot 1_n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>elements_sum(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sum of the elements of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(x \cdot 1_n^\top\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>column_repeat(x, n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(n\) copies of column vector \(x \in \mathbb{R}^{m \times 1}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_m \cdot x\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>row_repeat(x, m)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m\) copies of row vector \(x \in \mathbb{R}^{1 \times n}\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1_m^\top \cdot X\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns_sum(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 \times n\) row vector with sums of the columns of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X \cdot 1_n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rows_sum(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with sums of the rows of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\max(X)_{col}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns_max(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 \times n\) row vector with maximum values of the columns of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\max(X)_{row}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rows_max(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with maximum values of the rows of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\((1_m^\top \cdot X) / n\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns_mean(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 \times n\) row vector with mean values of the columns of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\((X \cdot 1_n) / m\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rows_mean(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(m \times 1\) column vector with mean values of the rows of \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(f(X)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apply(f, X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: \mathbb{R} \rightarrow \mathbb{R}\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(e^X\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exp(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow e^x\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\log(X)\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of the natural logarithm \(f: x \rightarrow \ln(x)\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(1 / X\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reciprocal(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow 1/x\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\sqrt{X}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sqrt(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow \sqrt{x}\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(X^{-1/2}\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inv_sqrt(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow x^{-1/2}\) to \(X\)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\(\log(\sigma(X))\)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log_sigmoid(X)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element-wise application of \(f: x \rightarrow \log(\sigma(x))\) to \(X\)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -821,7 +1858,7 @@ This format is used for portability between C++ and Python implementations. Ther
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-11-19 10:25:49 UTC
+Last updated 2025-11-19 10:50:50 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
