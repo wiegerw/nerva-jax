@@ -80,6 +80,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.sqrt"><code class="docutils literal notranslate"><span class="pre">sqrt()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.inv_sqrt"><code class="docutils literal notranslate"><span class="pre">inv_sqrt()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.log_sigmoid"><code class="docutils literal notranslate"><span class="pre">log_sigmoid()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.abs"><code class="docutils literal notranslate"><span class="pre">abs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nerva_jax.matrix_operations.clip"><code class="docutils literal notranslate"><span class="pre">clip()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.multilayer_perceptron.html">nerva_jax.multilayer_perceptron</a></li>
@@ -126,8 +128,14 @@ They operate on 1D/2D tensors and keep broadcasting explicit for clarity.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.Diag" title="nerva_jax.matrix_operations.Diag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Diag</span></code></a>(x)</p></td>
 <td><p>Create diagonal matrix with x as diagonal.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.apply" title="nerva_jax.matrix_operations.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(f, X)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.abs" title="nerva_jax.matrix_operations.abs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abs</span></code></a>(X)</p></td>
+<td><p>Element-wise absolute value <a href="#id1"><span class="problematic" id="id2">|X|</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.apply" title="nerva_jax.matrix_operations.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(f, X)</p></td>
 <td><p>Element-wise application of function f to X.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.clip" title="nerva_jax.matrix_operations.clip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clip</span></code></a>(X, a_min, a_max)</p></td>
+<td><p>Element-wise clip of X to [a_min, a_max].</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nerva_jax.matrix_operations.column_repeat" title="nerva_jax.matrix_operations.column_repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">column_repeat</span></code></a>(x, n)</p></td>
 <td><p>Repeat column vector x horizontally n times.</p></td>
@@ -393,6 +401,18 @@ They operate on 1D/2D tensors and keep broadcasting explicit for clarity.</p>
 <dt class="sig sig-object py" id="nerva_jax.matrix_operations.log_sigmoid">
 <span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#log_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.log_sigmoid" title="Link to this definition"></a></dt>
 <dd><p>Element-wise log(sigmoid(X)) computed stably.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.abs">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">abs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#abs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.abs" title="Link to this definition"></a></dt>
+<dd><p>Element-wise absolute value <a href="#id3"><span class="problematic" id="id4">|X|</span></a>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nerva_jax.matrix_operations.clip">
+<span class="sig-prename descclassname"><span class="pre">nerva_jax.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">clip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax.numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">jax.numpy.ndarray</span></span></span><a class="reference internal" href="../_modules/nerva_jax/matrix_operations.html#clip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.matrix_operations.clip" title="Link to this definition"></a></dt>
+<dd><p>Element-wise clip of X to [a_min, a_max].</p>
 </dd></dl>
 
 </section>

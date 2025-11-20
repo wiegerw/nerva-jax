@@ -9,7 +9,9 @@ nerva\_jax.matrix\_operations
    .. autosummary::
    
       Diag
+      abs
       apply
+      clip
       column_repeat
       columns_max
       columns_mean

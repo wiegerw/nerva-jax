@@ -154,7 +154,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns an mxn matrix with all elements equal to 0.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">if</span> <span class="n">n</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span></div>
 
 
 
@@ -164,7 +164,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns an mxn matrix with all elements equal to 1.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">if</span> <span class="n">n</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span></div>
 
 
 
@@ -174,7 +174,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the nxn identity matrix.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
 
 
 
@@ -359,6 +359,22 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">log_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Element-wise log(sigmoid(X)) computed stably.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">X</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="abs">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.abs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Element-wise absolute value |X|.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="clip">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.matrix_operations.html#nerva_jax.matrix_operations.clip">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">clip</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">a_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Matrix</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Element-wise clip of X to [a_min, a_max].&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">a_min</span><span class="p">,</span> <span class="n">a_max</span><span class="p">)</span></div>
 
 </pre></div>
 

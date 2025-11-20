@@ -142,11 +142,9 @@
 <div class="viewcode-block" id="MultilayerPerceptron.load_weights_and_bias">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.multilayer_perceptron.html#nerva_jax.multilayer_perceptron.MultilayerPerceptron.load_weights_and_bias">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_weights_and_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Loads the weights and biases from a file in .npz format</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads the weights and biases from a file in .npz format</span>
 
 <span class="sd">        The weight matrices are stored using the keys W1, W2, ... and the bias vectors using the keys b1, b2, ...</span>
-<span class="sd">        :param filename: the name of the file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Loading weights and bias from </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">load_dict_from_npz</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
