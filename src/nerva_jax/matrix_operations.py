@@ -52,21 +52,21 @@ def zeros(m: int, n=None) -> Matrix:
     """
     Returns an mxn matrix with all elements equal to 0.
     """
-    return jnp.zeros((m, n)) if n else jnp.zeros(m)
+    return (jnp.zeros((m, n), dtype=jnp.float32) if n is not None else jnp.zeros(m, dtype=jnp.float32))
 
 
 def ones(m: int, n=None) -> Matrix:
     """
     Returns an mxn matrix with all elements equal to 1.
     """
-    return jnp.ones((m, n)) if n else jnp.ones(m)
+    return (jnp.ones((m, n), dtype=jnp.float32) if n is not None else jnp.ones(m, dtype=jnp.float32))
 
 
 def identity(n: int) -> Matrix:
     """
     Returns the nxn identity matrix.
     """
-    return jnp.eye(n)
+    return jnp.eye(n, dtype=jnp.float32)
 
 
 def product(X: Matrix, Y: Matrix) -> Matrix:
@@ -188,3 +188,13 @@ def inv_sqrt(X: Matrix) -> Matrix:
 def log_sigmoid(X: Matrix) -> Matrix:
     """Element-wise log(sigmoid(X)) computed stably."""
     return -jnp.logaddexp(0, -X)
+
+
+def abs(X: Matrix) -> Matrix:
+    """Element-wise absolute value |X|."""
+    return jnp.abs(X)
+
+
+def clip(X: Matrix, a_min: float, a_max: float) -> Matrix:
+    """Element-wise clip of X to [a_min, a_max]."""
+    return jnp.clip(X, a_min, a_max)

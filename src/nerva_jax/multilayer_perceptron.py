@@ -44,11 +44,9 @@ class MultilayerPerceptron(object):
                 index += 1
 
     def load_weights_and_bias(self, filename: str):
-        """
-        Loads the weights and biases from a file in .npz format
+        """Loads the weights and biases from a file in .npz format
 
         The weight matrices are stored using the keys W1, W2, ... and the bias vectors using the keys b1, b2, ...
-        :param filename: the name of the file
         """
         print(f'Loading weights and bias from {filename}')
         data = load_dict_from_npz(filename)

@@ -18,9 +18,9 @@ from nerva_jax.utilities import load_dict_from_npz
 
 def to_one_hot(x: Matrix, num_classes: int):
     """Convert class index tensor to one-hot matrix with num_classes columns."""
-    one_hot = jnp.zeros((len(x), num_classes), dtype=float)
+    one_hot = jnp.zeros((len(x), num_classes), dtype=jnp.float32)
     one_hot = one_hot.at[jnp.arange(len(x)), x].set(1)
-    return jnp.array(one_hot)
+    return one_hot
 
 
 def from_one_hot(one_hot: Matrix) -> Matrix:
@@ -110,6 +110,6 @@ def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[DataLoa
     # Determine number of classes robustly to avoid underestimating when some classes are absent
     num_classes = infer_num_classes(Ttrain, Ttest)
 
-    train_loader = DataLoader(jnp.array(Xtrain), jnp.array(Ttrain), batch_size, num_classes=num_classes)
-    test_loader = DataLoader(jnp.array(Xtest), jnp.array(Ttest), batch_size, num_classes=num_classes)
+    train_loader = DataLoader(jnp.array(Xtrain, dtype=jnp.float32), jnp.array(Ttrain), batch_size, num_classes=num_classes)
+    test_loader = DataLoader(jnp.array(Xtest, dtype=jnp.float32), jnp.array(Ttest), batch_size, num_classes=num_classes)
     return train_loader, test_loader
