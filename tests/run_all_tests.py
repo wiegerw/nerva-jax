@@ -45,6 +45,8 @@ def main():
 
     # --- Argument parsing ---
     parser = argparse.ArgumentParser(description="Run all Python tests in this folder")
+    parser.add_argument("--run", action="store_true",
+                        help="Actually run all tests. Without this flag, the script prints help and exits.")
     parser.add_argument("--include-long", action="store_true",
                         help="Include tests marked @pytest.mark.slow")
     parser.add_argument("--duration", type=int, default=None,
@@ -52,6 +54,11 @@ def main():
     parser.add_argument("extra_args", nargs=argparse.REMAINDER,
                         help="Additional arguments to pass to the test runner (pytest or unittest)")
     args = parser.parse_args()
+
+    # Require explicit confirmation to avoid duplicate runs when called from a parent runner
+    if not args.run:
+        print("No action taken. To run tests in this folder, invoke:\n  python run_all_tests.py --run [--include-long] [--duration N] [<extra pytest/unittest args>]")
+        sys.exit(0)
 
     include_long = args.include_long
     duration_flag = args.duration
