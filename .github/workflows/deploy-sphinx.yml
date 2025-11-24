@@ -10,8 +10,7 @@ jobs:
   sphinx-build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/<username>/jax-sphinx:latest
-
+      image: ghcr.io/wiegerw/jax-sphinx:latest
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
