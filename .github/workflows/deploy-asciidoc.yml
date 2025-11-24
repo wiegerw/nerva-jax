@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build:
+  asciidoc-build:
     runs-on: ubuntu-latest
     container: asciidoctor/docker-asciidoctor:latest
 
