@@ -191,7 +191,7 @@ def log_sigmoid(X: Matrix) -> Matrix:
 
 
 def abs(X: Matrix) -> Matrix:
-    """Element-wise absolute value |X|."""
+    """Element-wise absolute value `|X|`."""
     return jnp.abs(X)
 
 
