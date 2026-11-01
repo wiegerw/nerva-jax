@@ -4,9 +4,9 @@ The tool `inspect_npz.py` can be used to inspect the contents of a dataset store
 An example invocation of the `inspect_npz.py` tool is
 
 [.small-code]
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
-python inspect_npz.py data/cifar10-flattened.npz
+python tools/inspect_npz.py {datasets-dir}/cifar10-flattened.npz
 ----
 
 The output may look like this:

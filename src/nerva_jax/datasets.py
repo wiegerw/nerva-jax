@@ -5,7 +5,10 @@
 """In-memory data loader helpers and one-hot conversions.
 
 The DataLoader defined here mirrors a small subset of the PyTorch
-DataLoader API but operates on in-memory tensors loaded from .npz files.
+DataLoader API but operates on in-memory tensors. Data loaders can be
+created from .npz files (create_npz_dataloaders) or from NumPy arrays
+(create_array_dataloaders). See also the module shapes_dataset, which
+generates a synthetic dataset.
 """
 
 from pathlib import Path

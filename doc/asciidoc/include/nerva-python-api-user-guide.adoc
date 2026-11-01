@@ -115,3 +115,15 @@ In each epoch, every batch `(X, T)` goes through the three standard steps of sto
 . *Backpropagation:* Given the outputs `Y` and the targets `T`, compute the gradient `DY` of `Y` with respect to the loss function. Then, using `Y` and `DY`, compute the gradients of the model parameters `DΘ`. These parameter gradients are stored internally in the model rather than returned. In the code, this step is performed by `M.backpropagate(Y, DY)`.
 
 . *Optimization:* Use the internally stored parameter gradients to update the parameters `Θ`. In the code, this corresponds to `M.optimize(lr)`.
+
+=== A complete example
+
+The following example trains an MLP on the synthetic shapes dataset (see <<shapes-dataset>>), using a training loop
+that shows the feedforward, backpropagation and optimization steps explicitly. The function `sgd` is defined in
+the file `examples/train_shapes.py`.
+
+[.small-code]
+[source,python]
+----
+include::../../../examples/train_shapes.py[tag=train]
+----

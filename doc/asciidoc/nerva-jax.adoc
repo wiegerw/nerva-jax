@@ -39,6 +39,8 @@ include::include/nerva-python-command-line-tools.adoc[]
 
 include::include/io.adoc[]
 
+include::include/nerva-python-datasets.adoc[]
+
 include::include/nerva-python-advanced-topics.adoc[]
 
 == References

@@ -14,42 +14,18 @@ A `.npz` file can store a dictionary of arrays in compressed form, which allows 
 === Preparing data [[preparing-data]]
 
 The `{mlptool}` utility expects training and testing data in `.npz` format.
+A helper script is provided to download and preprocess commonly used datasets, including **MNIST** and **CIFAR-10**.
 
-==== Synthetic shapes dataset
+The script is located at `link:{repo-url}/{prepare-data-script}[{prepare-data-script}]` and can be run from the command line.
+It stores the datasets in the directory given by `--data-dir`; the examples expect them in `{datasets-dir}`.
 
-The module `nerva_jax.shapes_dataset` generates a synthetic image classification dataset on the fly, without downloads
-and with no dependencies other than NumPy. Each example is a 28x28 grayscale image of one of ten shapes (disk, ring,
-square, square outline, triangle, cross, plus, horizontal bars, vertical bars, ellipse), with random position, size,
-stroke width, rotation and brightness, and with pixel noise. The images are flattened to 784 features, like MNIST.
-The examples in the `examples` folder use this dataset.
-
-[source,python]
-----
-from nerva_jax.shapes_dataset import create_shapes_dataloaders
-train_loader, test_loader = create_shapes_dataloaders(batch_size=100)
-----
-
-To save the dataset in `.npz` format, e.g. for the `{mlptool}` utility:
-
-[source,bash]
-----
-python -m nerva_jax.shapes_dataset --output shapes.npz
-----
-
-==== MNIST and CIFAR-10
-
-A helper script is provided to download and preprocess the **MNIST** and **CIFAR-10** datasets.
-It is located at `link:{repo-url}/examples/mnist_cifar10/prepare_data.py[examples/mnist_cifar10/prepare_data.py]`,
-together with the examples that use these datasets (see the README in that folder).
-The datasets are optional: they are not needed for the other examples or for the tests.
-
-===== MNIST
+==== MNIST
 
 To download and prepare MNIST:
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
-python prepare_data.py --dataset=mnist --download --data-dir=data
+python {prepare-data-script} --dataset=mnist --download --data-dir={datasets-dir}
 ----
 
 This will:
@@ -62,13 +38,13 @@ The output file contains:
 * `Xtrain`, `Xtest`: flattened and normalized image data
 * `Ttrain`, `Ttest`: corresponding label vectors
 
-===== CIFAR-10
+==== CIFAR-10
 
 To download and prepare CIFAR-10:
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
-python prepare_data.py --dataset=cifar10 --download --data-dir=data
+python {prepare-data-script} --dataset=cifar10 --download --data-dir={datasets-dir}
 ----
 
 This will:
@@ -83,12 +59,12 @@ The output file contains:
 * `Xtrain`, `Xtest`: flattened image arrays with pixel values normalized to `[0, 1]`
 * `Ttrain`, `Ttest`: integer class labels
 
-===== Reusing Existing Files
+==== Reusing Existing Files
 
 If the required `.npz` files already exist, the script will detect this and skip reprocessing.
 It is safe to rerun the script without overwriting existing files.
 
-===== Help
+==== Help
 
 To see all script options:
 

@@ -23,6 +23,7 @@ API reference
    nerva_jax
    nerva_jax.activation_functions
    nerva_jax.datasets
+   nerva_jax.shapes_dataset
    nerva_jax.layers
    nerva_jax.learning_rate
    nerva_jax.loss_functions

@@ -8,6 +8,7 @@ cd "$(dirname "$0")"
 export PYTHONPATH=../src
 dataset=shapes.npz
 
+# tag::doc[]
 # Generate the synthetic shapes dataset (28x28 images of 10 kinds of shapes) if it does not exist yet
 if [ ! -f $dataset ]; then
     python3 -m nerva_jax.shapes_dataset --output=$dataset || exit 1
@@ -23,3 +24,4 @@ python3 -u ../tools/mlp.py \
         --loss=SoftmaxCrossEntropy \
         --learning-rate="Constant(0.01)" \
         --load-dataset=$dataset
+# end::doc[]

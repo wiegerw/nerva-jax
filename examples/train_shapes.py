@@ -59,6 +59,7 @@ def sgd(M: MultilayerPerceptron,
 
 
 def main():
+    # tag::train[]
     # Generate the synthetic shapes dataset: 28x28 images of 10 kinds of shapes, flattened to 784 features
     train_loader, test_loader = create_shapes_dataloaders(batch_size=100)
 
@@ -94,6 +95,7 @@ def main():
     epochs = 5
 
     sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
+    # end::train[]
 
 
 if __name__ == '__main__':

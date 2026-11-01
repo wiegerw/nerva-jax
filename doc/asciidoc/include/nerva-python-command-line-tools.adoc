@@ -14,15 +14,26 @@ The following command line tools are available. They can be found in the `tools`
 |===
 
 === The tool {mlptool}
-The tool `{mlptool}` can be used for training multilayer perceptrons. An example invocation of the `{mlptool}` tool is
+The tool `{mlptool}` can be used for training multilayer perceptrons. The following example, which needs no
+downloads, generates the synthetic shapes dataset (see <<shapes-dataset>>) and trains an MLP on it:
+
+[.small-code]
+[source,bash]
+----
+include::../../../examples/train_shapes_cli.sh[tag=doc]
+----
+
+Larger examples use the https://en.wikipedia.org/wiki/MNIST_database[MNIST] and
+https://www.cs.toronto.edu/~kriz/cifar.html[CIFAR-10] datasets. They are found in the optional `examples/mnist_cifar10`
+directory, together with a script `prepare_data.py` that downloads the datasets, flattens them and stores them in
+`.npz` format (see <<preparing-data>>). An example invocation for CIFAR-10 is
 
 [.small-code]
 [source,bash]
 ----
 include::../../../examples/mnist_cifar10/train_cifar10_cli.sh[tag=doc]
 ----
-This will train a https://www.cs.toronto.edu/~kriz/cifar.html[CIFAR-10] model using an MLP consisting of three linear layers with activation functions ReLU, ReLU and no activation. A script `prepare_data.py` is available in the `examples/mnist_cifar10` directory
-that can be used to download the dataset, flatten it and store it in `.npz` format. See the section <<preparing-data>> for details.
+This trains an MLP consisting of three linear layers with activation functions ReLU, ReLU and no activation.
 
 The output may look like this:
 [[mlp_output]]

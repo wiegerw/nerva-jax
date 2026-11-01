@@ -2,3 +2,5 @@ ifndef::library[:library: pass:q[_Nerva-JAX Python Library_]]
 ifndef::mlptool[:mlptool: mlp.py]
 ifndef::module[:module: nerva_jax]
 :repo-url: https://github.com/wiegerw/nerva-jax/blob/main
+ifndef::prepare-data-script[:prepare-data-script: examples/mnist_cifar10/prepare_data.py]
+ifndef::datasets-dir[:datasets-dir: examples/mnist_cifar10/data]
