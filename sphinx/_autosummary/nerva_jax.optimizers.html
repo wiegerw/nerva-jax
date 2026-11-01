@@ -8,18 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nerva_jax.optimizers &mdash; nerva_jax  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="nerva_jax.softmax_functions" href="nerva_jax.softmax_functions.html" />
+    <link rel="next" title="nerva_jax.shapes_dataset" href="nerva_jax.shapes_dataset.html" />
     <link rel="prev" title="nerva_jax.multilayer_perceptron" href="nerva_jax.multilayer_perceptron.html" /> 
 </head>
 
@@ -46,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.shapes_dataset.html">nerva_jax.shapes_dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
@@ -141,7 +142,7 @@ factory callables from textual specifications like “Momentum(mu=0.9)”.</p>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.optimizers.Optimizer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">Optimizer</span></span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#Optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.Optimizer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">Optimizer</span></span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#Optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.Optimizer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Minimal optimizer interface used by layers to update parameters.</p>
 <dl class="py method">
@@ -153,7 +154,7 @@ factory callables from textual specifications like “Momentum(mu=0.9)”.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.optimizers.CompositeOptimizer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">CompositeOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nerva_jax.optimizers.Optimizer" title="nerva_jax.optimizers.Optimizer"><span class="pre">Optimizer</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#CompositeOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.CompositeOptimizer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">CompositeOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nerva_jax.optimizers.Optimizer" title="nerva_jax.optimizers.Optimizer"><span class="pre">Optimizer</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#CompositeOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.CompositeOptimizer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.optimizers.Optimizer" title="nerva_jax.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></a></p>
 <p>Combines multiple optimizers to update different parameter groups.</p>
 <dl class="py method">
@@ -166,7 +167,7 @@ factory callables from textual specifications like “Momentum(mu=0.9)”.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.optimizers.GradientDescentOptimizer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">GradientDescentOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_Dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#GradientDescentOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.GradientDescentOptimizer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">GradientDescentOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_Dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#GradientDescentOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.GradientDescentOptimizer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.optimizers.Optimizer" title="nerva_jax.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></a></p>
 <p>Standard gradient descent optimizer: x -= eta * grad.</p>
 <dl class="py method">
@@ -179,7 +180,7 @@ factory callables from textual specifications like “Momentum(mu=0.9)”.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.optimizers.MomentumOptimizer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">MomentumOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_Dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#MomentumOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.MomentumOptimizer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">MomentumOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_Dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#MomentumOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.MomentumOptimizer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.optimizers.GradientDescentOptimizer" title="nerva_jax.optimizers.GradientDescentOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientDescentOptimizer</span></code></a></p>
 <p>Gradient descent with momentum for accelerated convergence.</p>
 <dl class="py method">
@@ -192,7 +193,7 @@ factory callables from textual specifications like “Momentum(mu=0.9)”.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.optimizers.NesterovOptimizer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">NesterovOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_Dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#NesterovOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.NesterovOptimizer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.optimizers.</span></span><span class="sig-name descname"><span class="pre">NesterovOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_Dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/optimizers.html#NesterovOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.optimizers.NesterovOptimizer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.optimizers.MomentumOptimizer" title="nerva_jax.optimizers.MomentumOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">MomentumOptimizer</span></code></a></p>
 <p>Nesterov accelerated gradient descent optimizer.</p>
 <dl class="py method">
@@ -218,13 +219,13 @@ Supported names: GradientDescent, Momentum(mu=…), Nesterov(mu=…).</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="nerva_jax.multilayer_perceptron.html" class="btn btn-neutral float-left" title="nerva_jax.multilayer_perceptron" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="nerva_jax.softmax_functions.html" class="btn btn-neutral float-right" title="nerva_jax.softmax_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nerva_jax.shapes_dataset.html" class="btn btn-neutral float-right" title="nerva_jax.shapes_dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+    <p>&#169; Copyright 2026, Wieger Wesselink and contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nerva_jax.loss_functions &mdash; nerva_jax  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.shapes_dataset.html">nerva_jax.shapes_dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_jax.loss_functions</a><ul>
@@ -435,7 +436,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.LossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">LossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">LossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Interface for loss functions with value and gradient on batch matrices.</p>
 <dl class="py method">
@@ -447,7 +448,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.SquaredErrorLossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">SquaredErrorLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SquaredErrorLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SquaredErrorLossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">SquaredErrorLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SquaredErrorLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SquaredErrorLossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
 <p>Squared error loss function for regression tasks.</p>
 <dl class="py method">
@@ -459,7 +460,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.CrossEntropyLossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">CrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#CrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.CrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">CrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#CrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.CrossEntropyLossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
 <p>Cross entropy loss function for classification with probabilities.</p>
 <dl class="py method">
@@ -471,7 +472,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">SoftmaxCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SoftmaxCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">SoftmaxCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#SoftmaxCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.SoftmaxCrossEntropyLossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
 <p>Softmax cross entropy loss for classification with logits.</p>
 <dl class="py method">
@@ -483,7 +484,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">StableSoftmaxCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#StableSoftmaxCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">StableSoftmaxCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#StableSoftmaxCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.StableSoftmaxCrossEntropyLossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
 <p>Numerically stable softmax cross entropy loss for classification.</p>
 <dl class="py method">
@@ -495,7 +496,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.LogisticCrossEntropyLossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">LogisticCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LogisticCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">LogisticCrossEntropyLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#LogisticCrossEntropyLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.LogisticCrossEntropyLossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
 <p>Logistic cross entropy loss for binary classification.</p>
 <dl class="py method">
@@ -507,7 +508,7 @@ Concrete LossFunction classes wrap these for use in the training loop.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">NegativeLogLikelihoodLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#NegativeLogLikelihoodLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.loss_functions.</span></span><span class="sig-name descname"><span class="pre">NegativeLogLikelihoodLossFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/loss_functions.html#NegativeLogLikelihoodLossFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.loss_functions.NegativeLogLikelihoodLossFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.loss_functions.LossFunction" title="nerva_jax.loss_functions.LossFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">LossFunction</span></code></a></p>
 <p>Negative log likelihood loss for probabilistic outputs.</p>
 <dl class="py method">
@@ -538,7 +539,7 @@ LogisticCrossEntropy, NegativeLogLikelihood.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+    <p>&#169; Copyright 2026, Wieger Wesselink and contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

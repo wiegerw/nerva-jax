@@ -1,0 +1,15 @@
+nerva\_jax.shapes\_dataset
+==========================
+
+.. automodule:: nerva_jax.shapes_dataset
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_shapes_dataloaders
+      main
+      make_shapes
+      make_shapes_dataset
+   

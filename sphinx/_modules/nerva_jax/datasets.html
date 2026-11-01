@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nerva_jax.datasets &mdash; nerva_jax  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.shapes_dataset.html">nerva_jax.shapes_dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
@@ -87,12 +88,16 @@
 <span class="sd">&quot;&quot;&quot;In-memory data loader helpers and one-hot conversions.</span>
 
 <span class="sd">The DataLoader defined here mirrors a small subset of the PyTorch</span>
-<span class="sd">DataLoader API but operates on in-memory tensors loaded from .npz files.</span>
+<span class="sd">DataLoader API but operates on in-memory tensors. Data loaders can be</span>
+<span class="sd">created from .npz files (create_npz_dataloaders) or from NumPy arrays</span>
+<span class="sd">(create_array_dataloaders). See also the module shapes_dataset, which</span>
+<span class="sd">generates a synthetic dataset.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_jax.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dict_from_npz</span>
@@ -196,7 +201,7 @@
 
 <div class="viewcode-block" id="create_npz_dataloaders">
 <a class="viewcode-back" href="../../_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.create_npz_dataloaders">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">create_npz_dataloaders</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">DataLoader</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_npz_dataloaders</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">DataLoader</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors.&quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Loading dataset from file </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -213,6 +218,24 @@
     <span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ttest</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span></div>
 
+
+
+<div class="viewcode-block" id="create_array_dataloaders">
+<a class="viewcode-back" href="../../_autosummary/nerva_jax.datasets.html#nerva_jax.datasets.create_array_dataloaders">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_array_dataloaders</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Ttrain</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Ttest</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                             <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">DataLoader</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates data loaders for a training and a test set that are given as numpy arrays.</span>
+
+<span class="sd">    Xtrain and Xtest contain the examples (one per row), and Ttrain and Ttest the class indices.</span>
+<span class="sd">    If num_classes is 0, the number of classes is inferred from the targets.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Xtrain</span><span class="p">,</span> <span class="n">Ttrain</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="n">Ttest</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Ttrain</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Ttest</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num_classes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">num_classes</span> <span class="o">=</span> <span class="n">infer_num_classes</span><span class="p">(</span><span class="n">Ttrain</span><span class="p">,</span> <span class="n">Ttest</span><span class="p">)</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">Ttrain</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+    <span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span> <span class="n">Ttest</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span></div>
+
 </pre></div>
 
            </div>
@@ -222,7 +245,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+    <p>&#169; Copyright 2026, Wieger Wesselink and contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

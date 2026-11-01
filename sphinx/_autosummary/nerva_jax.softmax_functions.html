@@ -8,19 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nerva_jax.softmax_functions &mdash; nerva_jax  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="nerva_jax.training" href="nerva_jax.training.html" />
-    <link rel="prev" title="nerva_jax.optimizers" href="nerva_jax.optimizers.html" /> 
+    <link rel="prev" title="nerva_jax.shapes_dataset" href="nerva_jax.shapes_dataset.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.shapes_dataset.html">nerva_jax.shapes_dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
@@ -209,7 +210,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.softmax_functions.SoftmaxFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">SoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#SoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.SoftmaxFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">SoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#SoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.SoftmaxFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Callable implementing row-wise softmax and its Jacobian.</p>
 <dl class="py method">
@@ -221,7 +222,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.softmax_functions.StableSoftmaxFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">StableSoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#StableSoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.StableSoftmaxFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">StableSoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#StableSoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.StableSoftmaxFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Callable implementing numerically stable row-wise softmax and its Jacobian.</p>
 <dl class="py method">
@@ -233,7 +234,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.softmax_functions.LogSoftmaxFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">LogSoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#LogSoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.LogSoftmaxFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">LogSoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#LogSoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.LogSoftmaxFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Callable implementing row-wise log-softmax and its Jacobian.</p>
 <dl class="py method">
@@ -245,7 +246,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.softmax_functions.StableLogSoftmaxFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">StableLogSoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#StableLogSoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.StableLogSoftmaxFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">StableLogSoftmaxFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/softmax_functions.html#StableLogSoftmaxFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.softmax_functions.StableLogSoftmaxFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Callable implementing numerically stable row-wise log-softmax and its Jacobian.</p>
 <dl class="py method">
@@ -261,14 +262,14 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="nerva_jax.optimizers.html" class="btn btn-neutral float-left" title="nerva_jax.optimizers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_jax.shapes_dataset.html" class="btn btn-neutral float-left" title="nerva_jax.shapes_dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="nerva_jax.training.html" class="btn btn-neutral float-right" title="nerva_jax.training" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+    <p>&#169; Copyright 2026, Wieger Wesselink and contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

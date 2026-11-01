@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nerva_jax documentation &mdash; nerva_jax  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.html">nerva_jax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.activation_functions.html">nerva_jax.activation_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.shapes_dataset.html">nerva_jax.shapes_dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
@@ -106,34 +107,37 @@ sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.datasets.html#module-nerva_jax.datasets" title="nerva_jax.datasets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.datasets</span></code></a></p></td>
 <td><p>In-memory data loader helpers and one-hot conversions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.layers.html#module-nerva_jax.layers" title="nerva_jax.layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.layers</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.shapes_dataset.html#module-nerva_jax.shapes_dataset" title="nerva_jax.shapes_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.shapes_dataset</span></code></a></p></td>
+<td><p>A synthetic image classification dataset that is generated on the fly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.layers.html#module-nerva_jax.layers" title="nerva_jax.layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.layers</span></code></a></p></td>
 <td><p>Neural network layers used by the MultilayerPerceptron class.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.learning_rate.html#module-nerva_jax.learning_rate" title="nerva_jax.learning_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.learning_rate</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.learning_rate.html#module-nerva_jax.learning_rate" title="nerva_jax.learning_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.learning_rate</span></code></a></p></td>
 <td><p>Learning-rate schedulers.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.loss_functions.html#module-nerva_jax.loss_functions" title="nerva_jax.loss_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.loss_functions</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.loss_functions.html#module-nerva_jax.loss_functions" title="nerva_jax.loss_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.loss_functions</span></code></a></p></td>
 <td><p>Analytic loss functions and their gradients used during training.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.matrix_operations.html#module-nerva_jax.matrix_operations" title="nerva_jax.matrix_operations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.matrix_operations</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.matrix_operations.html#module-nerva_jax.matrix_operations" title="nerva_jax.matrix_operations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.matrix_operations</span></code></a></p></td>
 <td><p>Matrix operations built on top of torch to support the math in the library.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.multilayer_perceptron.html#module-nerva_jax.multilayer_perceptron" title="nerva_jax.multilayer_perceptron"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.multilayer_perceptron</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.multilayer_perceptron.html#module-nerva_jax.multilayer_perceptron" title="nerva_jax.multilayer_perceptron"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.multilayer_perceptron</span></code></a></p></td>
 <td><p>A simple multilayer perceptron (MLP) class.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.optimizers.html#module-nerva_jax.optimizers" title="nerva_jax.optimizers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.optimizers</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.optimizers.html#module-nerva_jax.optimizers" title="nerva_jax.optimizers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.optimizers</span></code></a></p></td>
 <td><p>Optimizers used to adjusts the model's parameters based on the gradients.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.softmax_functions.html#module-nerva_jax.softmax_functions" title="nerva_jax.softmax_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.softmax_functions</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.softmax_functions.html#module-nerva_jax.softmax_functions" title="nerva_jax.softmax_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.softmax_functions</span></code></a></p></td>
 <td><p>Softmax and log-softmax functions together with stable variants.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.training.html#module-nerva_jax.training" title="nerva_jax.training"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.training</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.training.html#module-nerva_jax.training" title="nerva_jax.training"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.training</span></code></a></p></td>
 <td><p>Training helpers for the MLP, including a basic SGD loop and CLI glue.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.utilities.html#module-nerva_jax.utilities" title="nerva_jax.utilities"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.utilities</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.utilities.html#module-nerva_jax.utilities" title="nerva_jax.utilities"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.utilities</span></code></a></p></td>
 <td><p>Miscellaneous utilities (formatting, timing, parsing, I/O).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_jax.weight_initializers.html#module-nerva_jax.weight_initializers" title="nerva_jax.weight_initializers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.weight_initializers</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_jax.weight_initializers.html#module-nerva_jax.weight_initializers" title="nerva_jax.weight_initializers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_jax.weight_initializers</span></code></a></p></td>
 <td><p>Weight and bias initialization helpers for linear layers.</p></td>
 </tr>
 </tbody>
@@ -151,7 +155,7 @@ sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+    <p>&#169; Copyright 2026, Wieger Wesselink and contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nerva_jax.activation_functions &mdash; nerva_jax  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -89,6 +89,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.datasets.html">nerva_jax.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_jax.shapes_dataset.html">nerva_jax.shapes_dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.layers.html">nerva_jax.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.learning_rate.html">nerva_jax.learning_rate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_jax.loss_functions.html">nerva_jax.loss_functions</a></li>
@@ -276,7 +277,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.ActivationFunction">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">ActivationFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ActivationFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ActivationFunction" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">ActivationFunction</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ActivationFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ActivationFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Interface for activation functions with value and gradient methods.</p>
 <dl class="py method">
@@ -288,7 +289,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.ReLUActivation">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">ReLUActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ReLUActivation" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">ReLUActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#ReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.ReLUActivation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
 <p>ReLU activation function: max(0, x).</p>
 <dl class="py method">
@@ -301,7 +302,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.LeakyReLUActivation">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">LeakyReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#LeakyReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.LeakyReLUActivation" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">LeakyReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#LeakyReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.LeakyReLUActivation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
 <p>Leaky ReLU activation: max(x, alpha * x).</p>
 <dl class="py method">
@@ -314,7 +315,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.AllReLUActivation">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">AllReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#AllReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.AllReLUActivation" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">AllReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#AllReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.AllReLUActivation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
 <p>AllReLU activation (alternative parameterization of leaky ReLU).</p>
 <dl class="py method">
@@ -327,7 +328,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.HyperbolicTangentActivation">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">HyperbolicTangentActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#HyperbolicTangentActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.HyperbolicTangentActivation" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">HyperbolicTangentActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#HyperbolicTangentActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.HyperbolicTangentActivation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
 <p>Hyperbolic tangent activation function.</p>
 <dl class="py method">
@@ -340,7 +341,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.SigmoidActivation">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">SigmoidActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SigmoidActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SigmoidActivation" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">SigmoidActivation</span></span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SigmoidActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SigmoidActivation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
 <p>Sigmoid activation function: 1 / (1 + exp(-x)).</p>
 <dl class="py method">
@@ -353,7 +354,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nerva_jax.activation_functions.SReLUActivation">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">SReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">al</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SReLUActivation" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nerva_jax.activation_functions.</span></span><span class="sig-name descname"><span class="pre">SReLUActivation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">al</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_jax/activation_functions.html#SReLUActivation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_jax.activation_functions.SReLUActivation" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nerva_jax.activation_functions.ActivationFunction" title="nerva_jax.activation_functions.ActivationFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivationFunction</span></code></a></p>
 <p>Smooth rectified linear activation with learnable parameters.</p>
 <dl class="py method">
@@ -386,7 +387,7 @@ that turns textual specifications into activation instances (e.g. “ReLU”,
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Wieger Wesselink and contributors.</p>
+    <p>&#169; Copyright 2026, Wieger Wesselink and contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
