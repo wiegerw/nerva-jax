@@ -1,0 +1,41 @@
+name: Documentation
+
+# Builds the manual (AsciiDoc) and the API reference (Sphinx) without publishing them, so that broken includes,
+# missing tags and other documentation errors are found before merging. Warnings are treated as errors.
+# The documentation is published by deploy-asciidoc.yml and deploy-sphinx.yml after a push to main.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  manual:
+    runs-on: ubuntu-latest
+    container: asciidoctor/docker-asciidoctor:latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build the manual
+        env:
+          ASCIIDOCTOR_EXTRA_OPTS: --failure-level=WARN
+        run: |
+          gem install asciidoctor-bibtex
+          bash doc/build_asciidoc_documentation.sh
+
+  api-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install Sphinx
+        # The frameworks are mocked in doc/sphinx/conf.py (autodoc_mock_imports); numpy is needed by some modules
+        run: python -m pip install sphinx sphinx-rtd-theme numpy
+
+      - name: Build the API reference
+        env:
+          SPHINX_EXTRA_OPTS: -W --keep-going
+        run: bash doc/build_sphinx_documentation.sh

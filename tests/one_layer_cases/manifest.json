@@ -1,0 +1,2216 @@
+[
+  {
+    "name": "Linear_D4_K3_GradientDescent",
+    "type": "Linear",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_000.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Linear_D4_K3_Momentum(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_001.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Linear_D4_K3_Nesterov(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_002.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Linear_D4_K4_GradientDescent",
+    "type": "Linear",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_003.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Linear_D4_K4_Momentum(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_004.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Linear_D4_K4_Nesterov(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_005.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Linear_D5_K3_GradientDescent",
+    "type": "Linear",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_006.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Linear_D5_K3_Momentum(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_007.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Linear_D5_K3_Nesterov(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_008.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Linear_D5_K4_GradientDescent",
+    "type": "Linear",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_009.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Linear_D5_K4_Momentum(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_010.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Linear_D5_K4_Nesterov(mu=0.9)",
+    "type": "Linear",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_011.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D4_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_012.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D4_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_013.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D4_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_014.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D4_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_015.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D4_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_016.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D4_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_017.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D5_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_018.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D5_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_019.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D5_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_020.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D5_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_021.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D5_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_022.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_ReLU_D5_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "ReLU",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_023.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D4_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_024.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D4_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_025.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D4_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_026.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D4_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_027.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D4_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_028.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D4_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_029.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D5_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_030.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D5_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_031.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D5_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_032.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D5_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_033.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D5_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_034.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_LeakyReLU_0p2_D5_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "LeakyReLU(alpha=0.2)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_035.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D4_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_036.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D4_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_037.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D4_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_038.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D4_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_039.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D4_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_040.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D4_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_041.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D5_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_042.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D5_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_043.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D5_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_044.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D5_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_045.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D5_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_046.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_AllReLU_0p7_D5_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "AllReLU(alpha=0.7)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_047.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D4_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_048.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D4_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_049.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D4_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_050.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D4_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_051.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D4_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_052.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D4_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_053.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D5_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_054.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D5_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_055.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D5_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_056.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D5_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_057.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D5_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_058.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Tanh_D5_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "HyperbolicTangent",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_059.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D4_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_060.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D4_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_061.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D4_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_062.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D4_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_063.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D4_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_064.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D4_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_065.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D5_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_066.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D5_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_067.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D5_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_068.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D5_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_069.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D5_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_070.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_Sigmoid_D5_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "Sigmoid",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_071.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D4_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_072.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D4_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_073.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D4_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_074.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D4_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_075.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D4_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_076.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D4_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_077.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D5_K3_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_078.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D5_K3_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_079.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D5_K3_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_080.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D5_K4_GradientDescent",
+    "type": "Activation",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_081.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D5_K4_Momentum(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_082.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Activation_SReLU_D5_K4_Nesterov(mu=0.9)",
+    "type": "Activation",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_083.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D4_K3_GradientDescent",
+    "type": "SReLU",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10000000149011612, tl=-0.20000000298023224, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_084.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D4_K3_Momentum(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.09998828172683716, tl=-0.1939248889684677, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_085.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D4_K3_Nesterov(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10440948605537415, tl=-0.2320513129234314, ar=0.30000001192092896, tr=0.5)",
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_086.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D4_K4_GradientDescent",
+    "type": "SReLU",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.10151253640651703, tl=-0.20223069190979004, ar=0.3000543415546417, tr=0.5003089308738708)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_087.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D4_K4_Momentum(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.0957508534193039, tl=-0.18688063323497772, ar=0.29875317215919495, tr=0.4888855814933777)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_088.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D4_K4_Nesterov(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.09893673658370972, tl=-0.21063271164894104, ar=0.3012542128562927, tr=0.5146210789680481)",
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_089.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D5_K3_GradientDescent",
+    "type": "SReLU",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.07831476628780365, tl=-0.23061825335025787, ar=0.30093440413475037, tr=0.5117414593696594)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_090.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D5_K3_Momentum(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.06094051152467728, tl=-0.16477736830711365, ar=0.29164448380470276, tr=0.4867689907550812)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_091.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D5_K3_Nesterov(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.044342704117298126, tl=-0.19520708918571472, ar=0.2991665005683899, tr=0.49084171652793884)",
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_092.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D5_K4_GradientDescent",
+    "type": "SReLU",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.04530210420489311, tl=-0.23452672362327576, ar=0.288605660200119, tr=0.4788064956665039)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_093.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D5_K4_Momentum(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.058161281049251556, tl=-0.29178762435913086, ar=0.281841903924942, tr=0.44838324189186096)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_094.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "SReLU_SReLU_D5_K4_Nesterov(mu=0.9)",
+    "type": "SReLU",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "activation_spec": "SReLU(al=0.06489501148462296, tl=-0.26102176308631897, ar=0.2679562568664551, tr=0.4213371276855469)",
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_095.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Softmax_D4_K3_GradientDescent",
+    "type": "Softmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_096.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "LogSoftmax_D4_K3_GradientDescent",
+    "type": "LogSoftmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_097.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Softmax_D4_K3_Momentum(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_098.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "LogSoftmax_D4_K3_Momentum(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_099.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Softmax_D4_K3_Nesterov(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_100.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "LogSoftmax_D4_K3_Nesterov(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 3,
+    "file": "case_101.npz",
+    "W_shape": [
+      3,
+      4
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Softmax_D4_K4_GradientDescent",
+    "type": "Softmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_102.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "LogSoftmax_D4_K4_GradientDescent",
+    "type": "LogSoftmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_103.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Softmax_D4_K4_Momentum(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_104.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "LogSoftmax_D4_K4_Momentum(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_105.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Softmax_D4_K4_Nesterov(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_106.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "LogSoftmax_D4_K4_Nesterov(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "K": 4,
+    "file": "case_107.npz",
+    "W_shape": [
+      4,
+      4
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Softmax_D5_K3_GradientDescent",
+    "type": "Softmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_108.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "LogSoftmax_D5_K3_GradientDescent",
+    "type": "LogSoftmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_109.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Softmax_D5_K3_Momentum(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_110.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "LogSoftmax_D5_K3_Momentum(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_111.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Softmax_D5_K3_Nesterov(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_112.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "LogSoftmax_D5_K3_Nesterov(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 3,
+    "file": "case_113.npz",
+    "W_shape": [
+      3,
+      5
+    ],
+    "b_shape": [
+      3
+    ]
+  },
+  {
+    "name": "Softmax_D5_K4_GradientDescent",
+    "type": "Softmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_114.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "LogSoftmax_D5_K4_GradientDescent",
+    "type": "LogSoftmax",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_115.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Softmax_D5_K4_Momentum(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_116.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "LogSoftmax_D5_K4_Momentum(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_117.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "Softmax_D5_K4_Nesterov(mu=0.9)",
+    "type": "Softmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_118.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "LogSoftmax_D5_K4_Nesterov(mu=0.9)",
+    "type": "LogSoftmax",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "K": 4,
+    "file": "case_119.npz",
+    "W_shape": [
+      4,
+      5
+    ],
+    "b_shape": [
+      4
+    ]
+  },
+  {
+    "name": "BatchNorm_D4_GradientDescent",
+    "type": "BatchNormalization",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "file": "case_120.npz",
+    "gamma_shape": [
+      4
+    ],
+    "beta_shape": [
+      4
+    ]
+  },
+  {
+    "name": "BatchNorm_D4_Momentum(mu=0.9)",
+    "type": "BatchNormalization",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "file": "case_121.npz",
+    "gamma_shape": [
+      4
+    ],
+    "beta_shape": [
+      4
+    ]
+  },
+  {
+    "name": "BatchNorm_D4_Nesterov(mu=0.9)",
+    "type": "BatchNormalization",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 4,
+    "file": "case_122.npz",
+    "gamma_shape": [
+      4
+    ],
+    "beta_shape": [
+      4
+    ]
+  },
+  {
+    "name": "BatchNorm_D5_GradientDescent",
+    "type": "BatchNormalization",
+    "optimizer_spec": "GradientDescent",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "file": "case_123.npz",
+    "gamma_shape": [
+      5
+    ],
+    "beta_shape": [
+      5
+    ]
+  },
+  {
+    "name": "BatchNorm_D5_Momentum(mu=0.9)",
+    "type": "BatchNormalization",
+    "optimizer_spec": "Momentum(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "file": "case_124.npz",
+    "gamma_shape": [
+      5
+    ],
+    "beta_shape": [
+      5
+    ]
+  },
+  {
+    "name": "BatchNorm_D5_Nesterov(mu=0.9)",
+    "type": "BatchNormalization",
+    "optimizer_spec": "Nesterov(mu=0.9)",
+    "lr": 0.1,
+    "N": 7,
+    "D": 5,
+    "file": "case_125.npz",
+    "gamma_shape": [
+      5
+    ],
+    "beta_shape": [
+      5
+    ]
+  }
+]

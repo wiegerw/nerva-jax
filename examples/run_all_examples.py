@@ -7,7 +7,7 @@
 # Run all example scripts in this folder.
 # - Executes all .py and .sh files except this runner script itself
 # - Adds ../src to PYTHONPATH so Python examples can import the local package
-# - Checks that required datasets (MNIST and CIFAR10) exist before running
+# - The examples in subfolders (e.g. mnist_cifar10) are not run
 # - Captures output and prints warnings if final loss did not decrease or test accuracy did not increase significantly
 # - Provides a summary of successful, failed, and skipped examples
 
@@ -28,10 +28,6 @@ SRC_DIR = REPO_ROOT / "src"
 # Add src to PYTHONPATH for current process and subprocesses
 os.environ["PYTHONPATH"] = f"{SRC_DIR}:{os.environ.get('PYTHONPATH','')}"
 sys.path.insert(0, str(SRC_DIR.resolve()))
-
-# Dataset files
-MNIST_DATA = REPO_ROOT / "data/mnist-flattened.npz"
-CIFAR_DATA = REPO_ROOT / "data/cifar10-flattened.npz"
 
 # --------------------------
 # Output checker
@@ -56,15 +52,7 @@ SUCCESS = []
 FAIL = []
 SKIP = []
 
-data_required = {MNIST_DATA, CIFAR_DATA}
-
-if not all(f.exists() for f in data_required):
-    for f in data_required:
-        if not f.exists():
-            print(f"[SKIP] Dataset not found: {f}")
-    sys.exit(1)
-
-for f in EXAMPLES_DIR.iterdir():
+for f in sorted(EXAMPLES_DIR.iterdir()):
     if f == SCRIPT_PATH:
         continue
     if f.suffix == ".py":

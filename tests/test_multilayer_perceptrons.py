@@ -19,7 +19,7 @@ from nerva_jax.training import stochastic_gradient_descent_plain, stochastic_gra
 # ----------------------------
 # Package-agnostic helpers (imported from tests.utilities)
 # ----------------------------
-from utilities import to_tensor, assert_tensors_are_close
+from utilities import to_tensor, assert_tensors_are_close, set_parameter
 
 # ----------------------------
 # MLPSpec dataclass
@@ -64,8 +64,8 @@ class TestMLP(unittest.TestCase):
         """Helper to construct and initialize the MLP with fixed weights/biases."""
         M = construct_mlp(spec.sizes)
         for i, (W, b) in enumerate(zip(spec.W, spec.b)):
-            M.layers[i].W = W
-            M.layers[i].b = b
+            set_parameter(M.layers[i], "W", W)
+            set_parameter(M.layers[i], "b", b)
         return M
 
     def _test_mlp(self, spec: MLPSpec):

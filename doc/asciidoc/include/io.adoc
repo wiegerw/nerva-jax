@@ -1,3 +1,4 @@
+// Maintained in doc/shared/python of https://github.com/wiegerw/nerva and copied by scripts/sync_docs.py. Do not edit this copy.
 // tag::io[]
 [[io]]
 == Data Handling
@@ -16,15 +17,16 @@ A `.npz` file can store a dictionary of arrays in compressed form, which allows 
 The `{mlptool}` utility expects training and testing data in `.npz` format.
 A helper script is provided to download and preprocess commonly used datasets, including **MNIST** and **CIFAR-10**.
 
-The script is located at `link:{repo-url}/data/prepare_data.py[data/prepare_data.py]` and can be run from the command line.
+The script is located at `link:{repo-url}/{prepare-data-script}[{prepare-data-script}]` and can be run from the command line.
+It stores the datasets in the directory given by `--data-dir`; the examples expect them in `{datasets-dir}`.
 
 ==== MNIST
 
 To download and prepare MNIST:
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
-python prepare_data.py --dataset=mnist --download
+python {prepare-data-script} --dataset=mnist --download --data-dir={datasets-dir}
 ----
 
 This will:
@@ -41,9 +43,9 @@ The output file contains:
 
 To download and prepare CIFAR-10:
 
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
-python prepare_data.py --dataset=cifar10 --download
+python {prepare-data-script} --dataset=cifar10 --download --data-dir={datasets-dir}
 ----
 
 This will:

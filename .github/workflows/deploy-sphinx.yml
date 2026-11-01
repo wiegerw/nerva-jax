@@ -13,7 +13,7 @@ jobs:
       image: ghcr.io/wiegerw/jax-sphinx:latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Build Sphinx HTML
         run: bash doc/build_sphinx_documentation.sh

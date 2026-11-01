@@ -173,3 +173,32 @@ def make_target(Y: np.ndarray) -> np.ndarray:
         T[i, random_index] = True
 
     return T
+
+
+# Adapter functions used by the test files that are shared by all backends
+
+def to_numpy(x) -> np.ndarray:
+    """Convert a tensor to a NumPy array."""
+    return np.asarray(x)
+
+
+def from_numpy(x):
+    """Convert a NumPy array to a tensor of this backend."""
+    return jnp.asarray(x)
+
+
+def set_parameter(obj, name: str, value):
+    """Assign value to the parameter obj.<name>. JAX arrays are immutable, so the attribute is replaced."""
+    setattr(obj, name, jnp.asarray(value))
+
+
+class Parameter:
+    """A parameter x with its gradient Dx, as used by the optimizer tests."""
+    def __init__(self, x, Dx):
+        self.x = x
+        self.Dx = Dx
+
+
+def make_optimizer(optimizer_class, obj: Parameter, **kwargs):
+    """Create an optimizer that updates obj.x using obj.Dx. JAX optimizers take the object and attribute names."""
+    return optimizer_class(obj, "x", "Dx", **kwargs)

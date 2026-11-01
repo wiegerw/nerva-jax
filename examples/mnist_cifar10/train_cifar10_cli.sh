@@ -4,18 +4,20 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
-PYTHONPATH=../src
-dataset=../data/mnist-flattened.npz
+cd "$(dirname "$0")"
+export PYTHONPATH=../../src
+dataset=data/cifar10-flattened.npz
 
 if [ ! -f $dataset ]; then
     echo "Error: file $dataset does not exist."
-    echo "Please provide the correct location or run the prepare_datasets.py script first."
+    echo "Please provide the correct location, or create it with: python prepare_data.py --dataset=cifar10 --download --data-dir=data"
     exit 1
 fi
 
-python3 -u ../tools/mlp.py \
+# tag::doc[]
+python3 -u ../../tools/mlp.py \
         --layers="ReLU;ReLU;Linear" \
-        --layer-sizes="784;1024;512;10" \
+        --layer-sizes="3072;1024;512;10" \
         --layer-weights="XavierNormal;XavierNormal;XavierNormal" \
         --optimizers="Momentum(0.9);Momentum(0.9);Momentum(0.9)" \
         --batch-size=100 \
@@ -23,3 +25,4 @@ python3 -u ../tools/mlp.py \
         --loss=SoftmaxCrossEntropy \
         --learning-rate="Constant(0.01)" \
         --load-dataset=$dataset
+# end::doc[]

@@ -1,12 +1,13 @@
+// Maintained in doc/shared/python of https://github.com/wiegerw/nerva and copied by scripts/sync_docs.py. Do not edit this copy.
 === The tool inspect_npz.py
 The tool `inspect_npz.py` can be used to inspect the contents of a dataset stored in `.npz` format.
 
 An example invocation of the `inspect_npz.py` tool is
 
 [.small-code]
-[source,bash]
+[source,bash,subs="attributes+"]
 ----
-python inspect_npz.py data/cifar10-flattened.npz
+python tools/inspect_npz.py {datasets-dir}/cifar10-flattened.npz
 ----
 
 The output may look like this:

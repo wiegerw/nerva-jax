@@ -1,4 +1,2 @@
-numpy
-jax
-jaxlib
-scikit-learn
+numpy>=1.23
+jax>=0.4.30

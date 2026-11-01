@@ -4,10 +4,8 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
-from pathlib import Path
-
 from nerva_jax.activation_functions import ReLUActivation, LeakyReLUActivation
-from nerva_jax.datasets import create_npz_dataloaders
+from nerva_jax.shapes_dataset import create_shapes_dataloaders
 from nerva_jax.layers import ActivationLayer, LinearLayer
 from nerva_jax.learning_rate import TimeBasedScheduler
 from nerva_jax.loss_functions import StableSoftmaxCrossEntropyLossFunction
@@ -60,11 +58,7 @@ def construct_mlp2() -> MultilayerPerceptron:
 
 
 def main():
-    if not Path("../data/mnist-flattened.npz").exists():
-        print("Error: MNIST dataset not found. Please provide the correct location or run the prepare_datasets.py script first.")
-        return
-
-    train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
+    train_loader, test_loader = create_shapes_dataloaders(batch_size=100)
 
     loss = StableSoftmaxCrossEntropyLossFunction()
     learning_rate = TimeBasedScheduler(lr=0.1, decay=0.09)

@@ -3,7 +3,7 @@
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
 import unittest
-from utilities import to_tensor, all_close, all_true, all_finite
+from utilities import to_tensor, all_close, all_true, all_finite, to_numpy, from_numpy
 from nerva_jax.matrix_operations import zeros, ones, identity, product, hadamard, columns_sum, \
     rows_sum, columns_mean, rows_mean, columns_max, rows_max, inv_sqrt
 
@@ -27,12 +27,12 @@ class TestMatrixOperationsBasics(unittest.TestCase):
 
     def test_sums_means_max(self):
         X = to_tensor([[1.0, 2.0, 3.0],[4.0, 5.0, 6.0]])
-        self.assertTrue(all_close(columns_sum(X), X.sum(axis=0)))
-        self.assertTrue(all_close(rows_sum(X), X.sum(axis=1)))
-        self.assertTrue(all_close(columns_mean(X), X.mean(axis=0)))
-        self.assertTrue(all_close(rows_mean(X), X.mean(axis=1)))
-        self.assertTrue(all_close(columns_max(X), X.max(axis=0)))
-        self.assertTrue(all_close(rows_max(X), X.max(axis=1)))
+        self.assertTrue(all_close(columns_sum(X), from_numpy(to_numpy(X).sum(axis=0))))
+        self.assertTrue(all_close(rows_sum(X), from_numpy(to_numpy(X).sum(axis=1))))
+        self.assertTrue(all_close(columns_mean(X), from_numpy(to_numpy(X).mean(axis=0))))
+        self.assertTrue(all_close(rows_mean(X), from_numpy(to_numpy(X).mean(axis=1))))
+        self.assertTrue(all_close(columns_max(X), from_numpy(to_numpy(X).max(axis=0))))
+        self.assertTrue(all_close(rows_max(X), from_numpy(to_numpy(X).max(axis=1))))
 
     def test_inv_sqrt_stability_and_log_sigmoid(self):
         X = to_tensor([0.0, 1.0, 4.0])
