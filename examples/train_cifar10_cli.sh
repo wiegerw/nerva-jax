@@ -4,12 +4,12 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
-PYTHONPATH=../src
+export PYTHONPATH=../src
 dataset=../data/cifar10-flattened.npz
 
 if [ ! -f $dataset ]; then
     echo "Error: file $dataset does not exist."
-    echo "Please provide the correct location or run the prepare_datasets.py script first."
+    echo "Please provide the correct location, or create it with: cd ../data && python prepare_data.py --dataset=cifar10 --download"
     exit 1
 fi
 

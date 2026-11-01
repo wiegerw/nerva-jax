@@ -97,7 +97,7 @@ def infer_num_classes(Ttrain: Matrix, Ttest: Matrix) -> int:
     return int(max(max_train, max_test) + 1)
 
 
-def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[DataLoader, DataLoader]:
+def create_npz_dataloaders(filename: str, batch_size: int = 1) -> Tuple[DataLoader, DataLoader]:
     """Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors."""
     path = Path(filename)
     print(f'Loading dataset from file {path}')
