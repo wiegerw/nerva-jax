@@ -162,3 +162,7 @@ cython_debug/
 # Generated datasets
 examples/shapes.npz
 examples/mnist_cifar10/data/
+
+# Generated documentation
+output_directory/
+doc/sphinx/_autosummary/
