@@ -19,9 +19,9 @@ The tool `{mlptool}` can be used for training multilayer perceptrons. An example
 [.small-code]
 [source,bash]
 ----
-include::../../../examples/train_cifar10_cli.sh[tag=doc]
+include::../../../examples/mnist_cifar10/train_cifar10_cli.sh[tag=doc]
 ----
-This will train a https://www.cs.toronto.edu/~kriz/cifar.html[CIFAR-10] model using an MLP consisting of three linear layers with activation functions ReLU, ReLU and no activation. A script `prepare_data.py` is available in the `data` directory
+This will train a https://www.cs.toronto.edu/~kriz/cifar.html[CIFAR-10] model using an MLP consisting of three linear layers with activation functions ReLU, ReLU and no activation. A script `prepare_data.py` is available in the `examples/mnist_cifar10` directory
 that can be used to download the dataset, flatten it and store it in `.npz` format. See the section <<preparing-data>> for details.
 
 The output may look like this:
@@ -29,7 +29,7 @@ The output may look like this:
 [.small-code]
 [source]
 ----
-Loading dataset from file ../data/cifar10-flattened.npz
+Loading dataset from file data/cifar10-flattened.npz
 --------------------------------------------------------------------------------
 epoch |           lr |         loss |    train_acc |     test_acc |     time (s)
 --------------------------------------------------------------------------------

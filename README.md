@@ -87,6 +87,13 @@ pip install ".[test]"
 python -m pytest tests
 ```
 
+#### Examples
+
+The examples in the [`examples`](examples) folder need no downloads: they use a synthetic dataset of 28x28 images
+of ten kinds of shapes that is generated on the fly by `nerva_jax.shapes_dataset`. Run them all with
+`python examples/run_all_examples.py`. Examples that use the MNIST and CIFAR-10 datasets are in the optional
+folder [`examples/mnist_cifar10`](examples/mnist_cifar10), which explains how to download the datasets.
+
 ### Example: Define and Train an MLP
 
 ```python
@@ -105,8 +112,8 @@ loss = StableSoftmaxCrossEntropyLossFunction()
 learning_rate = ConstantScheduler(0.01)
 epochs = 10
 
-# Load data
-train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
+# Generate a synthetic dataset: 28x28 images of 10 kinds of shapes
+train_loader, test_loader = create_shapes_dataloaders(batch_size=100)
 
 # Train the network
 stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)

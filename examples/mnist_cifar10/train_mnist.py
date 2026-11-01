@@ -60,11 +60,12 @@ def sgd(M: MultilayerPerceptron,
 
 
 def main():
-    if not Path("../data/mnist-flattened.npz").exists():
-        print("Error: MNIST dataset not found. Please provide the correct location or run the prepare_datasets.py script first.")
+    dataset = Path(__file__).resolve().parent / "data" / "mnist-flattened.npz"
+    if not dataset.exists():
+        print(f"Error: MNIST dataset {dataset} not found. Create it with: python prepare_data.py --dataset=mnist --download --data-dir=data")
         return
 
-    train_loader, test_loader = create_npz_dataloaders("../data/mnist-flattened.npz", batch_size=100)
+    train_loader, test_loader = create_npz_dataloaders(str(dataset), batch_size=100)
 
     # Create a new MLP model
     M = MultilayerPerceptron()
