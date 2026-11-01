@@ -67,6 +67,26 @@ pip install .
 pip install nerva-jax
 ```
 
+`nerva-jax` requires Python 3.11 or newer. Optional extras:
+
+```bash
+pip install "nerva-jax[examples]"   # dependencies of the examples (scikit-learn)
+pip install "nerva-jax[test]"       # pytest
+```
+
+#### CPU and GPU
+
+JAX installs its CPU version by default. For NVIDIA GPUs, install a CUDA-enabled JAX, e.g.
+`pip install "jax[cuda13]"` (Linux), see the [JAX installation guide](https://docs.jax.dev/en/latest/installation.html).
+JAX uses an available GPU automatically.
+
+#### Running the tests
+
+```bash
+pip install ".[test]"
+python -m pytest tests
+```
+
 ### Example: Define and Train an MLP
 
 ```python

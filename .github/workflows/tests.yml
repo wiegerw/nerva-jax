@@ -1,0 +1,53 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ".[test]"
+      - name: Show versions
+        run: python -m pip list
+      - name: Run tests
+        run: python -m pytest tests -ra
+
+  # Checks that the minimum versions declared in pyproject.toml still work.
+  minimum-versions:
+    name: Minimum versions (Python 3.11)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "jax==0.4.30" "jaxlib==0.4.30" "numpy==1.26.4" ".[test]"
+      - name: Show versions
+        run: python -m pip list
+      - name: Run tests
+        run: python -m pytest tests -ra
